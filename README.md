@@ -15,7 +15,7 @@ This README highlights what I've learned and what I do every day to grow as a cl
 
 ## About the Restart Program
 
-The Restart program is designed to take you from a beginner in tech to a confident, job-ready professional. During the program, I learned:
+During the program, I will learn:
 
 - **Cloud Computing:** Understanding AWS services, deploying applications, and managing infrastructure.  
 - **Programming & Scripting:** Building logic with Python, automating tasks, and working with data.  
@@ -23,18 +23,7 @@ The Restart program is designed to take you from a beginner in tech to a confide
 - **Networking & Security:** Basics of networking, VPNs, subnets, and security best practices.  
 - **Professional Skills:** Git, GitHub, documentation, teamwork, and problem-solving.
 
-Restart teaches not only **how to use tools**, but also **why they matter** in real-world IT environments. It emphasizes **hands-on practice, project building, and documentation**.
-
----
-
-## Why This Repository?
-
-This repository serves as:
-
-- A **personal knowledge base** for AWS services and cloud concepts  
-- A **portfolio showcasing labs, projects, and certifications**  
-- A way to **demonstrate technical writing and documentation skills**  
-- A tool to **track progress and review learning over time**
+The program teaches not only **how to use tools**, but also **why they matter** in real-world IT environments. It emphasizes **hands-on practice, project building, and documentation**.
 
 ---
 
