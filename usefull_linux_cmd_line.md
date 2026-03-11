@@ -83,6 +83,7 @@ student:x:1001:1001::/home/student:/bin/bash
 - [Input/Output Streams](#inputoutput-streams)
 - [Redirection & Pipe Tricks](#redirection--pipe-tricks)
 - [Bash Productivity](#bash-productivity-tip)
+- [Linux Directory Structure Overview](#linux-directory-structure-overview)
 
 ---
 
@@ -436,11 +437,6 @@ Benefits:
 
 ---
 
-# 🤝 Contributing
-
-Contributions are welcome!  
-Feel free to add more Linux commands, examples, or improvements to this cheat sheet.
-
 # 🗂 Linux Directory Structure Overview
 
 A visual map of the most common Linux directories:
@@ -485,3 +481,10 @@ A visual map of the most common Linux directories:
 ---
 
 This map helps visualize Linux filesystem layout for easier navigation and understanding.
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome!  
+Feel free to add more Linux commands, examples, or improvements to this cheat sheet.
