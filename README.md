@@ -4,7 +4,12 @@
 
 Welcome to my **AWS re/Start Program Portfolio**!  
 
-This repository documents my journey through the Restart program, where I gained hands-on experience in cloud computing, programming, networking, databases, and professional skills.  
+<!-- This repository documents my journey through the Restart program, where I gained hands-on experience in cloud computing, programming, networking, databases, and professional skills.  -->
+
+Hi, I'm Chiara
+
+I'm currently completing a full-time, 12-week AWS re/Start programme — an intensive, hands-on training designed to build real-world skills in Cloud Support, Cloud Operations, and DevOps fundamentals.
+This README highlights what I've learned and what I do every day to grow as a cloud professional.
 
 ---
 
