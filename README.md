@@ -106,7 +106,7 @@ Each certification folder includes:
 
 This section contains useful **cheat sheet**:
 
-1.  **[Useful Linux Command Line Cheat Sheet](usefull_linux_cmd_line.md)** A comprehensive, professional, and beginner-friendly Linux command reference. It includes:
+1.  **[Linux Command Lines](linux_command_lines.md)** A comprehensive, professional, and beginner-friendly Linux command reference. It includes:
 
 - Quick one-page command reference  
 - Categorized command sections (system info, file management, user/group management)  
