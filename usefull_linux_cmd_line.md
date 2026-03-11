@@ -42,7 +42,7 @@ student:x:1001:1001::/home/student:/bin/bash
 | `head` | First lines of file | `head -n 5 file.txt` |
 | `tail` | Last lines of file | `tail -n 5 file.txt` |
 | `grep` | Search text | `grep user /etc/passwd` |
-| `|` | Pipe command output | `ls /etc \| grep passwd` |
+| `\|` | Pipe command output | `ls /etc \| grep passwd` |
 | `useradd` | Create user | `useradd username` |
 | `usermod` | Modify user | `usermod -aG group user` |
 | `userdel` | Delete user | `userdel -r username` |
