@@ -1,6 +1,6 @@
-# 🌐 AWS Restart Portfolio
+# 🌐 AWS re/Start Program Portfolio
 
-Welcome to my **AWS Restart Program Portfolio**!  
+Welcome to my **AWS re/Start Program Portfolio**!  
 
 This repository documents my journey through the Restart program, where I gained hands-on experience in cloud computing, programming, networking, databases, and professional skills.  
 
