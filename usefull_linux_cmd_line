@@ -1,4 +1,0 @@
-**Usefull Linux Command Line**
-
-*whoami*
-The concatenation of the strings who, am, and iis whoami. In Linux, it's used to show the current user's user name when the command is invoked. A use case for this command would be to use it after you log in as UserA. Then, switch users and run commands as another user to see the context.
