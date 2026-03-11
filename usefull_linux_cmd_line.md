@@ -5,7 +5,7 @@
 ![Contributions](https://img.shields.io/badge/contributions-welcome-orange)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-A quick reference guide for commonly used Linux commands including system information, file operations, and user administration.
+A quick reference guide for commonly used Linux commands including system information, file operations, user management, standard streams, redirection, and Bash productivity tips.
 
 ---
 
@@ -80,6 +80,9 @@ student:x:1001:1001::/home/student:/bin/bash
 - [User Management](#user-management)
 - [Group Management](#group-management)
 - [Privilege & Access](#privilege--access)
+- [Input/Output Streams](#inputoutput-streams)
+- [Redirection & Pipe Tricks](#redirection--pipe-tricks)
+- [Bash Productivity](#bash-productivity-tip)
 
 ---
 
@@ -88,7 +91,6 @@ student:x:1001:1001::/home/student:/bin/bash
 ### whoami
 Displays the current username.
 
-Example:
 ```bash
 whoami
 ```
@@ -167,7 +169,7 @@ Displays previously executed commands.
 history
 ```
 
-Run a command again:
+Re-run a command from history:
 
 ```bash
 !143
@@ -193,7 +195,7 @@ Displays the contents of a file.
 cat file.txt
 ```
 
-Example:
+Example with pipe:
 
 ```bash
 sudo cat /etc/passwd | cut -d: -f1
@@ -348,15 +350,138 @@ Safely edit the sudo configuration file.
 visudo
 ```
 
-Configuration file:
+---
 
+# Input/Output Streams
+
+Linux uses **three standard input/output (I/O) streams**:
+
+| Stream | Name | Number | Purpose |
+|------|------|------|------|
+| `stdin` | Standard Input | 0 | Receives input data |
+| `stdout` | Standard Output | 1 | Displays normal command output |
+| `stderr` | Standard Error | 2 | Displays error messages |
+
+### Examples
+
+**Standard Input:**
+
+```bash
+cat 0<myfirstscript
 ```
-/etc/sudoers
+
+**Standard Output:**
+
+```bash
+ls -l 1>folder.txt
 ```
+
+**Standard Error:**
+
+```bash
+find / -name "*" -print 2>/dev/null
+```
+
+---
+
+# Redirection & Pipe Tricks
+
+```bash
+# Redirect output to a file (overwrite)
+ls > files.txt
+
+# Append output
+ls >> files.txt
+
+# Redirect input from a file
+cat < file.txt
+
+# Redirect errors
+find / -name test 2>errors.txt
+
+# Redirect both output and errors
+ls /etc /fakefolder > output.txt 2>&1
+
+# Discard output
+command > /dev/null
+command 2>/dev/null
+command > /dev/null 2>&1
+
+# Pipe output to another command
+ls /etc | grep passwd
+
+# Display output and save to file
+ls | tee files.txt
+ls | tee -a files.txt
+```
+
+---
+
+# Bash Productivity Tip
+
+### Tab Completion
+
+Press **Tab** to auto-complete commands, filenames, and directories.
+
+```bash
+cat myf<Tab>
+# completes to:
+cat myfirstscript
+```
+
+Benefits:
+- Saves time
+- Reduces typing errors
+- Helps discover available commands and files
 
 ---
 
 # 🤝 Contributing
 
 Contributions are welcome!  
-Feel free to add more Linux commands or examples.
+Feel free to add more Linux commands, examples, or improvements to this cheat sheet.
+
+# 🗂 Linux Directory Structure Overview
+
+A visual map of the most common Linux directories:
+
+```
+/
+├── /bin        # Essential command binaries (ls, cat, etc.)
+├── /boot       # Boot loader files, kernels, initrd
+├── /dev        # Device files (terminals, drives)
+├── /etc        # System configuration files
+├── /home       # User home directories
+│   ├── /home/student
+│   └── /home/admin
+├── /lib        # Shared libraries for binaries
+├── /media      # Mount points for removable media (USB, CD)
+├── /mnt        # Temporary mount points
+├── /opt        # Optional or third-party software
+├── /proc       # Virtual filesystem for system processes
+├── /root       # Root user's home directory
+├── /run        # Runtime variable data (PID files, sockets)
+├── /sbin       # System binaries (for root)
+├── /srv        # Data for services (web, ftp, etc.)
+├── /tmp        # Temporary files
+├── /usr        # User-installed software and utilities
+│   ├── /usr/bin
+│   ├── /usr/lib
+│   └── /usr/share
+├── /var        # Variable data (logs, spool files, cache)
+│   ├── /var/log
+│   ├── /var/spool
+│   └── /var/cache
+└── /lost+found # Recovered files after a filesystem check
+```
+
+**Tips for beginners:**
+
+- `/etc` – where most system configuration files live  
+- `/home` – your personal files and folders  
+- `/var/log` – check logs for system and service events  
+- `/usr/bin` and `/bin` – most executable programs are here  
+
+---
+
+This map helps visualize Linux filesystem layout for easier navigation and understanding.
