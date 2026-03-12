@@ -1,4 +1,4 @@
-# 🐧 Useful Linux Command Line Cheat Sheet
+# 🐧 Useful Linux Command Lines
 
 ![Platform](https://img.shields.io/badge/platform-linux-blue)
 ![Maintained](https://img.shields.io/badge/maintained-yes-brightgreen)
