@@ -36,6 +36,7 @@ student:x:1001:1001::/home/student:/bin/bash
 | `cal` | Display calendar | `cal` |
 | `clear` | Clear terminal screen | `clear` |
 | `echo` | Print text | `echo "Hello"` |
+| `tee` | Print on file | `tee file.txt` |
 | `history` | Command history | `history` |
 | `touch` | Create file | `touch file.txt` |
 | `cat` | Show file content | `cat file.txt` |
@@ -159,6 +160,15 @@ Prints text to the terminal.
 
 ```bash
 echo "Hello world!"
+```
+
+---
+
+### tee
+Reads from the standard input and writes to both standard output and one or more files at the same time.
+
+```bash
+tee file.text
 ```
 
 ---
