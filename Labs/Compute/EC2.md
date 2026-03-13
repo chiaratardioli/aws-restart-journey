@@ -1,4 +1,4 @@
-# Lab #1 - Introduction to Amazon EC2
+# Cloud Foundations - Introduction to Amazon EC2
 
 In this lab, I learned the fundamentals of **Amazon Elastic Compute Cloud (EC2)**, which allows users to launch and manage virtual servers in the cloud.
 
