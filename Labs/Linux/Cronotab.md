@@ -1,7 +1,5 @@
 # Linux Administration Lab – Processes and Cron Jobs
 
-## Overview
-
 In this lab, I learned essential Linux system administration skills, including process monitoring and task automation. The exercises included:
 
 - Listing and filtering system processes
