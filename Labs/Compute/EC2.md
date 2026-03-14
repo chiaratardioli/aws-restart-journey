@@ -9,6 +9,8 @@ Amazon EC2 provides **resizable compute capacity**, allowing developers to quick
 *(Insert the architectural diagram from the lab here)*
 
 ![Architecture Diagram Placeholder](images/ec2-architecture.png)
+![Architecture Diagram Placeholder]([images/ec2-architecture.png](https://www.craiyon.com/image/NmN4GC2NRWu5hpeaxhQ2FA))
+
 
 ---
 
