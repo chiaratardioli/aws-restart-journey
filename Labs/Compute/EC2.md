@@ -6,10 +6,9 @@ Amazon EC2 provides **resizable compute capacity**, allowing developers to quick
 
 ### Architecture Overview
 
-*(Insert the architectural diagram from the lab here)*
+![Architecture Diagram Placeholder](./ec2-architecture.png)
 
-![Architecture Diagram Placeholder](images/ec2-architecture.png)
-![Architecture Diagram Placeholder]([images/ec2-architecture.png](https://www.craiyon.com/image/NmN4GC2NRWu5hpeaxhQ2FA))
+Source: AWS architecture icons [link here](https://aws.amazon.com/architecture/icons/)
 
 
 ---
@@ -57,10 +56,6 @@ echo '<html><h1>Hello From Your Web Server!</h1></html>' > /var/www/html/index.h
 
 This script installs **Apache HTTP Server**, starts the service, and creates a simple web page.
 
-📷 *Screenshot placeholder*
-
-![Launch Instance Screenshot](images/ec2-launch-instance.png)
-
 ---
 
 # Task 2 – Monitoring the EC2 Instance
@@ -76,10 +71,6 @@ I checked:
 Both checks passed successfully.
 
 I also explored the **Monitoring tab**, which shows metrics from **Amazon CloudWatch**, such as CPU utilization.
-
-📷 *Screenshot placeholder*
-
-![EC2 Monitoring Screenshot](images/ec2-monitoring.png)
 
 ---
 
@@ -103,12 +94,6 @@ To fix this, I updated the inbound rules.
 
 After saving the rule, I refreshed the browser and saw the message:
 
-**Hello From Your Web Server!**
-
-📷 *Screenshot placeholder*
-
-![Web Server Output](images/ec2-webserver-output.png)
-
 ---
 
 # Task 4 – Resizing the EC2 Instance
@@ -130,10 +115,6 @@ I learned that EC2 instances can be resized if more resources are required.
 
 This process helps scale resources depending on application requirements.
 
-📷 *Screenshot placeholder*
-
-![Resize Instance Screenshot](images/ec2-resize.png)
-
 ---
 
 # Task 5 – Testing Termination Protection
@@ -148,10 +129,6 @@ To terminate the instance, I:
 2. Selected **Terminate Instance**
 
 This successfully deleted the instance.
-
-📷 *Screenshot placeholder*
-
-![Termination Protection Screenshot](images/ec2-termination.png)
 
 ---
 
