@@ -8,21 +8,52 @@ In this lab, I learnt how to:
 
 - Install the AWS Command Line Interface (AWS CLI)
 
+## Task 1: Use SSH to connect to an Amazon Linux EC2 instance
 
-## Task 1: Update your Linux machine
+I am using a Mac OS, so I uses an SSH utility to connect to a Amazon Linux EC2 instance. Same steps apply for Linuz users, while Windows users need to follow different operations.
+
+I download the file **labuser.pem** from the lab platform and saved the **PublicIP** address, that for my lab is `4.243.242.89`.
+Then, I opened a terminal and, after giving my user read permission on the file, I connect to the EC2 via `ssh`.
+This is how it looks like on my terminal.
+```bash
+chiara@macbook-air:~/labs$ chmod 400 labsuser.pem 
+chiara@macbook-air:~/labs$ ls -l labsuser.pem
+-r--------@ 1 chiara  staff   1.6K 15 Mar 13:42 labsuser.pem
+chiara@macbook-air:~/labs$ ssh -i labsuser.pem ec2-user@44.243.242.89
+The authenticity of host '44.243.242.89 (44.243.242.89)' can't be established.
+ED25519 key fingerprint is SHA256:0YeEq//xFB8hgIK/qVkg4i9tBzCIJ60eC77Ce4wSvlM.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '44.243.242.89' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2026-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
+
+[ec2-user@ip-10-0-10-161 ~]$ 
+
+```
+
+## Task 2: Update your Linux machine
 
 Here I used the yum package manager to update and upgrade the machine, including relevant security packages.
 
 1. I entered `sudo yum -y check-update` to query repositories for available updates.
 ```bash
-[ec2-user@ip-10-0-10-40 ~]$ sudo yum -y check-update
+[ec2-user@ip-10-0-10-161 ~]$ sudo yum -y check-update
 Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
-amzn2-core                                               | 3.6 kB     00:00 
+amzn2-core                                               | 3.6 kB     00:00  
 ```
 
 2. I entered `sudo yum update --security` to apply security-related updates.
 ```bash
-[ec2-user@ip-10-0-10-40 ~]$ sudo yum update --security
+[ec2-user@ip-10-0-10-161 ~]$ sudo yum update --security
 Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
 No packages needed for security; 0 packages available
 No packages marked for update
@@ -30,14 +61,14 @@ No packages marked for update
 
 3. I entered `sudo yum -y upgrade` to update packages.
 ```bash
-[ec2-user@ip-10-0-10-40 ~]$ sudo yum -y upgrade
+[ec2-user@ip-10-0-10-161 ~]$ sudo yum -y upgrade
 Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
 No packages marked for update
 ```
 
 4. Eventually, I used the command `sudo yum install httpd -y` to view the install of httpd and view the history of updates.
 ```bash
-[ec2-user@ip-10-0-10-40 ~]$ sudo yum install httpd -y
+[ec2-user@ip-10-0-10-161 ~]$ sudo yum install httpd -y
 Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
 Resolving Dependencies
 --> Running transaction check
@@ -87,17 +118,17 @@ Install  1 Package (+8 Dependent packages)
 Total download size: 1.9 M
 Installed size: 5.3 M
 Downloading packages:
-(1/9): apr-util-1.6.3-1.amzn2.0.1.x86_64.rpm               | 101 kB   00:00     
-(2/9): apr-1.7.2-1.amzn2.0.1.x86_64.rpm                    | 130 kB   00:00     
+(1/9): apr-1.7.2-1.amzn2.0.1.x86_64.rpm                    | 130 kB   00:00     
+(2/9): apr-util-1.6.3-1.amzn2.0.1.x86_64.rpm               | 101 kB   00:00     
 (3/9): apr-util-bdb-1.6.3-1.amzn2.0.1.x86_64.rpm           |  22 kB   00:00     
 (4/9): generic-logos-httpd-18.0.0-4.amzn2.noarch.rpm       |  19 kB   00:00     
-(5/9): httpd-filesystem-2.4.66-1.amzn2.0.1.noarch.rpm      |  25 kB   00:00     
-(6/9): httpd-2.4.66-1.amzn2.0.1.x86_64.rpm                 | 1.4 MB   00:00     
+(5/9): httpd-2.4.66-1.amzn2.0.1.x86_64.rpm                 | 1.4 MB   00:00     
+(6/9): httpd-filesystem-2.4.66-1.amzn2.0.1.noarch.rpm      |  25 kB   00:00     
 (7/9): httpd-tools-2.4.66-1.amzn2.0.1.x86_64.rpm           |  90 kB   00:00     
 (8/9): mailcap-2.1.41-2.amzn2.noarch.rpm                   |  31 kB   00:00     
 (9/9): mod_http2-1.15.19-1.amzn2.0.2.x86_64.rpm            | 149 kB   00:00     
 --------------------------------------------------------------------------------
-Total                                              8.7 MB/s | 1.9 MB  00:00     
+Total                                              9.3 MB/s | 1.9 MB  00:00     
 Running transaction check
 Running transaction test
 Transaction test succeeded
@@ -135,7 +166,6 @@ Dependency Installed:
   mod_http2.x86_64 0:1.15.19-1.amzn2.0.2                                        
 
 Complete!
-[ec2-user@ip-10-0-10-40 ~]$ 
 ```
 
 
