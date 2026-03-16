@@ -12,6 +12,6 @@ The following diagram illustrates the final architecture that you will build:
 
 
 
-![My imagee](./ec2-final-architecture.png)
+![My image BWBW](./bwbw.png)
 
 ## Steps
