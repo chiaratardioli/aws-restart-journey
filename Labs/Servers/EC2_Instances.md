@@ -13,7 +13,7 @@ The following diagram illustrates the final architecture that you will build:
 ![My image BWBW](./ec2-final-architecture.png)
 
 ## Task 1: Launching an EC2 Instance by using the AWS Management Console
-In this task, I launched an EC2 instance by using the AWS Management Console. The instance is a bastion host from which I can use the AWS CLI.
+Here I launched an EC2 instance by using the AWS Management Console. The instance is a bastion host from which I can use the AWS CLI.
 
 1. Set **Bastion host** in Name and tags section
 
@@ -64,3 +64,23 @@ The Bastion-Role profile grants permission to applications running on the instan
 9. After reviewing the instance configuration details in the Summary section, I clicked **Launch instance**.
 
 ![My Istance from Management Console](./istance-console.png)
+
+## Task 2: Logging in to the bastion host
+Here I used EC2 Instance Connect to log in to the bastion host that created in the previous task.
+
+1. On the EC2 Management Console, from the list of EC2 instances displayed, I selected the check box for the bastion host instance.
+2. On the EC2 Instance Connect tab, I clicled **Connect** to connect to the bastion host.
+
+![Connect to my Istance using Management Console](./istance-console-connect.png)
+
+## Task 3: Launching an EC2 instance using the AWS CLI
+
+
+
+
+
+
+
+
+
+
