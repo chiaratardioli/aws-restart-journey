@@ -10,7 +10,7 @@ AWS provides multiple ways to launch Amazon Elastic Compute Cloud (Amazon EC2) i
 In this lab, you use the AWS Management Console to launch an EC2 instance and then use it as a bastion host to launch another EC2 instance, which will be a web server. You use EC2 Instance Connect to securely connect to the bastion host and use the AWS Command Line Interface (AWS CLI) to launch a web server instance.
 The following diagram illustrates the final architecture that you will build:
 
-![My image BWBW](./ec2-final-architecture.png)
+![My image BWBW](./images/ec2-final-architecture.png)
 
 ## Task 1: Launching an EC2 Instance by using the AWS Management Console
 Here I launched an EC2 instance by using the AWS Management Console. The instance is a bastion host from which I can use the AWS CLI.
@@ -65,8 +65,8 @@ The Bastion-Role profile grants permission to applications running on the instan
 
 9. After reviewing the instance configuration details in the Summary section, I clicked **Launch instance**.
 
-![My instance from Management Console](./instance-summary.png)
-![View all instances](./all-instances.png)
+![My instance from Management Console](./images/instance-summary.png)
+![View all instances](./images/all-instances.png)
 
 ## Task 2: Connect to the bastion host using the Management Console
 Here I used EC2 Instance Connect to log in to the bastion host that created in the previous task.
@@ -74,7 +74,7 @@ Here I used EC2 Instance Connect to log in to the bastion host that created in t
 1. On the EC2 Management Console, from the list of EC2 instances displayed, I selected the check box for the bastion host instance.
 2. On the EC2 Instance Connect tab, I clicled **Connect** to connect to the bastion host.
 
-![Connect to my instance using Management Console](./instance-console-connect.png)
+![Connect to my instance using Management Console](./images/instance-console-connect.png)
 
 ## Task 3: Launching an EC2 instance using the AWS CLI
 Here I launched an EC2 instance using the AWS CLI. With the AWS CLI, I can automate the provisioning and configuration of AWS resources.
@@ -201,11 +201,11 @@ ec2-54-69-44-211.us-west-2.compute.amazonaws.com
 ```
 I copied and pasted the DNS name into a new web browser.
 
-![My public Web Server](./web-server.png)
+![My public Web Server](./images/web-server.png)
 
 I also checked all instances in the Amazon EC2 management console.
 
-![View all instances](./all-instances-new.png)
+![View all instances](./images/all-instances-new.png)
 
 ## Conclusion
 Which method should you use?
