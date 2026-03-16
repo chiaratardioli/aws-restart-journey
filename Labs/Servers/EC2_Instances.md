@@ -78,7 +78,7 @@ Here I launched an EC2 instance using the AWS CLI. With the AWS CLI, I can autom
 
 These are the parameters I gave to the to the command to successfully run it and launch.
 
-1. I run the following script in my EC2 Instance Connect session to retrieve the **AMI** to use.
+1.  Code to retrieve **AMI**.
 ```bash
 #Set the Region
 AZ=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
@@ -89,19 +89,19 @@ echo $AMI
 ```
 The AMI populates the boot disk of the instance. AWS continually patches and updates AMIs, so it is recommended to always use the latest AMI when launching instances.
 
-3. I run the following command to retrieve the subnet ID for the public subnet.
+3. Code to retrieve the **subnet ID** for the public subnet.
 ```bash
 SUBNET=$(aws ec2 describe-subnets --filters 'Name=tag:Name,Values=Public Subnet' --query Subnets[].SubnetId --output text)
 echo $SUBNET
 ```
 
-4. I run the following command to etrieve the security group to use, which allows inbound HTTP requests.
+4.  Code to retrieve the **security group**, which allows inbound HTTP requests.
 ```bash
 SG=$(aws ec2 describe-security-groups --filters Name=group-name,Values=WebSecurityGroup --query SecurityGroups[].GroupId --output text)
 echo $SG
 ```
 
-5. I run the following command to download a user data script
+5. Code to download a **user data script**.
 ```bash
 wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-RSJAWS-1-23732/171-lab-JAWS-create-ec2/s3/UserData.txt
 ```
