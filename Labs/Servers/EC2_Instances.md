@@ -172,7 +172,7 @@ The query parameter specifies that the command should return the instance ID onc
 
 The output parameter specifies that the output of the command should be in text. Other output options are json and table.
 
-7.  When the new instance to be ready I can check the details using the command `aws ec2 describe-instances`.
+7.  When the new instance to be ready I can check the details using the AWC CLI command `aws ec2 describe-instances`.
 ```bash
 [ec2-user@ip-10-0-0-4 ~]$ aws ec2 describe-instances --instance-ids $INSTANCE
 {
@@ -193,6 +193,25 @@ running
 Possible values for the status are pending or running.
 
 8.  Test the web server
+
+To get the public IPv4 Domain Name System (DNS) name of the instance I used the option `--query Reservations[].Instances[].PublicDnsName`.
+```bash
+[ec2-user@ip-10-0-0-4 ~]$ aws ec2 describe-instances --instance-ids $INSTANCE --query Reservations[].Instances[].PublicDnsName --output text
+ec2-54-69-44-211.us-west-2.compute.amazonaws.com
+```
+I copied and pasted the DNS name into a new web browser.
+
+![My public Web Server](./web-server.png)
+
+I also checked all instances in the Amazon EC2 management console.
+
+![View all instances](./all-instances-new.png)
+
+## Conclusion
+Which method should you use?
+- Launch from the management console when you quickly need to launch a one-off or temporary instance.
+- Launch by using a script when you need to automate the creation of an instance in a repeatable, reliable manner.
+- Launch by using CloudFormation when you want to launch related resources together.
 
 ## Optional challenge 1: Connect to an EC2 instance
 
