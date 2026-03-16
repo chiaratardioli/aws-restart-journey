@@ -92,7 +92,8 @@ These are the parameters I gave to the to the command to successfully run it and
 AZ=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
 export AWS_DEFAULT_REGION=${AZ::-1}
 #Retrieve latest Linux AMI
-AMI=$(aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2 --query 'Parameters[0].[Value]' --output text)
+AMI=$(aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2 \
+--query 'Parameters[0].[Value]' --output text)
 echo $AMI
 -bash: -1: substring expression < 0
 ami-0534a0fd33c655746
@@ -111,7 +112,8 @@ The subnet ID is stored in the SUBNET environment variable  with value `subnet-0
 
 4.  Code to retrieve the **security group**, which allows inbound HTTP requests.
 ```bash
-[ec2-user@ip-10-0-0-4 ~]$ SG=$(aws ec2 describe-security-groups --filters Name=group-name,Values=WebSecurityGroup --query SecurityGroups[].GroupId --output text)
+[ec2-user@ip-10-0-0-4 ~]$ SG=$(aws ec2 describe-security-groups --filters Name=group-name,Values=WebSecurityGroup \
+--query SecurityGroups[].GroupId --output text)
 echo $SG
 sg-04a3e8c90c93579ff
 ```
@@ -228,7 +230,11 @@ When I tried to connect via the AWC CLI and I got the error.
 ```bash
 [ec2-user@ip-10-0-0-43 ~]$ aws ec2-instance-connect ssh --instance-id $INSTANCE_MWS
 
-An error occurred (AccessDeniedException) when calling the SendSSHPublicKey operation: User: arn:aws:sts::286589080824:assumed-role/Bastion-Role/i-08fa5a9ca168d8017 is not authorized to perform: ec2-instance-connect:SendSSHPublicKey on resource: arn:aws:ec2:us-west-2:286589080824:instance/i-01c9b27d7fbc670b9 because no identity-based policy allows the ec2-instance-connect:SendSSHPublicKey action
+An error occurred (AccessDeniedException) when calling the SendSSHPublicKey operation:
+User: arn:aws:sts::286589080824:assumed-role/Bastion-Role/i-08fa5a9ca168d8017 is not
+authorized to perform: ec2-instance-connect:SendSSHPublicKey on resource:
+arn:aws:ec2:us-west-2:286589080824:instance/i-01c9b27d7fbc670b9 because no identity-based
+policy allows the ec2-instance-connect:SendSSHPublicKey action
 ```
 EC2 Instance Connect failed because I didn’t have an IAM user with EC2 Instance Connect permissions.
 
@@ -239,7 +245,8 @@ I tried to use the instance’s key pair to connect via standard **SSH** but did
 
 I retrieved the public IPv4 DNS name of the Misconfigured Web Server instance using the AWS CLI.
 ```
-[ec2-user@ip-10-0-0-43 ~]$ aws ec2 describe-instances --instance-ids $INSTANCE_MWS --query Reservations[].Instances[].PublicDnsName --output text
+[ec2-user@ip-10-0-0-43 ~]$ aws ec2 describe-instances --instance-ids $INSTANCE_MWS \
+--query Reservations[].Instances[].PublicDnsName --output text
 ec2-34-222-5-185.us-west-2.compute.amazonaws.com
 ```
 
