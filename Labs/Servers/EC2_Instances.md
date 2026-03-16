@@ -65,7 +65,7 @@ The Bastion-Role profile grants permission to applications running on the instan
 
 ![My Istance from Management Console](./istance-console.png)
 
-## Task 2: Logging in to the bastion host
+## Task 2: Connect to the bastion host using the Management Console
 Here I used EC2 Instance Connect to log in to the bastion host that created in the previous task.
 
 1. On the EC2 Management Console, from the list of EC2 instances displayed, I selected the check box for the bastion host instance.
@@ -74,9 +74,62 @@ Here I used EC2 Instance Connect to log in to the bastion host that created in t
 ![Connect to my Istance using Management Console](./istance-console-connect.png)
 
 ## Task 3: Launching an EC2 instance using the AWS CLI
+Here I launched an EC2 instance using the AWS CLI. With the AWS CLI, I can automate the provisioning and configuration of AWS resources.
 
+These are the parameters I gave to the to the command to successfully run it and launch.
 
+1. I run the following script in my EC2 Instance Connect session to retrieve the **AMI** to use.
+```bash
+#Set the Region
+AZ=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
+export AWS_DEFAULT_REGION=${AZ::-1}
+#Retrieve latest Linux AMI
+AMI=$(aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2 --query 'Parameters[0].[Value]' --output text)
+echo $AMI
+```
+The AMI populates the boot disk of the instance. AWS continually patches and updates AMIs, so it is recommended to always use the latest AMI when launching instances.
 
+3. I run the following command to retrieve the subnet ID for the public subnet.
+```bash
+SUBNET=$(aws ec2 describe-subnets --filters 'Name=tag:Name,Values=Public Subnet' --query Subnets[].SubnetId --output text)
+echo $SUBNET
+```
+
+4. I run the following command to etrieve the security group to use, which allows inbound HTTP requests.
+```bash
+SG=$(aws ec2 describe-security-groups --filters Name=group-name,Values=WebSecurityGroup --query SecurityGroups[].GroupId --output text)
+echo $SG
+```
+
+5. I run the following command to download a user data script
+```bash
+wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-RSJAWS-1-23732/171-lab-JAWS-create-ec2/s3/UserData.txt
+```
+The script installs a web server, downloads a .zip file containing the web application and installs the web application.
+
+6. Eventually I launched the instance.
+```bash
+INSTANCE=$(\
+aws ec2 run-instances \
+--image-id $AMI \
+--subnet-id $SUBNET \
+--security-group-ids $SG \
+--user-data file:///home/ec2-user/UserData.txt \
+--instance-type t3.micro \
+--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=Web Server}]' \
+--query 'Instances[*].InstanceId' \
+--output text \
+)
+echo $INSTANCE
+```
+
+7.  Wait for the instance to be ready
+
+8.  Test the web server
+
+## Optional challenge 1: Connect to an EC2 instance
+
+## Optional challenge 2: Fix the web server installation
 
 
 
