@@ -205,7 +205,7 @@ I copied and pasted the DNS name into a new web browser.
 
 I also checked all instances in the Amazon EC2 management console.
 
-![View all instances](./images/all-instances-new.png)
+![View all instances](./images/images/all-instances-new.png)
 
 ## Conclusion
 Which method should you use?
