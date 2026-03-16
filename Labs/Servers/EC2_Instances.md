@@ -10,7 +10,9 @@ AWS provides multiple ways to launch Amazon Elastic Compute Cloud (Amazon EC2) i
 In this lab, you use the AWS Management Console to launch an EC2 instance and then use it as a bastion host to launch another EC2 instance, which will be a web server. You use EC2 Instance Connect to securely connect to the bastion host and use the AWS Command Line Interface (AWS CLI) to launch a web server instance.
 The following diagram illustrates the final architecture that you will build:
 
-![My image BWBW](./images/ec2-final-architecture.png)
+<p align="center">
+<img src="./images/ec2-final-architecture.png" width="60%">
+</p>
 
 ## Task 1: Launching an EC2 Instance by using the AWS Management Console
 Here I launched an EC2 instance by using the AWS Management Console. The instance is a bastion host from which I can use the AWS CLI.
@@ -65,7 +67,10 @@ The Bastion-Role profile grants permission to applications running on the instan
 
 9. After reviewing the instance configuration details in the Summary section, I clicked **Launch instance**.
 
-![My instance from Management Console](./images/instance-summary.png)
+<p align="center">
+<img src="./images/instance-summary.png" width="30%">
+</p>
+
 ![View all instances](./images/all-instances.png)
 
 ## Task 2: Connect to the bastion host using the Management Console
