@@ -222,8 +222,30 @@ Which method should you use?
 
 ## Optional challenge 1: Connect to an EC2 instance
 
+I tried to connect to the **Misconfigured Web Server** instance by using EC2 Instance Connect and it does not work.
+
+When I tried to connect via the AWC CLI and I got the error.
+```bash
+[ec2-user@ip-10-0-0-43 ~]$ aws ec2-instance-connect ssh --instance-id $INSTANCE_MWS
+
+An error occurred (AccessDeniedException) when calling the SendSSHPublicKey operation: User: arn:aws:sts::286589080824:assumed-role/Bastion-Role/i-08fa5a9ca168d8017 is not authorized to perform: ec2-instance-connect:SendSSHPublicKey on resource: arn:aws:ec2:us-west-2:286589080824:instance/i-01c9b27d7fbc670b9 because no identity-based policy allows the ec2-instance-connect:SendSSHPublicKey action
+```
+EC2 Instance Connect failed because I didn’t have an IAM user with EC2 Instance Connect permissions.
+
+I tried to use the instance’s key pair to connect via standard **SSH** but didn't work either.
+
+
 ## Optional challenge 2: Fix the web server installation
 
+I retrieved the public IPv4 DNS name of the Misconfigured Web Server instance using the AWS CLI.
+```
+[ec2-user@ip-10-0-0-43 ~]$ aws ec2 describe-instances --instance-ids $INSTANCE_MWS --query Reservations[].Instances[].PublicDnsName --output text
+ec2-34-222-5-185.us-west-2.compute.amazonaws.com
+```
+
+The web server service was not running on the instance, so the web page could not be served. The security group might also have blocked HTTP traffic.
+
+My idea was to start the web server service (httpd or apache2) and ensured it starts at boot. I also verified that the security group allows HTTP traffic on port 80.
 
 
 
