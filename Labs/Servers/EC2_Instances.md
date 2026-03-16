@@ -177,7 +177,7 @@ The query parameter specifies that the command should return the instance ID onc
 
 The output parameter specifies that the output of the command should be in text. Other output options are json and table.
 
-7.  When the new instance to be ready I can check the details using the AWC CLI command `aws ec2 describe-instances`.
+7.  When the new instance was ready, I could check the details using the AWC CLI command `aws ec2 describe-instances`.
 ```bash
 [ec2-user@ip-10-0-0-4 ~]$ aws ec2 describe-instances --instance-ids $INSTANCE
 {
@@ -190,6 +190,8 @@ The output parameter specifies that the output of the command should be in text.
                 {
 ....
 ```
+Note the response is in **json** format.
+
 Or I can just print the status with the option `--query 'Reservations[].Instances[].State.Name'`.
 ```bash
 [ec2-user@ip-10-0-0-4 ~]$ aws ec2 describe-instances --instance-ids $INSTANCE --query 'Reservations[].Instances[].State.Name' --output text
@@ -197,7 +199,7 @@ running
 ```
 Possible values for the status are pending or running.
 
-8.  Test the web server
+8. Eventually, I tested the web server
 
 To get the public IPv4 Domain Name System (DNS) name of the instance I used the option `--query Reservations[].Instances[].PublicDnsName`.
 ```bash
