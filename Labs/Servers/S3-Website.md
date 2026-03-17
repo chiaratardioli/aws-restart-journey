@@ -98,6 +98,10 @@ aws s3 cp /home/ec2-user/sysops-activity-files/static-website/ s3://<my-bucket>/
 ![Updated S3 Wesite](./images/update-s3-website.png)
 
 ## Optional challenge
+Use the `aws s3 sync` command to only copy the files that have been modified to the `S3 bucket`, increasing efficiency.
+```bash
+aws s3 sync /home/ec2-user/sysops-activity-files/static-website/<s3://<my-bucket>/ --acl public-read
+```
 
 # Conclusion
 With this lab I learnt how to:
