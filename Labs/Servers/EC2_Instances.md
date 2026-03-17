@@ -225,8 +225,9 @@ Which method should you use?
 ## Optional challenge 1: Connect to an EC2 instance
 
 I tried to connect to the **Misconfigured Web Server** instance by using EC2 Instance Connect and it does not work.
+EC2 Instance Connect failed because I didn’t have an IAM user with EC2 Instance Connect permissions.
 
-When I tried to connect via the AWC CLI and I got the error.
+Also when I tried to connect with the AWC CLI and I got the error.
 ```bash
 [ec2-user@ip-10-0-0-43 ~]$ aws ec2-instance-connect ssh --instance-id $INSTANCE_MWS
 
@@ -236,10 +237,24 @@ authorized to perform: ec2-instance-connect:SendSSHPublicKey on resource:
 arn:aws:ec2:us-west-2:286589080824:instance/i-01c9b27d7fbc670b9 because no identity-based
 policy allows the ec2-instance-connect:SendSSHPublicKey action
 ```
-EC2 Instance Connect failed because I didn’t have an IAM user with EC2 Instance Connect permissions.
 
-I tried to use the instance’s key pair to connect via standard **SSH** but didn't work either.
+To fix the connection I added the inbound rule to accept `SSH`` (port 22) to the security group associated to the **Misconfigured Web Server** instance.
 
+I tried to use the instance’s key pair to connect via standard **SSH** and now it connected.
+
+```bash
+$ ssh -i labsuser.pem ec2-user@52.38.193.45
+   ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2026-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
+```
 
 ## Optional challenge 2: Fix the web server installation
 
