@@ -23,6 +23,10 @@ Capture a screenshot of the EC2 instance's system log showing that the httpd ser
 
 noete: To make the EC2 instance accessible from the internet, I attached an Internet Gateway to the VPC, updated the route table to allow internet traffic, placed the instance in a public subnet with a public IP, and configured the security group to allow HTTP and SSH access.
 
+
+VPC ID : vpc-0f3c238610059c5e2
+IPv4 CIDR : 172.31.0.0/16
+
 ## Task 2: Deploy and test the web page
 
 1. I use EC2 Instance Connect to connect to your EC2 instance.
