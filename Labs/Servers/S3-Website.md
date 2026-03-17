@@ -144,6 +144,8 @@ upload: images/Strawberry-&-Blueberry-Tarts.png to s3://ctardi256/images/Strawbe
                            PRE images/
 2026-03-17 13:03:53       2980 index.html
 ```
+![S3 Static Wesite Console](./images/s3-website-console.png)
+
 4. On AWS Management Console I checked that the Static website hosting is Enabled.
 
 ![S3 Static Wesite Enabled](./images/s3-website-enable.png)
@@ -182,7 +184,7 @@ upload: sysops-activity-files/static-website/images/Cup-of-Hot-Chocolate.png to 
 
 4. And here it is the uodated website!
 
-![Updated S3 Wesite](./images/update-s3-website.png)
+![Updated S3 Wesite](./images/s3-website-new.png)
 
 ## Optional challenge
 Using the `aws s3 sync` command to only copy the files that have been modified to the `S3 bucket` increases efficiency.
