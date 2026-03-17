@@ -258,18 +258,48 @@ $ ssh -i labsuser.pem ec2-user@52.38.193.45
 
 ## Optional challenge 2: Fix the web server installation
 
-I retrieved the public IPv4 DNS name of the Misconfigured Web Server instance using the AWS CLI.
+The **public IPv4 DNS** name of the **Misconfigured Web Server** instance is `52.38.193.45`.
+When I tried to open in a new browser `http://52.38.193.45`, the link is broken.
+
+In this case the most common cause are:
+- HTTP (port 80) is not allowed (security group misconfiguration)
+- the web Server is not running
+
+In this example, the port was correctly configured but the Apache web server (httpd) was stopped (inactive), so the instance was not serving any web pages.
+```bash
+[ec2-user@ip-10-0-0-208 ~]$ sudo systemctl status httpd
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; vendor preset: disabled)
+   Active: inactive (dead)
+     Docs: man:httpd.service(8)
 ```
-[ec2-user@ip-10-0-0-43 ~]$ aws ec2 describe-instances --instance-ids $INSTANCE_MWS \
---query Reservations[].Instances[].PublicDnsName --output text
-ec2-34-222-5-185.us-west-2.compute.amazonaws.com
+I started the Apache service using `systemctl start httpd` and enabled it with `systemctl enable httpd`, which allowed the web server to run and serve content.
+```bash
+[ec2-user@ip-10-0-0-208 ~]$ sudo systemctl start httpd
+[ec2-user@ip-10-0-0-208 ~]$ sudo systemctl enable httpd
+```
+And checked again the status.
+```bash
+[ec2-user@ip-10-0-0-208 ~]$ sudo systemctl status httpd
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Tue 2026-03-17 14:36:12 UTC; 2min 6s ago
+     Docs: man:httpd.service(8)
+ Main PID: 3335 (httpd)
+   Status: "Total requests: 0; Idle/Busy workers 100/0;Requests/sec: 0; Bytes served/sec:   0 B/sec"
+   CGroup: /system.slice/httpd.service
+           ├─3335 /usr/sbin/httpd -DFOREGROUND
+           ├─3336 /usr/sbin/httpd -DFOREGROUND
+           ├─3337 /usr/sbin/httpd -DFOREGROUND
+           ├─3338 /usr/sbin/httpd -DFOREGROUND
+           ├─3339 /usr/sbin/httpd -DFOREGROUND
+           └─3340 /usr/sbin/httpd -DFOREGROUND
+
+Mar 17 14:36:12 ip-10-0-0-208.us-west-2.compute.internal systemd[1]: Starting The Apache HTTP Server...
+Mar 17 14:36:12 ip-10-0-0-208.us-west-2.compute.internal systemd[1]: Started The Apache HTTP Server.
 ```
 
-The web server service was not running on the instance, so the web page could not be served. The security group might also have blocked HTTP traffic.
-
-My idea was to start the web server service (httpd or apache2) and ensured it starts at boot. I also verified that the security group allows HTTP traffic on port 80.
-
-
+![Fix Misconfigured Web Server](./images/misconfigured-web-server-fixed.png)
 
 
 
