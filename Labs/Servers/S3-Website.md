@@ -76,10 +76,26 @@ aws s3 cp /home/ec2-user/sysops-activity-files/static-website/ s3://<my-bucket>/
 
 4. On AWS Management Console I checked that the Static website hosting is Enabled.
 
-5. Eventually, I open the bucket website endpoint URL in the browser.
+5. And here it is the bucket website endpoint URL in the browser!
+
+![S3 Wesite](./images/s3-website.png)
 
 ## Task 8: Create a batch file to make updating the website repeatable
-
+1. To create a repeatable deployment, I created a batch file called `update-website.sh` in the home directory.
+```bash
+#!/bin/bash
+aws s3 cp /home/ec2-user/sysops-activity-files/static-website/ s3://<my-bucket>/ --recursive --acl public-read
+```
+2. Then I made some changes to the `sysops-activity-files/static-website/index.html` file:
+- bgcolor="aquamarine" to bgcolor="gainsboro"
+- bgcolor="orange" to bgcolor="cornsilk"
+- bgcolor="aquamarine" to bgcolor="gainsboro"
+3. Eventually, I run your batch file to update the website.
+```bash
+./update-website.sh
+```
+4. And here it is the uodated website!
+![Updated S3 Wesite](./images/update-s3-website.png)
 
 ## Optional challenge
 
