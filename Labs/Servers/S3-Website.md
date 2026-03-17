@@ -86,7 +86,7 @@ sh-4.2$ aws iam list-policies --query "Policies[?contains(PolicyName,'S3')]"
 ```
 And after I found the policy, I assigned it to the IAM user.
 ```bash
-aws iam attach-user-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --user-name awsS3user
+[ec2-user@ip-10-200-0-238 ~]$ aws iam attach-user-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --user-name awsS3user
 ```
 
 ## Task 5: Adjust S3 bucket permissions
@@ -98,9 +98,22 @@ I changed the permission for the S3 bucket:
 ## Task 6: Extract the files that you need for this lab
 I extracted the file containing the static-website contents for the Amazon S3 bucket using the CLI.
 ```bash
-cd ~/sysops-activity-files
-tar xvzf static-website-v2.tar.gz
-cd static-website
+[ec2-user@ip-10-200-0-238 ~]$ cd ~/sysops-activity-files
+[ec2-user@ip-10-200-0-238 sysops-activity-files]$ tar xvzf static-website-v2.tar.gz
+static-website/
+static-website/css/
+static-website/css/styles.css
+static-website/images/
+static-website/images/Cafe-Owners.png
+static-website/images/Cake-Vitrine.png
+static-website/images/Coffee-and-Pastries.png
+static-website/images/Coffee-Shop.png
+static-website/images/Cookies.png
+static-website/images/Cup-of-Hot-Chocolate.png
+static-website/images/Strawberry-&-Blueberry-Tarts.png
+static-website/images/Strawberry-Tarts.png
+static-website/index.html
+[ec2-user@ip-10-200-0-238 sysops-activity-files]$ cd static-website
 ```
 Among the files, there is one called `index.html`.
 
@@ -108,17 +121,34 @@ Among the files, there is one called `index.html`.
 The files are extracted, you upload the contents of the file to Amazon S3 using the `s3` command. s3 commands are built on top of the operations that are found in the s3api commands.
 1. In order to the the bucket to function as a website, I run the command `aws s3 website` with option `--index-document`. This process helps ensure that the index.html file will be known as the index document.
 ```bash
-aws s3 website s3://ctardi256 --index-document index.html
+[ec2-user@ip-10-200-0-238 static-website]$ aws s3 website s3://ctardi256 --index-document index.html
 ```
 2. To upload the files to the bucket, I run the command `aws s3 cp` with option `--recursive --acl public-read`. The access control list (ACL) parameter specifies that the uploaded files have public read access. It also includes the recursive parameter, which indicates that all files in the current directory on your machine should be uploaded.
 ```bash
-aws s3 cp /home/ec2-user/sysops-activity-files/static-website/ s3://<my-bucket>/ --recursive --acl public-read
+[ec2-user@ip-10-200-0-238 static-website]$ aws s3 cp /home/ec2-user/sysops-activity-files/static-website/ s3://ctardi256/ --recursive --acl public-read
+upload: css/styles.css to s3://ctardi256/css/styles.css
+upload: images/Coffee-Shop.png to s3://ctardi256/images/Coffee-Shop.png
+upload: ./index.html to s3://ctardi256/index.html
+upload: images/Cafe-Owners.png to s3://ctardi256/images/Cafe-Owners.png
+upload: images/Cake-Vitrine.png to s3://ctardi256/images/Cake-Vitrine.png
+upload: images/Coffee-and-Pastries.png to s3://ctardi256/images/Coffee-and-Pastries.png
+upload: images/Cookies.png to s3://ctardi256/images/Cookies.png
+upload: images/Strawberry-Tarts.png to s3://ctardi256/images/Strawberry-Tarts.png
+upload: images/Cup-of-Hot-Chocolate.png to s3://ctardi256/images/Cup-of-Hot-Chocolate.png
+upload: images/Strawberry-&-Blueberry-Tarts.png to s3://ctardi256/images/Strawberry-&-Blueberry-Tarts.png
 ```
-3. To verify that all files were successfully uploaded I run the command `aws s3 ls ctardi256 `.
-
+3. To verify that all files were successfully uploaded I run the command `aws s3 ls ctardi256`.
+```bash
+[ec2-user@ip-10-200-0-238 static-website]$ aws s3 ls ctardi256
+                           PRE css/
+                           PRE images/
+2026-03-17 13:03:53       2980 index.html
+```
 4. On AWS Management Console I checked that the Static website hosting is Enabled.
 
-5. And here it is the bucket website endpoint URL in the browser!
+![S3 Static Wesite Enabled](./images/s3-website-enable.png)
+
+6. And here it is the bucket website endpoint URL in the browser!
 
 ![S3 Wesite](./images/s3-website.png)
 
@@ -126,23 +156,40 @@ aws s3 cp /home/ec2-user/sysops-activity-files/static-website/ s3://<my-bucket>/
 1. To create a repeatable deployment, I created a batch file called `update-website.sh` in the home directory.
 ```bash
 #!/bin/bash
-aws s3 cp /home/ec2-user/sysops-activity-files/static-website/ s3://<my-bucket>/ --recursive --acl public-read
+aws s3 cp /home/ec2-user/sysops-activity-files/static-website/ s3://ctardi256/ --recursive --acl public-read
 ```
+And made the file executable `chmod +x update-website.sh`.
+
 2. Then I made some changes to the `sysops-activity-files/static-website/index.html` file:
 - bgcolor="aquamarine" to bgcolor="gainsboro"
 - bgcolor="orange" to bgcolor="cornsilk"
 - bgcolor="aquamarine" to bgcolor="gainsboro"
+
 3. Eventually, I run your batch file to update the website.
 ```bash
-./update-website.sh
+[ec2-user@ip-10-200-0-238 ~]$ ./update-website.sh
+upload: sysops-activity-files/static-website/css/styles.css to s3://ctardi256/css/styles.css
+upload: sysops-activity-files/static-website/images/Coffee-Shop.png to s3://ctardi256/images/Coffee-Shop.png
+upload: sysops-activity-files/static-website/images/Cafe-Owners.png to s3://ctardi256/images/Cafe-Owners.png
+upload: sysops-activity-files/static-website/images/Cookies.png to s3://ctardi256/images/Cookies.png
+upload: sysops-activity-files/static-website/index.html to s3://ctardi256/index.html
+upload: sysops-activity-files/static-website/images/Coffee-and-Pastries.png to s3://ctardi256/images/Coffee-and-Pastries.png
+upload: sysops-activity-files/static-website/images/Strawberry-&-Blueberry-Tarts.png to s3://ctardi256/images/Strawberry-&-Blueberry-Tarts.png
+upload: sysops-activity-files/static-website/images/Cake-Vitrine.png to s3://ctardi256/images/Cake-Vitrine.png
+upload: sysops-activity-files/static-website/images/Strawberry-Tarts.png to s3://ctardi256/images/Strawberry-Tarts.png
+upload: sysops-activity-files/static-website/images/Cup-of-Hot-Chocolate.png to s3://ctardi256/images/Cup-of-Hot-Chocolate.png
 ```
+
 4. And here it is the uodated website!
+
 ![Updated S3 Wesite](./images/update-s3-website.png)
 
 ## Optional challenge
-Use the `aws s3 sync` command to only copy the files that have been modified to the `S3 bucket`, increasing efficiency.
+Using the `aws s3 sync` command to only copy the files that have been modified to the `S3 bucket` increases efficiency.
+Only modified files were copied.
 ```bash
-aws s3 sync /home/ec2-user/sysops-activity-files/static-website/<s3://<my-bucket>/ --acl public-read
+[ec2-user@ip-10-200-0-238 ~]$ aws s3 sync /home/ec2-user/sysops-activity-files/static-website/ s3://ctardi256/ --acl public-read
+upload: sysops-activity-files/static-website/index.html to s3://ctardi256/index.html
 ```
 
 # Conclusion
