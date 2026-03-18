@@ -100,7 +100,7 @@ systemctl enable httpd
 
 2. I opened a web browser, and copy the **public IPv4** adreess of my instance. Here is the result!
 
-![My Web Application Challenge](./images/challenge-webpage-main.png)
+![My Web Application Challenge](./images/challenge-webpage-index.png)
 
 3. Then I navigated to my webpage using the URL: `http://<instance public IPv4>/projects.html`.
 
