@@ -20,9 +20,12 @@ I click **Create Volune** to add a new volume to the instance. I use the followi
 - **Tag (optional)**:
     - **Key**: `Name`
     - **Value**: `My Volume`
-I wait for the status to became *Available*.
 
 ![New Volume Options](./images/new-volume-options.png)
+
+I wait for the **Volume state** to became *Available*.
+
+![New Volume State Available](./images/new-volume-available.png)
 
 ## Task 2: Attaching the volume to an EC2 instance
 Now I attach my new volume to the EC2 instance. I use these options:
@@ -30,6 +33,10 @@ Now I attach my new volume to the EC2 instance. I use these options:
 - **Device name**: `/dev/sdb`
 
 ![Attach Volume To Instance](./images/new-volume-attach.png)
+
+I wait for the **Volume state** to became *In Use*.
+
+![New Volume State Available](./images/new-volume-in-use.png)
 
 ## Task 3: Connecting to the Lab EC2 instance
 
