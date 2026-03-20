@@ -13,6 +13,8 @@ The pet modeling agency wants a way to share files across its branch offices wit
 - Amazon Elastic Compute Cloud
 - Amazon Elastic File System
 
+![EFS-architecture](./images/lab-EFS-architecture.png)
+
 [Link to course on Skillbuilder](https://skillbuilder.aws/learn/A5M8X2CHM3/aws-simulearn-file-systems-in-the-cloud/RAJVAUNMHR)
 
 ## Solution
@@ -47,6 +49,9 @@ efs-1 mounted in site C
 ## Conclusion
 - I launched an Amazon EFS file system and mounted it to the EC2 instance PetModels-C.
 - I added the correct files to it.
+
+## Completion Certificate
+![AWS SimuLearn- File System in the Cloud](AWS SimuLearn- File System in the Cloud.pdf)
 
 
 
