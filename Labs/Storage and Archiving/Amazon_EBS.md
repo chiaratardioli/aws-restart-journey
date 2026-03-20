@@ -205,7 +205,7 @@ In this lab I learnt how to:
 
 ## Bash script to mount a volume
 ```bash
-!#/bin/bash
+#!/bin/bash
 
 # Verify the available storage
 df -h
