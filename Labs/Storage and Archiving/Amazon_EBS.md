@@ -21,22 +21,22 @@ I click **Create Volune** to add a new volume to the instance. I use the followi
     - **Key**: `Name`
     - **Value**: `My Volume`
 
-![New Volume Options](./images/new-volume-options.png)
+![My Volume Options](./images/my-volume-options.png)
 
 I wait for the **Volume state** to became *Available*.
 
-![New Volume State Available](./images/new-volume-available.png)
+![My Volume State Available](./images/my-volume-available.png)
 
 ## Task 2: Attaching the volume to an EC2 instance
 Now I attach my new volume to the EC2 instance. I use these options:
 - **Instance**: `Lab`
 - **Device name**: `/dev/sdb`
 
-![Attach Volume To Instance](./images/new-volume-attach.png)
+![Attach Volume To Instance](./images/my-volume-attach.png)
 
 I wait for the **Volume state** to became *In Use*.
 
-![New Volume State Available](./images/new-volume-in-use.png)
+![My Volume State Available](./images/my-volume-in-use.png)
 
 ## Task 3: Connecting to the Lab EC2 instance
 I connect to the instance **Lab** using the **EC2 Instance Connect**.
@@ -56,7 +56,7 @@ I connect to the instance **Lab** using the **EC2 Instance Connect**.
 ```
 
 ## Task 4: Creating and configuring the file system
-Here I will add the new volume to a Linux instance as an ext3 file system under the /mnt/data-store mount point.
+Here I will add the ume to a Linux instance as an ext3 file system under the /mnt/data-store mount point.
 
 1. I see the storage that is available on my instance using the command `df -h`.
 ```bash
@@ -70,7 +70,7 @@ tmpfs           471M     0  471M   0% /sys/fs/cgroup
 tmpfs            95M     0   95M   0% /run/user/1000
 ```
 
-2. I create an ext3 file system on the new volume.
+2. I create an ext3 file system on the ume.
 ```bash
 [ec2-user@ip-10-1-11-241 ~]$ sudo mkfs -t ext3 /dev/sdb
 mke2fs 1.42.9 (28-Dec-2013)
@@ -100,7 +100,7 @@ Writing superblocks and filesystem accounting information: done
 [ec2-user@ip-10-1-11-241 ~]$ sudo mkdir /mnt/data-store
 ```
 
-4. Eventually I mount the new volume and I ensures that the volume is mounted even after the instance is restarted.
+4. Eventually I mount the ume and I ensures that the volume is mounted even after the instance is restarted.
 ```bash
 [ec2-user@ip-10-1-11-241 ~]$ sudo mount /dev/sdb /mnt/data-store
 [ec2-user@ip-10-1-11-241 ~]$ echo "/dev/sdb   /mnt/data-store ext3 defaults,noatime 1 2" | sudo tee -a /etc/fstab
@@ -171,7 +171,7 @@ ls: cannot access /mnt/data-store/file.txt: No such file or directory
 ## Task 6: Restoring the Amazon EBS snapshot
 When I need to retrieve data stored in a snapshot, I can restore the snapshot to a new EBS volume.
 
-1. I create a new volume by using the snapshot with options:
+1. I create a ume by using the snapshot with options:
 - **Availability Zone**: `us-west-2a`
 - **Tag (optional)**:
     - **Key**: `Name`
@@ -179,11 +179,11 @@ When I need to retrieve data stored in a snapshot, I can restore the snapshot to
 
 ![Create Volume From Snapshot](./images/snapshot-create-volume.png)
 
-The Volume status of my new volume is *Available*.
+The Volume status of my ume is *Available*.
 
 ![Restored Volume Available](./images/restored-volume-available.png)
 
-**Note**: When restoring a snapshot to a new volume, I can also modify the configuration, such as changing the volume type, size, or Availability Zone.
+**Note**: When restoring a snapshot to a ume, I can also modify the configuration, such as changing the volume type, size, or Availability Zone.
 
 2. Attaching the restored volume to the EC2 instance
 dz 
