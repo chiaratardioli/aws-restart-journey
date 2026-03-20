@@ -51,7 +51,7 @@ efs-1 mounted in site C
 - I added the correct files to it.
 
 ## Completion Certificate
-![AWS SimuLearn- File System in the Cloud](AWS SimuLearn- File System in the Cloud.png)
+![AWS SimuLearn- File System in the Cloud](simuLearn-FileSystem.png)
 
 
 
