@@ -186,8 +186,16 @@ The Volume status of my ume is *Available*.
 **Note**: When restoring a snapshot to a ume, I can also modify the configuration, such as changing the volume type, size, or Availability Zone.
 
 2. Attaching the restored volume to the EC2 instance
-dz 
 
+Now I attach my restored volume to the EC2 instance. I use these options:
+- **Instance**: `Lab`
+- **Device name**: `/dev/sdc`
+
+![Attach Volume To Instance](./images/my-volume-attach.png)
+
+The **Volume state** is new *In Use*.
+
+![Restored Volume In Use](./images/restored-volume-in-use.png)
 
 3. Mounting the restored volume
 
