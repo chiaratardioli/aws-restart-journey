@@ -147,7 +147,9 @@ cat /mnt/data-store/file.txt
 ## Task 5: Creating an Amazon EBS snapshot
 Amazon EBS snapshots are stored in Amazon Simple Storage Service (Amazon S3) for durability. New EBS volumes can be created out of snapshots for cloning or restoring backups. Amazon EBS snapshots can also be shared among Amazon Web Services (AWS) accounts or copied over AWS Regions.
 
-1. Create the snapshot.
+1. I create a snapshot for my volume with options:
+- **Key**: `Name`
+- **Value**: `My Snapshot`
 
 ![My snapshot Options](./images/my-snapshot-options.png)
 
@@ -167,10 +169,27 @@ ls: cannot access /mnt/data-store/file.txt: No such file or directory
 ```
 
 ## Task 6: Restoring the Amazon EBS snapshot
+When I need to retrieve data stored in a snapshot, I can restore the snapshot to a new EBS volume.
 
-- Task 6.1: Creating a volume by using the snapshot
-- Task 6.2: Attaching the restored volume to the EC2 instance
-- Task 6.3: Mounting the restored volume
+1. I create a new volume by using the snapshot with options:
+- **Availability Zone**: `us-west-2a`
+- **Tag (optional)**:
+    - **Key**: `Name`
+    - **Value**: `Restored Volume`
+
+![Create Volume From Snapshot](./images/snapshot-create-volume.png)
+
+The Volume status of my new volume is *Available*.
+
+![Restored Volume Available](./images/restored-volume-available.png)
+
+**Note**: When restoring a snapshot to a new volume, I can also modify the configuration, such as changing the volume type, size, or Availability Zone.
+
+2. Attaching the restored volume to the EC2 instance
+dz 
+
+
+3. Mounting the restored volume
 
 ## Conclusion
 In this lab I learnt how to:
