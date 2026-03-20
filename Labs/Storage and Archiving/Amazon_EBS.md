@@ -145,7 +145,26 @@ cat /mnt/data-store/file.txt
 ```
 
 ## Task 5: Creating an Amazon EBS snapshot
+Amazon EBS snapshots are stored in Amazon Simple Storage Service (Amazon S3) for durability. New EBS volumes can be created out of snapshots for cloning or restoring backups. Amazon EBS snapshots can also be shared among Amazon Web Services (AWS) accounts or copied over AWS Regions.
 
+1. Create the snapshot.
+
+![My snapshot Options](./images/my-snapshot-options.png)
+
+2. The Snapshot status of my snapshot is *Pending*. 
+
+![My snapshot Pending](./images/my-snapshot-pending.png)
+
+3. After completion, the status changes to *Completed*. Only used storage blocks are copied to snapshots, so empty blocks do not use any snapshot storage space.
+
+![My snapshot Completed](./images/my-snapshot-completed.png)
+
+4. In my EC2 Instance Connect terminal window, I delete the file on my volume.
+```bash
+[ec2-user@ip-10-1-11-241 ~]$ sudo rm /mnt/data-store/file.txt
+[ec2-user@ip-10-1-11-241 ~]$ ls /mnt/data-store/file.txt
+ls: cannot access /mnt/data-store/file.txt: No such file or directory
+```
 
 ## Task 6: Restoring the Amazon EBS snapshot
 
