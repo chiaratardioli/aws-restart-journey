@@ -1,6 +1,6 @@
 # Working with Amazon EBS
 
-Amazon Elastic Block Store (Amazon EBS) is a scalable, high-performance block-storage service that is designed for Amazon Elastic Compute Cloud (Amazon EC2). In this lab, you learn how to create an EBS volume and perform operations on it, such as attaching it to an instance, creating a file system, and taking a snapshot backup.
+Amazon Elastic Block Store (Amazon EBS) is a scalable, high-performance block-storage service that is designed for Amazon Elastic Compute Cloud (Amazon EC2). In this lab, I will create an EBS volume and perform operations on it, such as attaching it to an instance, creating a file system, and taking a snapshot backup.
 
 ![Amazon EBS architecture](./amazonEBS-architecture.png)
 
@@ -27,8 +27,9 @@ Amazon Elastic Block Store (Amazon EBS) is a scalable, high-performance block-st
 - Task 6.3: Mounting the restored volume
 
 ## Conclusion
-- I created an EBS volume
-- I attached and mounted an EBS volume to an EC2 instance
-- I created a snapshot of an EBS volume
-- I created an EBS volume from a snapshot
+In this lab I learnt how to:
+- create an EBS volume
+- mount an EBS volume to an EC2 instance
+- create a snapshot of an EBS volume
+- create an EBS volume from a snapshot
 
