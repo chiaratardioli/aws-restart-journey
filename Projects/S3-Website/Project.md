@@ -84,6 +84,8 @@ We built and deployed a **static website** for Elegant Frame Gallery using AWS. 
 
 *Future enhancements may add DynamoDB, Lambda, Cognito, etc.*
 
+![Project Architecture Overview](./images/project-architecture.png)
+
 ---
 
 ## 📝 Project Steps
@@ -96,9 +98,17 @@ We built and deployed a **static website** for Elegant Frame Gallery using AWS. 
    - **Disable Block Public Access** (for static hosting)
 4. **Enable static website hosting** in bucket properties.
 5. **Upload all website files** (HTML, CSS, images) to the bucket.
+
+![S3 Bucket Files](./images/bucket-files.png)
+
 6. **Add a bucket policy** to make content publicly readable.
+
+![Bucket policy](./images/bucket-policy.png)
+
 7. **Test the website endpoint** – access via the S3 website URL.
 8. **Verify** that the site loads correctly.
+
+![Elegant Frame Gallery Static Website](./images/final-website.png)
 
 ---
 
