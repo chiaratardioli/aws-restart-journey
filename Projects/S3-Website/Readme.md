@@ -129,10 +129,10 @@ By migrating to AWS, Elegant Frame Gallery now enjoys:
 
 ## 📁 Repository Contents
 
-- `/index.html` – Main website page
-- `/css/` – Stylesheets
-- `/images/` – Product and gallery images
-- `/README.md` – This documentation (HTML format)
+- `index.html` – Main website page
+- `css/` – Stylesheets
+- `images/` – Product and gallery images
+- `README.md` – This documentation (HTML format)
 
 ---
 
