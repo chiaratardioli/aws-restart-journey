@@ -34,4 +34,11 @@ Here I've been challenged to sync the contents of a directory with the Amazon S3
 
 1. Downloading and unzipping sample files
 2. Syncing files
-3. 
+
+## Conclusion
+In this lab I learnt how to:
+
+- create and maintain snapshots for Amazon EC2 instances.
+- use Amazon S3 sync to copy files from an EBS volume to an S3 bucket.
+- use Amazon S3 versioning to retrieve deleted files.
+
