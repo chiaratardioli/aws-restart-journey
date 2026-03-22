@@ -97,9 +97,9 @@ Creating the group makes it convenient to manage individual user permissions. I 
 mediacouser user that is part of the group.
 
 1. The mediaco IAM group has 2 permissions:
-- IAMUserChangePassword:
+- **IAMUserChangePassword**:
    - AWS managed policy that permits users to change their own password
-- mediaCoPolicy:
+- **mediaCoPolicy**:
    - The first statement, identified by the Sid key name **AllowGroupToSeeBucketListInTheConsole**, 
       defines permissions that allow the user to use the Amazon S3 console to view the list of S3 buckets in the account.
    - The second statement, identified by the Sid key name **AllowRootLevelListingOfTheBucket**, defines permissions that allow 
@@ -111,8 +111,29 @@ mediacouser user that is part of the group.
 
 ![Mediaco IAM group](./images/lab03-IAM-group.png)
 
-2. Reviewing the mediacouser IAM user
+2. The mediacouser IAM user has 2 policies:
+- **IAMUserChangePassword**
+- **mediaCoPolicy**
+
+I create an **Access Key** wwith the following options:
+- Choose Command Line Interface (CLI).
+- Select the check box for I understand the above recommendation and want to proceed to create an access key.
+
+![IAM User Access Key](./images/lab03-access-key.png)
+
 3. Testing the mediacouser permissions
+
+In an incognito window, I copy the **Console sign-in link** `https://907540387694.signin.aws.amazon.com/console` 
+and sign in to the AWS Management Console as the mediacouser user.
+
+The external user is authorize to perform the view, upload, and delete operations on the contents of the images folder in the S3 share bucket.
+
+![Authorize actions](./images/lab03-authorized.png)
+
+The external user is not authorized to change the bucket permissions.
+
+![Unauthorize action](./images/lab03-unauthorized.png)
+
 
 ## Task 4: Configuring event notifications on the S3 share bucket
 Here I will configure the S3 share bucket to generate an event notification to an SNS topic whenever the contents of the bucket change. The SNS topic then sends an email message to its subscribed users with the notification message. Specifically, I will perform the following steps:
