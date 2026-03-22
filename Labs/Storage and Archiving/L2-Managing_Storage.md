@@ -61,7 +61,7 @@ aws ec2 stop-instances --instance-ids $INSTANCE_ID
 aws ec2 wait instance-stopped --instance-id $INSTANCE_ID
 ```
 
-Here the output on screen.
+Here is the output on screen.
 ```bash
 [ec2-user@ip-10-5-0-109 ~]$ INSTANCE_ID=$(aws ec2 describe-instances \
 >   --filters 'Name=tag:Name,Values=Processor' \
@@ -112,7 +112,7 @@ aws ec2 wait snapshot-completed --snapshot-id $SNAPSHOT_ID
 aws ec2 start-instances --instance-ids $INSTANCE_ID
 ```
 
-Here the output on screen.
+Here is the output on screen.
 ```bash
 [ec2-user@ip-10-5-0-109 ~]$ VOLUME_ID=$(aws ec2 describe-instances \
 >   --filter 'Name=tag:Name,Values=Processor' \
@@ -181,7 +181,7 @@ crontab cronjob
 aws ec2 describe-snapshots --filters "Name=volume-id,Values=$VOLUME_ID"
 ```
 
-Here the output screen.
+Here is the output screen.
 ```bash
 [ec2-user@ip-10-5-0-109 ~]$ echo "* * * * *  aws ec2 create-snapshot --volume-id $VOLUME_ID 2>&1 >> /tmp/cronlog" > cronjob
 You have new mail in /var/spool/mail/ec2-user
@@ -287,10 +287,191 @@ Deleting snapshot snap-022eead0ab16f1c3e
 The command returns only **2** snapshot IDs.
 
 ## Task 3: Challenge: Synchronize files with Amazon S3
-Here I've been challenged to sync the contents of a directory with the Amazon S3 bucket that you created earlier.
+Here I've been challenged to sync the contents of a directory with the Amazon S3 bucket that I created earlier.
 
 1. Downloading and unzipping sample files
+```bash
+[ec2-user@ip-10-5-0-109 ~]$ wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-RSJAWS-3-124627/183-lab-JAWS-managing-storage/s3/files.zip
+--2026-03-22 17:32:35--  https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-RSJAWS-3-124627/183-lab-JAWS-managing-storage/s3/files.zip
+Resolving aws-tc-largeobjects.s3.us-west-2.amazonaws.com (aws-tc-largeobjects.s3.us-west-2.amazonaws.com)... 3.5.83.200, 52.218.176.185, 52.92.129.18, ...
+Connecting to aws-tc-largeobjects.s3.us-west-2.amazonaws.com (aws-tc-largeobjects.s3.us-west-2.amazonaws.com)|3.5.83.200|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 72110 (70K) [application/zip]
+Saving to: ‘files.zip’
+
+100%[===========================================================================================================================================>] 72,110      --.-K/s   in 0.002s  
+
+2026-03-22 17:32:35 (40.5 MB/s) - ‘files.zip’ saved [72110/72110]
+
+[ec2-user@ip-10-5-0-109 ~]$ ls
+cronjob  files.zip  get-pip.py  snapshotter_v2.py
+[ec2-user@ip-10-5-0-109 ~]$ unzip files.zip
+Archive:  files.zip
+  inflating: files/file1.txt         
+  inflating: files/file2.txt         
+  inflating: files/file3.txt         
+[ec2-user@ip-10-5-0-109 ~]$ 
+```
+
 2. Syncing files
+```bash
+#!/bin/bash
+
+# Set bucket name
+BUCKET_NAME="s3-bucket-lab02-ct"
+echo $BUCKET_NAME
+
+# Activate versioning for the bucket
+aws s3api put-bucket-versioning --bucket $BUCKET_NAME --versioning-configuration Status=Enabled
+
+# Synch the local files with Amazon S3
+aws s3 sync files s3://$BUCKET_NAME/files/
+
+# Verify the status of the files
+aws s3 ls s3://$BUCKET_NAME/files/
+
+# Delete a local file.
+rm files/file1.txt
+
+# Force Amazon S3 to delete any files that aren't present on the local drive but present in Amazon S3
+aws s3 sync files s3://$BUCKET_NAME/files/ --delete
+```
+
+Here is the output on screen.
+```bash
+[ec2-user@ip-10-5-0-109 ~]$ BUCKET_NAME="s3-bucket-lab02-ct"
+[ec2-user@ip-10-5-0-109 ~]$ echo $BUCKET_NAME
+s3-bucket-lab02-ct
+[ec2-user@ip-10-5-0-109 ~]$ aws s3api put-bucket-versioning --bucket $BUCKET_NAME --versioning-configuration Status=Enabled
+
+[ec2-user@ip-10-5-0-109 ~]$ 
+[ec2-user@ip-10-5-0-109 ~]$ aws s3 sync files s3://$BUCKET_NAME/files/
+upload: files/file1.txt to s3://s3-bucket-lab02-ct/files/file1.txt 
+upload: files/file2.txt to s3://s3-bucket-lab02-ct/files/file2.txt 
+upload: files/file3.txt to s3://s3-bucket-lab02-ct/files/file3.txt  
+[ec2-user@ip-10-5-0-109 ~]$ aws s3 ls s3://$BUCKET_NAME/files/
+2026-03-22 17:42:46      30318 file1.txt
+2026-03-22 17:42:46      43784 file2.txt
+2026-03-22 17:42:46      96675 file3.txt
+[ec2-user@ip-10-5-0-109 ~]$ rm files/file1.txt
+[ec2-user@ip-10-5-0-109 ~]$ aws s3 sync files s3://$BUCKET_NAME/files/ --delete
+delete: s3://s3-bucket-lab02-ct/files/file1.txt
+[ec2-user@ip-10-5-0-109 ~]$ aws s3 ls s3://$BUCKET_NAME/files/
+2026-03-22 17:42:46      43784 file2.txt
+2026-03-22 17:42:46      96675 file3.txt
+```
+
+There's no direct command in Amazon S3 to restore a previous version of a file. 
+So I download a previous version of the deleted file from Amazon S3, with the `aws s3api list-object-versions`.
+
+```bash
+[ec2-user@ip-10-5-0-109 ~]$ aws s3api list-object-versions --bucket $BUCKET_NAME --prefix files/file1.txt
+{
+    "Versions": [
+        {
+            "ETag": "\"b76b2b775023e60be16bc332496f8409\"",
+            "ChecksumAlgorithm": [
+                "CRC32"
+            ],
+            "ChecksumType": "FULL_OBJECT",
+            "Size": 30318,
+            "StorageClass": "STANDARD",
+            "Key": "files/file1.txt",
+            "VersionId": "3_WSZ8J9KWIVrnEQSxSxImohrdd3tmTH",
+            "IsLatest": false,
+            "LastModified": "2026-03-22T17:42:46.000Z",
+            "Owner": {
+                "ID": "95cf776de2c265c07b3e5a4f729c702482223fdeeb94f8a48974c62e41ec8afb"
+            }
+        }
+    ],
+    "DeleteMarkers": [
+        {
+            "Owner": {
+                "ID": "95cf776de2c265c07b3e5a4f729c702482223fdeeb94f8a48974c62e41ec8afb"
+            },
+            "Key": "files/file1.txt",
+            "VersionId": "HtPkp5T0ogF1m7QavnnovmoG_yvZgFDM",
+            "IsLatest": true,
+            "LastModified": "2026-03-22T17:43:09.000Z"
+        }
+    ],
+    "RequestCharged": null,
+    "Prefix": "files/file1.txt"
+}
+```
+
+The **Versions** block contains a list of all available versions. I save the value for VersionId.
+```bash
+[ec2-user@ip-10-5-0-109 ~]$ VERSION_ID="3_WSZ8J9KWIVrnEQSxSxImohrdd3tmTH"
+[ec2-user@ip-10-5-0-109 ~]$ echo $VERSION_ID
+3_WSZ8J9KWIVrnEQSxSxImohrdd3tmTH
+```
+
+Then I re-download the old version and sync again to Amazon S3.
+
+```bash
+#!/bin/bash
+# Download the previous version of file1.txt.
+aws s3api get-object --bucket $BUCKET_NAME --key files/file1.txt --version-id $VERSION_ID files/file1.txt
+
+# Verify that the file was restored locally.
+ls files
+
+# Re-sync the contents of the files/ folder to Amazon S3.
+aws s3 sync files s3://$BUCKET_NAME/files/
+
+# Verify that a new version of file1.txt was pushed to the S3 bucket.
+aws s3 ls s3://$BUCKET_NAME/files/
+```
+Here is the output screen.
+```bash
+[ec2-user@ip-10-5-0-109 ~]$ aws s3api get-object --bucket $BUCKET_NAME --key files/file1.txt --version-id $VERSION_ID files/file1.txt
+{
+    "AcceptRanges": "bytes",
+    "LastModified": "Sun, 22 Mar 2026 17:42:46 GMT",
+    "ContentLength": 30318,
+    "ETag": "\"b76b2b775023e60be16bc332496f8409\"",
+    "ChecksumCRC32": "qqrPtQ==",
+    "ChecksumType": "FULL_OBJECT",
+    "VersionId": "3_WSZ8J9KWIVrnEQSxSxImohrdd3tmTH",
+    "ContentType": "text/plain",
+    "ServerSideEncryption": "AES256",
+    "Metadata": {}
+}
+[ec2-user@ip-10-5-0-109 ~]$ ls files
+file1.txt  file2.txt  file3.txt
+[ec2-user@ip-10-5-0-109 ~]$ aws s3 sync files s3://$BUCKET_NAME/files/
+upload: files/file1.txt to s3://s3-bucket-lab02-ct/files/file1.txt
+[ec2-user@ip-10-5-0-109 ~]$ aws s3 ls s3://$BUCKET_NAME/files/
+2026-03-22 18:03:26      30318 file1.txt
+2026-03-22 17:42:46      43784 file2.txt
+2026-03-22 17:42:46      96675 file3.txt
+[ec2-user@ip-10-5-0-109 ~]$ 
+```bash
+[ec2-user@ip-10-5-0-109 ~]$ aws s3api get-object --bucket $BUCKET_NAME --key files/file1.txt --version-id $VERSION_ID files/file1.txt
+{
+    "AcceptRanges": "bytes",
+    "LastModified": "Sun, 22 Mar 2026 17:42:46 GMT",
+    "ContentLength": 30318,
+    "ETag": "\"b76b2b775023e60be16bc332496f8409\"",
+    "ChecksumCRC32": "qqrPtQ==",
+    "ChecksumType": "FULL_OBJECT",
+    "VersionId": "3_WSZ8J9KWIVrnEQSxSxImohrdd3tmTH",
+    "ContentType": "text/plain",
+    "ServerSideEncryption": "AES256",
+    "Metadata": {}
+}
+[ec2-user@ip-10-5-0-109 ~]$ ls files
+file1.txt  file2.txt  file3.txt
+[ec2-user@ip-10-5-0-109 ~]$ aws s3 sync files s3://$BUCKET_NAME/files/
+upload: files/file1.txt to s3://s3-bucket-lab02-ct/files/file1.txt
+[ec2-user@ip-10-5-0-109 ~]$ aws s3 ls s3://$BUCKET_NAME/files/
+2026-03-22 18:03:26      30318 file1.txt
+2026-03-22 17:42:46      43784 file2.txt
+2026-03-22 17:42:46      96675 file3.txt
+[ec2-user@ip-10-5-0-109 ~]$
+```
 
 ## Conclusion
 In this lab I learnt how to:
