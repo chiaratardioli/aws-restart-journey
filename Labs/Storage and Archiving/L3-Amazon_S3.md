@@ -217,6 +217,60 @@ Here I will test the configuration of the S3 share bucket event notification by 
 These actions include putting objects into and deleting objects from the bucket, which send email notifications. I will also test an unauthorized operation to 
 verify that it is rejected. I will use the AWS s3api CLI command to perform these operations on the S3 share bucket.
 
+1. AWS CLI
+```bash
+[ec2-user@ip-10-200-0-7 ~]$ aws s3api put-bucket-notification-configuration --bucket $BUCKET_NAME --notification-configuration file://s3EventNotification.json
+[ec2-user@ip-10-200-0-7 ~]$ aws configure
+AWS Access Key ID [****************UFPQ]: <mediacouser_AccessKey>
+AWS Secret Access Key [****************BIlc]: <mediacouser_SecretKey>
+Default region name [us-west-2]: 
+Default output format [json]: json
+```
+
+2. PUT
+```bash
+[ec2-user@ip-10-200-0-7 ~]$ aws s3api put-object --bucket $BUCKET_NAME --key images/Caramel-Delight.jpg --body ~/new-images/Caramel-Delight.jpg
+{
+    "ETag": "\"31ac30da619244b0ce786f106e4f3df7\"", 
+    "ServerSideEncryption": "AES256"
+}
+```
+I receive an email message with the subject *Amazon S3 Notification*. This notification indicates that a new object with a key of images/Caramel-Delight.jpg was added (put) into the S3 share bucket.
+
+3. GET
+```bash
+[ec2-user@ip-10-200-0-7 ~]$ aws s3api get-object --bucket $BUCKET_NAME --key images/Donuts.jpg Donuts.jpg
+{
+    "AcceptRanges": "bytes", 
+    "ContentType": "image/jpeg", 
+    "LastModified": "Sun, 22 Mar 2026 20:51:55 GMT", 
+    "ContentLength": 380753, 
+    "ETag": "\"405b0bcc53cb5ab713c967dc1422b4f4\"", 
+    "ServerSideEncryption": "AES256", 
+    "Metadata": {}
+}
+```
+This operation does not generate an email notification because the share bucket is configured to send notifications only when objects are created or deleted.
+
+4. Delete
+```bash
+aws s3api delete-object --bucket $BUCKET_NAME --key images/Strawberry-Tarts.jpg
+```
+I receive an email message with the subject *Amazon S3 Notification*. The **eventName** is "ObjectRemoved:Delete" and **key** is "images/Strawberry-Tarts.jpg".
+In other words, the object with a key of images/Strawberry-Tarts.jpg was deleted from the S3 share bucket.
+
+![Amazon S3 Notification Delete Event](./images/lab03-delete-notification.png)
+
+5. I try to change the permission of the Donuts.jpg object so that it can be read publicly.
+```bash
+[ec2-user@ip-10-200-0-7 ~]$ aws s3api put-object-acl --bucket $BUCKET_NAME --key images/Donuts.jpg --acl public-read
+
+An error occurred (AccessDenied) when calling the PutObjectAcl operation: User: arn:aws:iam::907540387694:user/mediacouser is not authorized to perform: s3:PutObjectAcl on resource: "arn:aws:s3:::cafe-ct-2026/images/Donuts.jpg" because public ACLs are prevented by the BlockPublicAcls setting in S3 Block Public Access.
+[ec2-user@ip-10-200-0-7 ~]$ 
+```
+The command fails and displays the following error message as expected: "An error occurred (AccessDenied) when calling the PutObjectAcl operation: Access Denied" 
+because the mediacouser cannot change the bucket permissions.
+
 ## Conclusion
 In this lab I learnt how to:
 - use the s3api and s3 AWS CLI commands to create and configure an S3 bucket
