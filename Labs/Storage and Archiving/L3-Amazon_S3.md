@@ -96,7 +96,21 @@ the users of the media company to use the AWS Management Console or the AWS CLI 
 Creating the group makes it convenient to manage individual user permissions. I will also review the permissions inherited by the 
 mediacouser user that is part of the group.
 
-1. Reviewing the mediaco IAM group
+1. The mediaco IAM group has 2 permissions:
+- IAMUserChangePassword:
+   - AWS managed policy that permits users to change their own password
+- mediaCoPolicy:
+   - The first statement, identified by the Sid key name **AllowGroupToSeeBucketListInTheConsole**, 
+      defines permissions that allow the user to use the Amazon S3 console to view the list of S3 buckets in the account.
+   - The second statement, identified by the Sid key name **AllowRootLevelListingOfTheBucket**, defines permissions that allow 
+      the user to use the Amazon S3 console to view the list of first-level objects in the cafe bucket and other objects in the bucket.
+   - The third statement, identified by the Sid key name **AllowUserSpecificActionsOnlyInTheSpecificPrefix**, defines permissions that specify 
+   the actions that the user can perform on the objects in the cafe-*/images/* folder. The main operations are GetObject, PutObject, 
+   and DeleteObject, which correspond to the read, write, and delete permissions that you want to grant to the mediacouser user. 
+   Two additional operations are included for eventual version-related actions.
+
+![Mediaco IAM group](./images/lab03-IAM-group.png)
+
 2. Reviewing the mediacouser IAM user
 3. Testing the mediacouser permissions
 
