@@ -29,15 +29,69 @@ of the changes to the contents of the bucket.
 - Configure event notification on an S3 bucket.
 
 ## Task 1: Connecting to the CLI Host EC2 instance and configuring the AWS CLI
-Here I will connect to the CLI Host EC2 instance by using EC2 Instance Connect and configure the AWS CLI so that you can run commands.
+Here I connect to the CLI Host EC2 instance by using EC2 Instance Connect and configure the AWS CLI.
 
-1. Connecting to the CLI Host EC2 instance
-2. Configuring the AWS CLI on the CLI Host instance
+```bash
+   ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2026-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
+
+[ec2-user@ip-10-200-0-7 ~]$ aws configure
+AWS Access Key ID [None]: <AccessKey>
+AWS Secret Access Key [None]: <SecretKey>
+Default region name [None]: us-west-2
+Default output format [None]: json
+```
 
 ## Task 2: Creating and initializing the S3 share bucket
+Here I use the AWS CLI to create my S3 share bucket `cafe-ct-2026` and upload a few images.
+
+Script:
+```bash
+# Set bucket name
+BUCKET_NAME=cafe-ct-2026
+echo $BUCKET_NAME
+
+# Create buckect
+aws s3 mb s3://$BUCKET_NAME --region 'us-west-2'
+
+# Load images into the bucket
+aws s3 sync ~/initial-images/ s3://$BUCKET_NAME/images
+
+# Verify that the files were synced to the S3 bucket
+aws s3 ls s3://$BUCKET_NAME/images/ --human-readable --summarize
+```
+
+Output on screen.
+```bash
+[ec2-user@ip-10-200-0-7 ~]$ BUCKET_NAME=cafe-ct-2026
+[ec2-user@ip-10-200-0-7 ~]$ echo $BUCKET_NAME
+cafe-ct-2026
+[ec2-user@ip-10-200-0-7 ~]$ aws s3 mb s3://$BUCKET_NAME --region 'us-west-2'
+make_bucket: cafe-ct-2026
+[ec2-user@ip-10-200-0-7 ~]$ aws s3 sync ~/initial-images/ s3://$BUCKET_NAME/images
+upload: initial-images/Donuts.jpg to s3://cafe-ct-2026/images/Donuts.jpg
+upload: initial-images/Cup-of-Hot-Chocolate.jpg to s3://cafe-ct-2026/images/Cup-of-Hot-Chocolate.jpg
+upload: initial-images/Strawberry-Tarts.jpg to s3://cafe-ct-2026/images/Strawberry-Tarts.jpg
+[ec2-user@ip-10-200-0-7 ~]$ aws s3 ls s3://$BUCKET_NAME/images/ --human-readable --summarize
+2026-03-22 20:51:55  308.7 KiB Cup-of-Hot-Chocolate.jpg
+2026-03-22 20:51:55  371.8 KiB Donuts.jpg
+2026-03-22 20:51:55  468.0 KiB Strawberry-Tarts.jpg
+
+Total Objects: 3
+   Total Size: 1.1 MiB
+[ec2-user@ip-10-200-0-7 ~]$ 
+```
 
 ## Task 3: Reviewing the IAM group and user permissions
-Here I will review the permissions assigned to the mediaco IAM user group. This group was created to provide a way for 
+Here I review the permissions assigned to the mediaco IAM user group. This group was created to provide a way for 
 the users of the media company to use the AWS Management Console or the AWS CLI to upload and modify images in the S3 share bucket. 
 Creating the group makes it convenient to manage individual user permissions. I will also review the permissions inherited by the 
 mediacouser user that is part of the group.
