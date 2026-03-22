@@ -7,7 +7,7 @@ and configure a scheduler to run Python scripts to delete older snapshots.
 In the challenge section, I will sync the contents of a directory on an EBS volume to an Amazon Simple 
 Storage Service (Amazon S3) bucket using an Amazon S3 sync command.
 
-![Managing Storage Archtecture](./images/managing-storage-archtecture.png)
+![Managing Storage Archtecture](./images/lab02-archtecture.png)
 
 This lab environment consists of a virtual private cloud (VPC) with a public subnet. Amazon Elastic Compute 
 Cloud (Amazon EC2) instances named "Command Host" and "Processor" have already been created in this VPC.
@@ -23,8 +23,13 @@ The "Command Host" instance will be used to administer AWS resources including t
 I create an Amazon S3 bucket and configure the "Command Host" EC2 instance to have secure access to other AWS resources.
 
 1. I create an S3 bucket named `s3-bucket-lab02-ct`.
+
+![My bucket](./images/lab02-s3-bucket.png)
+
 2. I attach a pre-created IAM role `S3BucketAccessRole` as an instance profile to the EC2 instance **Processor**, 
 giving it the permissions to interact with other AWS services such as EBS volumes and S3 buckets.
+
+![EC2 Processing with IAM role](./images/lab02-EC2-IAMuser.png)
 
 ## Task 2: Taking snapshots of your instance
 Here I use the AWS Command Line Interface (AWS CLI) to manage the processing of snapshots of an instance.
