@@ -284,6 +284,7 @@ Deleting snapshot snap-022eead0ab16f1c3e
     "snap-0d058c55a2c125801"
 ]
 ```
+The command returns only **2** snapshot IDs.
 
 ## Task 3: Challenge: Synchronize files with Amazon S3
 Here I've been challenged to sync the contents of a directory with the Amazon S3 bucket that you created earlier.
