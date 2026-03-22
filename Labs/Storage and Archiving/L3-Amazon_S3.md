@@ -137,13 +137,80 @@ The external user is not authorized to change the bucket permissions.
 
 ## Task 4: Configuring event notifications on the S3 share bucket
 Here I will configure the S3 share bucket to generate an event notification to an SNS topic whenever the contents of the bucket change. The SNS topic then sends an email message to its subscribed users with the notification message. Specifically, I will perform the following steps:
-- Create the s3NotificationTopic SNS topic.
-- Grant Amazon S3 permission to publish to the topic.
-- Subscribe to the topic.
-- Add an event notification configuration to the S3 bucket.
 
-1. Creating and configuring the s3NotificationTopic SNS topic
-2. Adding an event notification configuration to the S3 bucket
+1. I create the **s3NotificationTopic** SNS topic.
+
+![SNS Topic](./images/lab03-SNS-topic.png)
+
+2. I grant Amazon S3 permission to publish to the topic. In the **Access policy (ooptional)**, 
+I replca the contents of the JSON editor with the following policy:
+
+```json
+{
+  "Version": "2008-10-17",
+  "Id": "S3PublishPolicy",
+  "Statement": [
+    {
+      "Sid": "AllowPublishFromS3",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "s3.amazonaws.com"
+      },
+      "Action": "SNS:Publish",
+      "Resource": "arn:aws:sns:us-west-2:907540387694:s3NotificationTopic",
+      "Condition": {
+        "ArnLike": {
+          "aws:SourceArn": "arn:aws:s3:*:*:cafe-ct-2026"
+        }
+      }
+    }
+  ]
+}
+```
+It grants the cafe S3 share bucket permission to publish messages to the s3NotificationTopic SNS topic.
+
+3. I subscribe to the topic.
+
+![SNS Topic Subscription](./images/lab03-subscription.png)
+
+![SNS Topic Subscription](./images/lab03-subscription-confirmed.png)
+
+4. I add an event notification configuration to the S3 bucket.
+
+First, I copy the following json code into the file `s3EventNotification.json`.
+```bash
+  {
+    "TopicConfigurations": [
+      {
+        "TopicArn": "arn:aws:sns:us-west-2:907540387694:s3NotificationTopic",
+        "Events": ["s3:ObjectCreated:*","s3:ObjectRemoved:*"],
+        "Filter": {
+          "Key": {
+            "FilterRules": [
+              {
+                "Name": "prefix",
+                "Value": "images/"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+```
+The code requests that Amazon S3 publish an event notification to the s3NotificationTopic SNS topic whenever an ObjectCreated or ObjectRemoved event is performed on objects inside an Amazon S3 resource with a prefix of images/.
+
+
+Then I associate the event configuration file with the S3 share bucket:
+```bash
+aws s3api put-bucket-notification-configuration --bucket $BUCKET_NAME --notification-configuration file://s3EventNotification.json
+```
+
+Eventually, I checked my email.
+
+![Amazon S3 Notification Test Event](./images/lab03-test-event.png)
+
+The value of the "Event" key is "s3:TestEvent". Amazon S3 sent this notification as a test of the event notifications configuration that you set up.
 
 ## Task 5: Testing the S3 share bucket event notifications
 Here I will test the configuration of the S3 share bucket event notification by performing the use cases that mediacouser expects to perform on the bucket. 
