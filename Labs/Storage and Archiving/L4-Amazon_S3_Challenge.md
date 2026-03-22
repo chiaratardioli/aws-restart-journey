@@ -49,8 +49,8 @@ In this lab I learnt how to:
 - Listed the contents of the S3 bucket by using AWS CLI
 
 ## Additional resources
-- ![S3 CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/s3/)
-- ![Getting Started with Amazon S3](https://aws.amazon.com/s3/getting-started/)
-- ![How Can I Grant Public Read Access to Some Objects in My Amazon S3 Bucket?](https://repost.aws/knowledge-center/read-access-objects-s3-bucket)
-- ![Connect to Your Linux Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-to-linux-instance.html)
+- [S3 CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/s3/)
+- [Getting Started with Amazon S3](https://aws.amazon.com/s3/getting-started/)
+- [How Can I Grant Public Read Access to Some Objects in My Amazon S3 Bucket?](https://repost.aws/knowledge-center/read-access-objects-s3-bucket)
+- [Connect to Your Linux Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-to-linux-instance.html)
 
