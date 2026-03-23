@@ -86,7 +86,7 @@ Then on the object permission tab, I edit the ACL and in the **Everyone (public 
 
 5. Now I reload the Object URL on my web browser and I can see the image.
 
-![Object URL](./images/lab03-object-url.png)
+![Object URL](./images/lab04-object-url.png)
 
 6. Eventually, I list the contents of the S3 bucket by using the AWS CLI.
 ```bash
