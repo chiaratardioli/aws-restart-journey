@@ -24,28 +24,87 @@ To set up the AWS CLI profile with credentials I run the command `aws configure`
 - **Default output format**: `json`
 
 ```bash
+   ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2026-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
 
+[ec2-user@ip-10-200-0-11 ~]$ aws configure
+AWS Access Key ID [None]: <AccessKey>
+AWS Secret Access Key [None]: <SecretKey>
+Default region name [None]: us-west-2
+Default output format [None]: json
+[ec2-user@ip-10-200-0-11 ~]$ 
 ```
 
 ## Task 3: Finishing the challenge
 
-1. I create an S3 bucket with the following commands.
+1. I create an S3 bucket.
 ```bash
 # Set bucket name
-BUCKET_NAME="chll-ct-2026"
+BUCKET_NAME="challenge-ct-2026"
 echo $BUCKET_NAME
 
 # Create buckect
 aws s3 mb s3://$BUCKET_NAME --region 'us-west-2'
 ```
 
-2. I upload an object into this bucket with the following commands.
+Output screen:
 ```bash
-# Load images into the bucket
-aws s3 sync ~/initial-images/ s3://$BUCKET_NAME/images
+[ec2-user@ip-10-200-0-11 ~]$ # Set bucket name
+[ec2-user@ip-10-200-0-11 ~]$ BUCKET_NAME="challenge-ct-2026"
+[ec2-user@ip-10-200-0-11 ~]$ echo $BUCKET_NAME
+chll-ct-2026
+[ec2-user@ip-10-200-0-11 ~]$ 
+[ec2-user@ip-10-200-0-11 ~]$ # Create buckect
+[ec2-user@ip-10-200-0-11 ~]$ aws s3 mb s3://$BUCKET_NAME --region 'us-west-2'
+make_bucket: challenge-ct-2026
+[ec2-user@ip-10-200-0-11 ~]$ 
 ```
 
-3. I try to access the object by using a web browser.
+2. I upload the content of the folder **sysops-activity-files/images** into this bucket.
+```bash
+# Load images into the bucket
+[ec2-user@ip-10-200-0-11 ~]$ aws s3 sync ~/sysops-activity-files/images/ s3://$BUCKET_NAME/images
+upload: sysops-activity-files/images/Cake-Vitrine.png to s3://chll-ct-2026/images/Cake-Vitrine.png
+upload: sysops-activity-files/images/Cookies.png to s3://chll-ct-2026/images/Cookies.png
+upload: sysops-activity-files/images/Coffee-and-Pastries.png to s3://chll-ct-2026/images/Coffee-and-Pastries.png
+upload: sysops-activity-files/images/Mom-&-Pop-Coffee-Shop.png to s3://chll-ct-2026/images/Mom-&-Pop-Coffee-Shop.png
+upload: sysops-activity-files/images/Mom-&-Pop.png to s3://chll-ct-2026/images/Mom-&-Pop.png
+upload: sysops-activity-files/images/Strawberry-&-Blueberry-Tarts.png to s3://chll-ct-2026/images/Strawberry-&-Blueberry-Tarts.png
+upload: sysops-activity-files/images/Strawberry-Tarts.png to s3://chll-ct-2026/images/Strawberry-Tarts.png
+upload: sysops-activity-files/images/Cup-of-Hot-Chocolate.png to s3://chll-ct-2026/images/Cup-of-Hot-Chocolate.png
+[ec2-user@ip-10-200-0-11 ~]$
+[ec2-user@ip-10-200-0-11 ~]$ aws s3 ls s3://$BUCKET_NAME/images/ --human-readable --summarize
+2026-03-23 12:58:02    3.8 MiB Cake-Vitrine.png
+2026-03-23 12:58:02    3.1 MiB Coffee-and-Pastries.png
+2026-03-23 12:58:02    1.4 MiB Cookies.png
+2026-03-23 12:58:02    3.6 MiB Cup-of-Hot-Chocolate.png
+2026-03-23 12:58:02  726.8 KiB Mom-&-Pop-Coffee-Shop.png
+2026-03-23 12:58:02    2.7 MiB Mom-&-Pop.png
+2026-03-23 12:58:02    2.9 MiB Strawberry-&-Blueberry-Tarts.png
+2026-03-23 12:58:02    3.4 MiB Strawberry-Tarts.png
+
+Total Objects: 8
+   Total Size: 21.7 MiB
+```
+
+3. I try to access the object **Cake-Vitrine.png** by using a web browser.
+But I received an error message at the **Object URL** `https://chll-ct-2026.s3.us-west-2.amazonaws.com/images/Cake-Vitrine.png`.
+```html
+<Error>
+<Code>AccessDenied</Code>
+<Message>Access Denied</Message>
+<RequestId>WCQ1KEQNPQDVRBJN</RequestId>
+<HostId>GfdXJFA6rism4+wesaLVMO1wNYPIpf4ldTPD+IujnaDAJRZqlRWSiKg0UxexWSiG0JIFAtE1+3E=</HostId>
+</Error>
+```
 
 4. I make the object (not the bucket) publicly accessible.
 
