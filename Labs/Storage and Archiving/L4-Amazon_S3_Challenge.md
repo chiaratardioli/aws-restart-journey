@@ -18,7 +18,7 @@ On the EC2 Instance Connect tab, I click Connect.
 
 ## Task 2: Configuring the AWS CLI
 To set up the AWS CLI profile with credentials I run the command `aws configure` with options:
-- **AWS Access Key ID**:`ccessKey`
+- **AWS Access Key ID**:`AccessKey`
 - **AWS Secret Access Key**: `SecretKey`
 - **Default region name**: `us-west-2`
 - **Default output format**: `json`
@@ -29,9 +29,21 @@ To set up the AWS CLI profile with credentials I run the command `aws configure`
 
 ## Task 3: Finishing the challenge
 
-1. I create an S3 bucket.
+1. I create an S3 bucket with the following commands.
+```bash
+# Set bucket name
+BUCKET_NAME="chll-ct-2026"
+echo $BUCKET_NAME
 
-2. I upload an object into this bucket.
+# Create buckect
+aws s3 mb s3://$BUCKET_NAME --region 'us-west-2'
+```
+
+2. I upload an object into this bucket with the following commands.
+```bash
+# Load images into the bucket
+aws s3 sync ~/initial-images/ s3://$BUCKET_NAME/images
+```
 
 3. I try to access the object by using a web browser.
 
@@ -39,7 +51,11 @@ To set up the AWS CLI profile with credentials I run the command `aws configure`
 
 5. I access the object by using a web browser.
 
-6. I list the contents of the S3 bucket by using the AWS CLI. 
+6. I list the contents of the S3 bucket by using the AWS CLI.
+```bash
+# Verify that the files were synced to the S3 bucket
+aws s3 ls s3://$BUCKET_NAME/images/ --human-readable --summarize
+```
 
 ## Conclusion
 In this lab I learnt how to:
