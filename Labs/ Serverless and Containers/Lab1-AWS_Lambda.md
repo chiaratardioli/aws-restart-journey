@@ -22,8 +22,17 @@ The following diagram shows the architecture of the sales analysis report soluti
 
 ## Task 1: Observing the IAM role settings
 
-1. Observing the salesAnalysisReport IAM role settings
-2. Observing the salesAnalysisReportDERole IAM role settings
+1. The **salesAnalysisReportRole** IAM role has 4 policies:
+- **AmazonSNSFullAccess** provides full access to Amazon SNS resources.
+- **AmazonSSMReadOnlyAccess** provides read-only access to Systems Manager resources.
+- **AWSLambdaBasicRunRole** provides write permissions to CloudWatch logs (which are required by every Lambda function).
+- **AWSLambdaRole** gives a Lambda function the ability to invoke another Lambda function.  
+Besides, *lambda.amazonaws.com* is listed as a trusted entity, which means that the Lambda service can use this role.
+
+3. The **salesAnalysisReportDERole** IAM role has 2 policies:
+- **AWSLambdaBasicRunRole** provides write permissions to CloudWatch logs.
+- **AWSLambdaVPCAccessRunRole** provides permissions to manage elastic network interfaces to connect a function to a virtual private cloud (VPC).
+Besides, *lambda.amazonaws.com* is listed as a trusted entity.
 
 ## Task 2: Creating a Lambda layer and a data extractor Lambda function
 1. Creating a Lambda Layer
