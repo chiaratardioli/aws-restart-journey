@@ -1,1 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Elegant Frame Gallery</title>
 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        header {
+            background-color: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #eaeaea;
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        footer {
+            background-color: #f5f5f5;
+            text-align: center;
+            padding: 15px;
+        }
+<style>
+    .products {
+        display: grid;
+        gap: 20px;
+    }
+
+    .products-top {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .products-bottom {
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .product img {
+        width: 100%;      /* ширина картинки займає всю колонку */
+        height: 250px;    /* встановлюємо однакову висоту для всіх */
+        object-fit: cover; /* обрізає/масштабує фото, щоб не спотворювалося */
+        border-radius: 8px;
+    }
+.shop img {
+    width: 200px;       /* ширина картинки для SHOP */
+    height: auto;       /* висота підлаштовується пропорційно */
+    border-radius: 8px;
+}
+</style>
+    
+</head>
+
+<body>
+
+<header>
+    <h1>Elegant Frame Gallery</h1>
+    <p>Timeless Frames for Your Precious Moments</p>
+</header>
+
+<nav>
+    <a href="#home">HOME</a>
+    <a href="#brand">BRAND</a>
+    <a href="#catalogues">CATALOGUES</a>
+    <a href="#contacts">CONTACTS</a>
+    <a href="#shop">SHOP</a>
+</nav>
+
+<!-- HOME -->
+<!-- HOME -->
+<section id="home">
+    <h2>Welcome</h2>
+    <img src="main.jpg" alt="Main Photo" style="width:1600px; max-width:100%; border-radius:10px; display:block; margin: 20px auto;">
+    <p>Discover elegant photo frames inspired by Italian craftsmanship.</p>
+</section>
+
+<!-- BRAND -->
+<section id="brand">
+    <h2>Our Brand</h2>
+    <p>
+        Elegant Frame Gallery represents premium quality and timeless design.
+        Inspired by Italian craftsmanship, our products combine elegance and durability.
+    </p>
+</section>
+
+<section id="catalogues">
+    <h2>Catalogues</h2>
+
+    <!-- Верхні 4 розділи -->
+    <div class="products products-top">
+        <div class="product">
+            <img src="disney.jpg" alt="Disney">
+            <h3>Disney</h3>
+        </div>
+        <div class="product">
+            <img src="children.jpg" alt="Children">
+            <h3>Children</h3>
+        </div>
+        <div class="product">
+            <img src="frames.jpg" alt="Frames">
+            <h3>Frames</h3>
+        </div>
+        <div class="product">
+            <img src="anniversaries.jpg" alt="Anniversaries">
+            <h3>Anniversaries</h3>
+        </div>
+    </div>
+
+    <!-- Нижні 3 по центру -->
+    <div class="products products-bottom">
+        <div class="product">
+            <img src="paintings.jpg" alt="Paintings">
+            <h3>Paintings</h3>
+        </div>
+        <div class="product">
+            <img src="resins.jpg" alt="Resins">
+            <h3>Resins</h3>
+        </div>
+        <div class="product">
+            <img src="sacred.jpg" alt="Sacred">
+            <h3>Sacred</h3>
+        </div>
+    </div>
+</section>
+<!-- SHOP -->
+<section id="shop">
+    <h2>Shop</h2>
+    <p>Browse our collection and choose the perfect frame.</p>
+
+    <div class="products shop" style="grid-template-columns: repeat(3, 1fr); gap:20px; justify-content:center;">
+        <div class="product">
+            <img src="frame1.jpg" alt="Silver Frame">
+            <h3>Classic Frame</h3>
+            <p>CHF2O</p>
+        </div>
+
+        <div class="product">
+            <img src="frame2.jpg" alt="Wood Frame">
+            <h3>Elegant Frame</h3>
+            <p>CHF25</p>
+        </div>
+
+        <div class="product">
+            <img src="frame3.jpg" alt="Gold Frame">
+            <h3>Vintage Frame</h3>
+            <p>CHF30</p>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACTS -->
+<section id="contacts">
+    <h2>Contact Us</h2>
+    <p>Email: info@elegantframes.com</p>
+    <p>Phone: +41 111 222 333</p>
+    <p>Address: St. Gallen, Switzerland</p>
+</section>
+
+<footer>
+    <p>© 2026 Elegant Frame Gallery</p>
+</footer>
+
+</body>
+</html>
