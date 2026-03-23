@@ -70,7 +70,7 @@ upload: sysops-activity-files/images/Strawberry-Tarts.png to s3://challenge-ct-2
 ```
 
 3. I try to access the object **Cake-Vitrine.png** by using a web browser.
-But I received an error message at the **Object URL** `https://chll-ct-2026.s3.us-west-2.amazonaws.com/images/Cake-Vitrine.png`.
+But I received an error message at the **Object URL** `https://challenge-ct-2026-03-23.s3.us-west-2.amazonaws.com/images/Cake-Vitrine.png`.
 ```html
 <Error>
 <Code>AccessDenied</Code>
