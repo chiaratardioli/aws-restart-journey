@@ -142,7 +142,7 @@ Here I will configure the S3 share bucket to generate an event notification to a
 
 ![SNS Topic](./images/lab03-SNS-topic.png)
 
-2. I grant Amazon S3 permission to publish to the topic. In the **Access policy (ooptional)**, 
+2. I grant Amazon S3 permission to publish to the topic. In the **Access policy (optional)**, 
 I replca the contents of the JSON editor with the following policy:
 
 ```json
