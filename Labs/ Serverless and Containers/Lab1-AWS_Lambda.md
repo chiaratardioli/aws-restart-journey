@@ -35,11 +35,31 @@ Besides, *lambda.amazonaws.com* is listed as a trusted entity, which means that 
 Besides, *lambda.amazonaws.com* is listed as a trusted entity.
 
 ## Task 2: Creating a Lambda layer and a data extractor Lambda function
-1. Creating a Lambda Layer
-2. Creating a data extractor Lambda function
-3. Adding the Lambda layer to the function
-4. Importing the code for the data extractor Lambda function
-5. Configuring network settings for the function
+
+1. In AWS Lambda service, I create a **Lambda Layer** with these settings:
+- Name: `pymysqlLibrary`
+- Description: `PyMySQL library modules`
+- Upload a .zip file: `pymysql-v3.zip` (previously downloaded)
+- Compatible runtimes: `Python 3.14`
+
+2. In AWS Lambda service, I create a data extractor **Lambda Function** with these settings:
+- Select `Author from scratch`
+- Name: `salesAnalysisReportDataExtractor`
+- Runtime: `Python 3.14`
+- Execution role: `salesAnalysisReportDERole` (existing role)
+
+3. At the bottom of the page for the new function, in the Layers panel, I click edit and then add a layer with these options:
+- Layer: `Custom layers`
+- Custom layers: `pymysqlLibrary`
+- Version: `1`
+
+4. In the Runtime settings panel, I updated the **Handler** with `salesAnalysisReportDataExtractor.lambda_handler`. 
+Then I import the code `salesAnalysisReportDataExtractor.py` (previously downloaded) for the data extractor Lambda function.
+
+5. In the Configuring setting, I edit the VPC network settings for the function:
+- VPC: option with Cafe VPC as the Name.
+- Subnets: option with Cafe Public Subnet 1 as the Name.
+- Security groups: option with CafeSecurityGroup as the Name.
 
 ## Task 3: Testing the data extractor Lambda function
 
