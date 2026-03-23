@@ -24,7 +24,7 @@ To set up the AWS CLI profile with credentials I run the command `aws configure`
 - **Default output format**: `json`
 
 ```bash
-   ,     #_
+  ,     #_
    ~\_  ####_        Amazon Linux 2
   ~~  \_#####\
   ~~     \###|       AL2 End of Life is 2026-06-30.
@@ -35,12 +35,11 @@ To set up the AWS CLI profile with credentials I run the command `aws configure`
          _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
        _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
 
-[ec2-user@ip-10-200-0-11 ~]$ aws configure
+[ec2-user@ip-10-200-0-239 ~]$ aws configure
 AWS Access Key ID [None]: <AccessKey>
 AWS Secret Access Key [None]: <SecretKey>
 Default region name [None]: us-west-2
 Default output format [None]: json
-[ec2-user@ip-10-200-0-11 ~]$ 
 ```
 
 ## Task 3: Finishing the challenge
@@ -57,39 +56,38 @@ aws s3 mb s3://$BUCKET_NAME --region 'us-west-2'
 
 Output screen:
 ```bash
-[ec2-user@ip-10-200-0-11 ~]$ # Set bucket name
-[ec2-user@ip-10-200-0-11 ~]$ BUCKET_NAME="challenge-ct-2026"
-[ec2-user@ip-10-200-0-11 ~]$ echo $BUCKET_NAME
-chll-ct-2026
-[ec2-user@ip-10-200-0-11 ~]$ 
-[ec2-user@ip-10-200-0-11 ~]$ # Create buckect
-[ec2-user@ip-10-200-0-11 ~]$ aws s3 mb s3://$BUCKET_NAME --region 'us-west-2'
-make_bucket: challenge-ct-2026
-[ec2-user@ip-10-200-0-11 ~]$ 
+[ec2-user@ip-10-200-0-239 ~]$ # Set bucket name
+[ec2-user@ip-10-200-0-239 ~]$ BUCKET_NAME="challenge-ct-2026-03-23"
+[ec2-user@ip-10-200-0-239 ~]$ echo $BUCKET_NAME
+challenge-ct-2026-03-23
+[ec2-user@ip-10-200-0-239 ~]$ 
+[ec2-user@ip-10-200-0-239 ~]$ # Create buckect
+[ec2-user@ip-10-200-0-239 ~]$ aws s3 mb s3://$BUCKET_NAME --region 'us-west-2'
+make_bucket: challenge-ct-2026-03-23
 ```
 
 2. I upload the content of the folder **sysops-activity-files/images** into this bucket.
 ```bash
 # Load images into the bucket
-[ec2-user@ip-10-200-0-11 ~]$ aws s3 sync ~/sysops-activity-files/images/ s3://$BUCKET_NAME/images
-upload: sysops-activity-files/images/Cake-Vitrine.png to s3://chll-ct-2026/images/Cake-Vitrine.png
-upload: sysops-activity-files/images/Cookies.png to s3://chll-ct-2026/images/Cookies.png
-upload: sysops-activity-files/images/Coffee-and-Pastries.png to s3://chll-ct-2026/images/Coffee-and-Pastries.png
-upload: sysops-activity-files/images/Mom-&-Pop-Coffee-Shop.png to s3://chll-ct-2026/images/Mom-&-Pop-Coffee-Shop.png
-upload: sysops-activity-files/images/Mom-&-Pop.png to s3://chll-ct-2026/images/Mom-&-Pop.png
-upload: sysops-activity-files/images/Strawberry-&-Blueberry-Tarts.png to s3://chll-ct-2026/images/Strawberry-&-Blueberry-Tarts.png
-upload: sysops-activity-files/images/Strawberry-Tarts.png to s3://chll-ct-2026/images/Strawberry-Tarts.png
-upload: sysops-activity-files/images/Cup-of-Hot-Chocolate.png to s3://chll-ct-2026/images/Cup-of-Hot-Chocolate.png
-[ec2-user@ip-10-200-0-11 ~]$
-[ec2-user@ip-10-200-0-11 ~]$ aws s3 ls s3://$BUCKET_NAME/images/ --human-readable --summarize
-2026-03-23 12:58:02    3.8 MiB Cake-Vitrine.png
-2026-03-23 12:58:02    3.1 MiB Coffee-and-Pastries.png
-2026-03-23 12:58:02    1.4 MiB Cookies.png
-2026-03-23 12:58:02    3.6 MiB Cup-of-Hot-Chocolate.png
-2026-03-23 12:58:02  726.8 KiB Mom-&-Pop-Coffee-Shop.png
-2026-03-23 12:58:02    2.7 MiB Mom-&-Pop.png
-2026-03-23 12:58:02    2.9 MiB Strawberry-&-Blueberry-Tarts.png
-2026-03-23 12:58:02    3.4 MiB Strawberry-Tarts.png
+[ec2-user@ip-10-200-0-239 ~]$ aws s3 sync ~/sysops-activity-files/images/ s3://$BUCKET_NAME/images
+upload: sysops-activity-files/images/Cake-Vitrine.png to s3://challenge-ct-2026-03-23/images/Cake-Vitrine.png
+upload: sysops-activity-files/images/Mom-&-Pop-Coffee-Shop.png to s3://challenge-ct-2026-03-23/images/Mom-&-Pop-Coffee-Shop.png
+upload: sysops-activity-files/images/Cookies.png to s3://challenge-ct-2026-03-23/images/Cookies.png
+upload: sysops-activity-files/images/Coffee-and-Pastries.png to s3://challenge-ct-2026-03-23/images/Coffee-and-Pastries.png
+upload: sysops-activity-files/images/Cup-of-Hot-Chocolate.png to s3://challenge-ct-2026-03-23/images/Cup-of-Hot-Chocolate.png
+upload: sysops-activity-files/images/Strawberry-&-Blueberry-Tarts.png to s3://challenge-ct-2026-03-23/images/Strawberry-&-Blueberry-Tarts.png
+upload: sysops-activity-files/images/Mom-&-Pop.png to s3://challenge-ct-2026-03-23/images/Mom-&-Pop.png
+upload: sysops-activity-files/images/Strawberry-Tarts.png to s3://challenge-ct-2026-03-23/images/Strawberry-Tarts.png
+[ec2-user@ip-10-200-0-239 ~]$ 
+[ec2-user@ip-10-200-0-239 ~]$ aws s3 ls s3://$BUCKET_NAME/images/ --human-readable --summarize
+2026-03-23 13:37:14    3.8 MiB Cake-Vitrine.png
+2026-03-23 13:37:14    3.1 MiB Coffee-and-Pastries.png
+2026-03-23 13:37:14    1.4 MiB Cookies.png
+2026-03-23 13:37:14    3.6 MiB Cup-of-Hot-Chocolate.png
+2026-03-23 13:37:14  726.8 KiB Mom-&-Pop-Coffee-Shop.png
+2026-03-23 13:37:14    2.7 MiB Mom-&-Pop.png
+2026-03-23 13:37:14    2.9 MiB Strawberry-&-Blueberry-Tarts.png
+2026-03-23 13:37:14    3.4 MiB Strawberry-Tarts.png
 
 Total Objects: 8
    Total Size: 21.7 MiB
@@ -101,8 +99,8 @@ But I received an error message at the **Object URL** `https://chll-ct-2026.s3.u
 <Error>
 <Code>AccessDenied</Code>
 <Message>Access Denied</Message>
-<RequestId>WCQ1KEQNPQDVRBJN</RequestId>
-<HostId>GfdXJFA6rism4+wesaLVMO1wNYPIpf4ldTPD+IujnaDAJRZqlRWSiKg0UxexWSiG0JIFAtE1+3E=</HostId>
+<RequestId>Z6MWS6H273768K6X</RequestId>
+<HostId>TisU0CsXtjYDXvSDai7/Fy7O8cjUw9fpYZxQhyf7WZ3Sw49Ug88KUZ1VmZ5rFLQUlSMC73vzbIk=</HostId>
 </Error>
 ```
 
