@@ -1,20 +1,52 @@
 # AWS Lambda Exercise (Challenge)
 
 In this challenge lab, I will create an AWS Lambda function to count the number of words in a text file.
+Then, I will configure an Amazon S3 bucket to automatically invoke the Lambda function when a text file is uploaded.
+Eventually, I will use an Amazon SNS topic to send the word count result as an email notification.
 
 ## Challenge 1: Create a Lambda function to count the number of words in a text file. 
 
-1. Use the AWS Management Console to develop a Lambda function in Python and create the function's required resources.
+1. I asked chatgpt to create a Python function to count the number of words in a text file.
+```python
+# ========================== countwords.py ==========================
+import boto3
+
+s3 = boto3.client('s3')
+
+def lambda_handler(event, context):
+    # Get bucket and file from event
+    bucket = event['bucket']
+    key = event['key']
+
+    # Read file from S3
+    response = s3.get_object(Bucket=bucket, Key=key)
+    text = response['Body'].read().decode('utf-8')
+
+    # Count words
+    words = text.split()
+    word_count = len(words)
+
+    return {
+        "statusCode": 200,
+        "file": key,
+        "word_count": word_count
+    }
+```
+
+2. Use the AWS Management Console to develop a Lambda function in Python and create the function's required resources.
+
 2. Report the word count in an email by using an SNS topic. Optionally, also send the result in an SMS (text) message.
+
 3. Format the response message as follows:
    - The word count in the <textFileName> file is nnn. 
    - Replace <textFileName> with the name of the file.
+
 4. Enter the following text as the email subject: Word Count Result
+
 5. Automatically invoke the function when the text file is uploaded to an S3 bucket.
 
 ## Challenge 2: Test the function by uploading a few sample text files with different word counts to the S3 bucket.
 
-## Challenge 3: Forward the email that one of your tests produces and a screenshot of your Lambda function to your instructor.
 
 ## Conclusion
 In this lab, I learnt how to:
