@@ -205,9 +205,19 @@ I test it with another order from the cafe website.
 
 6. Adding a trigger to the salesAnalysisReport Lambda function.
 To complete the implementation of the salesAnalysisReport function, I configure the report to be initiated Monday
-through Saturday at 8 PM each day. To do so, I use a CloudWatch Events event as the trigger mechanism.
+through Saturday at 8 PM each day. To do so, I use a CloudWatch Events event as the trigger mechanism:
+- **Rule**: Create a new rule
+- **Rule name**: `salesAnalysisReportDailyTrigger`
+- **Rule description**: `Initiates report generation on a daily basis`
+- **Rule type**: `Schedule expression`
+- **Schedule expression**: cron(00 17 ? * MON-SAT *)
 
+All times in a Cron expression are based on the UTC time zone and it is something like:
+```
+cron(Minutes Hours Day-of-month Month Day-of-week Year)
+```
 
+![Sales Analysis Report With Trigger](./images/lab01-salesAnalysisReport-trigger.png)
 
 
 ## 
