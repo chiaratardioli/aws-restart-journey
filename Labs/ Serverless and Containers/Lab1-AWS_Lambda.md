@@ -138,8 +138,17 @@ Then I test again the Lambda function. Now the result is code 200 and the produc
 
 ## Task 4: Configuring notifications
 
-1. Creating an SNS topic
-2. Subscribing to the SNS topic
+1. I create an SNS topic in **Simple Notification Service**:
+- **Type**: Standard
+- **Name**: `salesAnalysisReportTopic`
+- **Display name**: `SARTopic`
+This is the **ARN** value for this topic: `arn:aws:sns:us-west-2:827648958306:salesAnalysisReportTopic`.
+
+2. I subscribing to the SNS topic in the **Subscription** tab:
+- **Protocol**: `Email`
+- **Endpoint**: `<my email>`
+The subscription is created and has a Status of *Pending confirmation*.
+After confirm the subscription using the link in the email *AWS Notification - Subscription Confirmation*, the status changes to *Confirmed*.
 
 ## Task 5: Creating the salesAnalysisReport Lambda function
 
