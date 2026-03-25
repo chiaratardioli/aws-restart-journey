@@ -117,20 +117,6 @@ Then I test again the Lambda function. Now the result is code 200 and the produc
       "product_id": 1,
       "product_name": "Croissant",
       "quantity": 1
-    },
-    {
-      "product_group_number": 1,
-      "product_group_name": "Pastries",
-      "product_id": 2,
-      "product_name": "Donut",
-      "quantity": 1
-    },
-    {
-      "product_group_number": 1,
-      "product_group_name": "Pastries",
-      "product_id": 6,
-      "product_name": "Strawberry Tart",
-      "quantity": 1
     }
   ]
 }
@@ -205,15 +191,24 @@ salesAnalysisReport-v2.zip
 - **Template**: `hello-world`
 The function does not require any input parameters. Leave the default JSON lines as is.
 
-I got a timeout error the first time, but the second time was successful:
+I get a timeout error the first time, but the second time is successful:
 ```
 {
   "statusCode": 200,
   "body": "\"Sale Analysis Report sent.\""
 }
 ```
+I check my email and I've received an email from AWS Notifications with the subject "Daily Sales Analysis Report."
+I test it with another order from the cafe website.
 
-6. Adding a trigger to the salesAnalysisReport Lambda function
+![Daily Sales Analysis Repor](./images/lab01-sales-analysis-report.png)
+
+6. Adding a trigger to the salesAnalysisReport Lambda function.
+To complete the implementation of the salesAnalysisReport function, I configure the report to be initiated Monday
+through Saturday at 8 PM each day. To do so, I use a CloudWatch Events event as the trigger mechanism.
+
+
+
 
 ## 
 
