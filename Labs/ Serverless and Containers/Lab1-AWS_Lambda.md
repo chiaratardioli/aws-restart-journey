@@ -151,6 +151,10 @@ The subscription is created and has a Status of *Pending confirmation*.
 After confirm the subscription using the link in the email *AWS Notification - Subscription Confirmation*, the status changes to *Confirmed*.
 
 ## Task 5: Creating the salesAnalysisReport Lambda function
+Here I create and configure the salesAnalysisReport Lambda function. This function is the main driver of the sales analysis report flow. It does the following:
+- Retrieves the database connection information from Parameter Store
+- Invokes the salesAnalysisReportDataExtractor Lambda function, which retrieves the report data from the database
+- Formats and publishes a message containing the report data to the SNS topic
 
 1. Connecting to the CLI Host instance
 2. Configuring the AWS CLI
