@@ -71,9 +71,9 @@ The function expects these input parameters (from event):
 These inputs allow the Lambda function to securely connect to the database dynamically.
 
 6. In the Configuring setting, I edit the VPC network settings for the function:
-- VPC: option with Cafe VPC as the Name.
-- Subnets: option with Cafe Public Subnet 1 as the Name.
-- Security groups: option with CafeSecurityGroup as the Name.
+- VPC: option with Cafe VPC as the Name
+- Subnets: option with Cafe Public Subnet 1 as the Name
+- Security groups: option with CafeSecurityGroup as the Name
 
 ## Task 3: Testing the data extractor Lambda function
 
@@ -151,16 +151,68 @@ The subscription is created and has a Status of *Pending confirmation*.
 After confirm the subscription using the link in the email *AWS Notification - Subscription Confirmation*, the status changes to *Confirmed*.
 
 ## Task 5: Creating the salesAnalysisReport Lambda function
-Here I create and configure the salesAnalysisReport Lambda function. This function is the main driver of the sales analysis report flow. It does the following:
+Here I create and configure the salesAnalysisReport Lambda function. This function is the main driver of the sales analysis report flow. 
+It does the following:
 - Retrieves the database connection information from Parameter Store
 - Invokes the salesAnalysisReportDataExtractor Lambda function, which retrieves the report data from the database
 - Formats and publishes a message containing the report data to the SNS topic
 
-1. Connecting to the CLI Host instance
-2. Configuring the AWS CLI
-3. Creating the salesAnalysisReport Lambda function using the AWS CLI
-4. Configuring the salesAnalysisReport Lambda function
-5. Testing the salesAnalysisReport Lambda function
+1. I connecting to the CLI Host instance using the EC2 Management Console.
+2. I configure the AWS CLI with the command `asw confugure` and the parameters from the lab.
+3. I create the salesAnalysisReport Lambda function using the AWS CLI:
+```bash
+[ec2-user@ip-10-200-0-25 ~]$ cd activity-files/
+[ec2-user@ip-10-200-0-25 activity-files]$ ls
+salesAnalysisReport-v2.zip
+[ec2-user@ip-10-200-0-25 activity-files]$ aws lambda create-function \
+> --function-name salesAnalysisReport \
+> --runtime python3.14 \
+> --zip-file fileb://salesAnalysisReport-v2.zip \
+> --handler salesAnalysisReport.lambda_handler \
+> --region us-west-2 \
+> --role arn:aws:iam::827648958306:role/salesAnalysisReportRole
+{
+    "FunctionName": "salesAnalysisReport", 
+    "LastModified": "2026-03-25T17:38:44.194+0000", 
+    "RevisionId": "c99c78ad-7a87-4ede-9f58-9d95e645bc7f", 
+    "MemorySize": 128, 
+    "State": "Pending", 
+    "Version": "$LATEST", 
+    "Role": "arn:aws:iam::827648958306:role/salesAnalysisReportRole", 
+    "Timeout": 3, 
+    "StateReason": "The function is being created.", 
+    "Runtime": "python3.14", 
+    "StateReasonCode": "Creating", 
+    "TracingConfig": {
+        "Mode": "PassThrough"
+    }, 
+    "CodeSha256": "FOQaNphpQr/canEnzctygYFVreHKiABxYNh8X8lOpnE=", 
+    "Description": "", 
+    "CodeSize": 1643, 
+    "FunctionArn": "arn:aws:lambda:us-west-2:827648958306:function:salesAnalysisReport", 
+    "Handler": "salesAnalysisReport.lambda_handler"
+}
+[ec2-user@ip-10-200-0-25 activity-files]$ 
+```
+
+4. I configure the salesAnalysisReport Lambda function by adding the enviromental variale:
+- **Key**: `topicARN`
+- **Value**: `arn:aws:iam::827648958306:role/salesAnalysisReportRole`
+
+5. I create a test for the salesAnalysisReport Lambda function:
+- **Test event action**: `Create new event`
+- **Event name**:, `SARTestEvent`
+- **Template**: `hello-world`
+The function does not require any input parameters. Leave the default JSON lines as is.
+
+I got a timeout error the first time, but the second time was successful:
+```
+{
+  "statusCode": 200,
+  "body": "\"Sale Analysis Report sent.\""
+}
+```
+
 6. Adding a trigger to the salesAnalysisReport Lambda function
 
 ## 
@@ -174,4 +226,146 @@ In this lab I learnt the followings.
 - Use CloudWatch logs to troubleshoot any issues running a Lambda function.
 
 
+## Python code
+
+```python
+#
+# Sales Analysis Report
+#
+import boto3
+import os
+import json
+import io
+import datetime
+
+def setTabsFor(productName):
+
+    # Determine the required number of tabs between Item Name and Quantity based on the item name's length.
+
+    nameLength = len(productName)
+
+    if nameLength < 20:
+        tabs='\t\t\t'
+    elif 20 <= nameLength <= 37:
+        tabs = '\t\t'
+    else:
+        tabs = '\t'
+
+    return tabs
+
+def lambda_handler(event, context):
+
+    # Retrieve the topic ARN and the region where the lambda function is running from the environment variables.
+
+    TOPIC_ARN = os.environ['topicARN']
+    FUNCTION_REGION = os.environ['AWS_REGION']
+
+    # Extract the topic region from the topic ARN.
+
+    arnParts = TOPIC_ARN.split(':')
+    TOPIC_REGION = arnParts[3]
+
+    # Get the database connection information from the Systems Manager Parameter Store.
+
+    # Create an SSM client.
+
+    ssmClient = boto3.client('ssm', region_name=FUNCTION_REGION)
+
+    # Retrieve the database URL and credentials.
+
+    parm = ssmClient.get_parameter(Name='/cafe/dbUrl')
+    dbUrl = parm['Parameter']['Value']
+
+    parm = ssmClient.get_parameter(Name='/cafe/dbName')
+    dbName = parm['Parameter']['Value']
+
+    parm = ssmClient.get_parameter(Name='/cafe/dbUser')
+    dbUser = parm['Parameter']['Value']
+
+    parm = ssmClient.get_parameter(Name='/cafe/dbPassword')
+    dbPassword = parm['Parameter']['Value']
+
+    # Create a lambda client and invoke the lambda function to extract the daily sales analysis report data from the database.
+
+    lambdaClient = boto3.client('lambda', region_name=FUNCTION_REGION)
+
+    dbParameters = {"dbUrl": dbUrl, "dbName": dbName, "dbUser": dbUser, "dbPassword": dbPassword}
+    response = lambdaClient.invoke(FunctionName = 'salesAnalysisReportDataExtractor', InvocationType = 'RequestResponse', Payload = json.dumps(dbParameters))
+
+    # Convert the response payload from bytes to string, then to a Python dictionary in order to retrieve the data in the body.
+
+    reportDataBytes = response['Payload'].read()
+    reportDataString = str(reportDataBytes, encoding='utf-8')
+    reportData = json.loads(reportDataString)
+    reportDataBody = reportData["body"]
+
+    # Create an SNS client, and format and publish a message containing the sales analysis report based on the extracted report data.
+
+    snsClient = boto3.client('sns', region_name=TOPIC_REGION)
+
+    # Create the message.
+
+    # Write the report header first.
+
+    message = io.StringIO()
+    message.write('Sales Analysis Report'.center(80))
+    message.write('\n')
+
+    today = 'Date: ' + str(datetime.datetime.now().strftime('%Y-%m-%d'))
+    message.write(today.center(80))
+    message.write('\n')
+
+    if (len(reportDataBody) > 0):
+
+        previousProductGroupNumber = -1
+
+        # Format and write a line for each item row in the report data.
+
+        for productRow in reportDataBody:
+
+            # Check for a product group break.
+
+            if productRow['product_group_number'] != previousProductGroupNumber:
+
+               # Write the product group header.
+
+                message.write('\n')
+                message.write('Product Group: ' + productRow['product_group_name'])
+                message.write('\n\n')
+                message.write('Item Name'.center(40) + '\t\t\t' + 'Quantity' + '\n')
+                message.write('*********'.center(40) + '\t\t\t' + '********' + '\n')
+
+                previousProductGroupNumber = productRow['product_group_number']
+
+            # Write the item line.
+
+            productName = productRow['product_name']
+            tabs = setTabsFor(productName)
+
+            itemName = productName.center(40)
+            quantity = str(productRow['quantity']).center(5)
+            message.write(itemName + tabs + quantity + '\n')
+
+    else:
+
+        # Write a message to indicate that there is no report data.
+
+        message.write('\n')
+        message.write('There were no orders today.'.center(80))
+
+    # Publish the message to the topic.
+
+    response = snsClient.publish(
+        TopicArn = TOPIC_ARN,
+        Subject = 'Daily Sales Analysis Report',
+        Message = message.getvalue()
+    )
+
+    # Return a successful function execution message.
+
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Sale Analysis Report sent.')
+    }
+```
 
