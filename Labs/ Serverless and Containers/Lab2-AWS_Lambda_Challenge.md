@@ -4,7 +4,7 @@ In this challenge lab, I will create an AWS Lambda function to count the number 
 Then, I will configure an Amazon S3 bucket to automatically invoke the Lambda function when a text file is uploaded.
 Eventually, I will use an Amazon SNS topic to send the word count result as an email notification.
 
-## Challenge 1: Create a Lambda function to count the number of words in a text file. 
+## Step 1: Lambda function
 
 1. I asked chatgpt to create a Python function to count the number of words in a text file.
 ```python
@@ -35,6 +35,9 @@ def lambda_handler(event, context):
 
 2. Use the AWS Management Console to develop a Lambda function in Python and create the function's required resources.
 
+## Step #2: Amazon Simple Storage Service (Amazon S3) bucket to invoke a Lambda function
+
+## Step $3: Amazon SNS topic
 2. Report the word count in an email by using an SNS topic. Optionally, also send the result in an SMS (text) message.
 
 3. Format the response message as follows:
