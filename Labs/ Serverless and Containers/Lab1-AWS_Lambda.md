@@ -56,17 +56,85 @@ Besides, *lambda.amazonaws.com* is listed as a trusted entity.
 4. In the Runtime settings panel, I updated the **Handler** with `salesAnalysisReportDataExtractor.lambda_handler`. 
 Then I import the code `salesAnalysisReportDataExtractor.py` (previously downloaded) for the data extractor Lambda function.
 
-5. In the Configuring setting, I edit the VPC network settings for the function:
+The AWS Lambda function connects to a MySQL database and retrieves aggregated sales data. It uses **pymysql** to establish a 
+connection using credentials passed in the event. If the connection fails, it prints an error and exits. Once connected, it 
+executes an SQL query that joins three tables (order_item, product, product_group) to calculate total quantities sold per 
+product group and product. The results are fetched as a list of dictionaries. The database connection is then closed, and the 
+function returns the query results in a JSON-like response with a status code.
+
+The function expects these input parameters (from event):
+- **dbUrl**: Database host (endpoint)
+- **dbName**: Database name
+- **dbUser**: Username
+- **dbPassword**: Password
+
+These inputs allow the Lambda function to securely connect to the database dynamically.
+
+6. In the Configuring setting, I edit the VPC network settings for the function:
 - VPC: option with Cafe VPC as the Name.
 - Subnets: option with Cafe Public Subnet 1 as the Name.
 - Security groups: option with CafeSecurityGroup as the Name.
 
 ## Task 3: Testing the data extractor Lambda function
 
-1. Launching a test of the Lambda function
-2. Troubleshooting the data extractor Lambda function
-3. Analyzing and correcting the Lambda function
-4. Placing an order and testing again
+To invoke the salesAnalysisReportDataExtractor function, I need to supply values for the café database connection parameters. 
+That these are stored in Parameter Store.
+
+1. Launching a test of the Lambda function. I found the values for the parameters in **Parameter Store** under AWS Systems Manager.
+
+![Testing Lambda function](./images/lab01-test-lambda-function.png)
+
+After a few seconds, the page shows the message "Execution result: failed". 
+
+2. Troubleshooting the data extractor Lambda function.
+This error message indicates that the function timed out after 3 seconds.
+```
+{
+  "errorType": "Sandbox.Timedout",
+  "errorMessage": "RequestId: 2b68f3d0-d201-4466-898e-1a7fe124494e Error: Task timed out after 3.00 seconds"
+}
+```
+Also the **Log output** section includes:
+```
+START RequestId: 2b68f3d0-d201-4466-898e-1a7fe124494e Version: $LATEST
+END RequestId: 2b68f3d0-d201-4466-898e-1a7fe124494e
+REPORT RequestId: 2b68f3d0-d201-4466-898e-1a7fe124494e	Duration: 3000.00 ms	Billed Duration: 3403 ms	Memory Size: 128 MB	Max Memory Used: 73 MB	Init Duration: 402.04 ms	Status: timeout
+```
+
+3. Fix the Lambda function: I added the inboud rule `MYSQL/Aurora` (port 3306)
+for the security group **CafeSecurityGroup** that is used by the EC2 instance running the database
+and then I test the function again. This time, the execution succedded with statusCode 200.
+
+4. I open the café websit at the url `http://52.27.133.252/cafe/` and place an order. 
+Then I test again the Lambda function. Now the result is code 200 and the product quantity information in the body:
+```
+{
+  "statusCode": 200,
+  "body": [
+    {
+      "product_group_number": 1,
+      "product_group_name": "Pastries",
+      "product_id": 1,
+      "product_name": "Croissant",
+      "quantity": 1
+    },
+    {
+      "product_group_number": 1,
+      "product_group_name": "Pastries",
+      "product_id": 2,
+      "product_name": "Donut",
+      "quantity": 1
+    },
+    {
+      "product_group_number": 1,
+      "product_group_name": "Pastries",
+      "product_id": 6,
+      "product_name": "Strawberry Tart",
+      "quantity": 1
+    }
+  ]
+}
+```
 
 ## Task 4: Configuring notifications
 
