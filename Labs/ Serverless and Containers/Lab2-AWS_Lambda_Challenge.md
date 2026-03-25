@@ -137,17 +137,19 @@ key = event['Records'][0]['s3']['object']['key']
 11. I test again the final version of the Lambda function. The output code is 200 and I also receive an email notification
 with email subject *Word Count Result* and message *The word count in the loremipsum.txt file is 225*.
 
+![Word Count Test 225 words](./images/lab02-test-225words.png)
+
 ## User Acceptance Tests
 
 I test the function by uploading a few sample text files with different word counts to the S3 bucket.
 
 1. Lorem Ipsum with 512 words.
 
-![Word Count Test 512 words](./images/lab02-test-512words.png)
+![UAT01 Word Count Test 512 words](./images/lab02-test-512words.png)
 
 2. Lorem Ipsum with 10001 words.
 
-![Word Count Test 10001 words](./images/lab02-test-10001words.png)
+![UAT02 Word Count Test 10001 words](./images/lab02-test-10001words.png)
 
 ## Conclusion
 In this lab, I learnt how to:
