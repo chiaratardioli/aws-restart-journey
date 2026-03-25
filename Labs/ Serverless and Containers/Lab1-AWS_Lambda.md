@@ -214,10 +214,11 @@ through Saturday at 8 PM each day. To do so, I use a CloudWatch Events event as 
 - **Rule type**: `Schedule expression`
 - **Schedule expression**: cron(00 17 ? * MON-SAT *)
 
-All times in a Cron expression are based on the UTC time zone and it is something like:
+All times in a cron expression are based on the UTC time zone, and the format is:
 ```
 cron(Minutes Hours Day-of-month Month Day-of-week Year)
 ```
+In a cron expression, `*` means “every possible value,” while `?` means “no specific value” and is used to ignore either the day-of-month or day-of-week field.
 
 ![Sales Analysis Report With Trigger](./images/lab01-salesAnalysisReport-daily-trigger.png)
 
