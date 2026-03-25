@@ -11,7 +11,7 @@ I will use the following AWS services:
 
 ![AWS Lambda Challenge Architecture](./images/lab02-architecture.png)
 
-## Implementation
+## Implementation & Unit Test
 
 1. I create an Amazon S3 bucket:
 - Bucket type: `General purpose`
@@ -107,22 +107,47 @@ The test passed with output:
 }
 ```
 
-## Step 3: Set up an Amazon SNS topic
+8. I configure an Amazon SNS topic:
+- Type: `Standard`
+- Name: `wordCountTopic`
+- Display name: `WCTopic`
+The ARN is `arn:aws:sns:us-west-2:334367257401:wordCountTopic`
+I subscribe to this topic using my email.
 
-2. Report the word count in an email by using an SNS topic. Optionally, also send the result in an SMS (text) message.
+9. I changed the Lambda function to include the details:
+- Email Subject: ` Word Count Result`
+- Email Message: `The word count in the <textFileName> file is <N>`.
+```python
+subject = "Word Count Result"
 
-3. Format the response message as follows:
-   - The word count in the <textFileName> file is nnn. 
-   - Replace <textFileName> with the name of the file.
+sns.publish(
+    TopicArn=SNS_TOPIC_ARN,
+    Message=message,
+    Subject=subject  # <-- This sets the email subject
+)
+```
 
-4. Enter the following text as the email subject: Word Count Result
+10. I also change the Lambda function inpute to automatically invoke the function when the text file is uploaded to an S3 bucket.
+Since S3 sends the event in a nested Records list containing bucket and object info, I use:
+```python
+bucket = event['Records'][0]['s3']['bucket']['name']
+key = event['Records'][0]['s3']['object']['key']
+```
 
-5. Automatically invoke the function when the text file is uploaded to an S3 bucket.
+11. I test again the final version of the Lambda function. The output code is 200 and I also receive an email notification
+with email subject *Word Count Result* and message *The word count in the loremipsum.txt file is 225*.
 
-## Challenge 2: Test the function by uploading a few sample text files with different word counts to the S3 bucket.
+## User Acceptance Tests
 
-Test the Lambda function with the Amazon S3 trigger
+I test the function by uploading a few sample text files with different word counts to the S3 bucket.
 
+1. Lorem Ipsum with 512 words.
+
+![Word Count Test 512 words](./images/lab02-test-512words.png)
+
+2. Lorem Ipsum with 10001 words.
+
+![Word Count Test 10001 words](./images/lab02-test-10001words.png)
 
 ## Conclusion
 In this lab, I learnt how to:
@@ -136,3 +161,56 @@ In this lab, I learnt how to:
 - [Using an Amazon S3 trigger to invoke a Lambda function](https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html)
 - [AWS managed policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies)
 
+## Python Code
+The final Python code for the Lamnda function `wordcount.py` is:
+```python
+import boto3
+import json
+import os
+
+# Initialize clients
+s3 = boto3.client('s3')
+sns = boto3.client('sns')
+
+# Read SNS topic ARN from environment variable
+SNS_TOPIC_ARN = os.environ['SNS_TOPIC_ARN']
+
+def lambda_handler(event, context):
+    # Determine if triggered by S3 event or manual/test event
+    if 'Records' in event and event['Records'][0].get('s3'):
+        # S3 trigger
+        bucket = event['Records'][0]['s3']['bucket']['name']
+        key = event['Records'][0]['s3']['object']['key']
+    else:
+        # Manual/test event
+        bucket = event['bucket']
+        key = event['key']
+
+    # Read file from S3
+    response = s3.get_object(Bucket=bucket, Key=key)
+    text = response['Body'].read().decode('utf-8')
+
+    # Count words
+    word_count = len(text.split())
+
+    # Format message
+    message = f"The word count in the {key} file is {word_count}."
+    subject = "Word Count Result"
+
+    # Publish message to SNS
+    sns.publish(
+        TopicArn=SNS_TOPIC_ARN,
+        Message=message,
+        Subject=subject
+    )
+
+    # Return response
+    return {
+        "statusCode": 200,
+        "body": json.dumps({
+            "file": key,
+            "word_count": word_count,
+            "message": message
+        })
+    }
+```
