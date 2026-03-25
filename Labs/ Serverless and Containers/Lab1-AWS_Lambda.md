@@ -201,7 +201,9 @@ I get a timeout error the first time, but the second time is successful:
 I check my email and I've received an email from AWS Notifications with the subject "Daily Sales Analysis Report."
 I test it with another order from the cafe website.
 
-![Daily Sales Analysis Repor](./images/lab01-sales-analysis-report-email.png)
+<p align="center">
+  <img src="./images/lab01-sales-analysis-report-email.png" alt="Daily Sales Analysis Report" width="400">
+</p>
 
 6. Adding a trigger to the salesAnalysisReport Lambda function.
 To complete the implementation of the salesAnalysisReport function, I configure the report to be initiated Monday
