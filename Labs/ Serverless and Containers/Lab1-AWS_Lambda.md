@@ -219,7 +219,7 @@ All times in a Cron expression are based on the UTC time zone and it is somethin
 cron(Minutes Hours Day-of-month Month Day-of-week Year)
 ```
 
-![Sales Analysis Report With Trigger](./images/lab01-salesAnalysisReport-trigger.png)
+![Sales Analysis Report With Trigger](./images/lab01-salesAnalysisReport-daily-trigger.png)
 
 
 ## 
