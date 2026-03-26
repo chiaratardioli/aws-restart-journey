@@ -1,0 +1,70 @@
+# Performing a Conditional Search
+
+The database operations team has created a relational database named **world** containing three tables: **city**, **country**, and **countrylanguage**. 
+To help the team, I will write a few queries to search for records in the country table by using the **SELECT** statement and a **WHERE** clause.
+
+![Conditional Search Overview](./images/lab04-archtecture.png)
+
+## Task 1: Connect to the Command Host
+I connect to the Command Host EC2 instance using the Session Manager tab. Then on the terminal I run the commands to connect to the database:
+```bash
+sudo su
+cd /home/ec2-user/
+mysql -u root --password='re:St@rt!9'
+```
+
+## Task 2: Query the world database
+There are 4 databases.
+```sql
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| world              |
++--------------------+
+4 rows in set (0.001 sec)
+```
+Here I query the **world** database by using various **SELECT** statements and database functions.
+```sql
+SELECT * FROM world.country;
+-- returns the rows in the country table: total of 239 rows
+
+SELECT Name, Capital, Region, SurfaceArea, Population FROM world.country WHERE Population >= 50000000 AND Population <= 100000000;
+-- returns the rows in the country table: total of 14 rows
+
+SELECT Name, Capital, Region, SurfaceArea, Population FROM world.country WHERE Population BETWEEN 50000000 AND 100000000;
+-- same as before but with the between operator
+
+SELECT sum(Population) from world.country WHERE Region LIKE "%Europe%";
+-- returns the population of all European countries: 634947800 rows
+
+SELECT sum(population) as "Europe Population Total" from world.country WHERE region LIKE "%Europe%";
+-- return the same information as the previous query with the column alias
+
+SELECT Name, Capital, Region, SurfaceArea, Population from world.country WHERE LOWER(Region) LIKE "%central%";
+-- perform a case-sensitive search by using the LOWER function: total of 31 rows
+```
+
+**Note**: SQL is not a case-sensitive language.
+
+## Challenge
+Write a query to return the sum of the surface area and sum of the population of North America.
+```sql
+SELECT sum(SurfaceArea), sum(population) FROM world.country
+```
+
+
+## Additional resources
+- Country, city, and language data, Statistics Finland. The material was downloaded from Statistics Finland's interface service 
+on February 4, 2022, with the [Creative Commons Attribution 4.0 International license](https://creativecommons.org/licenses/by/4.0/deed.en). 
+The original data source is available from [Statistics Finland](https://tilastokeskus.fi/tup/kvportaali/index_en.html).
+
+- For more information about database functions and operators, see the following resources:
+  - [WHERE clause](https://mariadb.com/kb/en/select/)
+  - [BETWEEN operator](https://mariadb.com/kb/en/between-and/)
+  - [LIKE function](https://mariadb.com/kb/en/like/)
+  - [SUM function](https://mariadb.com/kb/en/sum/)
+  - [LOWER function](https://mariadb.com/kb/en/lower/)
