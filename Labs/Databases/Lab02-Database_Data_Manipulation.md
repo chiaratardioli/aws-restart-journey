@@ -3,7 +3,7 @@
 The database operations team has created a relational database called world containing three tables: city, country, and countrylanguage. 
 I have to validate the configuration of the database by running **INSERT**, **UPDATE**, and **DELETE** statements on the country table.
 
-![Database Data Manipulation Overview](lab02-architecture.png)
+![Database Data Manipulation Overview](./images/lab02-architecture.png)
 
 ## Task 1: Connect to a database
 I connect to the Command Host EC2 instance using the Session Manager tab. Then on terminal I type:
