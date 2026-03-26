@@ -4,7 +4,7 @@ The database operations team has created a relational database named **world** c
 country, and countrylanguage. Based on specific use cases in the lab exercise, I write a few queries 
 using database functions with the **SELECT** statement and **WHERE** clause.
 
-![Working with Function Overview](./images/lab04-architecture.png)
+![Working with Function Overview](./images/lab05-architecture.png)
 
 ## Task 1: Connect to the Command Host
 I connect to the Command Host EC2 instance containing a database client via the Session Manager tab.
