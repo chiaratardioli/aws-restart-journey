@@ -53,7 +53,13 @@ SELECT Name, Capital, Region, SurfaceArea, Population from world.country WHERE L
 ## Challenge
 Write a query to return the sum of the surface area and sum of the population of North America.
 ```sql
-SELECT sum(SurfaceArea), sum(population) FROM world.country
+MariaDB [(none)]> SELECT SUM(SurfaceArea) as "N. America Surface Area", SUM(Population) as "N. America Population" FROM world.country WHERE Region = "North America";
++-------------------------+-----------------------+
+| N. America Surface Area | N. America Population |
++-------------------------+-----------------------+
+|             21500515.00 |             309632000 |
++-------------------------+-----------------------+
+1 row in set (0.000 sec)
 ```
 
 
