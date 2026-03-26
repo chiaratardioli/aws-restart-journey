@@ -3,6 +3,8 @@
 The database operations team has created a relational database named **world** containing three tables: **city**, **country**, and **countrylanguage**. 
 Based on specific use cases defined in the lab exercise, I write a few queries using database operators and the **SELECT** statement.
 
+![SELECT Statement Overview](./images/lab03-architecture.png)
+
 ## Task 1: Connect to the Command Host
 I connect to the Command Host EC2 instance using the Session Manager tab and on terminal I type:
 ```bash
