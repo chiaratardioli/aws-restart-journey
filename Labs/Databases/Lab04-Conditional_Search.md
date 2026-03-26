@@ -3,7 +3,7 @@
 The database operations team has created a relational database named **world** containing three tables: **city**, **country**, and **countrylanguage**. 
 To help the team, I will write a few queries to search for records in the country table by using the **SELECT** statement and a **WHERE** clause.
 
-![Conditional Search Overview](./images/lab04-archtecture.png)
+![Conditional Search Overview](./images/lab04-architecture.png)
 
 ## Task 1: Connect to the Command Host
 I connect to the Command Host EC2 instance using the Session Manager tab. Then on the terminal I run the commands to connect to the database:
