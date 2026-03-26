@@ -14,7 +14,7 @@ mysql -u root --password='re:St@rt!9'
 ```
 
 I also verify the existing database using the command `SHOW DATABASES;`:
-```bash
+```sql
 MariaDB [(none)]> SHOW DATABASES;
 +--------------------+
 | Database           |
@@ -30,7 +30,7 @@ MariaDB [(none)]> SHOW DATABASES;
 ## Task 2: Insert data into a table
 Here I verufy that the **country** table exist and **INSERT** sample data into it.
 
-```bash
+```sql
 MariaDB [(none)]> SELECT * FROM world.country;
 Empty set (0.001 sec)
 
@@ -55,7 +55,7 @@ MariaDB [(none)]>
 ## Task 3: Update rows in a table
 Here I update both rows in the **country** table using an **UPDATE** statement.
 
-```bash
+```sql
 MariaDB [(none)]> UPDATE world.country SET Population = 0;
 Query OK, 2 rows affected (0.003 sec)
 Rows matched: 2  Changed: 2  Warnings: 0
@@ -86,7 +86,7 @@ MariaDB [(none)]> SELECT * FROM world.country;
 ## Task 4: Delete rows from a table
 Here I delete rows in the **country** table using a **DELETE** statement. 
 
-```bash
+```sql
 MariaDB [(none)]> SET FOREIGN_KEY_CHECKS = 0;  # Ignore all foreign key rules for now
 Query OK, 0 rows affected (0.000 sec)
 
@@ -101,7 +101,7 @@ Empty set (0.000 sec)
 Here I import sample data into the **country** table using an SQL file.
 
 First, I qui the the MySQL terminal:
-```bash
+```sql
 MariaDB [(none)]> QUIT;
 Bye
 ```
@@ -143,7 +143,7 @@ The original data source is available from [Statistics Finland](https://tilastok
 ## SQL script file
 This *SQL script file* copntains a group of SQL statements to quickly load data into a database.
 
-```mariaDB
+```sql
 -- MariaDB dump 10.19  Distrib 10.6.5-MariaDB, for Linux (x86_64)
 --
 -- Host: localhost    Database: world
