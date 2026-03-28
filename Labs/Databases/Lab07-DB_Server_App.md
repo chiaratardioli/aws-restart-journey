@@ -35,6 +35,12 @@ Then I add the subnets `Private Subnet 1` (10.0.1.0/24) and `Private Subnet 2` (
 
 ![DB Subnet Group](./images/lab07-subnet-group.png)
 
+The Address Book application is using the RDS database to store information.
+
+Test the web application by adding, editing and removing contacts.
+
+The data is being persisted to the database and is automatically replicating to the second Availability Zone.
+
 ## Task 3: Create an Amazon RDS DB Instance
 In this task, I will configure and launch a Multi-AZ Amazon RDS for MySQL database instance.
 
