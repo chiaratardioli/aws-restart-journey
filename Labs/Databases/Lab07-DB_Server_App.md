@@ -77,14 +77,27 @@ Scroll down to the Additional configuration section and expand this option. Then
 ![DB MySQL Database - create part 2](./images/lab07-create-database2.png)
 
 Eventually I click on *Create Database*. The database will now be launched.
+
 ![DB MySQL Database - waiting](./images/lab07-database-waiting.png)
 
 The deployment process is deploying a database in two different Availability zones. I wait about 5 min for the database to be available.
+
 ![DB MySQL Database - success](./images/lab07-database-success.png)
 
 The MySQL database endpoint is `lab-db.cihrm3hmaoii.us-west-2.rds.amazonaws.com`.
 
 ## Task 4: Interact with Your Database
+I copy and past the WebServer IP address in a new broser tab.
+
+![WebServer Home Page](./images/lab07-webserver.png)
+
+At the top of the web application page, I click the RDS link and configure the following settings:
+- Endpoint: `lab-db.cihrm3hmaoii.us-west-2.rds.amazonaws.com`
+- Database: `lab-db`
+- Username: `main`
+- Password: `lab-password`
+
+![Connec to DB MySQL Database](./images/lab07-connect-to-database.png)
 
 ## Conclusions
 - I launch an Amazon RDS DB instance with high availability.
