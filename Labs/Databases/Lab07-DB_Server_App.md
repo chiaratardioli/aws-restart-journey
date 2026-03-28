@@ -76,10 +76,13 @@ Scroll down to the Additional configuration section and expand this option. Then
 
 ![DB MySQL Database - create part 2](./images/lab07-create-database2.png)
 
-After clicking on *Create Database*, I wait for about 5 min for the database to be available. The deployment process is deploying a database in two different Availability zones. Your database will now be launched.
+Eventually I click on *Create Database*. The database will now be launched.
 ![DB MySQL Database - waiting](./images/lab07-database-waiting.png)
 
+The deployment process is deploying a database in two different Availability zones. I wait about 5 min for the database to be available.
 ![DB MySQL Database - success](./images/lab07-database-success.png)
+
+The MySQL database endpoint is `lab-db.cihrm3hmaoii.us-west-2.rds.amazonaws.com`.
 
 ## Task 4: Interact with Your Database
 
