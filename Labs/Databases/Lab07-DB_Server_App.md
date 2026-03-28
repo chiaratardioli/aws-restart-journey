@@ -23,13 +23,13 @@ that is associated with the Web Security Group:
 The security group will be used when launching the Amazon RDS database instance.
 
 ## Task 2: Create a DB Subnet Group
-I In this task, I create a DB subnet group that is used to tell RDS which subnets can be used for the database:
+In this task, I create a DB subnet group that is used to tell RDS which subnets can be used for the database:
 - Name: `DB Subnet Group`
 - Description: `DB Subnet Group`
 - VPC ID: `Lab VPC`
 
-Each DB subnet group requires subnets in at least two Availability Zones. 
-So I add Private Subnet 1 (10.0.1.0/24) and Private Subnet 2 (10.0.3.0/24).
+Each DB subnet group requires subnets in at least two Availability Zones: I select `us-west-2s` and `us-west-2b`.
+Then I add the subnets `Private Subnet 1` (10.0.1.0/24) and `Private Subnet 2` (10.0.3.0/24).
 
 
 
