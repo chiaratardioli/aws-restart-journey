@@ -98,7 +98,7 @@ I copy and past the WebServer IP address in a new broser tab: `http://54.187.147
 
 At the top of the web application page, I click the RDS link and configure the following settings:
 - Endpoint: `lab-db.cihrm3hmaoii.us-west-2.rds.amazonaws.com`
-- Database: `lab-db`
+- Database: `lab`
 - Username: `main`
 - Password: `lab-password`
 
