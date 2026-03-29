@@ -92,7 +92,7 @@ The deployment process is deploying a database in two different Availability zon
 The MySQL database endpoint is `lab-db.cihrm3hmaoii.us-west-2.rds.amazonaws.com`.
 
 ## Task 4: Interact with Your Database
-I copy and past the WebServer IP address in a new broser tab.
+I copy and past the WebServer IP address in a new broser tab: `http://54.187.147.172`
 
 ![WebServer Home Page](./images/lab07-webserver.png)
 
