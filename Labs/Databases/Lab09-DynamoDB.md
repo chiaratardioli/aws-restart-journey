@@ -88,8 +88,11 @@ Only the song released in 1971 is displayed.
 ![DynamoDB Music Table - Scan](./images/lab09-dynamoDB-music-scan.png)
 
 ## Task 5: Delete the table
+Delete a table, also delete all the data in the table.
 
+![DynamoDB Music Table - Delete](./images/lab09-dynamoDB-music-delete.png)
 
+![DynamoDB Music Table - Deleting](./images/lab09-dynamoDB-music-deleting.png)
 
 ## Conclusion
 * I created an Amazon DynamoDB table
