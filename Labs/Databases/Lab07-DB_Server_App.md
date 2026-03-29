@@ -54,7 +54,7 @@ Under Engine options I select:
 - Availability and durability: `Multi-AZ DB Instance`
 
 Under Settings, I configure the following:
-- Engine version: `MySQK8.4.7`
+- Engine version: `MySQL 8.4.7`
 - DB instance identifier: `lab-db`
 - Master username: `main`
 - Master password: `lab-password`
