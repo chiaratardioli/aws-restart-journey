@@ -71,12 +71,11 @@ Under Connectivity, I configure:
 - Virtual Private Cloud (VPC): `Lab VPC`
 - Under VPC security group: choose existing and select `DB Security Group`
 
-Under Monitoring, I expand Additional configuration and then configure the following:
-- For Enhanced Monitoring: uncheck Enable Enhanced monitoring
-
-Scroll down to the Additional configuration section and expand this option. Then configure:
+Expand Additional configuration and then configure the following:
 - Initial database name: `lab`
-- Under Backup: uncheck  Enable automated backups.
+- Uncheck Enable automated backups
+- Uncheck Enable encrypttion
+- Uncheck Enable Enhanced monitoring
 
 ![DB MySQL Database - create part 1](./images/lab07-create-database1.png)
 
