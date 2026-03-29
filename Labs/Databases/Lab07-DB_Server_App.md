@@ -104,8 +104,8 @@ At the top of the web application page, I click the RDS link and configure the f
 
 ![Connec to DB MySQL Database](./images/lab07-connect-to-database.png)
 
-I got an error and can not connect to the address book database.
-![Solution by Anand K - min 18:00](https://www.youtube.com/watch?v=UN_lrT4ScJo)
+I got an error and can not connect to the address book database. 
+Watch the [Solution by Anand K - min 18:00](https://www.youtube.com/watch?v=UN_lrT4ScJo)
 
 ## Conclusions
 - I launch an Amazon RDS DB instance with high availability.
