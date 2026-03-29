@@ -52,7 +52,7 @@ I expand Additional configuration and then I configure the following:
 - Uncheck Enable encryption.
 - Uncheck Enable auto minor version upgrade.
 
-![DB Aurora (MySQL Compatible)](./images/db-aurora.png)
+![DB Aurora (MySQL Compatible)](./images/lab08-db-aurora.png)
 
 ## Task 2: Connect to an Amazon EC2 Linux instance
 
