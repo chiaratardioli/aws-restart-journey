@@ -17,7 +17,7 @@ I create a new table in DynamoDB with this configuration:
 * Partition key: `Artist` (String)
 * Sort key - optional: `Song` (String)
 
-![DynamoDB Music Table](./imanges/lab09-dynamoDB-music.png)
+![DynamoDB Music Table](./images/lab09-dynamoDB-music.png)
 
 ## Task 2: Add data
 A table is a collection of data on a particular topic. Each table contains multiple items. An item is a group of attributes that is uniquely 
