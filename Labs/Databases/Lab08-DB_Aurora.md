@@ -56,8 +56,54 @@ I expand Additional configuration and then I configure the following:
 
 ## Task 2: Connect to an Amazon EC2 Linux instance
 
+I log into to your Amazon EC2 Linux instance using the Session Manager tab.
+This instance was launched when the lab started using CloudFormation.
+
+![Connect to Amazon EC2 Linux instance](./images/lab08-ec2-linux-connect.png)
+
 ## Task 3: Configure the Amazon EC2 Linux instance to connect to Aurora
 
+First, I use the yum package manager to install the MariaDB client.
+
+```bash
+sh-4.2$ sudo yum install mariadb -y
+...
+Install  1 Package
+
+Total download size: 8.8 M
+Installed size: 49 M
+Downloading packages:
+mariadb-5.5.68-1.amzn2.0.1.x86_64.rpm                                                                                                                                                                         | 8.8 MB  00:00:00
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : 1:mariadb-5.5.68-1.amzn2.0.1.x86_64        1/1
+  Verifying  : 1:mariadb-5.5.68-1.amzn2.0.1.x86_64        1/1
+
+Installed:
+  mariadb.x86_64 1:5.5.68-1.amzn2.0.1
+
+Complete!
+```
+
+Then I configure the Amazon EC2 Linux instance to connect to the Aurora database.
+
+The cluster endpoint is `aurora.cluster-c3wnq2wplfcs.us-west-2.rds.amazonaws.com`
+The reader endpoint is `aurora.cluster-ro-c3wnq2wplfcs.us-west-2.rds.amazonaws.com`
+
+```bash
+sh-4.2$ mysql -u admin --password='admin123' -h aurora.cluster-c3wnq2wplfcs.us-west-2.rds.amazonaws.com
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 131
+Server version: 8.0.42 6252a59a
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]>
+```
 ## Task 4: Create a table and insert and query records
 
 ## Conclusions
@@ -88,3 +134,26 @@ if you use the console, you can select the VPC and subnets that you want to use.
 
 3. You can encrypt your Amazon RDS instances and snapshots at rest by enabling the encryption option for your RDS DB instance. 
 Data that is encrypted at rest includes the underlying storage for a DB instance, its automated backups, read replicas, and snapshots.
+
+4. An endpoint is represented as an Aurora specific URL that contains a host address and a port. The following types of endpoints are available from an Aurora DB cluster.
+  * **Cluster endpoint**
+  
+    * A cluster endpoint for an Aurora DB cluster connects to the current primary DB instance for that DB cluster. This endpoint is the only one that can perform write operations such as DDL statements. Because of this, the cluster endpoint is the one that you connect to when you first set up a cluster or when your cluster contains only a single DB instance.
+
+    * Each Aurora DB cluster has one cluster endpoint and one primary DB instance.
+
+    * You use the cluster endpoint for all write operations on the DB cluster, including inserts, updates, deletes, and DDL changes. You can also use the cluster endpoint for read operations, such as queries.
+
+    * The cluster endpoint provides failover support for read/write connections to the DB cluster. If the current primary DB instance of a DB cluster fails, Aurora automatically fails over to a new primary DB instance. During a failover, the DB cluster continues to serve connection requests to the cluster endpoint from the new primary DB instance, with minimal interruption of service.
+
+    * The following example illustrates a cluster endpoint for an Aurora MySQL DB cluster: *mydbcluster.cluster-123456789012.us-west-2.rds.amazonaws.com:3306*
+
+  * **Reader endpoint**
+
+    * A reader endpoint for an Aurora DB cluster connects to one of the available Aurora replicas for that DB cluster. Each Aurora DB cluster has one reader endpoint. If there is more than one Aurora replica, the reader endpoint directs each connection request to one of the Aurora replicas.
+  
+    * The reader endpoint provides load-balancing support for read-only connections to the DB cluster. Use the reader endpoint for read operations, such as queries. You can't use the reader endpoint for write operations.
+
+    * The DB cluster distributes connection requests to the reader endpoint among the available Aurora replicas. If the DB cluster contains only a primary DB instance, the reader endpoint serves connection requests from the primary DB instance. If one or more Aurora replicas are created for that DB cluster, subsequent connections to the reader endpoint are load balanced among the replicas.
+
+    * The following example represents a reader endpoint for an Aurora MySQL DB cluster: *mydbcluster.cluster-ro-123456789012.us-west-2.rds.amazonaws.com:3306*
