@@ -12,16 +12,27 @@ Oracle, Microsoft SQL Server, PostgreSQL, MySQL and MariaDB.
 1. Launch an Amazon RDS DB instance using either Amazon Aurora Provisioned DB or MySQL database engines. 
 Make a note of the DB credentials, as it will be needed in next steps. Please note the following lab restrictions:
 
-* DatabaseEngine: Supported engines are Amazon Aurora or MySQL. Amazon Aurora serverless is not available.
-* Template: Choose Dev/Test or Free tier.
-* Availability and durability: Avoid creating a standby instance.
-* DB instance size: Choose Burstable classes - db.t3 instances of type db. t*.micro to db.t*.medium.
-* Storage: Choose General Purpose SSD (gp2) of a size up to 100 GB. Provisioned IOPS access is restricted.
-* Amazon VPC: Use the Lab VPC
-* Security Group: Include a security group that will allow the LinuxServer to connect to the RDS instance.
-* For MySQL, under Additional configuration - Enable Enhanced monitoring - Disable the option
-* Purchasing Options: On-Demand instances are allowed. Other purchasing options are disabled.
-  
+    * DatabaseEngine: `Aurora (MySQL compatible)`
+    * Template: Choose `Dev/Test`
+    * DB instance identifier: `db-cluster-challenge`
+    * Master username: `admin`
+    * Password: `labchallenge123&` (self-manage)
+    * DB instance size: `Burstable classes` type `db.t3.micro`
+    * Storage: `Aurora Standard`
+    * Availability and durability: `Don't create an Aurora Replica`
+    * Amazon VPC: `Lab VPC`
+    * DB subnet group: `lab subnet`
+    * Security Group: `WebSecurityGorup` (the security group needs to allow the LinuxServer to connect to the RDS instance)
+    * Initial database name: `lab`
+    *  Under Additional configuration:
+        * Disable Enable Enhanced monitoring
+        * Disable Enable automated backup
+        * Disable Enable encryption
+        * Disable Enable auto minor version upgrade
+    * Purchasing Options: On-Demand instances are allowed. Other purchasing options are disabled
+
+![DB Aurora (MySQL compatible)]()
+
 2. Click the Details followed by Show. Click Download PEM (for Linux or macOS) or Download PPK (for Windows) depending on your local operating system.
 Make a note of the LinuxServer address. Connect (SSH) to the LinuxServer using the details you made a note of.
 Install a MySQL client, and use it to connect to your db. Some helpful information is available here
