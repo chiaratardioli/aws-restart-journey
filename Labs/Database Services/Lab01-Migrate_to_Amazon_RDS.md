@@ -160,7 +160,37 @@ RDS Instance Database Endpoint Address: cafedbinstance.cuidhnvjgvfc.us-west-2.rd
 ```
 
 ## Task 3: Migrating application data to the Amazon RDS instance
+Here, I migrate the data from the existing local database to the newly created Amazon RDS database. Specifically, I do the following:
+- Connect to the CafeInstance by using EC2 Instance Connect.
+- Use the mysqldump utility to create a backup of the local database.
+```bash
+mysqldump --user=root --password='Re:Start!9' \
+--databases cafe_db --add-drop-database > cafedb-backup.sql
 
+less cafedb-backup.sql
+```
+- Restore the backup to the Amazon RDS database.
+```bash
+mysql --user=root --password='Re:Start!9' \
+--host='cafedbinstance.cuidhnvjgvfc.us-west-2.rds.amazonaws.com' \
+< cafedb-backup.sql
+```
+
+- Test the data migration. I run the command to enter the SQL session
+```bash
+mysql --user=root --password='Re:Start!9' \
+--host='cafedbinstance.cuidhnvjgvfc.us-west-2.rds.amazonaws.com' \
+cafe_db
+```
+Then I review the output of `select * from product;`:
+```sql
+
+
+```
+I type `exit` to exit the interactive SQL session.
+
+Note that I can perform these steps from the command line after connecting to the CafeInstance. This instance can communicate with 
+the Amazon RDS instance by using the MySQL protocol because I associated the CafeDatabaseSG security group with the Amazon RDS instance.
 
 ## Task 4: Configuring the website to use the Amazon RDS instance
 
@@ -235,6 +265,20 @@ aws rds create-db-instance \
 aws rds describe-db-instances \
 --db-instance-identifier CafeDBInstance \
 --query "DBInstances[*].[Endpoint.Address,AvailabilityZone,PreferredBackupWindow,BackupRetentionPeriod,DBInstanceStatus]"
+
+# Use the mysqldump utility to create a backup of the local cafe_db database
+mysqldump --user=root --password='Re:Start!9' \
+--databases cafe_db --add-drop-database > cafedb-backup.sql
+
+# Restore the backup to the Amazon RDS database
+mysql --user=root --password='Re:Start!9' \
+--host=<RDS Instance Database Endpoint Address> \
+< cafedb-backup.sql
+
+$ Verify that the cafe_db was successfully created and populated in the Amazon RDS instance
+mysql --user=root --password='Re:Start!9' \
+--host=<RDS Instance Database Endpoint Address> \
+cafe_db
 ```
 
 ## Terminal Screen
