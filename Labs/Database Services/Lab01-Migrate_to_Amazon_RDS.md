@@ -172,20 +172,43 @@ less cafedb-backup.sql
 - Restore the backup to the Amazon RDS database.
 ```bash
 mysql --user=root --password='Re:Start!9' \
---host='cafedbinstance.cuidhnvjgvfc.us-west-2.rds.amazonaws.com' \
+--host="cafedbinstance.cuidhnvjgvfc.us-west-2.rds.amazonaws.com" \
+--ssl \
 < cafedb-backup.sql
 ```
 
 - Test the data migration. I run the command to enter the SQL session
-```bash
-mysql --user=root --password='Re:Start!9' \
---host='cafedbinstance.cuidhnvjgvfc.us-west-2.rds.amazonaws.com' \
-cafe_db
-```
-Then I review the output of `select * from product;`:
 ```sql
+[ec2-user@ip-10-200-0-12 ~]$ mysql --user=root --password='Re:Start!9' \
+> --host="cafedbinstance.cuidhnvjgvfc.us-west-2.rds.amazonaws.com" \
+> --ssl \
+> cafe_db
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 77
+Server version: 11.8.5-MariaDB-log managed by https://aws.amazon.com/rds/
 
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [cafe_db]> select * from product;
++----+---------------------------+-----------------------------------------------------------------+-------+---------------+---------------------------------------+
+| id | product_name              | description                                                     | price | product_group | image_url                             |
++----+---------------------------+-----------------------------------------------------------------+-------+---------------+---------------------------------------+
+|  1 |                 Croissant |                  Fresh, buttery and fluffy... Simply delicious! |  1.50 |             1 |                 images/Croissants.jpg |
+|  2 |                     Donut |                         We have more than half-a-dozen flavors! |  1.00 |             1 |                     images/Donuts.jpg |
+|  3 |     Chocolate Chip Cookie |    Made with Swiss chocolate with a touch of Madagascar vanilla |  2.50 |             1 |     images/Chocolate-Chip-Cookies.jpg |
+|  4 |                    Muffin |                     Banana bread, blueberry, cranberry or apple |  3.00 |             1 |                    images/Muffins.jpg |
+|  5 | Strawberry Blueberry Tart |                Bursting with the taste and aroma of fresh fruit |  3.50 |             1 | images/Strawberry-Blueberry-Tarts.jpg |
+|  6 |           Strawberry Tart | Made with fresh ripe strawberries and a delicious whipped cream |  3.50 |             1 |           images/Strawberry-Tarts.jpg |
+|  7 |                    Coffee |                Freshly-ground black or blended Columbian coffee |  3.00 |             2 |                     images/Coffee.jpg |
+|  8 |             Hot Chocolate |                   Rich and creamy, and made with real chocolate |  3.00 |             2 |       images/Cup-of-Hot-Chocolate.jpg |
+|  9 |                     Latte |            Offered hot or cold and in various delicious flavors |  3.50 |             2 |                      images/Latte.jpg |
++----+---------------------------+-----------------------------------------------------------------+-------+---------------+---------------------------------------+
+9 rows in set (0.00 sec)
 ```
 I type `exit` to exit the interactive SQL session.
 
