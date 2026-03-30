@@ -241,7 +241,7 @@ INNER JOIN cloud_practitioner cp
 ON rs.Student_ID = cp.Student_ID;
 ```    
 
-Output screen:
+Terminal screen:
 ```sql
 MySQL [lab]> SELECT 
     ->     rs.Student_ID AS `Student ID`,
