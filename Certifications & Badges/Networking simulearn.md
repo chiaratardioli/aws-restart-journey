@@ -37,4 +37,4 @@ from source `10.10.0.0/24` (public subnet IP address).
 
 ## Completion Certificate
 
-![AWS SimuLearn- Networking Concepts](./images/cert-SL02-NetworkingConcepts.png)
+![AWS SimuLearn Certification- Networking Concepts](./images/cert-SL02-NetworkingConcepts.png)
