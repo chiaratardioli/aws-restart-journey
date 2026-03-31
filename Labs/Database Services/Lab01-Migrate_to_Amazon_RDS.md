@@ -247,7 +247,7 @@ Detailed information about the database is displayed.
 The Monitoring tab displays a number of key database instance metrics that are available from CloudWatch. 
 Each metric includes a graph that shows the metric as it is monitored over a specific time span.
 
-![Café DB instance](./images/lab01-db-cloudwatch)
+![Café DB CloudWatch](./images/lab01-db-cloudwatch.png)
 
 The list of displayed metrics includes the following:
 - **CPUUtilization**: The percent of CPU utilization
