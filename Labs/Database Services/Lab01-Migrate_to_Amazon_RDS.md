@@ -227,16 +227,46 @@ with the **RDS Instance Database Endpoint Address value** `cafedbinstance.cuidhn
 
 I refresh to the website `http://44.251.174.187/cafe` and verify that the Order History has not been changed.
 
+![Café Order History DB](./images/lab01-cafe-order-hystory-new.png)
+
+I got the error: `Connection failed: Connections using insecure transport are prohibited while --require_secure_transport=ON.`
+This means that the café website is connecting to MySQL without SSL, but the RDS requires it.
+Indeed, in  the sql code in task 3 I added the option `--ssl` to make it work. 
+Here I should change the PHP code to enable SSL, that is out of the scope of this lab.
+
 ## Task 5: Monitoring the Amazon RDS database
 One of the benefits of using Amazon RDS is the ability to monitor the performance of a database instance. Amazon RDS automatically 
 sends metrics to CloudWatch every minute for each active database. In this task, I identify some of these performance metrics and 
 learn how to monitor a metric in the Amazon RDS console.
 
-```bash
-mysql --user=root --password='Re:Start!9' \
---host="cafedbinstance.cuidhnvjgvfc.us-west-2.rds.amazonaws.com" \
-cafe_db
-```
+First, on the AWS Management Console I navigate to the RDS Management Console, then from the Databases list, I choose cafedbinstance.
+Detailed information about the database is displayed.
+
+![Café DB instance](./images/lab01-cafedbistance.png)
+
+The Monitoring tab displays a number of key database instance metrics that are available from CloudWatch. 
+Each metric includes a graph that shows the metric as it is monitored over a specific time span.
+
+![Café DB instance](./images/lab01-db-cloudwatch)
+
+The list of displayed metrics includes the following:
+- **CPUUtilization**: The percent of CPU utilization
+- **DatabaseConnections**: The number of database connections in use
+- **FreeStorageSpace**: The amount of available storage space
+- **FreeableMemory**: The amount of memory (RAM) available on the Amazon RDS instance
+- **WriteIOPS**: The average number of disk write I/O operations per second
+- **ReadIOPS**: The average number of disk read I/O operations per second
+
+This is how the DatabaseConnections looks like when I open it. The graph shows a line that indicates that 1 connection is in use. 
+This connection was established by the interactive SQL session from the CafeInstance.
+
+![DatabaseConnections before](./images/lab01-db-DatabaseConnection-1.png)
+
+I type `exit` in the terminal window to close the connection from the interactive SQL session in the CafeInstance.
+After few minutes, I refresh the DatabaseConnections graph in Amazon RDS console. 
+The graph now shows that the number of connections in use is 0.
+
+![DatabaseConnections after](./images/lab01-db-DatabaseConnection-2.png)
 
 
 ## Conclusion
