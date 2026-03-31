@@ -122,11 +122,11 @@ which forwards the request to the internet. Responses flow through the NAT gatew
 ## Optional challenge: Testing the private subnet
 In this optional challenge, I will launch an EC2 instance in the private subnet and confirm that it can communicate with the internet.
 
-1. Launching an instance in the private subnet
+1. I launch an instance in the private subnet called `Private Instance`.
 
-![EC2 Bastion Instance](./images/lab01-ec2-private-instance.png)
+![EC2 Private Instance](./images/lab01-ec2-private-instance.png)
 
-2. Logging in to the bastion server and, from there, logging in to the private instance with Private IPv4 addresses `10.0.3.8`.
+2. I log in to the bastion server and, from there, I log in to the private instance with Private IPv4 addresses `10.0.3.8`.
 
 ```bash
    ,     #_
@@ -159,8 +159,7 @@ ec2-user@10.0.3.8's password:
 [ec2-user@ip-10-0-3-8 ~]$
 ```
 
-3. Testing the NAT gateway
-I test that the private instance can access the internet by sending a request to `amazon.com`.
+3. I test the NAT gateway anf that the private instance can access the internet by sending a request to `amazon.com`.
 
 ```bash
 [ec2-user@ip-10-0-3-8 ~]$ ping -c 3 amazon.com
