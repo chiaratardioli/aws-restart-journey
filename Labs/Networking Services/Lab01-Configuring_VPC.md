@@ -192,11 +192,11 @@ Even if I haven't created anything in my account yet, I see some pre-existing VP
 3. Even though this subnet has been named `Public Subnet`, it is not yet public. A public subnet must have an internet gateway, 
 which you attach in a task later in the lab.
 
-4. The CIDR block of 10.0.2.0/23 includes all IP addresses that start with 10.0.2.x and 10.0.3.x. This range is twice as large as the public 
+4. The `CIDR block` of 10.0.2.0/23 includes all IP addresses that start with 10.0.2.x and 10.0.3.x. This range is twice as large as the public 
 subnet because most resources should be kept in private subnets unless they specifically need to be accessible from the internet.
 
-5. A bastion server (also known as a jump box) is an EC2 instance in a public subnet that is securely configured to provide access to resources 
+5. A `bastion server` (also known as a jump box) is an EC2 instance in a public subnet that is securely configured to provide access to resources 
 in a private subnet. Systems operators can connect to the bastion server and then jump into resources in the private subnet.
 
-6. The Private IPv4 addresses is a private IP address starting with 10.0.2.x or 10.0.3.x. This address is not reachable directly from the internet, 
+6. The `Private IPv4 addresses` is a private IP address starting with 10.0.2.x or 10.0.3.x. This address is not reachable directly from the internet, 
 which is why you first logged in to the bastion server. You now log in to the private instance.
