@@ -98,7 +98,7 @@ I create an EC2 instance with this configurations:
     - Type: Choose `ssh`
     - Source type: `Anywhere`
 
-![EC2 Instance Bastion Server](./images/lab01-ec2-instance-bastion.png)
+![EC2 Bastion Instance](./images/lab01-ec2-bastion-instance.png)
 
 ## Task 6: Creating a NAT gateway
 
@@ -120,13 +120,60 @@ which forwards the request to the internet. Responses flow through the NAT gatew
 
 
 ## Optional challenge: Testing the private subnet
+In this optional challenge, I will launch an EC2 instance in the private subnet and confirm that it can communicate with the internet.
 
 1. Launching an instance in the private subnet
-2. Logging in to the bastion server
-3. Logging in to the private instance
-4. Testing the NAT gateway
 
-![](./images)
+![EC2 Bastion Instance](./images/lab01-ec2-private-instance.png)
+
+2. Logging in to the bastion server and, from there, logging in to the private instance with Private IPv4 addresses `10.0.3.8`.
+
+```bash
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+[ec2-user@ip-10-0-0-160 ~]$ ssh 10.0.3.8
+The authenticity of host '10.0.3.8 (10.0.3.8)' can't be established.
+ED25519 key fingerprint is SHA256:1scTFVDInX4gCItOhEYwybPEpmX6z3Azcq5Isav+BfQ.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '10.0.3.8' (ED25519) to the list of known hosts.
+ec2-user@10.0.3.8's password: 
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+[ec2-user@ip-10-0-3-8 ~]$
+```
+
+3. Testing the NAT gateway
+I test that the private instance can access the internet by sending a request to `amazon.com`.
+
+```bash
+[ec2-user@ip-10-0-3-8 ~]$ ping -c 3 amazon.com
+PING amazon.com (98.87.170.74) 56(84) bytes of data.
+
+--- amazon.com ping statistics ---
+3 packets transmitted, 0 received, 100% packet loss, time 2089ms
+
+[ec2-user@ip-10-0-3-8 ~]$
+```
+
+This output indicates that the private instance successfully communicated with amazon.com on the internet.
+The private instance is in the private subnet, and the only way that this is possible in the curent scenario is by going through the NAT gateway.
 
 ## Conclusions
 - I created a VPC with a private and public subnet, an internet gateway, and a NAT gateway.
@@ -151,3 +198,6 @@ subnet because most resources should be kept in private subnets unless they spec
 
 5. A bastion server (also known as a jump box) is an EC2 instance in a public subnet that is securely configured to provide access to resources 
 in a private subnet. Systems operators can connect to the bastion server and then jump into resources in the private subnet.
+
+6. The Private IPv4 addresses is a private IP address starting with 10.0.2.x or 10.0.3.x. This address is not reachable directly from the internet, 
+which is why you first logged in to the bastion server. You now log in to the private instance.
