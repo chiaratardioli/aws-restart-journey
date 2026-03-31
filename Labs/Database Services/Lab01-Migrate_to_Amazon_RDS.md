@@ -216,9 +216,27 @@ Note that I can perform these steps from the command line after connecting to th
 the Amazon RDS instance by using the MySQL protocol because I associated the CafeDatabaseSG security group with the Amazon RDS instance.
 
 ## Task 4: Configuring the website to use the Amazon RDS instance
+Here, I configure the café website to use the Amazon RDS instance. This step is straightforward because the designer of the 
+application followed best practices and externalized the database connection information as parameters in Parameter Store, 
+a capability of AWS Systems Manager. In this task, I change the database URL parameter of the café application to point to 
+the endpoint address of the RDS instance.
 
+I navigate to the **Parameter Store** in **AWS Systems Manager** and locate **/cafe/dbUrl** from the list.
+Then I change the current value `ec2-44-251-174-187.us-west-2.compute.amazonaws.com` of **/cafe/dbUrl** 
+with the **RDS Instance Database Endpoint Address value** `cafedbinstance.cuidhnvjgvfc.us-west-2.rds.amazonaws.com`.
+
+I refresh to the website `http://44.251.174.187/cafe` and verify that the Order History has not been changed.
 
 ## Task 5: Monitoring the Amazon RDS database
+One of the benefits of using Amazon RDS is the ability to monitor the performance of a database instance. Amazon RDS automatically 
+sends metrics to CloudWatch every minute for each active database. In this task, I identify some of these performance metrics and 
+learn how to monitor a metric in the Amazon RDS console.
+
+```bash
+mysql --user=root --password='Re:Start!9' \
+--host="cafedbinstance.cuidhnvjgvfc.us-west-2.rds.amazonaws.com" \
+cafe_db
+```
 
 
 ## Conclusion
