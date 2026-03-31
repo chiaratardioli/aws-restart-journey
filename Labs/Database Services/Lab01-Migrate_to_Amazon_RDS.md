@@ -43,7 +43,7 @@ First I get the details for the lab:
 Then, I browse the café website and place a few orders that are stored in the existing database. 
 Placing orders creates data for the application before the application is migrated to new Amazon RDS instance.
 
-![Café Order History](./images/lab01-cafe-order-history)
+![Café Order History](./images/lab01-cafe-order-history.png)
 
 ## Task 2: Creating an Amazon RDS instance by using the AWS CLI
 
@@ -260,13 +260,13 @@ The list of displayed metrics includes the following:
 This is how the DatabaseConnections looks like when I open it. The graph shows a line that indicates that 1 connection is in use. 
 This connection was established by the interactive SQL session from the CafeInstance.
 
-![DatabaseConnections before](./images/lab01-db-DatabaseConnection-1.png)
+![DatabaseConnections before](./images/lab01-db-DatabaseConnections-1.png)
 
 I type `exit` in the terminal window to close the connection from the interactive SQL session in the CafeInstance.
 After few minutes, I refresh the DatabaseConnections graph in Amazon RDS console. 
 The graph now shows that the number of connections in use is 0.
 
-![DatabaseConnections after](./images/lab01-db-DatabaseConnection-2.png)
+![DatabaseConnections after](./images/lab01-db-DatabaseConnections-2.png)
 
 
 ## Conclusion
