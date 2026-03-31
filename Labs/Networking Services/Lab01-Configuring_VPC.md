@@ -116,7 +116,7 @@ I create an EC2 instance with this configurations:
 Resources in the private subnet that wish to communicate with the internet now have their network traffic directed to the NAT gateway, 
 which forwards the request to the internet. Responses flow through the NAT gateway back to the private subnet.
 
-![Private Route Table](./images/lab01-private-route-table)
+![Private Route Table](./images/lab01-private-route-table.png)
 
 
 ## Optional challenge: Testing the private subnet
