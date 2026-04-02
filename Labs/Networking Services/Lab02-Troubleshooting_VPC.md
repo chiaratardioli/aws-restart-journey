@@ -6,7 +6,7 @@ I will begin with an environment that includes two VPCs, Amazon Elastic Compute 
 in the diagram below.
 This diagram also shows four numbered circles (#1–4) that indicate the order in which I will work through this lab.
 
-![Troubleshooting a VPC Architecture](./images/lab2-architecture.png)
+![Troubleshooting a VPC Architecture](./images/lab02-architecture.png)
 
 My tasks includes the following:
 - creating an Amazon Simple Storage Service (Amazon S3) bucket to hold VPC Flow Log data
