@@ -95,11 +95,11 @@ if the instance is stopped and started again.
 >AWS Support Team
 
 ## Conclusion
-In this lab, I will:
-- Summarize the customer scenario
-- Analyze the difference between a statically and dynamically assigned IP addresses using EC2 instances
-- Assign a persistent (static) IP to an EC2 instance
-- Develop a solution to the customers issue found within this lab; after developing a solution, summarize and describe your findings
+- I summarized the customer scenario
+- I analyzed the difference between a statically and dynamically assigned IP addresses using EC2 instances
+- I assigned a persistent (static) IP to an EC2 instance
+- I developped a solution to the customers issue found within this lab
+- After developing a solution, I summarized and describe my findings
 
 ## Additional Resources
 - [Amazon EC2 Instance public IP addressing](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html)
