@@ -9,7 +9,7 @@ practices for managing public-facing instances, ensuring reliable access and min
 ## Scenario
 Your role is a cloud support engineer at Amazon Web Services (AWS). During your shift, a customer from a Fortune 500 company requests assistance regarding a networking issue within their AWS infrastructure. The email and an attachment of their architecture is below:
 
-Ticket from your customer
+Ticket from the customer
 
 >Hello Cloud Support!
 >
