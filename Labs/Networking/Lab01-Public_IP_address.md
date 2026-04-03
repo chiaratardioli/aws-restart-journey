@@ -132,4 +132,4 @@ However, instance B does not have the Public IPv4 address and it is not possible
 - I summarized and investigated the customer scenario
 - I analyzed the difference between a private and public IP address
 - I developped a solution to the customer's issue in this lab
-- I summarized and describe your findings
+- I summarized and describe my findings
