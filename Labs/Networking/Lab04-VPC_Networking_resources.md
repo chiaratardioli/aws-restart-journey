@@ -20,6 +20,8 @@ Email from the customer
 >
 >Brock, startup owner
 
+![VPC Networking Resources Architecture](./images/NF-04-architecture.png)
+
 ## Task 1: Investigate the customer's needs
 
 In this scenario, Brock, the customer requesting assistance, has requested help in creating resources for his VPC to be routable to the internet. 
