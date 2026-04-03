@@ -48,7 +48,7 @@ would like a public subnet. He would like to allocate at least 50 IP addresses i
 
 ![Create VPC and more - part 2](./images/NF-03-create-vpc-2.png)
 
-![VPC successfully created.](./images/NF-03-vpc-details.png)
+![VPC successfully created](./images/NF-03-vpc-details.png)
 
 ## Task 2: Send the response to the customer
 
