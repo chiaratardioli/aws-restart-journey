@@ -31,9 +31,26 @@ headquarters and 50 IP addresses for their operations department, which will be 
 
 ## Task 1: Investigate the customer's needs
 
-## Task 2: Solution Design
+In this scenario, Paulo, who is the customer requesting assistance, has switched to using AWS and would like assistance in launching his first VPC. 
+He has some networking knowledge but is new to AWS. You know that he needs around 15,000 IP addresses in the private range within his VPC, and he 
+would like a public subnet. He would like to allocate at least 50 IP addresses in the public subnet.   
 
-## Task 3: Send the response to the customer
+1. First I build a VPC environment based on the customer's requirements:
+- VPC name: `First VPC`
+- IPv4 CIDR block: `192.168.0.0/16` (65536 IPs)
+- VPC with one AZ and a Single Public Subnet
+- Public Subnet name: `Public subnet`
+- Public subnet's IPv4 CIDR: `192.168.0.0/26` (64 IPs)
+- Private Subnet name: `Private subnet`
+- Private subnet's IPv4 CIDR: `192.168.64.0/18` (16384 IPs)
+
+![Create VPC and more - part 1](./images/NF-03-create-vpc-1.png)
+
+![Create VPC and more - part 2](./images/NF-03-create-vpc-2.png)
+
+![VPC successfully created.](./images/NF-03-vpc-details.png)
+
+## Task 2: Send the response to the customer
 
 ## Conclusion
 - I summarized the customer scenario
@@ -41,6 +58,15 @@ headquarters and 50 IP addresses for their operations department, which will be 
 - I familiarized with the Amazon Web Services (AWS) Management Console
 - I developped a solution to the customer's issue in this lab
 - I summarized and described my findings
+
+## Notes
+
+1. A VPC is like a data center but in the cloud. It is logically isolated from other virtual networks, and you can use a VPC to spin up and launch your AWS resources within minutes.
+2. Resources within a VPC communicate with each other through private IP addresses. An instance needs a public IP address for it to communicate outside the VPC. The VPC needs networking resources, such as an internet gateway and a route table, for the instance to reach the internet.
+3. A CIDR block is a range of private IP addresses that is used within the VPC (for example, the /16 number that you see next to an IP address).
+4. A subnet is a range of IP addresses within your VPC.
+5. To determine the CIDR range, you can use the following third-party calculator: https://www.subnet-calculator.com/
+6. To determine the recommended range of private IP addresses that you can use, you can refer to the following guide: https://datatracker.ietf.org/doc/html/rfc1918.
 
 ## Additional resources
 - [What is Amazon VPC?](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
