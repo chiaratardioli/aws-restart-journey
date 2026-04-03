@@ -22,17 +22,113 @@ Email from the customer
 
 ## Task 1: Investigate the customer's needs
 
-1. Creating the VPC
-2. Creating Subnets
-3. Creating Route Table
-4. Creating Internet Gateway and attach Internet Gateway
-5. Add route to route table and associate subnet to route table
-6. Creating a Network ACL
-7. Creating a Security Group
+In this scenario, Brock, the customer requesting assistance, has requested help in creating resources for his VPC to be routable to the internet. 
+I will keep the VPC CIDR at 192.168.0.0/18 and public subnet CIDR of 192.168.1.0/26.
+
+1. Creating the VPC:
+- Name tag: `Test VPC`
+- IPv4 CIDR block: `192.168.0.0/18`
+
+2. Creating Subnets:
+- VPC ID: `Test VPC`
+- Subnet name: `Public subnet`
+- IPv4 subnet CIDR block: `192.168.1.0/28` (16 IPs)
+
+3. Creating Route Table:
+- Name: `Public route table`
+- VPC: `Test VPC`
+
+4. Creating Internet Gateway and attach Internet Gateway:
+- Name: `IGW test VPC`
+- Attach to VPC: `Test VPC`
+
+5. Add route to *Public route table* and associate subnet to route table:
+- Destination: `0.0.0/0`
+- Target: `IGW test VPC` (Internet Gatway)
+- Associate to `Public subnet`
+
+6. Creating a Network ACL:
+- Name: `Public Subnet NACL`
+- VPC: `Test VPC`
+- Add new Inbound rule:
+  - Rule number: Enter 100
+  - Type: `All traffic`
+- Add new Outbound rule:
+  - Rule number: Enter 100
+  - Type: `All traffic`
+    
+7. Creating a Security Group:
+- Security group name: `public security group`
+- Description: `allows public access`
+- VPC: `Test VPC`
+- Inbound rules:
+  - `SSH` (port 22) from `0.0.0/0` (Anywhere-IPv4)
+  - `HTTP` (port 80) from `0.0.0/0` (Anywhere-IPv4)
+  - `HTTPS` (port 443) from `0.0.0/0` (Anywhere-IPv4)
+- Outbound rule:
+  - `All traffic` from `0.0.0/0` (custom)
+
+I now have a functional VPC. In the next task I will launch an EC2 instance to ensure that everything works.
 
 ## Task 2: Launch EC2 instance and SSH into instance
 
+1. I create a new instance with these configurations:
+- Name and tags: `Bastion Server`
+- Application and OS Images (Amazon Machine Image):
+  - Quick Start: `Amazon Linux`
+  - Amazon Machine Image (AMI): `Amazon Linux 2023 AMI`
+- Instance type: `t3.micro`
+- Key pair (login): `vockey`
+- Network settings:
+  - VPC: `Test VPC`
+  - Subnet: `Public Subnet`
+  - Auto-assign public IP: `Enable`
+  - Firewall (security groups): `public security group` (existing security group)
+
+2. I connect to the Bastion Server via SSH. The Public IPv4 address of the Bastion Server is `34.221.201.192`.
+```bash
+$ chmod 700 labsuser.pem 
+$ ssh -i labsuser.pem ec2-user@34.221.201.192
+The authenticity of host '34.221.201.192 (34.221.201.192)' can't be established.
+ED25519 key fingerprint is SHA256:FIe7w+eDaXVI4ofOLkmi53OkSTHavLYXReyWsh7xCHo.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '34.221.201.192' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+[ec2-user@ip-192-168-1-4 ~]$
+```
+
 ## Task 3: Use ping to test internet connectivity
+
+I test the connectivity with a ping to the google website:
+
+```bash
+[ec2-user@ip-192-168-1-4 ~]$ ping google.com
+PING google.com (142.251.46.78) 56(84) bytes of data.
+64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=1 ttl=117 time=5.63 ms
+64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=2 ttl=117 time=5.68 ms
+64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=3 ttl=117 time=5.69 ms
+64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=4 ttl=117 time=5.65 ms
+64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=5 ttl=117 time=5.65 ms
+64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=6 ttl=117 time=5.69 ms
+64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=7 ttl=117 time=5.66 ms
+^C
+--- google.com ping statistics ---
+7 packets transmitted, 7 received, 0% packet loss, time 6008ms
+rtt min/avg/max/mdev = 5.629/5.664/5.694/0.022 ms
+[ec2-user@ip-192-168-1-4 ~]$
+```
+
+The message on the terminal screen is saying I have replies from google.com and 0% packet loss.
 
 ## Objectives
 - I summarized the customer scenario
@@ -61,11 +157,14 @@ separate subnets according to offices, teams, or floors.
 a router, and, just like a router, it stores IP addresses within the VPC. You associate a route table to each subnet and put the routes that you need your
 subnet to be able to reach. For this step, you will create the route table first, and then add the routes as you create AWS resources for the VPC.
 
-5. An **IGW** is what allows the VPC to have internet connectivity and allows communication between resources in your VPC and the internet. The IGW is used 
+5. An Internet Gateway **IGW** is what allows the VPC to have internet connectivity and allows communication between resources in your VPC and the internet. The IGW is used 
 as a target in the route table to route internet-routable traffic and to perform network address translation (NAT) for EC2 instances. NAT is a bit beyond the 
 scope of this lab, but it is referenced in the reference section if you'd like to dive deeper.
 
-6. An NACL is a layer of security that acts like a firewall at the subnet level. The rules to set up a NACL are similar to security groups in the way that 
+6. Security groups and Network Access Control Lists (NACLs) work as the firewall within your VPC. Security groups work at the instance level and are stateful,
+which means they block everything by default. NACLs work at the subnet level and are stateless, which means they do not block everything by default.
+
+7. An NACL is a layer of security that acts like a firewall at the subnet level. The rules to set up a NACL are similar to security groups in the way that 
 they control traffic. The following rules apply: NACLs must be associated to a subnet, NACLs are stateless, and they have the following parts:
   - Rule number: The lowest number rule gets evaluated first. As soon as a rule matches traffic, its applied; for example: 10 or 100. Rule 10 would get evaluated first.
   - Type of traffic; for example: HTTP or SSH
@@ -73,6 +172,8 @@ they control traffic. The following rules apply: NACLs must be associated to a s
   - Port range: All or specific ones
   - Destination: Only applies to outbound rules  
   - Allow or Deny specified traffic.
+
+
 
 ## Additional Resources
 - [What is Amazon VPC?](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
