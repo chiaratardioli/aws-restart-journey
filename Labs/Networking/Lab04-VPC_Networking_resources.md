@@ -28,7 +28,12 @@ Email from the customer
 4. Creating Internet Gateway and attach Internet Gateway
 5. Add route to route table and associate subnet to route table
 6. Creating a Network ACL
-7. 
+7. Creating a Security Group
+
+## Task 2: Launch EC2 instance and SSH into instance
+
+## Task 3: Use ping to test internet connectivity
+
 ## Objectives
 - I summarized the customer scenario
 - Create a VPC, Internet Gateway, Route Table, Security Group, Network Access List, and EC2 instance to create a routable network within the VPC
