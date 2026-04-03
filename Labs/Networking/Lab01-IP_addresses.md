@@ -27,7 +27,7 @@ Ticket from the customer
 >
 >Cloud Admin
 
-![IP Addresses Architecture](./images/NF-01-architecture.png)
+![Public and Private IP addresses Architecture](./images/NF-01-architecture.png)
 
 Figure: The customer's architecture, which consists of a VPC, internet gateway, public subnet with instance A, and a public subnet with instance B.
 
