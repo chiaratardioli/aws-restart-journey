@@ -11,11 +11,6 @@ This diagram also shows four numbered circles (#1–4) that indicate the order i
 AWS services:
 - EC2 instances
 - Amazon Simple Storage Service (Amazon S3) bucket
-- 
-- creating an Amazon Simple Storage Service (Amazon S3) bucket to hold VPC Flow Log data
-- creating a flow log to capture all IP traffic passing through network interfaces in the VPC
-- troubleshooting the VPC configuration issues to allow access to the resources
-- downloading and analyzing the flow log data
 
 
 ## Task 1: Connecting to the CLI Host instance
@@ -113,8 +108,71 @@ The command output shows that a single flow log was created with a FlowLogStatus
 ```
 
 ## Task 3: Troubleshooting VPC configuration issues to allow access to resources
+Here, I analyze access to the web server instance and troubleshoot some networking issues. 
+
+1. I copy and paste *WebServerIP IP address* `54.200.166.86` into a new browser tab. 
+I recall that the cafe web server instance runs in the public subnet in VPC1.
+
+2. In the CLI Host terminal, I find details about the web server instance:
+```bash
+aws ec2 describe-instances --filter "Name=ip-address,Values='54.200.166.86'"
+```
+
+A large JSON document is returned that provides more details than I need for your troubleshooting. 
+To return only relevant details, you filter the results on the client side by using the query parameter.
+The command in the next step returns only the state of the instance, the private IP address, the instance ID, 
+the security groups that are applied to it, the subnet in which it runs, and the key pair name that is associated with it. 
+
+3. I filter the results using the query parameter:
+```bash
+aws ec2 describe-instances --filter "Name=ip-address,Values='54.200.166.86'" --query 'Reservations[*].Instances[*].[State,PrivateIpAddress,InstanceId,SecurityGroups,SubnetId,KeyName]'
+```
+
+Output:
+```bash
+ċ
+    [
+        [
+            {
+                "Code": 16, 
+                "Name": "running"
+            }, 
+            "10.0.1.141", 
+            "i-03e760bad906c10f0", 
+            [
+                {
+                    "GroupName": "c203346a5187757l14538602t1w761183759049-WebSecurityGroup-YlE0AZHZU4cj", 
+                    "GroupId": "sg-064fb798758e559f1"
+                }
+            ], 
+            "subnet-01110cef37b3434c0", 
+            "vockey"
+        ]
+    ]
+]
+```
+
+4. I verify that I cannpt connect to the *Cafe Web Server* instance using the EC2 Management Console.
 
 ## Troubleshooting challenge #1
+
+1. I check which ports are open on the web server EC2 instance using the command `nmap`
+```bash
+[ec2-user@cli-host ~]$ nmap 54.200.166.86
+
+Starting Nmap 6.40 ( http://nmap.org ) at 2026-04-04 21:43 UTC
+Note: Host seems down. If it is really up, but blocking our ping probes, try -Pn
+Nmap done: 1 IP address (0 hosts up) scanned in 3.03 seconds
+```
+
+2. I check the security group details by using the command `aws ec2 describe-security-groups` with query parameters.
+```bash
+aws ec2 describe-security-groups --filter "Name=ip-address,Values='54.200.166.86'" --query 'Reservations[*].Instances[*].[State,PrivateIpAddress,InstanceId,SecurityGroups,SubnetId,KeyName]'
+```
+
+4. 
+
+
 
 ## Troubleshooting challenge #2
 
