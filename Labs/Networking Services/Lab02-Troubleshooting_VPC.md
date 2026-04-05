@@ -482,7 +482,83 @@ aws s3 cp s3://flowlog20260405/ . --recursive
 761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1045Z_8bca7662.log
 ```
 
+All the log files are now extracted in the folder `AWSLogs/761183759049/vpcflowlogs/us-west-2/2026/04/05/`.
+
 2. Analyzing the logs
+
+To preview the first 10 line of a file, I use the command *head`. The header row indicates the kind of data that each log entry contains. 
+Each entry contains information, such as the IP address of the source of the event (in the fourth column), the destination port (seventh column), 
+start and end timestamps (in Unix timestamp format), and the action that resulted (ACCEPT or REJECT).
+
+```bash
+[ec2-user@cli-host 05]$ head 761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1045Z_37d5c4b8.log
+version account-id interface-id srcaddr dstaddr srcport dstport protocol packets bytes start end action log-status
+2 761183759049 eni-0748364acdd1e6191 64.62.156.56 10.0.1.198 34739 3128 6 1 40 1775386055 1775386082 REJECT OK
+2 761183759049 eni-0748364acdd1e6191 65.49.1.107 10.0.1.198 4339 5683 17 1 32 1775386055 1775386082 REJECT OK
+2 761183759049 eni-0748364acdd1e6191 162.216.150.147 10.0.1.198 53755 46615 6 1 44 1775386055 1775386082 REJECT OK
+2 761183759049 eni-0748364acdd1e6191 195.178.110.204 10.0.1.198 45665 102 6 1 52 1775386055 1775386082 REJECT OK
+2 761183759049 eni-03ea31929c2ad1629 10.0.1.113 44.254.112.134 52978 443 6 2 128 1775386079 1775386097 ACCEPT OK
+2 761183759049 eni-03ea31929c2ad1629 10.0.1.113 23.142.248.8 51429 123 17 1 76 1775386079 1775386097 ACCEPT OK
+2 761183759049 eni-03ea31929c2ad1629 10.0.1.113 44.254.14.144 35114 443 6 54 26215 1775386079 1775386097 ACCEPT OK
+2 761183759049 eni-03ea31929c2ad1629 35.203.210.191 10.0.1.113 54182 12083 6 1 44 1775386079 1775386097 REJECT OK
+2 761183759049 eni-03ea31929c2ad1629 44.254.14.144 10.0.1.113 443 36296 6 48 13104 1775386079 1775386097 ACCEPT OK
+```
+
+To search each log file in the current directory and return lines that contain the word REJECT, I use the command `grep -rn REJECT .`
+This command returns a large dataset because it includes every event where the VPC settings rejected the request.
+```bash
+[ec2-user@cli-host 05]$ grep -rn REJECT . | wc -l
+3467
+```
+
+To refine the search by looking for only lines that contain 22 (which is the port number where I attempted to connect to the web server 
+when access was blocked), I run the command `grep -rn 22 . | grep REJECT`. The command returns a smaller number of results.
+```bash
+[ec2-user@cli-host 05]$ grep -rn 22 . | grep REJECT | wc -l
+618
+```
+
+To isolate the result set so that it displays only the log entries that correspond to the failed SSH connection attempts that I made, 
+I filter the results further using the command `grep -rn 22 . | grep REJECT | grep <ip-address>`.
+```bash
+[ec2-user@cli-host 05]$ grep -rn 22 . | grep REJECT | grep 193.5.233.119
+./761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T0940Z_d60e79f1.log:7:2 761183759049 eni-03ea31929c2ad1629 193.5.233.119 10.0.1.113 52265 443 6 1 64 1775381989 1775382017 REJECT OK
+./761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T0940Z_d60e79f1.log:14:2 761183759049 eni-03ea31929c2ad1629 193.5.233.119 10.0.1.113 52280 443 6 9 576 1775382017 1775382048 REJECT OK
+./761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T0940Z_d60e79f1.log:15:2 761183759049 eni-03ea31929c2ad1629 193.5.233.119 10.0.1.113 52265 443 6 8 512 1775382017 1775382048 REJECT OK
+./761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T0940Z_d60e79f1.log:30:2 761183759049 eni-03ea31929c2ad1629 193.5.233.119 10.0.1.113 52280 443 6 1 64 1775382049 1775382075 REJECT OK
+./761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T0940Z_d60e79f1.log:32:2 761183759049 eni-03ea31929c2ad1629 193.5.233.119 10.0.1.113 52265 443 6 1 64 1775382049 1775382075 REJECT OK
+```
+
+The number of lines in the result set should now match the number of times I tried and failed to use SSH to connect the web server instance.
+Also the elastic network interface ID is in each of the log entries that were returned by my query: `eni-03ea31929c2ad1629`.
+
+To confirm that the network interface ID that is recorded in the flow log matches the network interface that is assigned to the web server instance (as part of the network interface),
+I run the command:
+```bash
+[ec2-user@cli-host 05]$ aws ec2 describe-network-interfaces --filters "Name=association.public-ip,Values='16.148.88.255'" --query 'NetworkInterfaces[*].[NetworkInterfaceId,Association.PublicIp]'
+
+[
+    [
+        "eni-03ea31929c2ad1629", 
+        "16.148.88.255"
+    ]
+]
+```
+
+Two long numbers appear toward the end of each log entry before the REJECT term.
+These numbers are Unix-formatted timestamps. The first timestamp indicates the start time of each event that was captured. The second timestamp indicates the end time. 
+To translate one of the timestamps into a human-readable format, run the `date -d @` command for one of the captured timestamps from one of the filtered REJECT results.
+It indicates a time from today that corresponds to when I were working through this lab. 
+To compare the result to the current time, run the following command `date`.
+```bash
+ec2-user@cli-host 05]$ date -d @1775382049
+Sun Apr  5 09:40:49 UTC 2026
+[ec2-user@cli-host 05]$ date -d @1775382075
+Sun Apr  5 09:41:15 UTC 2026
+[ec2-user@cli-host 05]$ date
+Sun Apr  5 12:37:49 UTC 2026
+[ec2-user@cli-host 05]$
+```
 
 ## Conclusion
 - I created VPC Flow Logs
@@ -550,6 +626,9 @@ aws s3 ls
 
 # Download the flow logs
 aws s3 cp s3://<flowlog######>/ . --recursive
+
+# Display network interface
+aws ec2 describe-network-interfaces --filters "Name=association.public-ip,Values='<WebServerIP>'" --query 'NetworkInterfaces[*].[NetworkInterfaceId,Association.PublicIp]'
 ```
 
 ## Additional resources
@@ -558,4 +637,5 @@ aws s3 cp s3://<flowlog######>/ . --recursive
 - [AWS CLI Command Reference: delete-network-acl-entry](https://docs.aws.amazon.com/cli/latest/reference/ec2/delete-network-acl-entry.html#delete-network-acl-entry)
 - [AWS CLI Command Reference: describe-security-groups](https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-security-groups.html)
 - [Connect to Your Linux Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html)
+- [Querying Amazon VPC Flow Logs](https://docs.aws.amazon.com/athena/latest/ug/vpc-flow-logs.html)
   
