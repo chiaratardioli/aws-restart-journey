@@ -323,9 +323,114 @@ Here I will resolve the issue that prevented me from accessing the web server in
 I already verified that the web server is running. I successfully created a route table entry to connect the subnet where the web server instance is running to the internet. I also verified that the security group allows connections on port 22, which is the default SSH port.
 Now I will check the network access control list (network ACL) settings for the network ACL that is associated with the subnet where the instance is running. 
 
-aws ec2 describe-network-acls --filter "Name=association.subnet-id,Values='VPC1PublicSubnetID'" --query 'NetworkAcls[*].[NetworkAclId,Entries]'
+```bash
+[ec2-user@cli-host ~]$ aws ec2 describe-network-acls --filter "Name=association.subnet-id,Values='subnet-0d697d9f218ade797'" --query 'NetworkAcls[*].[NetworkAclId,Entries]'
+[
+    [
+        "acl-0385e47cb02589ecf", 
+        [
+            {
+                "RuleNumber": 100, 
+                "Protocol": "-1", 
+                "Egress": true, 
+                "CidrBlock": "0.0.0.0/0", 
+                "RuleAction": "allow"
+            }, 
+            {
+                "RuleNumber": 32767, 
+                "Protocol": "-1", 
+                "Egress": true, 
+                "CidrBlock": "0.0.0.0/0", 
+                "RuleAction": "deny"
+            }, 
+            {
+                "RuleNumber": 40, 
+                "Protocol": "6", 
+                "PortRange": {
+                    "To": 22, 
+                    "From": 22
+                }, 
+                "Egress": false, 
+                "RuleAction": "deny", 
+                "CidrBlock": "0.0.0.0/0"
+            }, 
+            {
+                "RuleNumber": 100, 
+                "Protocol": "-1", 
+                "Egress": false, 
+                "CidrBlock": "0.0.0.0/0", 
+                "RuleAction": "allow"
+            }, 
+            {
+                "RuleNumber": 32767, 
+                "Protocol": "-1", 
+                "Egress": false, 
+                "CidrBlock": "0.0.0.0/0", 
+                "RuleAction": "deny"
+            }
+        ]
+    ]
+]
+```
 
+Inbound SSH traffic is blocked by Network ACL *acl-0385e47cb02589ecf* due to rule *40*, which explicitly denied TCP port *22* from all sources *(0.0.0.0/0)*.
+I delete this rule and test again the connection to cafe web server.
 
+```bash
+[ec2-user@cli-host ~]$ aws ec2 delete-network-acl-entry --network-acl-id acl-0385e47cb02589ecf --rule-number 40 --ingress
+[ec2-user@cli-host ~]$ aws ec2 describe-network-acls --filter "Name=association.subnet-id,Values='subnet-0d697d9f218ade797'" --query 'NetworkAcls[*].[NetworkAclId,Entries]'
+[
+    [
+        "acl-0385e47cb02589ecf", 
+        [
+            {
+                "RuleNumber": 100, 
+                "Protocol": "-1", 
+                "Egress": true, 
+                "CidrBlock": "0.0.0.0/0", 
+                "RuleAction": "allow"
+            }, 
+            {
+                "RuleNumber": 32767, 
+                "Protocol": "-1", 
+                "Egress": true, 
+                "CidrBlock": "0.0.0.0/0", 
+                "RuleAction": "deny"
+            }, 
+            {
+                "RuleNumber": 100, 
+                "Protocol": "-1", 
+                "Egress": false, 
+                "CidrBlock": "0.0.0.0/0", 
+                "RuleAction": "allow"
+            }, 
+            {
+                "RuleNumber": 32767, 
+                "Protocol": "-1", 
+                "Egress": false, 
+                "CidrBlock": "0.0.0.0/0", 
+                "RuleAction": "deny"
+            }
+        ]
+    ]
+]
+```
+
+```bash
+   ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2026-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
+
+[ec2-user@web-server ~]$ hostname
+web-server
+```
 ## Task 4: Analyzing flow logs
 
 1. Downloading and extracting flow logs
@@ -388,6 +493,9 @@ aws ec2 describe-internet-gateways
 
 # Check the network access control list (network ACL) settings for the network ACL that is associated with the subnet where the instance is running
 aws ec2 describe-network-acls --filter "Name=association.subnet-id,Values='VPC1PublicSubnetID'" --query 'NetworkAcls[*].[NetworkAclId,Entries]'
+
+# Delete rule
+aws ec2 delete-network-acl-entry --network-acl-id <acl-XXXX> --rule-number <number> --ingress
 ```
 
 ## Additional resources
