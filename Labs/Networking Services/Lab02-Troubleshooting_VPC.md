@@ -304,6 +304,18 @@ The security group settings that are applied to the web server EC2 instance look
 }
 ```
 
+The public subnet is not routed to the interenet. To fix the issue I create a new route.
+```bash
+[ec2-user@cli-host ~]$ aws ec2 create-route --route-table-id 'rtb-05f86acb7cacdb3a9' --gateway-id 'igw-095164480f3ede1f3' --destination-cidr-block '0.0.0.0/0'
+{
+    "Return": true
+}
+```
+
+This time, when I refresh the webpage where I tried to load the web server page `16.148.88.255`, the browser page displays the message "Hello From Your Web Server!"
+
+![Hello From Your Web Server!](./images/NS-02-weserverpage.png)
+
 ## Troubleshooting challenge #2
 
 ## Task 4: Analyzing flow logs
@@ -356,6 +368,15 @@ aws ec2 describe-route-tables --filter "Name=association.subnet-id,Values='<VPC1
 
 # or if there are more than one route tables
 aws ec2 describe-route-tables  --route-table-ids '<VPC1PubRouteTableId>' --filter "Name=association.subnet-id,Values='<VPC1PubSubnetID>'"
+
+# Create new route for the rout table with destination the internet
+aws ec2 create-route --route-table-id '<VPC1PubRouteTableId>' --gateway-id  '<VPC1GatewayId>' --destination-cidr-block '0.0.0.0/0'
+
+# Display details about the command
+aws ec2 create-route help
+
+# Get the gateway-id
+aws ec2 describe-internet-gateways
 ```
 
 ## Additional resources
