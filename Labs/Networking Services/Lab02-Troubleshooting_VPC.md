@@ -432,8 +432,56 @@ I delete this rule and test again the connection to cafe web server.
 web-server
 ```
 ## Task 4: Analyzing flow logs
+While resolving the network issues, I created some useful entries in the flow logs that I created when you created VPC Flow Logs at the beginning of this lab. 
+Here, I query the flow logs to observe the activities that they capture.
 
 1. Downloading and extracting flow logs
+
+```bash
+mkdir flowlogs
+cd flowlogs
+aws s3 ls
+aws s3 cp s3://flowlog20260405/ . --recursive
+```
+
+```bash
+[ec2-user@cli-host flowlogs]$ cd AWSLogs/761183759049/vpcflowlogs/us-west-2/2026/04/05/
+[ec2-user@cli-host 05]$ gunzip *.gz
+[ec2-user@cli-host 05]$ ls
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T0930Z_412d0816.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1050Z_0c612992.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T0930Z_824fa0aa.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1050Z_cd9e7c66.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T0935Z_0d4532db.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1055Z_7bd4c042.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T0935Z_f3f0260e.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1055Z_c429a131.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T0940Z_a4ca0a34.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1100Z_989cc5fb.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T0940Z_d60e79f1.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1100Z_f23dc4c4.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T0945Z_0a7eccf2.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1105Z_0d1ea9f8.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T0945Z_f9eddb28.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1105Z_afff4700.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T0950Z_35de592d.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1110Z_8d1285fd.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T0950Z_d3f850c1.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1110Z_9624d67d.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T0955Z_1d8c4c13.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1115Z_20e45838.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T0955Z_ed9e9875.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1115Z_d6508515.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1000Z_05a05cd3.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1120Z_54fc44c2.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1000Z_dd5f7d39.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1120Z_8b219954.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1005Z_c5ae9773.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1125Z_73885029.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1005Z_f6888dc9.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1125Z_dea5a8c1.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1010Z_1e01076d.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1130Z_98b98634.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1010Z_86f9059d.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1130Z_adb6263f.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1015Z_5c1c3be2.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1135Z_5b2a9d43.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1015Z_f3a80277.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1135Z_fc356131.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1020Z_201ceb4b.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1140Z_66ae70f3.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1020Z_9aa83715.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1140Z_c88b50d7.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1025Z_857e0e10.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1145Z_85e2a0f0.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1025Z_d79cadbb.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1145Z_eb14ad1e.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1030Z_9c72988d.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1150Z_3349a2fb.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1030Z_9d57e1bc.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1150Z_3a764d6b.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1035Z_479f8495.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1155Z_33025e79.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1035Z_b7fdcb02.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1155Z_fd746c50.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1040Z_2c1bd2b9.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1200Z_4e124c1d.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1040Z_d57195f0.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1200Z_7295e0b5.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1045Z_37d5c4b8.log  761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1205Z_280103a9.log
+761183759049_vpcflowlogs_us-west-2_fl-0ce3731cfc100a6c5_20260405T1045Z_8bca7662.log
+```
+
 2. Analyzing the logs
 
 ## Conclusion
@@ -496,6 +544,12 @@ aws ec2 describe-network-acls --filter "Name=association.subnet-id,Values='VPC1P
 
 # Delete rule
 aws ec2 delete-network-acl-entry --network-acl-id <acl-XXXX> --rule-number <number> --ingress
+
+# List all S3 buckets
+aws s3 ls
+
+# Download the flow logs
+aws s3 cp s3://<flowlog######>/ . --recursive
 ```
 
 ## Additional resources
