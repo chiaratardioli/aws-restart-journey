@@ -246,9 +246,63 @@ The command *nmap* cannot find any open ports.
 }
 ```
 
-4. 
+The security group settings that are applied to the web server EC2 instance look like they are allowing connectivity to port 22.
 
-
+3. I check the route table settings for the route table that is associated with the subnet where the web server is running.
+```bash
+[ec2-user@cli-host ~]$ aws ec2 describe-route-tables --filter "Name=association.subnet-id,Values='subnet-0d697d9f218ade797'"
+{
+    "RouteTables": [
+        {
+            "Associations": [
+                {
+                    "SubnetId": "subnet-0d697d9f218ade797", 
+                    "AssociationState": {
+                        "State": "associated"
+                    }, 
+                    "RouteTableAssociationId": "rtbassoc-0d260dbb0618579fd", 
+                    "Main": false, 
+                    "RouteTableId": "rtb-05f86acb7cacdb3a9"
+                }
+            ], 
+            "RouteTableId": "rtb-05f86acb7cacdb3a9", 
+            "VpcId": "vpc-0d6117f5364c05d1d", 
+            "PropagatingVgws": [], 
+            "Tags": [
+                {
+                    "Value": "VPC1PublicRouteTable", 
+                    "Key": "aws:cloudformation:logical-id"
+                }, 
+                {
+                    "Value": "VPC1 Public Route Table", 
+                    "Key": "Name"
+                }, 
+                {
+                    "Value": "c203346a5187757l14538602t1w761183759049", 
+                    "Key": "aws:cloudformation:stack-name"
+                }, 
+                {
+                    "Value": "c203346a5187757l14538602t1w761183759049", 
+                    "Key": "cloudlab"
+                }, 
+                {
+                    "Value": "arn:aws:cloudformation:us-west-2:761183759049:stack/c203346a5187757l14538602t1w761183759049/f4650cf0-30d0-11f1-af86-02a472f2502d", 
+                    "Key": "aws:cloudformation:stack-id"
+                }
+            ], 
+            "Routes": [
+                {
+                    "GatewayId": "local", 
+                    "DestinationCidrBlock": "10.0.0.0/16", 
+                    "State": "active", 
+                    "Origin": "CreateRouteTable"
+                }
+            ], 
+            "OwnerId": "761183759049"
+        }
+    ]
+}
+```
 
 ## Troubleshooting challenge #2
 
@@ -297,7 +351,11 @@ nmap <WebServerIP>
 # Display the security group details
 aws ec2 describe-security-groups --group-ids 'WebServerSgId'
 
-  
+# Check the route table settings for the route table that is associated with the subnet where the web server is running
+aws ec2 describe-route-tables --filter "Name=association.subnet-id,Values='<VPC1PubSubnetID>'"
+
+# or if there are more than one route tables
+aws ec2 describe-route-tables  --route-table-ids '<VPC1PubRouteTableId>' --filter "Name=association.subnet-id,Values='<VPC1PubSubnetID>'"
 ```
 
 ## Additional resources
