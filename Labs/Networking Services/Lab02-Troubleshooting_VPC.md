@@ -154,7 +154,8 @@ Output:
 
 4. I verify that I cannpt connect to the *Cafe Web Server* instance using the EC2 Management Console.
 
-## Troubleshooting challenge #1
+### Troubleshooting challenge #1
+Here I will resolve the issue that prevented me from accessing the website.
 
 1. I check which ports are open on the web server EC2 instance using the command `nmap`
 ```bash
@@ -316,7 +317,14 @@ This time, when I refresh the webpage where I tried to load the web server page 
 
 ![Hello From Your Web Server!](./images/NS-02-weserverpage.png)
 
-## Troubleshooting challenge #2
+### Troubleshooting challenge #2
+Here I will resolve the issue that prevented me from accessing the web server instance using EC2 instance Connect. 
+
+I already verified that the web server is running. I successfully created a route table entry to connect the subnet where the web server instance is running to the internet. I also verified that the security group allows connections on port 22, which is the default SSH port.
+Now I will check the network access control list (network ACL) settings for the network ACL that is associated with the subnet where the instance is running. 
+
+aws ec2 describe-network-acls --filter "Name=association.subnet-id,Values='VPC1PublicSubnetID'" --query 'NetworkAcls[*].[NetworkAclId,Entries]'
+
 
 ## Task 4: Analyzing flow logs
 
@@ -377,6 +385,9 @@ aws ec2 create-route help
 
 # Get the gateway-id
 aws ec2 describe-internet-gateways
+
+# Check the network access control list (network ACL) settings for the network ACL that is associated with the subnet where the instance is running
+aws ec2 describe-network-acls --filter "Name=association.subnet-id,Values='VPC1PublicSubnetID'" --query 'NetworkAcls[*].[NetworkAclId,Entries]'
 ```
 
 ## Additional resources
