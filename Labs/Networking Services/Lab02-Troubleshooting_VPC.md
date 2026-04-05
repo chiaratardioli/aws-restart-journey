@@ -262,6 +262,44 @@ The command *nmap* cannot find any open ports.
 - I troubleshot VPC configuration issues
 - I analyzed flow logs
 
+## AWS CLI
+```bash
+# Start AWS CLI
+aws configure
+
+# Create the S3 bucket
+aws s3api create-bucket --bucket flowlog###### --region 'us-west-2' --create-bucket-configuration LocationConstraint='us-west-2'
+
+# Get the VPC ID for VPC1
+aws ec2 describe-vpcs --query 'Vpcs[*].[VpcId,Tags[?Key==`Name`].Value,CidrBlock]' --filters "Name=tag:Name,Values='VPC1'"
+
+# Create VPC Flow Logs on VPC1
+aws ec2 create-flow-logs --resource-type VPC --resource-ids <vpc-id> --traffic-type ALL --log-destination-type s3 --log-destination arn:aws:s3:::<flowlog######>
+
+# Confirm that the flow log was created
+aws ec2 describe-flow-logs
+
+# Delete AWS VPC Flow Log fl-XXXXXXX
+aws ec2 delete-flow-logs --flow-log-ids <fl-XXXXXXX>
+
+# Show all details about the web server instance
+aws ec2 describe-instances --filter "Name=ip-address,Values='<WebServerIP>'"
+
+# Show relevant details about the web server instance
+aws ec2 describe-instances --filter "Name=ip-address,Values='<WebServerIP>'" --query 'Reservations[*].Instances[*].[State,PrivateIpAddress,InstanceId,SecurityGroups,SubnetId,KeyName]'
+
+# Install the nmap utility
+sudo yum install -y nmap
+
+# Display which ports are open (on the web server EC2 instance)
+nmap <WebServerIP>
+
+# Display the security group details
+aws ec2 describe-security-groups --group-ids 'WebServerSgId'
+
+  
+```
+
 ## Additional resources
 - [Flow Log Records](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records)
 - [AWS CLI Command Reference: create-route](https://docs.aws.amazon.com/cli/latest/reference/ec2/create-route.html)
