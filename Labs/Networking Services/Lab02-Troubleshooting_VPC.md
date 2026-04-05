@@ -6,7 +6,7 @@ I will begin with an environment that includes two VPCs, Amazon Elastic Compute 
 in the diagram below.
 This diagram also shows four numbered circles (#1–4) that indicate the order in which I will work through this lab.
 
-![Troubleshooting a VPC Architecture](./images/lab02-architecture.png)
+![Troubleshooting a VPC Architecture](./images/NS-02-architecture.png)
 
 AWS services:
 - EC2 instances
