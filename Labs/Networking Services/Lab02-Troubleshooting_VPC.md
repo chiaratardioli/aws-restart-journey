@@ -28,7 +28,7 @@ AWS services:
          _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
        _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
 
-[ec2-user@cli-host ~]$ 
+[ec2-user@cli-host ~]$
 ```
 
 2. I configure the AWS CLI on the CLI Host instance with the command `aws congigure` and the following parameters:
@@ -41,13 +41,13 @@ AWS services:
 
 1. I create an S3 bucket  where the flow logs will be published:
 ```bash
-aws s3api create-bucket --bucket flowlog20260404 --region 'us-west-2' --create-bucket-configuration LocationConstraint='us-west-2'
+aws s3api create-bucket --bucket flowlog20260405 --region 'us-west-2' --create-bucket-configuration LocationConstraint='us-west-2'
 ```
 
 Output:
 ```bash
 {
-    "Location": "http://flowlog20260404.s3.amazonaws.com/"
+    "Location": "http://flowlog20260405.s3.amazonaws.com/"
 }
 ```
 
@@ -60,7 +60,7 @@ Output:
 ```bash
 [
     [
-        "vpc-0f9c39be0b5406fb9", 
+        "vpc-0d6117f5364c05d1d", 
         [
             "VPC1"
         ], 
@@ -71,7 +71,7 @@ Output:
 
 4. I create VPC Flow Logs on VPC1 to capture information about IP traffic between network interfaces in VPC1. The flow logs are then published to the S3 bucket.
 ```bash
-aws ec2 create-flow-logs --resource-type VPC --resource-ids vpc-0f9c39be0b5406fb9 --traffic-type ALL --log-destination-type s3 --log-destination arn:aws:s3:::flowlog20260404
+aws ec2 create-flow-logs --resource-type VPC --resource-ids vpc-0d6117f5364c05d1d --traffic-type ALL --log-destination-type s3 --log-destination arn:aws:s3:::flowlog20260404
 ```
 
 Output:
@@ -79,9 +79,9 @@ Output:
 {
     "Unsuccessful": [], 
     "FlowLogIds": [
-        "fl-0feb27c7f8419f694"
+        "fl-0ce3731cfc100a6c5"
     ], 
-    "ClientToken": "MlIbnTrt9lgna4pmmj9GBifSSeoEA1aUV+/FSWs60wQ="
+    "ClientToken": "alZro6sAbJYDU90H+bHPHcrZAy2Wg7Otd29+FWNOOUM="
 }
 ```
 
@@ -93,14 +93,14 @@ The command output shows that a single flow log was created with a FlowLogStatus
         {
             "LogDestinationType": "s3", 
             "Tags": [], 
-            "ResourceId": "vpc-0f9c39be0b5406fb9", 
-            "CreationTime": "2026-04-04T21:21:42.990Z", 
+            "ResourceId": "vpc-0d6117f5364c05d1d", 
+            "CreationTime": "2026-04-05T09:29:36.737Z", 
             "TrafficType": "ALL", 
             "FlowLogStatus": "ACTIVE", 
             "LogFormat": "${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}", 
-            "FlowLogId": "fl-0feb27c7f8419f694", 
+            "FlowLogId": "fl-0ce3731cfc100a6c5", 
             "MaxAggregationInterval": 600, 
-            "LogDestination": "arn:aws:s3:::flowlog20260404", 
+            "LogDestination": "arn:aws:s3:::flowlog20260405", 
             "DeliverLogsStatus": "SUCCESS"
         }
     ]
@@ -115,7 +115,7 @@ I recall that the cafe web server instance runs in the public subnet in VPC1.
 
 2. In the CLI Host terminal, I find details about the web server instance:
 ```bash
-aws ec2 describe-instances --filter "Name=ip-address,Values='54.200.166.86'"
+aws ec2 describe-instances --filter "Name=ip-address,Values='16.148.88.255'"
 ```
 
 A large JSON document is returned that provides more details than I need for your troubleshooting. 
@@ -125,27 +125,27 @@ the security groups that are applied to it, the subnet in which it runs, and the
 
 3. I filter the results using the query parameter:
 ```bash
-aws ec2 describe-instances --filter "Name=ip-address,Values='54.200.166.86'" --query 'Reservations[*].Instances[*].[State,PrivateIpAddress,InstanceId,SecurityGroups,SubnetId,KeyName]'
+aws ec2 describe-instances --filter "Name=ip-address,Values='16.148.88.255'" --query 'Reservations[*].Instances[*].[State,PrivateIpAddress,InstanceId,SecurityGroups,SubnetId,KeyName]'
 ```
 
 Output:
 ```bash
-ċ
+[
     [
         [
             {
                 "Code": 16, 
                 "Name": "running"
             }, 
-            "10.0.1.141", 
-            "i-03e760bad906c10f0", 
+            "10.0.1.113", 
+            "i-080537e8fee8c21f5", 
             [
                 {
-                    "GroupName": "c203346a5187757l14538602t1w761183759049-WebSecurityGroup-YlE0AZHZU4cj", 
-                    "GroupId": "sg-064fb798758e559f1"
+                    "GroupName": "c203346a5187757l14538602t1w761183759049-WebSecurityGroup-nay824whUpA4", 
+                    "GroupId": "sg-00fd2748ee040b1db"
                 }
             ], 
-            "subnet-01110cef37b3434c0", 
+            "subnet-0d697d9f218ade797", 
             "vockey"
         ]
     ]
@@ -158,16 +158,92 @@ Output:
 
 1. I check which ports are open on the web server EC2 instance using the command `nmap`
 ```bash
-[ec2-user@cli-host ~]$ nmap 54.200.166.86
+[ec2-user@cli-host ~]$ nmap 16.148.88.255
 
-Starting Nmap 6.40 ( http://nmap.org ) at 2026-04-04 21:43 UTC
+Starting Nmap 6.40 ( http://nmap.org ) at 2026-04-05 09:46 UTC
 Note: Host seems down. If it is really up, but blocking our ping probes, try -Pn
 Nmap done: 1 IP address (0 hosts up) scanned in 3.03 seconds
 ```
 
-2. I check the security group details by using the command `aws ec2 describe-security-groups` with query parameters.
+The command *nmap* cannot find any open ports.
+
+2. I check the security group details by using the command `aws ec2 describe-security-groups --group-ids '<GroupID>'`
 ```bash
-aws ec2 describe-security-groups --filter "Name=ip-address,Values='54.200.166.86'" --query 'Reservations[*].Instances[*].[State,PrivateIpAddress,InstanceId,SecurityGroups,SubnetId,KeyName]'
+[ec2-user@cli-host ~]$ aws ec2 describe-security-groups --group-ids 'sg-00fd2748ee040b1db'
+{
+    "SecurityGroups": [
+        {
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1", 
+                    "PrefixListIds": [], 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "UserIdGroupPairs": [], 
+                    "Ipv6Ranges": []
+                }
+            ], 
+            "Description": "Enable HTTP access", 
+            "Tags": [
+                {
+                    "Value": "c203346a5187757l14538602t1w761183759049", 
+                    "Key": "cloudlab"
+                }, 
+                {
+                    "Value": "arn:aws:cloudformation:us-west-2:761183759049:stack/c203346a5187757l14538602t1w761183759049/f4650cf0-30d0-11f1-af86-02a472f2502d", 
+                    "Key": "aws:cloudformation:stack-id"
+                }, 
+                {
+                    "Value": "WebSecurityGroup", 
+                    "Key": "aws:cloudformation:logical-id"
+                }, 
+                {
+                    "Value": "c203346a5187757l14538602t1w761183759049", 
+                    "Key": "aws:cloudformation:stack-name"
+                }, 
+                {
+                    "Value": "WebSecurityGroup", 
+                    "Key": "Name"
+                }
+            ], 
+            "IpPermissions": [
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 80, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 80, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": [], 
+                    "Ipv6Ranges": []
+                }, 
+                {
+                    "PrefixListIds": [], 
+                    "FromPort": 22, 
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ], 
+                    "ToPort": 22, 
+                    "IpProtocol": "tcp", 
+                    "UserIdGroupPairs": [], 
+                    "Ipv6Ranges": []
+                }
+            ], 
+            "GroupName": "c203346a5187757l14538602t1w761183759049-WebSecurityGroup-nay824whUpA4", 
+            "VpcId": "vpc-0d6117f5364c05d1d", 
+            "OwnerId": "761183759049", 
+            "GroupId": "sg-00fd2748ee040b1db"
+        }
+    ]
+}
 ```
 
 4. 
