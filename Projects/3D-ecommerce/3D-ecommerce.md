@@ -1,5 +1,24 @@
 # Design a 3D E-Commerce Platform Architecture on AWS
 
+## Table of Contents
+- [Scenario](#scenario)
+- [Architecture Overview](#architecture-overview)
+  - [Flow 1: Static & 3D Content Delivery](#flow-1-static--3d-content-delivery)
+  - [Flow 2: Secure API Requests](#flow-2-secure-api-requests)
+  - [Flow 3: Data Layer (Optimized)](#flow-3-data-layer-optimized)
+  - [Database Layer](#database-layer)
+- [Why We Chose Each AWS Service](#why-we-chose-each-aws-service)
+- [How the Architecture Meets the Requirements](#how-the-architecture-meets-the-requirements)
+  - [High Availability](#high-availability)
+  - [Scalability](#scalability)
+  - [Performance](#performance)
+  - [Security](#security)
+  - [Cost Optimization](#cost-optimization)
+- [Design Trade-offs and Challenges](#design-trade-offs-and-challenges)
+- [Final Takeaway](#final-takeaway)
+
+---
+
 ## Scenario
 
 We are a startup team launching a next-generation 3D e-commerce web application.  
@@ -21,10 +40,9 @@ As Cloud Practitioners, our goal is to design a scalable AWS architecture that m
 
 ### Flow 1: Static & 3D Content Delivery
 ```
-
 User → Route 53 → CloudFront → S3
-
 ```
+
 - Route 53 routes users globally  
 - CloudFront caches content at edge locations  
 - S3 stores 3D models, images, and static assets  
@@ -33,10 +51,9 @@ User → Route 53 → CloudFront → S3
 
 ### Flow 2: Secure API Requests
 ```
-
 User → Route 53 → WAF → API Gateway → Cognito → Lambda
-
 ```
+
 - WAF protects against web attacks  
 - API Gateway handles API requests  
 - Cognito manages authentication  
@@ -46,9 +63,7 @@ User → Route 53 → WAF → API Gateway → Cognito → Lambda
 
 ### Flow 3: Data Layer (Optimized)
 ```
-
 Lambda → ElastiCache → DynamoDB / RDS
-
 ```
 
 #### Cache Behavior
@@ -68,100 +83,100 @@ Lambda → ElastiCache → DynamoDB / RDS
 ## Why We Chose Each AWS Service
 
 - **Amazon S3**  
-  Stores 3D assets (images and models). It is highly durable, scalable, and cost-efficient for static content.
+  Stores 3D assets (images and models). Highly durable, scalable, and cost-efficient for static content.
 
 - **Amazon CloudFront**  
-  Delivers content globally with low latency using edge locations, improving load times for 3D assets.
+  Delivers content globally with low latency using edge locations, improving load times.
 
 - **Amazon Route 53**  
-  Handles DNS and routes users to the closest or healthiest endpoint. It is a reliable and cost-effective routing service.
+  Handles DNS and routes users to the closest or healthiest endpoint.
 
 - **Amazon API Gateway**  
-  Acts as the front door for applications to access backend services. Manages API traffic securely.
+  Acts as the front door for backend services and manages API traffic securely.
 
 - **AWS Lambda**  
-  Serverless compute service that runs code without managing servers. Scales automatically with pay-per-use pricing.
+  Serverless compute service with automatic scaling and pay-per-use pricing.
 
 - **Amazon DynamoDB**  
-  Stores dynamic data such as carts and sessions. Provides fast performance and automatic scaling for large workloads.
+  Provides fast, scalable NoSQL storage for sessions and metadata.
 
 - **Amazon RDS (Multi-AZ)**  
-  Fully managed relational database service that automates setup, backups, patching, and scaling. Multi-AZ ensures high availability.
+  Managed relational database with automated backups and high availability.
 
 - **Amazon VPC**  
-  Provides a secure, isolated network environment with full control over networking, connectivity, and security.
+  Provides a secure and isolated networking environment.
 
 - **Public Subnets**  
-  Subnets with routes to an Internet Gateway, allowing public internet access.
+  Allow internet-facing resources via Internet Gateway.
 
 - **Private Subnets**  
-  Subnets without direct internet access, used to secure sensitive resources like databases.
+  Protect sensitive resources without direct internet access.
 
 - **Bastion Host**  
-  Located in a public subnet. Provides secure administrative access to private resources (e.g., RDS) via SSH.
+  Secure entry point for administrative access to private resources.
 
 - **Internet Gateway (IGW)**  
-  Enables communication between the VPC and the internet. Supports IPv4 and IPv6 traffic.
+  Enables communication between VPC and the internet.
 
 - **Amazon Cognito**  
-  Provides authentication, authorization, and user management for web and mobile applications.
+  Handles authentication, authorization, and user management.
 
-- **AWS Web Application Firewall (WAF)**  
-  Protects applications by filtering malicious web traffic based on defined rules.
+- **AWS WAF**  
+  Protects applications from common web exploits.
 
 - **AWS Identity and Access Management (IAM)**  
-  Manages secure access to AWS resources with fine-grained permissions.
+  Controls access with fine-grained permissions.
 
 - **Amazon CloudWatch**  
-  Monitors logs, metrics, and system health. Helps track usage and set alerts.
+  Monitors logs, metrics, and system health.
 
 - **AWS Trusted Advisor**  
-  Analyzes the AWS environment and provides recommendations for cost optimization, performance, and security.
+  Provides recommendations for cost, performance, and security.
 
 - **Cache Layer (ElastiCache)**  
-  Improves performance by reducing database load and latency through in-memory caching.
+  Improves performance by reducing database load and latency.
 
 ---
 
 ## How the Architecture Meets the Requirements
 
 ### High Availability
-- Multi-AZ deployment ensures redundancy across availability zones  
-- RDS replication provides automatic failover  
+- Multi-AZ deployment ensures redundancy  
+- RDS provides automatic failover  
 - DynamoDB is inherently highly available  
-- CloudFront and Route 53 improve availability and routing  
+- CloudFront and Route 53 improve resilience and routing  
 
 ---
 
 ### Scalability
-- AWS Lambda automatically scales based on demand  
+- Lambda automatically scales with demand  
 - DynamoDB scales without manual intervention  
-- CloudFront efficiently handles global traffic  
+- CloudFront handles global traffic efficiently  
 
 ---
 
 ### Performance
 - CloudFront caches content close to users  
-- S3 provides fast access to 3D assets  
+- S3 delivers assets efficiently  
 - Cache layer reduces database load  
 - Serverless backend ensures fast responses  
 
 ---
 
 ### Security
-- Cognito secures user authentication  
+- Cognito manages secure authentication  
 - WAF protects against attacks  
-- VPC with private subnets isolates sensitive resources  
-- Bastion host controls administrative access  
+- VPC isolates infrastructure  
+- Bastion host secures admin access  
 - IAM enforces least-privilege access  
 
 ---
 
 ### Cost Optimization
 - Lambda uses pay-per-use pricing  
-- S3 and CloudFront optimize storage and delivery costs  
-- DynamoDB on-demand prevents over-provisioning  
-- CloudWatch and Trusted Advisor help optimize usage  
+- S3 and CloudFront optimize storage and delivery  
+- DynamoDB on-demand avoids over-provisioning  
+- CloudWatch and Trusted Advisor support optimization  
 
 ---
 
@@ -171,22 +186,22 @@ Lambda → ElastiCache → DynamoDB / RDS
   May introduce latency for infrequent requests  
 
 - **Hybrid database approach (RDS + DynamoDB)**  
-  - RDS provides strong consistency but at higher cost  
-  - DynamoDB provides scalability but uses a different data model  
+  - RDS ensures strong consistency but at higher cost  
+  - DynamoDB offers scalability with a different data model  
 
 - **Skill requirements**  
-  Developers must understand both:
+  Developers must understand:
   - SQL (RDS)  
   - NoSQL / JSON (DynamoDB)  
 
 - **Cache management**  
-  Requires proper cache invalidation strategies to avoid stale data  
+  Requires proper invalidation strategies to avoid stale data  
 
 - **Cost vs. performance balance**  
   Requires continuous monitoring and tuning  
 
 - **Security complexity**  
-  Multiple security layers increase system complexity but are necessary for protection  
+  Multiple layers increase complexity but are necessary  
 
 ---
 
