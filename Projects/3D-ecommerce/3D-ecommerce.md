@@ -1,6 +1,6 @@
 # Design a 3D E-Commerce Platform Architecture on AWS
 
-## Introduction
+## Scenario
 
 We are a startup team launching a next-generation 3D e-commerce web application.  
 This platform allows users to interact with 3D models of products (e.g., furniture, gadgets, fashion items) before purchasing.
@@ -16,6 +16,8 @@ As Cloud Practitioners, our goal is to design a scalable AWS architecture that m
 ---
 
 ## Architecture Overview
+
+![3D E-Commerce Platform Architecture](./images/3d-ecommerce-architecture.png)
 
 ### Flow 1: Static & 3D Content Delivery
 ```
@@ -63,235 +65,128 @@ Lambda → ElastiCache → DynamoDB / RDS
 
 ---
 
-## AWS Services and Justifications
+## Why We Chose Each AWS Service
+
+- **Amazon S3**  
+  Stores 3D assets (images and models). It is highly durable, scalable, and cost-efficient for static content.
+
+- **Amazon CloudFront**  
+  Delivers content globally with low latency using edge locations, improving load times for 3D assets.
+
+- **Amazon Route 53**  
+  Handles DNS and routes users to the closest or healthiest endpoint. It is a reliable and cost-effective routing service.
+
+- **Amazon API Gateway**  
+  Acts as the front door for applications to access backend services. Manages API traffic securely.
+
+- **AWS Lambda**  
+  Serverless compute service that runs code without managing servers. Scales automatically with pay-per-use pricing.
+
+- **Amazon DynamoDB**  
+  Stores dynamic data such as carts and sessions. Provides fast performance and automatic scaling for large workloads.
+
+- **Amazon RDS (Multi-AZ)**  
+  Fully managed relational database service that automates setup, backups, patching, and scaling. Multi-AZ ensures high availability.
+
+- **Amazon VPC**  
+  Provides a secure, isolated network environment with full control over networking, connectivity, and security.
+
+- **Public Subnets**  
+  Subnets with routes to an Internet Gateway, allowing public internet access.
+
+- **Private Subnets**  
+  Subnets without direct internet access, used to secure sensitive resources like databases.
+
+- **Bastion Host**  
+  Located in a public subnet. Provides secure administrative access to private resources (e.g., RDS) via SSH.
+
+- **Internet Gateway (IGW)**  
+  Enables communication between the VPC and the internet. Supports IPv4 and IPv6 traffic.
+
+- **Amazon Cognito**  
+  Provides authentication, authorization, and user management for web and mobile applications.
+
+- **AWS Web Application Firewall (WAF)**  
+  Protects applications by filtering malicious web traffic based on defined rules.
+
+- **AWS Identity and Access Management (IAM)**  
+  Manages secure access to AWS resources with fine-grained permissions.
+
+- **Amazon CloudWatch**  
+  Monitors logs, metrics, and system health. Helps track usage and set alerts.
+
+- **AWS Trusted Advisor**  
+  Analyzes the AWS environment and provides recommendations for cost optimization, performance, and security.
+
+- **Cache Layer (ElastiCache)**  
+  Improves performance by reducing database load and latency through in-memory caching.
+
+---
+
+## How the Architecture Meets the Requirements
 
 ### High Availability
-**Services:**
-- Amazon Route 53  
-- Multi-AZ Amazon RDS  
-- Amazon S3  
-- Amazon CloudFront  
-
-**Reasoning:**
-- Route 53 ensures global routing and failover  
-- RDS Multi-AZ provides automatic failover  
-- S3 and CloudFront are inherently highly available  
+- Multi-AZ deployment ensures redundancy across availability zones  
+- RDS replication provides automatic failover  
+- DynamoDB is inherently highly available  
+- CloudFront and Route 53 improve availability and routing  
 
 ---
 
 ### Scalability
-**Services:**
-- AWS Lambda  
-- Amazon DynamoDB  
-- Amazon ElastiCache  
-
-**Reasoning:**
-- Lambda scales automatically per request  
-- DynamoDB handles massive workloads  
-- ElastiCache reduces database load  
+- AWS Lambda automatically scales based on demand  
+- DynamoDB scales without manual intervention  
+- CloudFront efficiently handles global traffic  
 
 ---
 
 ### Performance
-**Services:**
-- Amazon CloudFront  
-- Amazon S3  
-- RDS Read Replicas  
-- Amazon ElastiCache  
-
-**Reasoning:**
-- CloudFront delivers low-latency content globally  
-- S3 efficiently stores large assets  
-- Read replicas improve database read performance  
-- ElastiCache provides sub-millisecond access  
+- CloudFront caches content close to users  
+- S3 provides fast access to 3D assets  
+- Cache layer reduces database load  
+- Serverless backend ensures fast responses  
 
 ---
 
 ### Security
-**Services:**
-- AWS Identity and Access Management (IAM)  
-- Amazon Cognito  
-- AWS WAF  
-- Amazon VPC  
-- Security Groups  
-
-**Reasoning:**
-- IAM enforces least-privilege access  
-- Cognito manages secure authentication  
+- Cognito secures user authentication  
 - WAF protects against attacks  
-- VPC isolates infrastructure  
-- Security Groups control network traffic  
+- VPC with private subnets isolates sensitive resources  
+- Bastion host controls administrative access  
+- IAM enforces least-privilege access  
 
 ---
 
 ### Cost Optimization
-**Services:**
-- AWS Lambda  
-- S3 Intelligent-Tiering  
-- AWS Trusted Advisor  
-
-**Reasoning:**
-- Lambda eliminates idle server costs  
-- S3 Intelligent-Tiering optimizes storage pricing  
-- Trusted Advisor provides cost-saving recommendations  
+- Lambda uses pay-per-use pricing  
+- S3 and CloudFront optimize storage and delivery costs  
+- DynamoDB on-demand prevents over-provisioning  
+- CloudWatch and Trusted Advisor help optimize usage  
 
 ---
 
-### Monitoring & Observability
-**Services:**
-- Amazon CloudWatch  
-- AWS Trusted Advisor  
+## Design Trade-offs and Challenges
 
-**Reasoning:**
-- CloudWatch provides logs, metrics, and alarms  
-- Trusted Advisor helps optimize cost, security, and performance  
+- **Lambda cold starts**  
+  May introduce latency for infrequent requests  
 
----
+- **Hybrid database approach (RDS + DynamoDB)**  
+  - RDS provides strong consistency but at higher cost  
+  - DynamoDB provides scalability but uses a different data model  
 
-## Design Trade-offs & Challenges
+- **Skill requirements**  
+  Developers must understand both:
+  - SQL (RDS)  
+  - NoSQL / JSON (DynamoDB)  
 
-### 1. Serverless (Lambda) vs. Traditional Compute
+- **Cache management**  
+  Requires proper cache invalidation strategies to avoid stale data  
 
-#### Challenge
-Balancing simplicity, scalability, and execution limits.
+- **Cost vs. performance balance**  
+  Requires continuous monitoring and tuning  
 
-#### Trade-off
-- Lambda offers automatic scaling and pay-per-use  
-- Limitations:
-  - Execution time limit (~15 minutes)  
-  - Cold starts  
-  - Limited runtime control  
-
-#### Resolution Strategies
-- Use Lambda for API-driven and event-based tasks  
-- Enable provisioned concurrency for critical paths  
-- Optimize functions (small size, connection reuse)  
-
-#### Architecture Decision
-Adopt a serverless-first approach for scalability and cost efficiency.
-
----
-
-### 2. RDS vs. DynamoDB
-
-#### Challenge
-Balancing transactional integrity with large-scale performance.
-
-#### Trade-off
-- RDS:
-  - Strong consistency and ACID compliance  
-  - Less scalable  
-- DynamoDB:
-  - Highly scalable and fast  
-  - Eventual consistency  
-
-#### Resolution Strategies
-- RDS → transactions, orders, payments  
-- DynamoDB → sessions, metadata, user activity  
-- Avoid unnecessary synchronization  
-
-#### Architecture Decision
-Use polyglot persistence for optimal performance and consistency.
-
----
-
-### 3. Caching Strategy (ElastiCache)
-
-#### Challenge
-Reducing database load while maintaining fresh data.
-
-#### Trade-off
-- Faster performance  
-- Risk of stale data and cache complexity  
-
-#### Resolution Strategies
-- Use cache-aside pattern  
-- Cache only frequently accessed data  
-- Apply TTL for automatic expiration  
-- Avoid caching sensitive transactional data  
-
-#### Architecture Decision
-Place ElastiCache between Lambda and databases as a performance layer.
-
----
-
-### 4. 3D Asset Delivery
-
-#### Challenge
-Efficiently delivering large 3D assets globally.
-
-#### Trade-off
-- Fast delivery via CDN  
-- Requires cache and asset management  
-
-#### Resolution Strategies
-- Use CloudFront for global caching  
-- Enable S3 versioning  
-- Implement cache invalidation  
-- Optimize assets:
-  - glTF / Draco compression  
-  - Level of Detail (LOD)  
-  - Lazy loading  
-
-#### Architecture Decision
-Decouple static content delivery using S3 and CloudFront.
-
----
-
-### 5. Security vs. Performance
-
-#### Challenge
-Ensuring strong security without increasing latency.
-
-#### Trade-off
-- Security layers add processing overhead  
-
-#### Resolution Strategies
-- Use WAF at the edge (CloudFront)  
-- Implement Cognito JWT authentication  
-- Apply least-privilege IAM roles  
-
-#### Architecture Decision
-Adopt a security-first design with minimal performance impact.
-
----
-
-### 6. Global Users & Latency
-
-#### Challenge
-Providing low-latency experience worldwide.
-
-#### Trade-off
-- Single-region is simple  
-- Multi-region adds complexity and cost  
-
-#### Resolution Strategies
-- Start with single-region backend  
-- Use CloudFront for global caching  
-- Use Route 53 for routing  
-- Scale later with replicas and global tables  
-
-#### Architecture Decision
-Start simple and expand globally as needed.
-
----
-
-### 7. Monitoring, Cost, and Optimization
-
-#### Challenge
-Maintaining visibility and controlling costs.
-
-#### Trade-off
-- More monitoring improves insight  
-- Adds operational overhead  
-
-#### Resolution Strategies
-- Use CloudWatch for monitoring and alerts  
-- Use Trusted Advisor for optimization  
-- Set up alerts for failures and latency  
-
-#### Architecture Decision
-Implement built-in observability for proactive management.
+- **Security complexity**  
+  Multiple security layers increase system complexity but are necessary for protection  
 
 ---
 
