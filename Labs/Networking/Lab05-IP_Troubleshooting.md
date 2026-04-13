@@ -10,6 +10,7 @@ Some layers have commands related to them to help with troubleshooting. The foll
 with the Open Systems Interconnection (OSI) model.
 
 ![OSI model and Troubleshooting: a comparison](NS05-OSItroubleshooting.png)
+
 Figure: This is an example of how troubleshooting commands have similarities to the OSI model.
 
 ### Layer 3 (network): The ping and traceroute commands
