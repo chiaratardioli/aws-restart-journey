@@ -116,14 +116,6 @@ The command accepts a hostname or IP address followed by a port number.
 Example usage:
 
 ```bash
-[ec2-user@ip-10-0-10-132 ~]$ sudo yum install telnet -y
-Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
-amzn2-core                                                                                                              | 3.6 kB  00:00:00     
-...
-Installed:
-  telnet.x86_64 1:0.17-65.amzn2                                                                                                                
-
-Complete!
 [ec2-user@ip-10-0-10-132 ~]$ telnet www.google.com 80
 Trying 142.251.156.119...
 Connected to www.google.com.
@@ -152,7 +144,40 @@ For example, a customer running an Apache web server may want to verify that the
 Example usage:
 
 ```bash
-curl -vLo /dev/null https://aws.com
+[ec2-user@ip-10-0-10-132 ~]$ curl -vLo /dev/null https://aws.com
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 3.169.173.67:443...
+* Connected to aws.com (3.169.173.67) port 443
+...
+> GET / HTTP/2
+> Host: aws.amazon.com
+> User-Agent: curl/8.3.0
+> Accept: */*
+> 
+{ [5 bytes data]
+< HTTP/2 200 
+< content-type: text/html;charset=utf-8
+< date: Mon, 13 Apr 2026 13:33:39 GMT
+< set-cookie: aws-priv=eyJ2IjoxLCJldSI6MCwic3QiOjB9; Version=1; Comment="Anonymous cookie for privacy regulations"; Domain=.aws.amazon.com; Max-Age=31536000; Expires=Tue, 13 Apr 2027 13:33:39 GMT; Path=/; Secure
+< set-cookie: aws_lang=en; Domain=.amazon.com; Path=/
+< x-content-type-options: nosniff
+< server: Server
+< x-frame-options: SAMEORIGIN
+< x-xss-protection: 1; mode=block
+< strict-transport-security: max-age=47304000; includeSubDomains
+< x-amz-id-1: A39AE69C3E9A458CB1FE
+< last-modified: Thu, 09 Apr 2026 20:44:30 GMT
+< vary: accept-encoding
+< x-cache: Miss from cloudfront
+< via: 1.1 250b49a977a2df6676d3fbf2508fc16e.cloudfront.net (CloudFront)
+< x-amz-cf-pop: HIO52-P2
+< x-amz-cf-id: abhHDF7u4FmDDTm9iQMtt4Qhosghn0mVKr66LAwGKkGZvF1yD7fV6g==
+< 
+{ [8186 bytes data]
+100  331k    0  331k    0     0  1534k      0 --:--:-- --:--:-- --:--:-- 1534k
+* Connection #2 to host aws.amazon.com left intact
+[ec2-user@ip-10-0-10-132 ~]$ 
 ```
 
 This command sends a request to a web server and provides detailed output about the connection and response, while discarding the actual page content.
