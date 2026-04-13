@@ -28,9 +28,34 @@ The wizard also creates a NAT gateway, which is used to provide internet connect
 
 I create two additional subnets in a second Availability Zone. This option is useful for creating resources in multiple Availability Zones to provide high availability.
 
+I create another public subnet:
+- VPC ID: `Lab VPC`
+- Subnet name: `Public Subnet 2`  
+- Availability Zone: `No preference`
+- IPv4 CIDR block: `10.0.2.0/24`
+
+The subnet will have all IP addresses starting with **10.0.2.x**.
+
+I create another private subnet:
+- VPC ID: `Lab VPC`
+- Subnet name: `Private Subnet 2`
+- Availability Zone: `No preference`
+- IPv4 CIDR block: `10.0.3.0/24`
+
+The subnet will have all IP addresses starting with **10.0.3.x**.
+
 ## Task 3: Associate the subnets and add routes
 
+I navigate to Route Tables in the left pane and select the Public Route Table, then edit the subnet associations to include Public Subnet 2 and save the changes. 
+I then repeat the process for the Private Route Table, adding Private Subnet 2 and saving the updated associations.
+
+Now my VPC has public and private subnets configured in two Availability Zones.
+ 
 ## Task 4: Create a VPC security group
+
+In this task, I create a VPC security group, which acts as a virtual firewall for my instance. When I launch an instance, I associate one or more security groups with it.
+I can also add rules to each security group to allow traffic to or from its associated instances.
+
 
 ## Task 5: Launch a web server instance
 
