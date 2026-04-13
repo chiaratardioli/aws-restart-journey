@@ -17,6 +17,21 @@ I will gain hands-on experience working with AWS services, developing job-ready 
 - AWS Identity and Access Management
 - Amazon Relational Database Service
 
+[Link to course on Skillbuilder](https://skillbuilder.aws/learn/3KYWQBTSTV/aws-simulearn-core-security-concepts/Q29T2DWZPK)
+
+## Solution
+
+1. I create an IAM group and users.
+2. I attach an AWS managed policy to the group of users.
+3. I grant the "SupportEngineers" group read-only access to Amazon RDS.
+
+![User Group Permission Policies](./images/SL03-permission-policies.png)
+
+
+## Final Architecture
+
+![Core Security Concepts Architecture](./images/SL03-architecture.png)
+
 ## Conclusion
 - I compared IAM users, roles, and groups and their creation processes.
 - I analyzed the structure and components of IAM policies.
