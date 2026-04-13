@@ -53,9 +53,17 @@ Now my VPC has public and private subnets configured in two Availability Zones.
  
 ## Task 4: Create a VPC security group
 
-In this task, I create a VPC security group, which acts as a virtual firewall for my instance. When I launch an instance, I associate one or more security groups with it.
-I can also add rules to each security group to allow traffic to or from its associated instances.
+I create a VPC security group, which acts as a virtual firewall for my instance, with the following options:
+- Security group name: `Web Security Group`
+- Description: `Enable HTTP access`
+- VPC: `Lab VPC`
 
+Under Inbound rules, I add a new rule with these options:
+- Type: `HTTP`
+- Source: `Anywhere IPv4`
+- Description: `Permit web requests`
+
+When an instance is launched, one or more security groups is associated with it.
 
 ## Task 5: Launch a web server instance
 
