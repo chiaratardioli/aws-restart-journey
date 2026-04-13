@@ -30,8 +30,6 @@ ping 8.8.8.8 -c 5
 
 In this example, five ICMP echo requests are sent to `8.8.8.8`, a public DNS server operated by Google, to test connectivity and measure response times.
 
----
-
 2. **traceroute**
 
 The `traceroute` command is used to analyze the path that packets take from a local machine to a destination, such as `8.8.8.8`. Each intermediate device along the route is referred to as a *hop*.
@@ -107,6 +105,33 @@ The `telnet` command operates primarily at the transport layer (Layer 4) to test
 
 Overall, `telnet` is a simple and effective tool for verifying port accessibility and identifying where connectivity problems may exist.
 
+### Layer 7 (application): The curl command
+
+5. **curl**
+
+The `curl` command is used to transfer data between a local machine and a remote server. It supports multiple protocols, most commonly HTTP and HTTPS, and is widely used to test web services and troubleshoot connectivity.
+
+For example, a customer running an Apache web server may want to verify that their website is functioning correctly by checking for a successful HTTP response (such as **200 OK**). The `curl` command can be used to send a request and inspect the server’s response.
+
+Example usage:
+
+```bash
+curl -vLo /dev/null https://aws.com
+```
+
+This command sends a request to a web server and provides detailed output about the connection and response, while discarding the actual page content.
+
+Common options include:
+
+* `-I`: Sends a HEAD request and returns only the response headers
+* `-i`: Includes response headers with the output (GET request)
+* `-k`: Ignores SSL certificate errors
+* `-v`: Enables verbose output, showing detailed request and response information
+* `-o /dev/null`: Discards the response body (such as HTML and CSS content)
+
+After execution, the output displays details about the connection and the HTTP response. A **200 OK** status indicates that the server is operating correctly and responding successfully to requests.
+
+The `curl` command is a powerful tool for testing communication between a local system and a server. By examining responses and status codes, it helps identify issues related to connectivity, server configuration, or application behavior.
 
 
 ## Conclusion
