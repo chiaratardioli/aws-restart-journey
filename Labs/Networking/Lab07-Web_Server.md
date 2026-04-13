@@ -69,7 +69,7 @@ When an instance is launched, one or more security groups is associated with it.
 I launch an EC2 instance into the new VPC and configure it to act as a web server with the following congisurations:
 - Name:  `Web Server 1`
 - Quick Start: `Amazon Linux`
-- Amazon Machine Image (AMI): keep selection
+- Amazon Machine Image (AMI): `Amazon Linux 2023 kernel-6.1 AMI`
 - Instance type: `t3.micro`
 - Key pair: `vockey`
 - VPC: `Lab VPC`
