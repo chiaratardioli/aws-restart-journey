@@ -77,6 +77,37 @@ This command outputs currently established TCP connections, allowing verificatio
 
 Overall, `netstat` provides a snapshot of Layer 4 (transport layer) connectivity. By revealing active connections and listening ports, it helps narrow down potential network or security issues efficiently.
 
+4. **telnet**
+
+The `telnet` command is used to test connectivity to a specific host and port, helping verify whether a service is reachable over a TCP connection. It is often used in troubleshooting to determine if network access is being blocked by firewalls, security groups, or access control rules.
+
+For example, a customer may have a secure web server with firewall rules configured to block port 80. To confirm whether the port is actually inaccessible, the `telnet` command can be used to attempt a connection to that port. If the connection is refused, it indicates that the port is properly blocked.
+
+Before using `telnet`, it may need to be installed:
+
+```bash
+sudo yum install telnet -y
+```
+
+The command accepts a hostname or IP address followed by a port number.
+
+Example usage:
+
+```bash
+telnet www.google.com 80
+```
+
+This command attempts to establish a TCP connection to port 80 on the specified server. If successful, it confirms that the port is open and reachable. When connecting to a web server on port 80, it is also possible to manually send an HTTP request through the session.
+
+The `telnet` command operates primarily at the transport layer (Layer 4) to test TCP connectivity, but it can also be used at the application layer (Layer 7) for simple protocol interactions.
+
+* If the connection succeeds, the port is open and accessible
+* If the connection fails with **“connection refused”**, the port is reachable but blocked by a firewall or service configuration
+* If the connection fails with **“connection timed out”**, it may indicate a lack of network connectivity or routing issues
+
+Overall, `telnet` is a simple and effective tool for verifying port accessibility and identifying where connectivity problems may exist.
+
+
 
 ## Conclusion
 - I practiced troubleshooting commands
