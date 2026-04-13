@@ -26,7 +26,18 @@ The `ping` command accepts an IP address or URL along with optional parameters. 
 Example usage:
 
 ```bash
-ping 8.8.8.8 -c 5
+[ec2-user@ip-10-0-10-132 ~]$ ping 8.8.8.8 -c 5
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=117 time=5.38 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=117 time=5.39 ms
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=117 time=5.39 ms
+64 bytes from 8.8.8.8: icmp_seq=4 ttl=117 time=5.39 ms
+64 bytes from 8.8.8.8: icmp_seq=5 ttl=117 time=5.40 ms
+
+--- 8.8.8.8 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 5.380/5.393/5.403/0.080 ms
+[ec2-user@ip-10-0-10-132 ~]$
 ```
 
 In this example, five ICMP echo requests are sent to `8.8.8.8`, a public DNS server operated by Google, to test connectivity and measure response times.
