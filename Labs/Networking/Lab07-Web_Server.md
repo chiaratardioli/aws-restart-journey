@@ -92,8 +92,9 @@ systemctl enable httpd
 systemctl start httpd
 ```
 
-After it passes the status checks, I copy the Public IPv4 DNS and open it in a browser to verify that the web server is running successfully.
+After it passes the status checks, I copy the Public IPv4 DNS `54.148.74.241` and open it in a browser to verify that the web server is running successfully.
 
+![Web Server Instance](./images/NF-07-web-server-istance.png)
 
 
 ## Conclusion
