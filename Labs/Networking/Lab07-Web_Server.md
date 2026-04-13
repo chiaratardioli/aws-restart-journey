@@ -79,14 +79,17 @@ I launch an EC2 instance into the new VPC and configure it to act as a web serve
 - User data:
 ```bash
 #!/bin/bash
-#Install Apache Web Server and PHP
-yum install -y httpd mysql php
-#Download Lab files
+# Install Apache, MySQL, PHP
+dnf install -y httpd mariadb105 php
+
+# Download lab files
 wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-RESTRT-1/267-lab-NF-build-vpc-web-server/s3/lab-app.zip
+
 unzip lab-app.zip -d /var/www/html/
-#Turn on web server
-chkconfig httpd on
-service httpd start
+
+# Enable and start Apache (systemd)
+systemctl enable httpd
+systemctl start httpd
 ```
 
 After it passes the status checks, I copy the Public IPv4 DNS and open it in a browser to verify that the web server is running successfully.
