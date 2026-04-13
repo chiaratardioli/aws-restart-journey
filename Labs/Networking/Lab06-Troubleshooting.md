@@ -97,11 +97,14 @@ rtt min/avg/max/mdev = 5.314/5.334/5.362/0.075 ms
 This confirm that I can get to the internet, so the internet gateway and route table are working.
 
 Instead, the security group lacked an inbound rule allowing HTTP traffic (port 80) from the internet (0.0.0.0/0). I added this rule to 
-the Linux instance SG security group and retested the server using its public URL.
+the Linux instance SG security group and retested the Apache server using its public URL.
 
 ![HTTPD Server Working](./images/NF-06-httpd-running.png)
 
 
 ## Conclusion
 - I analyzed the customer scenario.
-- I troubleshot the issue.
+- I investigated and fixed the issue.
+
+## Additional resources
+- [What is Amazon VPC?](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
