@@ -55,7 +55,14 @@ A failed hop is typically shown as three asterisks (`***`), indicating that no r
 Example usage:
 
 ```bash
-traceroute 8.8.8.8
+[ec2-user@ip-10-0-10-132 ~]$ traceroute 8.8.8.8
+traceroute to 8.8.8.8 (8.8.8.8), 30 hops max, 60 byte packets
+ 1  242.16.83.239 (242.16.83.239)  5.362 ms 242.4.194.199 (242.4.194.199)  5.364 ms 242.16.82.107 (242.16.82.107)  15.591 ms
+ 2  99.82.10.8 (99.82.10.8)  6.624 ms  5.980 ms *
+ 3  * 99.83.117.223 (99.83.117.223)  5.586 ms 99.82.10.7 (99.82.10.7)  5.486 ms
+ 4  * 142.251.61.157 (142.251.61.157)  6.708 ms 108.170.255.127 (108.170.255.127)  6.539 ms
+ 5  dns.google (8.8.8.8)  5.304 ms  5.402 ms  5.387 ms
+[ec2-user@ip-10-0-10-132 ~]$
 ```
 
 This command reveals the route taken to reach the destination and provides insight into network performance and potential issues along the path.
@@ -80,7 +87,12 @@ Common options include:
 Example usage:
 
 ```bash
-netstat -tp
+[ec2-user@ip-10-0-10-132 ~]$ netstat -tp
+(No info could be read for "-p": geteuid()=1000 but you should be root.)
+Active Internet connections (w/o servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0     36 ip-10-0-10-132.us-w:ssh bbcs-113.232.5.19:36032 ESTABLISHED -                   
+[ec2-user@ip-10-0-10-132 ~]$
 ```
 
 This command outputs currently established TCP connections, allowing verification of which remote hosts are connected and which processes are involved.
@@ -104,7 +116,19 @@ The command accepts a hostname or IP address followed by a port number.
 Example usage:
 
 ```bash
-telnet www.google.com 80
+[ec2-user@ip-10-0-10-132 ~]$ sudo yum install telnet -y
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+amzn2-core                                                                                                              | 3.6 kB  00:00:00     
+...
+Installed:
+  telnet.x86_64 1:0.17-65.amzn2                                                                                                                
+
+Complete!
+[ec2-user@ip-10-0-10-132 ~]$ telnet www.google.com 80
+Trying 142.251.156.119...
+Connected to www.google.com.
+Escape character is '^]'.
+
 ```
 
 This command attempts to establish a TCP connection to port 80 on the specified server. If successful, it confirms that the port is open and reachable. When connecting to a web server on port 80, it is also possible to manually send an HTTP request through the session.
