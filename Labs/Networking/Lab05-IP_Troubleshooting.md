@@ -12,37 +12,71 @@ with the Open Systems Interconnection (OSI) model.
 ![OSI model and Troubleshooting: a comparison](NS05-OSItroubleshooting.png)
 Figure: This is an example of how troubleshooting commands have similarities to the OSI model.
 
-## Layer 3 (network): The ping and traceroute commands
+### Layer 3 (network): The ping and traceroute commands
 
 1. **ping**
 
-One can use the ping command for several purposes, but the most common is to test connectivity to a server. The ping command sends ICMP echo
-requests from a machine to a target server (for example, amazon.com). The server then responds with an echo reply, including the round-trip time.
-It is primarily used to troubleshoot connectivity issues and verify reachability to a specific target. Additionally, it can be used to maintain
-continuous traffic flow in a network if needed, and it also supports sending continuous pings.
+The `ping` command is used to test connectivity between a local machine and a specified destination. It works by sending Internet Control Message Protocol (ICMP) echo request packets to a target host, such as `amazon.com` or `8.8.8.8`. The destination responds with echo reply packets, allowing measurement of the round-trip time (RTT).
 
-The *ping* command accepts an IP address or URL followed by options; the *-c* option specifies the count, indicating how many echo requests will be sent.
+This command is primarily used to verify whether a host is reachable and to troubleshoot network connectivity issues. By examining the responses, it is possible to assess latency and detect packet loss. Many implementations also allow continuous transmission of requests, which can be useful for ongoing monitoring of network stability.
+
+The `ping` command accepts an IP address or URL along with optional parameters. The `-c` option specifies the number of echo requests to send.
+
+Example usage:
+
 ```bash
 ping 8.8.8.8 -c 5
 ```
-In the example above, ping sends five ICMP echo requests to the public DNS server operated by Google to test connectivity and measure response time.
 
-3. **traceroute**
+In this example, five ICMP echo requests are sent to `8.8.8.8`, a public DNS server operated by Google, to test connectivity and measure response times.
 
-The traceroute command reports on the path and latency that the packet takes to get from your machine to the destination (8.8.8.8). Each server is 
-called a hop. There can be packet loss, seen as percentages, at each loss, which is usually due to the user's local area network (LAN) or ISP; however, 
-if the packet loss occurs toward the end of the route, then the issue is more than likely the server connection. You can pinpoint an issue or error when 
-hostnames and IP addresses on either side of a failed jump, which looks like three asterisks (***).
+---
 
-The *traceroute** command accepts an IP address or URL followed by options.
+2. **traceroute**
+
+The `traceroute` command is used to analyze the path that packets take from a local machine to a destination, such as `8.8.8.8`. Each intermediate device along the route is referred to as a *hop*.
+
+The output displays each hop in sequence, along with the latency for reaching that hop. This information helps identify where delays or disruptions occur along the network path.
+
+Packet loss may appear at individual hops and is often associated with issues in the local area network (LAN) or the Internet Service Provider (ISP). If packet loss occurs closer to the final hops, it may indicate a problem near the destination server.
+
+A failed hop is typically shown as three asterisks (`***`), indicating that no response was received within the timeout period. By comparing the hostnames and IP addresses before and after such failures, it is possible to locate potential points of failure or filtering.
+
+Example usage:
+
 ```bash
 traceroute 8.8.8.8
 ```
-The traceroute command shows the path taken to the web server operated by Google and the latency taken to it.
 
-Packet loss, seen as percentages, can occur at each hop, and this loss usually occurs because of an issue with the user's local area network (LAN) or ISP
+This command reveals the route taken to reach the destination and provides insight into network performance and potential issues along the path.
 
-You can pinpoint an issue or error when the hostnames and IP addresses on either side of a jump have failed. Three asterisks (***) indicate a failed hop.
+
+### Layer 4 (transport): The netstat and telnet commands
+
+3. **netstat**
+
+The `netstat` command is used to display network connections, listening ports, and associated processes on a system. It is a useful tool for troubleshooting network issues and verifying whether specific ports are open or in use.
+
+For example, during a routine security scan, a compromised port may be detected on a subnet. To investigate further, `netstat` can be run on a local host within that subnet to determine whether the port is actively listening when it should not be.
+
+The command provides insight into active TCP connections and listening services, helping identify unexpected or unauthorized network activity. It is particularly valuable when diagnosing issues starting from the host machine and working outward through the network.
+
+Common options include:
+
+* `netstat -tp`: Displays established TCP connections along with the associated processes
+* `netstat -tlp`: Shows services that are currently listening for incoming connections
+* `netstat -ntlp`: Displays listening services without resolving port names (shows numeric ports only)
+
+Example usage:
+
+```bash
+netstat -tp
+```
+
+This command outputs currently established TCP connections, allowing verification of which remote hosts are connected and which processes are involved.
+
+Overall, `netstat` provides a snapshot of Layer 4 (transport layer) connectivity. By revealing active connections and listening ports, it helps narrow down potential network or security issues efficiently.
+
 
 ## Conclusion
 - I practiced troubleshooting commands
