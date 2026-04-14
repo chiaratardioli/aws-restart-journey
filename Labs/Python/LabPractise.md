@@ -246,7 +246,7 @@ else:
 
 ### 8. Working with Loops
 
-Python file name: `.py`
+Python file name: `while-loop.py`
 ```python
 # Guess a number between 1 and 10
 
@@ -282,14 +282,9 @@ Here is the pseudocode (written logic) for the **while loop**:
 
 ![Working with Loops](./images/PY08.png)
 
-### 9.
+### 9. Creating a Git Repository
 
-Python file name: `.py`
-```python
-
-```
-
-![](./images/PY09.png)
+You can find all python scripts here: [Python Scripts](./python-scripts)
 
 ### 10.
 
