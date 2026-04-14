@@ -12,6 +12,10 @@ In this exercise, I cover some of the basic commands for debugging the [debugger
 
 ![Cloud9 Python Debugger](./images/PY16-debugger.png)
 
+I use the Python Debugger to step into the `jsonFileHandler.py` file while running `calc_weight_json.py` in degug mode.
+
+![Debug FileHandler](./images/PY16-debug-FileHandler.png)
+
 ## Conclusion
 - I explored the basic features of the Python Debugger
 - I used the Python Debugger to step through Python scripts
