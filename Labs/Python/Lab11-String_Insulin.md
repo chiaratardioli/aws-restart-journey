@@ -5,7 +5,7 @@ Next, I will print these variables to the console, with comments that explain th
 
 ## Solution
 
-The full code for this lab is avalable here: [string-insulin](./python-scripts/string-insulin.py)
+The full code for this lab is avalable here: [string-insulin.py](./python-scripts/string-insulin.py)
 
 ![String Sequence and Numeric Weight of Insulin](./images/PY11-string-insulin.png)
 
