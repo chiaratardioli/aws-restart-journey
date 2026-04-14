@@ -4,7 +4,7 @@
 
 ## Labs
 
-![AWS Cloud9 IDE](./images/py-0.png)
+![AWS Cloud9 IDE](./images/PY00.png)
 
 ### 1. Creating a Hello, World Program
 
@@ -53,7 +53,7 @@ print(type(myValue))
 print(str(myValue) + " is of the data type " + str(type(myValue)))
 ```
 
-![Numeric Data Types](./images/py-2.png)
+![Numeric Data Types](./images/PY02.png)
 
 ### 3. Working with the String Data Type
 
@@ -81,7 +81,7 @@ animal = input("What is your favorite animal?  ")
 print("{}, you like a {} {}!".format(name,color,animal))
 ```
 
-![](./images/py-3.png)
+![String Data Type](./images/PY03.png)
 
 ### 4. Working with Lists, Tuples, and Dictionaries
 
@@ -90,7 +90,7 @@ Python file name: `-data.py`
 
 ```
 
-![](./images/py-4.png)
+![Lists, Tuples, and Dictionaries](./images/PY04.png)
 
 ### 17.
 
