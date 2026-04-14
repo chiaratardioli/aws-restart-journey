@@ -222,6 +222,14 @@ for myCarProperties in myInventoryList:
 
 Python file name: `conditionals.py`
 ```python
+# Exercise 1: Working with the if-else statement
+userReply = input("Do you need to ship a package? (Enter yes or no) ")
+if userReply == "yes":
+    print("We can help you ship that package!")
+else:
+    print("Please come back when you need to ship a package. Thank you.")
+
+# Exercise 2: Working with the elif statement
 userReply = input("Would you like to buy stamps, buy an envelope, or make a copy? (Enter stamps, envelope, or copy) ")
 if userReply == "stamps":
     print("We have many stamp designs to choose from.")
