@@ -244,6 +244,62 @@ else:
 
 ![Working with Conditionals](./images/PY07.png)
 
+### 8. Working with Loops
+
+Python file name: `.py`
+```python
+# Guess a number between 1 and 10
+
+# Importing random
+import random
+
+# Printing the game rules
+print("Welcome to Guess the Number!")
+print("The rules are simple. I will think of a number, and you will try to guess it.")
+
+number = random.randint(1,10)
+isGuessRight = False
+
+# writing a while loop
+while isGuessRight != True:
+    guess = input("Guess a number between 1 and 10: ")
+    if int(guess) == number:
+        print("You guessed {}. That is correct! You win!".format(guess))
+        isGuessRight = True
+    else:
+        print("You guessed {}. Sorry, that isn’t it. Try again.".format(guess))
+```
+
+Here is the pseudocode (written logic) for the **while loop**:
+
+* If the user has not guessed the correct number, continue running the loop.
+* Ask the user to guess a number between 1 and 10.
+* Convert the user’s input into a number.
+* Check if the guessed number is equal to the randomly generated number.
+* If the guess is correct, display a success message and end the loop.
+* If the guess is incorrect, display a message telling the user to try again and repeat the loop.
+
+
+![Working with Loops](./images/PY08.png)
+
+### 9.
+
+Python file name: `.py`
+```python
+
+```
+
+![](./images/PY09.png)
+
+### 10.
+
+Python file name: `.py`
+```python
+
+```
+
+![](./images/PY10.png)
+
 ### 17.
 
 Python file name: `.py`
@@ -251,4 +307,4 @@ Python file name: `.py`
 
 ```
 
-![](./images/PY08.png)
+![](./images/PY17.png)
