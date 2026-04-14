@@ -138,9 +138,12 @@ print(myFavoriteFruitDictionary["Paulo"])   # Paulo's favorite fruit
 
 ### 5. Categorizing Values
 
-Python file name: `.py`
+Python file name: `categorize-values.py`
 ```python
-
+# Exercise 1: Creating a mixed-type list
+myMixedTypeList = [45, 290578, 1.02, True, "My dog is on the bed.", "45"]
+for item in myMixedTypeList:
+    print("{} is of the data type {}".format(item,type(item)))
 ```
 
 ![Categorizing Values](./images/PY05.png)
