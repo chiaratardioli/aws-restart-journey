@@ -15,7 +15,7 @@ The charge varies with pH:
 - High pH → negative charge  
 - Net charge = 0 → isoelectric point (pI)
 
-![Insulin Net Charge](./images/PY11-net-charge.png)
+![Insulin Net Charge](./images/PY12-net-charge.png)
 
 ## Conclusion
 - I created a dictionary of pKa values (which indicate the strength of an acid) that will be used in the net charge calculations
