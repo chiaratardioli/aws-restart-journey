@@ -2,7 +2,11 @@
 
 ## Solution
 
-The python code is [calc_weight_json.py](./python-scripts/calc_weight_json.py).
+The python files for this lab are: 
+- [calc_weight_json.py](./python-scripts/calc_weight_json.py)
+- [jsonFileHandler.py](./python-scripts/jsonFileHandler.py)
+
+The output files are stored in a subfolder named `files`.
 
 ![File Handlers and Modules for Retrieving Information about Insulin](./images/PY14-FileHandler-insulin.png)
 
