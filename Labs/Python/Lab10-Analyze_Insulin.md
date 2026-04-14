@@ -18,3 +18,21 @@ ORIGIN
 //
 ```
 
+## Exercise 2: Obtaining the protein sequence of human insulin
+
+Insulin is obtained from preproinsulin through a series of cut-and-paste procedures. 
+Insulin formation process:
+- Insulin is produced from preproinsulin through a series of cut-and-paste (processing) steps.
+- Preproinsulin consists of:
+  - A 24 amino acid (aa) signal sequence
+  - An 86 amino acid proinsulin molecule
+- During processing:
+  - The signal sequence (aa 1–24) is removed
+  - The remaining molecule becomes proinsulin
+- Further processing of proinsulin produces the final insulin:
+  - Amino acids 25–54 → form part of the insulin molecule
+  - Amino acids 90–110 → form another part of the insulin molecule
+
+I will use Python code [analyze-insulin.py](analyze-insulin.py) to retrieve only those amino acids in the sequence that compose insulin.
+
+![Protein Sequence of Human Insulin](./images/PY10-insuline.png)
