@@ -10,7 +10,7 @@ select the `insulin [Homo sapiens] GenBank: AAA59172.1`.
 
 ![Preproinsulin Sequence](./images/PY10-NCBI-search.png)
 
-Then I copy and paste the insulin sequence into the new file [preproinsulin-seq.txt](./csv-files/preproinsulin-seq.txt).
+Then I copy and paste the insulin sequence into the new file [preproinsulin-seq.txt](./files/preproinsulin-seq.txt).
 ```txt
 ORIGIN      
         1 malwmrllpl lallalwgpd paaafvnqhl cgshlvealy lvcgergffy tpktrreaed
