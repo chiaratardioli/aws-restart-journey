@@ -2,9 +2,18 @@
 
 I will use lists, for and while loops, and basic math to calculate the net charge of insulin from pH 0 to pH 14.
 
-## Solution
+## Solution: Net Charge of Insulin
 
-The python code is [net-charge.py](./python-scripts/net-charge.py)
+The python code is [net-charge.py](./python-scripts/net-charge.py).
+
+This program calculates the net charge of insulin from pH 0 to 14 based on the ionization of amino acids.
+
+Net Charge = positive residues (K, H, R) − negative residues (Y, C, D, E)
+
+The charge varies with pH:
+- Low pH → positive charge  
+- High pH → negative charge  
+- Net charge = 0 → isoelectric point (pI)
 
 ![Insulin Net Charge](./images/PY11-net-charge.png)
 
