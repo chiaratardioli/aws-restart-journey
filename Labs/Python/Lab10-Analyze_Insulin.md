@@ -10,7 +10,7 @@ select the `insulin [Homo sapiens] GenBank: AAA59172.1`.
 
 ![Preproinsulin Sequence](./images/PY10-NCBI-search.png)
 
-Then I copy and paste the insulin sequence into the new file `preproinsulin-seq.txt`.
+Then I copy and paste the insulin sequence into the new file [preproinsulin-seq.txt](./csv-files/preproinsulin-seq.txt).
 ```txt
 ORIGIN      
         1 malwmrllpl lallalwgpd paaafvnqhl cgshlvealy lvcgergffy tpktrreaed
@@ -36,3 +36,23 @@ Insulin formation process:
 I use Python code [analyze-insulin.py](./python-scripts/analyze-insulin.py) to retrieve only those amino acids in the sequence that compose insulin.
 
 ![Protein Sequence of Human Insulin](./images/PY10-insuline.png)
+
+
+## Visualize full processing pathway
+
+This is how preproinsulin becomes insulin.
+
+```
+Preproinsulin (110 aa total)
+│
+├── Signal peptide (1–24) → removed
+│
+└── Proinsulin (25–110)
+    │
+    ├── B chain (25–54)
+    ├── C-peptide (55–89) → removed
+    └── A chain (90–110)
+           ↓
+Final product:
+B chain + A chain = Insulin
+```
