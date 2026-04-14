@@ -286,20 +286,3 @@ Here is the pseudocode (written logic) for the **while loop**:
 
 You can find all python scripts here: [Python Scripts](./python-scripts)
 
-### 10.
-
-Python file name: `.py`
-```python
-
-```
-
-![](./images/PY10.png)
-
-### 17.
-
-Python file name: `.py`
-```python
-
-```
-
-![](./images/PY17.png)
