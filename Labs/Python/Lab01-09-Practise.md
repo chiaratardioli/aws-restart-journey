@@ -150,7 +150,7 @@ for item in myMixedTypeList:
 
 ### 6. Working with Composite Data Types
 
-The car inventory data is in the file [car_fleet.csv](./csv-files/car_fleet.csv):
+The car inventory data is in the file [car_fleet.csv](./files/car_fleet.csv):
 
 ```csv
 vin,make,model,year,range,topSpeed,zeroSixty,mileage
