@@ -33,6 +33,6 @@ Insulin formation process:
   - Amino acids 25–54 → form part of the insulin molecule
   - Amino acids 90–110 → form another part of the insulin molecule
 
-I will use Python code [analyze-insulin.py](analyze-insulin.py) to retrieve only those amino acids in the sequence that compose insulin.
+I will use Python code [analyze-insulin.py](./python-scripts/analyze-insulin.py) to retrieve only those amino acids in the sequence that compose insulin.
 
 ![Protein Sequence of Human Insulin](./images/PY10-insuline.png)
