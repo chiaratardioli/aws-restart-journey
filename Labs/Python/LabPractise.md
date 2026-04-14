@@ -136,9 +136,38 @@ print(myFavoriteFruitDictionary["Paulo"])   # Paulo's favorite fruit
 
 ![Lists, Tuples, and Dictionaries](./images/PY04.png)
 
-### 17.
+### 5. Categorizing Values
 
-Python file name: `numeric-data.py`
+Python file name: `.py`
 ```python
 
 ```
+
+![Categorizing Values](./images/PY05.png)
+
+### 6.
+
+Python file name: `.py`
+```python
+
+```
+
+![](./images/PY06.png)
+
+### 7.
+
+Python file name: `.py`
+```python
+
+```
+
+![](./images/PY07.png)
+
+### 17.
+
+Python file name: `.py`
+```python
+
+```
+
+![](./images/PY08.png)
