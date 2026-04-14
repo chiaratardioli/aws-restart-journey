@@ -218,14 +218,23 @@ for myCarProperties in myInventoryList:
 
 ![Working with Composite Data Types](./images/PY06.png)
 
-### 7.
+### 7. Working with Conditionals
 
-Python file name: `.py`
+Python file name: `conditionals.py`
 ```python
-
+userReply = input("Would you like to buy stamps, buy an envelope, or make a copy? (Enter stamps, envelope, or copy) ")
+if userReply == "stamps":
+    print("We have many stamp designs to choose from.")
+elif userReply == "envelope":
+    print("We have many envelope sizes to choose from.")
+elif userReply == "copy":
+    copies = input("How many copies would you like? (Enter a number) ")
+    print("Here are {} copies.".format(copies))
+else:
+    print("Thank you, please come again.")
 ```
 
-![](./images/PY07.png)
+![Working with Conditionals](./images/PY07.png)
 
 ### 17.
 
