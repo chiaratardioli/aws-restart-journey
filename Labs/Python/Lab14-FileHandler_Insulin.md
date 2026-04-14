@@ -1,6 +1,10 @@
 # Creating File Handlers and Modules for Retrieving Information about Insulin
 
+
 ## Solution
+
+I created the JSON molecules data file [insulin.json](./files/insulin.json).
+This JSON document stores all the information of previous lab, such as the insulin molecules, the numeric weights of the amino acids and the actual weight of the insulin molecule
 
 The python files for this lab are: 
 - [calc_weight_json.py](./python-scripts/calc_weight_json.py)
