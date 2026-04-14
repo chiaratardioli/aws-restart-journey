@@ -35,7 +35,7 @@ Insulin formation process:
 
 I use Python code [analyze-insulin.py](./python-scripts/analyze-insulin.py) to retrieve only those amino acids in the sequence that compose insulin.
 
-![Protein Sequence of Human Insulin](./images/PY10-insuline.png)
+![Protein Sequence of Human Insulin](./images/PY10-analyze-insulin.png)
 
 
 ## Visualize full processing pathway
