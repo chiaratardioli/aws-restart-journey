@@ -1,16 +1,24 @@
 # Creating File Handlers and Modules for Retrieving Information about Insulin
 
+This lab demonstrates how to use Python to process biological data by reading insulin sequences from a JSON file and calculating their molecular weight.
 
 ## Solution
 
-I created the JSON molecules data file [insulin.json](./files/insulin.json).
-This JSON document stores all the information of previous lab, such as the insulin molecules, the numeric weights of the amino acids and the actual weight of the insulin molecule
+I created the JSON molecules data file [insulin.json](./files/insulin.json) and placed in the subfolder `files`.
+This JSON document stores all the information of previous lab, such as the insulin molecules, the numeric weights of the amino acids and the actual weight of the insulin molecule.
 
 The python files for this lab are: 
 - [calc_weight_json.py](./python-scripts/calc_weight_json.py)
 - [jsonFileHandler.py](./python-scripts/jsonFileHandler.py)
 
-The output files are stored in a subfolder named `files`.
+These programs calculate the molecular weight of insulin using data stored in a JSON file.
+
+The programs:
+- Reads insulin data (A chain, B chain, amino acid weights, and actual molecular weight) from `insulin.json`
+- Combines the A and B chains to form the full insulin sequence  
+- Counts the occurrence of each amino acid  
+- Calculates the molecular weight by summing the weights of all amino acids  
+- Compares the result with the actual value and computes the percent error 
 
 ![File Handlers and Modules for Retrieving Information about Insulin](./images/PY14-FileHandler-insulin.png)
 
