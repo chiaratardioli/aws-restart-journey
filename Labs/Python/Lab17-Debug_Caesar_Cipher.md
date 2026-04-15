@@ -54,9 +54,9 @@ Encrypted Message: CYU Testart rocks!
 Decrypted Message: AWS Restart rocks!
 ```
 
-However, there is no explanation about it. To get clues about the bug, I run the program several times with different inputs and I notices that ...
-Here is the fixed Caesar Cipher Program [caesar_debug-2-fixed.py](./python-scripts/debug-caesarg-2-fixed.py)
-
+However, no explanation of the issue is provided. To investigate the bug, I executed the program multiple times with different inputs and 
+observed that uppercase letters were correctly encrypted, while lowercase letters were not. This indicates that line 25 in the `encryptMessage`
+function is missing the conversion to uppercase. The correct statement should be: `uppercaseMessage = message.upper()`.
 
 ## Caesar Cipher Program Bug #3
 
@@ -64,9 +64,6 @@ The Caesar Cipher Program [debug-caesar-3.py](./python-scripts/debug-caesar-3.py
 
 ![Buggy Caesar Cipher Program 3](./images/PY17-debug-caesar-3.png)
 
-However, no explanation of the issue is provided. To investigate the bug, I executed the program multiple times with different inputs and 
-observed that uppercase letters were correctly encrypted, while lowercase letters were not. This indicates that line 25 in the `encryptMessage`
-function is missing the conversion to uppercase. The correct statement should be: `uppercaseMessage = message.upper()`.
 
 
 ## Conclusion
