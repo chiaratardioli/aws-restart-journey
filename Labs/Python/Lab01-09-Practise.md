@@ -8,9 +8,9 @@ Cloud9 environments can run on Amazon EC2 instances or on custom Linux servers, 
 
 ![AWS Cloud9 Service](./images/PY00-Cloud9-dashboard.png)
 
-## Labs 1-9
-
 ![AWS Cloud9 IDE](./images/PY00.png)
+
+## Labs 1-9
 
 ### 1. Creating a Hello, World Program
 
