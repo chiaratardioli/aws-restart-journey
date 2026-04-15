@@ -11,7 +11,7 @@
 
 ## Solution
 
-I decide to use a brute-force approach to find the prime number between 1 and 250.
+I decide to use a brute-force approach to find the prime numbers between 1 and 250.
 I log to the EC2 instance via SSH and create a folder `python`.
 There I create the program [prime_numbers.py](./python-scripts/prime_numbers.py) 
 so that the location of my python script is `/home/ec2-user/python`.
