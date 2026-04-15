@@ -42,7 +42,8 @@ To fix the program, I just modified the line to `newPosition = position + int(ci
 
 ## Caesar Cipher Program Bug #2
 
-The Caesar Cipher Program [debug-caesar-2.py](./python-scripts/debug-caesar-2.py) returns an incorrect output, indicating the presence of a bug.
+The Caesar Cipher Program [debug-caesar-2.py](./python-scripts/debug-caesar-2.py) returns an incorrect encrypted message, 
+indicating the presence of a bug in the encryption function.
 ```bash
 Alphabet: ABCDEFGHIJKLMNOPQRSTUVWXYZ
 Alphabet2: ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ
@@ -60,11 +61,26 @@ function is missing the conversion to uppercase. The correct statement should be
 
 ## Caesar Cipher Program Bug #3
 
-The Caesar Cipher Program [debug-caesar-3.py](./python-scripts/debug-caesar-3.py) gives an error.
+The Caesar Cipher Program [debug-caesar-3.py](./python-scripts/debug-caesar-3.py) returns an incorrect decrypted message, 
+indicating the presence of a bug in the decryption function.
+```bash
+Alphabet: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Alphabet2: ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ
+Please enter a message to encrypt: AWS Restart rocks!
+AWS Restart rocks!
+Please enter a key (whole number from 1-25): 2
+2
+Encrypted Message: CYU TGUVCTV TQEMU!
+Decrypted Message: EAW VIWXEVX VSGOW!
+```
 
-![Buggy Caesar Cipher Program 3](./images/PY17-debug-caesar-3.png)
+## Caesar Cipher Program Bug #4
+
+The Caesar Cipher Program [debug-caesar-4.py](./python-scripts/debug-caesar-4.py) returns again an incorrect decrypted message.
+```bash
 
 
+```
 
 ## Conclusion
 - I used the Python Debugger.
