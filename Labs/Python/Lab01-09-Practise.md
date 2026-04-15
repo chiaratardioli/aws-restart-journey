@@ -2,7 +2,13 @@
 
 ### Accessing the AWS Cloud9 IDE
 
-## Labs
+**AWS Cloud9** is a cloud-based integrated development environment (IDE) provided by Amazon Web Services that allows users to write, run, and debug code directly from a web browser. It includes a code editor, debugger, and terminal with a preconfigured AWS CLI, and supports over 40 programming languages.
+
+Cloud9 environments can run on Amazon EC2 instances or on custom Linux servers, and they can be connected to source control systems like AWS CodeCommit. Environments can be easily created through the AWS Management Console or CLI, often automatically provisioning the required infrastructure.
+
+![AWS Cloud9 Service](./images/PY00-Cloud9-dashboard.png)
+
+## Labs 1-9
 
 ![AWS Cloud9 IDE](./images/PY00.png)
 
@@ -14,7 +20,7 @@ Python file name: `hello-world.py`
 print("Hello, World")
 ```
 
-![Hello World!](./images/py-1.png)
+![Hello World!](./images/PY01.png)
 
 ### 2. Working with Numeric Data Types
 
