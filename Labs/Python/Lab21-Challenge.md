@@ -65,11 +65,11 @@ There are 53 prime numbers between 2 and 250
 2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,193,197,199,211,223,227,229,233,239,241
 ```
 
-The program also print the prime numbers on the file [results.txt](./files/results.txt), one number per line.
-First I check that the number of rows of the file is equal to the total number of prime number found by the program:
+The program also prints the prime numbers on the file [results.txt](./files/results.txt), one number per line.
+First I check that the number of rows of the file is equal to the total number of prime numbers found by the program:
 ```bash
 [ec2-user@ip-10-1-11-68 python]$ wc -l results.txt 
 53 results.txt
 ```
 
-Then I open the file and manually check the results. Al lprime numners were there, as expected.
+Then I open the file and manually check the results. All prime numbers were there, as expected.
