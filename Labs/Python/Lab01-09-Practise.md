@@ -6,7 +6,7 @@
 
 Cloud9 environments can run on Amazon EC2 instances or on custom Linux servers, and they can be connected to source control systems like AWS CodeCommit. Environments can be easily created through the AWS Management Console or CLI, often automatically provisioning the required infrastructure.
 
-![AWS Cloud9 Service](./images/PY00-Cloud9-dashboard.png)
+![AWS Cloud9 Dashboard](./images/PY00-Cloud9-dashboard.png)
 
 ![AWS Cloud9 IDE](./images/PY00.png)
 
