@@ -22,7 +22,10 @@ Below it the Amazon Inspector dashboard showing **activation status** and **Lamb
 
 ### 2.1 Reviewing Lambda Findings
 
-While the scan was running, I explored the detected vulnerabilities under the **Findings** section. Amazon Inspector reported multiple findings related to Lambda functions, each with details such as severity, affected resource, and vulnerability description.
+While the scan was running, I explored the detected vulnerabilities under the **Findings** section. Amazon Inspector reported multiple findings related to Lambda functions, 
+each with details such as severity, affected resource, and vulnerability description.
+
+![Lambda Vulnerability Findings](./images/SE-02-vulnerabilities.png)
 
 One key finding was **CVE-2023-32681**, which identified a vulnerability in the Python `requests` package. By opening the finding details, I accessed additional information, including:
 
