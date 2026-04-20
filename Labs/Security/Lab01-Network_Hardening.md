@@ -34,9 +34,9 @@ One key finding was **CVE-2023-32681**, which identified a vulnerability in the 
 I accessed the External reference to the National Vulnerability Database (NVD) which contains the recommended remediation.
 The issue was that the requests package was vulnerable and outdated, and the recommendation was to upgrade the package. 
 
-![Detailed view of a specific finding (CVE-2023-32681)](./images/SE-01-CVE-2023-32681.png)
+![Detailed view of a specific finding (CVE-2023-32681)](./images/SE-01-vulnerability-details.png)
 
-![NVD vulnerability page](./images/NVD-vulnerability-page.png)
+![NVD vulnerability page](./images/SE-01-NVD-vulnerability-page.png)
 
 ## Task 3: Remediating Vulnerabilities
 
@@ -51,7 +51,7 @@ To remediate the identified vulnerability, I modified the Lambda function config
 
 This change ensured that the function used an up-to-date and secure version of the package.
 
-![](./images/)
+![Lambda Function Dependencies](./images/SE-01-lambda-dependencies.png)
 
 ### 3.2 Verifying Remediation
 
