@@ -19,7 +19,6 @@ Below it the Amazon Inspector dashboard showing **activation status** and **Lamb
 
 The dashboard shows my account number and activation status for AWS Lambda. By default, scanning is activated for Amazon EC2, Amazon ECR, and AWS Lambda standard scanning.
 
-
 ## Task 2: Reviewing Inspected Resources**
 
 ### 2.1 Reviewing Lambda Findings
