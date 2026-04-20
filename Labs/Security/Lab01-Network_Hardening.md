@@ -18,9 +18,7 @@ Below it the Amazon Inspector dashboard showing **activation status** and **Lamb
 ![Amazon Inspector Environment coverage](./images/SE-01-inspector-environment-coverage.png)
 
 
-## Task 2: Reviewing Inspected Resources**
-
-### 2.1 Reviewing Lambda Findings
+## Task 2: Reviewing Lambda Findings
 
 While the scan was running, I explored the detected vulnerabilities under the **Findings** section. Amazon Inspector reported multiple findings related to Lambda functions, 
 each with details such as severity, affected resource, and vulnerability description.
