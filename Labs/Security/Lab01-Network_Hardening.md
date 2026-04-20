@@ -36,8 +36,6 @@ The issue was that the requests package was vulnerable and outdated, and the rec
 
 ![Detailed view of a specific finding (CVE-2023-32681)](./images/SE-01-vulnerability-details.png)
 
-![NVD vulnerability page](./images/SE-01-NVD-vulnerability-page.png)
-
 ## Task 3: Remediating Vulnerabilities
 
 ### 3.1 Updating Lambda Function Dependencies
