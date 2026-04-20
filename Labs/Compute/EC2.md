@@ -11,8 +11,6 @@ Amazon EC2 provides **resizable compute capacity**, allowing developers to quick
 Source: AWS architecture icons [link here](https://aws.amazon.com/architecture/icons/)
 
 
----
-
 ## Lab Objectives
 
 By completing this lab, I learned how to:
@@ -24,9 +22,7 @@ By completing this lab, I learned how to:
 * Test **termination protection**
 * Terminate an EC2 instance
 
----
-
-# Task 1 – Launching an EC2 Instance
+## Task 1 – Launching an EC2 Instance
 
 First, I launched a new **Amazon EC2 instance** from the AWS Management Console.
 
@@ -56,9 +52,7 @@ echo '<html><h1>Hello From Your Web Server!</h1></html>' > /var/www/html/index.h
 
 This script installs **Apache HTTP Server**, starts the service, and creates a simple web page.
 
----
-
-# Task 2 – Monitoring the EC2 Instance
+## Task 2 – Monitoring the EC2 Instance
 
 After launching the instance, I monitored its status and performance.
 
@@ -72,9 +66,7 @@ Both checks passed successfully.
 
 I also explored the **Monitoring tab**, which shows metrics from **Amazon CloudWatch**, such as CPU utilization.
 
----
-
-# Task 3 – Updating the Security Group
+## Task 3 – Updating the Security Group
 
 Initially, I could not access the web server using the **public IP address**.
 
@@ -94,9 +86,7 @@ To fix this, I updated the inbound rules.
 
 After saving the rule, I refreshed the browser and saw the message:
 
----
-
-# Task 4 – Resizing the EC2 Instance
+## Task 4 – Resizing the EC2 Instance
 
 I learned that EC2 instances can be resized if more resources are required.
 
@@ -117,7 +107,7 @@ This process helps scale resources depending on application requirements.
 
 ---
 
-# Task 5 – Testing Termination Protection
+## Task 5 – Testing Termination Protection
 
 Termination protection prevents accidental deletion of instances.
 
@@ -132,7 +122,7 @@ This successfully deleted the instance.
 
 ---
 
-# Conclusion
+## Conclusion
 
 In this lab, I learned how to use **Amazon EC2 to deploy and manage a cloud-based server**.
 
