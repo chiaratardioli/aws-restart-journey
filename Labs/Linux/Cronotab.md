@@ -12,8 +12,6 @@ All tasks were performed in the directory:
 /home/ec2-user/companyA
 ````
 
----
-
 ## Task 2: Create a List of Processes
 
 ### Objective
@@ -24,8 +22,6 @@ In this task, I learned how to generate a log file of running processes while fi
 - Commands containing `[` or `]`
 
 The log file was stored in the `SharedFolders` directory.
-
----
 
 ### Step 1: Verify the Working Directory
 
@@ -47,8 +43,6 @@ If I was not in the correct folder, I navigated there using:
 cd companyA
 ```
 
----
-
 ### Step 2: Generate the Process Log
 
 I ran the following command to list all processes while excluding the `root` user:
@@ -69,8 +63,6 @@ The file was saved as:
 SharedFolders/processes.csv
 ```
 
----
-
 ### Step 3: Verify the Log File
 
 To ensure that the log file contained the correct data, I viewed its contents:
@@ -81,15 +73,11 @@ cat SharedFolders/processes.csv
 
 I confirmed that the file correctly listed the processes and excluded the unwanted entries.
 
----
-
 ## Task 3: Monitor Processes Using `top`
 
 ## Objective
 
 In this task, I learned how to monitor system performance and active processes in real time using the `top` command.
-
----
 
 ### Step 1: Run the `top` Command
 
@@ -131,8 +119,6 @@ I exited `top` by pressing:
 q
 ```
 
----
-
 ## Step 3: Display Help and Version Information
 
 I also explored the help and version options:
@@ -143,8 +129,6 @@ top -hv
 
 This allowed me to better understand the available options for `top`.
 
----
-
 ## Task 4: Create a Cron Job
 
 ### Objective
@@ -154,8 +138,6 @@ In this task, I learned how to automate a task using `cron`. I created a cron jo
 ```
 SharedFolders/filteredAudit.csv
 ```
-
----
 
 ### Step 1: Open the Crontab Editor
 
@@ -170,8 +152,6 @@ Since the editor opened in `vi`, I entered insert mode by pressing:
 ```
 i
 ```
-
----
 
 ### Step 2: Add the Cron Configuration
 
@@ -192,8 +172,6 @@ Through this, I learned:
 * How to use `find` and `sed` to manipulate file names
 * How to redirect output to a file (`>`)
 
----
-
 ### Step 3: Save and Exit
 
 I saved and exited the editor by pressing:
@@ -208,8 +186,6 @@ Then typing:
 :wq
 ```
 
----
-
 ### Step 4: Verify the Cron Job
 
 I verified the cron job with:
@@ -219,8 +195,6 @@ sudo crontab -l
 ```
 
 I confirmed that the cron configuration matched what I entered.
-
----
 
 ## Conclusion
 
