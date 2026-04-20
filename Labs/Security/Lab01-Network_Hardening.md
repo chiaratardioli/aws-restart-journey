@@ -7,15 +7,16 @@ The scenario is based on developers at AnyCompany who are building a serverless 
 Amazon Inspector fulfills this need by continuously scanning for vulnerable software packages and issues within the code, while also automatically extending protection 
 to other resources such as Amazon EC2 instances and Amazon ECR repositories. This ensures a proactive approach to security as new resources and updates are introduced.
 
-## Task 1: Activating Amazon Inspector**
+## Task 1: Activating Amazon Inspector
 
 I began by activating Amazon Inspector through the AWS Management Console. Once enabled, the service automatically initiated scans across supported resources, including Lambda functions.
 
 After activation, the dashboard indicated that scanning was in progress. I monitored the **Environment coverage** section until Lambda coverage reached 100%, confirming that all functions were being scanned.
 
-*Suggested screenshot:*
+Below it the Amazon Inspector dashboard showing **activation status** and **Lambda coverage at 100%**.
+![Activated Amazon Inspector](./images/SE-01-inspector-activated.png)
 
-* Amazon Inspector dashboard showing **activation status** and **Lambda coverage at 100%**
+The dashboard shows my account number and activation status for AWS Lambda. By default, scanning is activated for Amazon EC2, Amazon ECR, and AWS Lambda standard scanning.
 
 
 ## Task 2: Reviewing Inspected Resources**
