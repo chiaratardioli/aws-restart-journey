@@ -23,20 +23,20 @@ Below it the Amazon Inspector dashboard showing **activation status** and **Lamb
 While the scan was running, I explored the detected vulnerabilities under the **Findings** section. Amazon Inspector reported multiple findings related to Lambda functions, 
 each with details such as severity, affected resource, and vulnerability description.
 
-![Lambda Vulnerability Findings](./images/SE-02-vulnerabilities.png)
+![Lambda Vulnerability Findings](./images/SE-01-vulnerabilities.png)
 
-One key finding was **CVE-2023-32681**, which identified a vulnerability in the Python `requests` package. By opening the finding details, I accessed additional information, including:
+Three rows are displayed, one for each vulnerability within Lambda function. I see the following key details:
+- Severity: `Medium`
+- Impacted resource shows you the affected Lambda function, here: `get-request`
+- Title shows the reason for the finding, here: `CVE-20XX-XXXXX - requests`
 
-* Severity level (Medium)
-* Impacted Lambda function
-* External reference to the National Vulnerability Database (NVD)
-* Recommended remediation steps
+One key finding was **CVE-2023-32681**, which identified a vulnerability in the Python `requests` package. By opening the finding details, 
+I accessed the External reference to the National Vulnerability Database (NVD) which contains the recommended remediation.
+The issue was that the requests package was vulnerable and outdated, and the recommendation was to upgrade the package. 
 
-*Suggested screenshots:*
+![Detailed view of a specific finding (CVE-2023-32681)](./images/SE-01-CVE-2023-32681.png)
 
-* Findings list showing vulnerabilities
-* Detailed view of a specific finding (CVE-2023-32681)
-* NVD vulnerability page (optional but useful for context)
+![NVD vulnerability page](./images/NVD-vulnerability-page.png)
 
 ## Task 3: Remediating Vulnerabilities
 
@@ -51,10 +51,7 @@ To remediate the identified vulnerability, I modified the Lambda function config
 
 This change ensured that the function used an up-to-date and secure version of the package.
 
-*Suggested screenshots:*
-
-* Lambda function code editor showing `requirements.txt` before and after changes
-* Deployment success message
+![](./images/)
 
 ### 3.2 Verifying Remediation
 
@@ -66,11 +63,13 @@ After deployment, Amazon Inspector automatically triggered a new scan. I then:
 
 Additionally, I verified that the Lambda function had been rescanned by checking the updated timestamp in the **Resource coverage** section.
 
-*Suggested screenshots:*
+Below the closed findings list showing resolved vulnerability.
 
-* Closed findings list showing resolved vulnerability
-* Resource coverage page with updated scan timestamp
+![Closed findings list showing resolved vulnerability](./images/SE-01-closed-vulnerability.png)
 
+Here the resource coverage page with updated scan timestamp.
+
+![Resource coverage page](./images/SE-01-NVD-vulnerability-updated.png)
 
 ## Conclusion
 
