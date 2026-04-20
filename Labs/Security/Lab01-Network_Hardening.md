@@ -14,7 +14,8 @@ I began by activating Amazon Inspector through the AWS Management Console. Once 
 After activation, the dashboard indicated that scanning was in progress. I monitored the **Environment coverage** section until Lambda coverage reached 100%, confirming that all functions were being scanned.
 
 Below it the Amazon Inspector dashboard showing **activation status** and **Lambda coverage at 100%**.
-![Activated Amazon Inspector](./images/SE-01-inspector-activated.png)
+
+![Amazon Inspector Environment coverage](./images/SE-01-inspector-environment-coverage.png)
 
 The dashboard shows my account number and activation status for AWS Lambda. By default, scanning is activated for Amazon EC2, Amazon ECR, and AWS Lambda standard scanning.
 
