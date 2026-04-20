@@ -17,7 +17,6 @@ After activation, the dashboard indicated that scanning was in progress. I monit
 
 * Amazon Inspector dashboard showing **activation status** and **Lambda coverage at 100%**
 
----
 
 ## Task 2: Reviewing Inspected Resources**
 
@@ -38,8 +37,6 @@ One key finding was **CVE-2023-32681**, which identified a vulnerability in the 
 * Detailed view of a specific finding (CVE-2023-32681)
 * NVD vulnerability page (optional but useful for context)
 
----
-
 ## Task 3: Remediating Vulnerabilities
 
 ### 3.1 Updating Lambda Function Dependencies
@@ -57,8 +54,6 @@ This change ensured that the function used an up-to-date and secure version of t
 
 * Lambda function code editor showing `requirements.txt` before and after changes
 * Deployment success message
-
----
 
 ### 3.2 Verifying Remediation
 
