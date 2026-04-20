@@ -1,6 +1,6 @@
 # Network Hardening : Using Amazon Inspector for vulnerability assesment and remediation
 
-In this lab, I used **Amazon Inspector** to identify and remediate vulnerabilities in AWS Lambda functions. The process included activating the service, reviewing detected vulnerabilities, and applying remediation steps to secure the application environment.
+In this lab, I used **Amazon Inspector** to identify and remediate vulnerabilities in **AWS Lambda** functions. The process included activating the service, reviewing detected vulnerabilities, and applying remediation steps to secure the application environment.
 
 ## Scenario
 The scenario is based on developers at AnyCompany who are building a serverless application and require an integrated security tool during development. 
