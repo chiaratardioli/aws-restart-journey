@@ -21,6 +21,15 @@ I will gain hands-on experience working with AWS services, developing job-ready 
 
 ## Solution
 
+**AWS Shared Responsibility Model** defines how security and compliance responsibilities are divided between AWS and the customer. 
+**AWS** is responsible for the security “of” the cloud (infrastructure, hardware, and managed services), while **customers** are 
+responsible for security “in” the cloud (data, configurations, and access management). **AWS compliance programs** demonstrates
+adherence to global standards and regulations, helping customers meet their own compliance requirements.
+
+**IAM users** represent individual identities with long-term credentials, groups are collections of users used to simplify permission management, 
+and **IAM roles** provide temporary access to resources without permanent credentials, often used for services or cross-account access. 
+In this lab I will reviewed how each is created and configured within the **IAM service**.
+
 1. I create an IAM group and users.
 2. I attach an AWS managed policy to the group of users.
 3. I grant the "SupportEngineers" group read-only access to Amazon RDS.
