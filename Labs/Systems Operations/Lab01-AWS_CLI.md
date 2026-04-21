@@ -15,7 +15,7 @@ At the end of this lab, the resulting architecture consists of a Virtual Private
 Through an SSH connection, the user accesses this instance and uses the CLI to communicate with IAM services. The diagram below illustrates this architecture, 
 showing the relationship between the local environment, the EC2 instance, and AWS services within the cloud infrastructure.
 
-![AWS CLI Final Architecture](./images/SC-01-architecture.png)
+![AWS CLI Final Architecture](./images/SO-01-architecture.png)
 
 ## Solution
 
@@ -64,13 +64,35 @@ aws-cli/2.34.33 Python/3.14.4 Linux/4.14.355-281.714.amzn2.x86_64 exe/x86_64.amz
 
 To verify that the AWS CLI is now working, I run the `aws help` command. The help command displays the information for the AWS CLI.
 
-3. Observe IAM configuration details in the AWS Management Console
-```bash
-```
+3. I observe IAM configuration details in the AWS Management Console.
+
+Within the IAM dashboard, the *awsstudent* user is selected from the Users section.
+
+![IAM User Record awsstudent](./images/SO-01-awsstudent-user.png)
+
+In the Permissions tab, I click on the *lab_policy* and examine it in JSON format to understand the specific permissions granted to the user.
+
+![IAM USer Lab Policy](./images/SO-01-lab-policy.png)
+
+The *lab_policy* broadly allows the *awsstudent* user to perform most actions across services like EC2, CloudFormation, CloudWatch, IAM (read-only), 
+and SSM, while explicitly denying certain advanced or cost-related EC2 operations such as reserved instances, spot instances, and capacity reservations.
+
+Next, in the Security credentials tab, the access key ID associated with the awsstudent user is located. It is important to note that secret access keys 
+must normally be saved at the time of creation; however, for this lab, both the access key ID and secret access key are provided in the lab instructions.
+
+![IAM User Security Credentials](./images/SO-01-security-credentials.png)
 
 4. Configure the AWS CLI to connect to your AWS Account
 ```bash
+
 ```
+
+5. Observe IAM configuration details by using the AWS CLI
+```bash
+
+```
+
+## Challenge
 
 ## Conclusion
 - I installed and configured the AWS CLI
