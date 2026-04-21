@@ -125,6 +125,8 @@ This method requires no SSH keys or open ports. Indeed, port 22 is not open in t
 Access to Session Manager can be further restricted using AWS Identity and Access Management (IAM) policies, and AWS CloudTrail 
 logs Session Manager usage. These features provide improved security and auditing compared to traditional SSH access.
 
+![App Security Group](TA-01-AppSecurityGroup.png)
+
 ## Results and Discussion
 
 This lab demonstrates the advantages of AWS Systems Manager:
