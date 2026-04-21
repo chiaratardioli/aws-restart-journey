@@ -106,23 +106,24 @@ After deleting the parameter, the feature disappears again.
 
 ## Task 4: Access Instance Using Session Manager
 
-Session Manager is used to securely access the EC2 instance via a browser-based shell.
+**Session Manager**, a capability of Systems Manager, enables management of EC2 instances through an interactive browser-based shell or 
+via the AWS Command Line Interface (AWS CLI). It provides secure and auditable instance access without requiring inbound ports, 
+bastion hosts, or SSH key management. It also supports compliance with organizational policies by enforcing controlled access, 
+strong security practices, and fully auditable logs, while maintaining simple cross-platform access to EC2 instances.
 
-Commands executed include:
-- Listing application files  
-- Retrieving metadata  
-- Describing EC2 instances  
+When Session Manager is used with Microsoft Windows, Session Manager provides access to a PowerShell console on the instance.
 
-This method requires no SSH keys or open ports.
+I use *Session Manager* to securely access the EC2 instance via a browser-based shell.
 
-📸 **Screenshot 9 – Session Manager Start Session**  
-![Session Start](images/session-start.png)
+![Session Start](./images/TA-01-session-start.png)
 
-📸 **Screenshot 10 – Command Execution in Session**  
-![Session Commands](images/session-commands.png)
+A new session tab opens in my browser.
 
-**Outcome:**  
-Secure, auditable access to the instance is achieved without traditional SSH.
+![Session Commands](./images/TA-01-session-commands.png)
+
+This method requires no SSH keys or open ports. Indeed, port 22 is not open in the security group of the instance. 
+Access to Session Manager can be further restricted using AWS Identity and Access Management (IAM) policies, and AWS CloudTrail 
+logs Session Manager usage. These features provide improved security and auditing compared to traditional SSH access.
 
 ## Results and Discussion
 
