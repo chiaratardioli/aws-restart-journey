@@ -111,7 +111,8 @@ Default output format [None]: json
 ```
 
 ## Challenge
-In this challenge I use the AWS CLI Command Reference documentation and AWS CLI to download the lab_policy document in a JSON-formatted IAM policy document. 
+In this challenge I use the [AWS CLI Command Reference documentation](https://docs.aws.amazon.com/cli/latest/reference/iam/) and 
+AWS CLI to download the *lab_policy document* in a JSON-formatted IAM policy document. 
 
 1. I list all IAM customer managed policies by filtering the scope to local.
 ```bash
