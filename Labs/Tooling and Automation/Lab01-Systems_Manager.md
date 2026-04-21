@@ -39,10 +39,6 @@ The collected data is now accessible through the *Inventory tab*, allowing inspe
 **Run Command**, a capability  of Systems Manager, enables secure, remote execution of commands on managed instances such as Amazon EC2 
 without requiring direct login access.
 
-![Run Command Architecture](./images/TA-01-InstallApplication.png)
-
-In the preceding diagram, Systems Manager installs an application on an EC2 instance within a virtual private cloud (VPC). It is installed by using Run Command. Run Command will run the "install script" and install the following: Apache web server, PHP, AWS SDK, and the web application. Once everything is installed, it also starts the web server.
-
 I use the *Run Command* to install a custom application (Widget Manufacturing Dashboard) on the EC2 instance.
 
 This process executes a predefined document that:
@@ -75,6 +71,13 @@ After 1–2 minutes, the Overall status changes to *Success*.
 I verify that the application is running using the instance’s public IP address in a browser.
 
 ![Web App](./images/TA-01-web-app.png)
+
+In the diagram below, the final architecture is illustrated. AWS Systems Manager installs an application on an Amazon EC2 instance 
+within a virtual private cloud (VPC) using Run Command. Run Command executes the installation script, which installs the following 
+components: Apache web server, PHP, AWS SDK, and the web application. Once the installation is complete, the web server is started.
+
+![Run Command Architecture](./images/TA-01-InstallApplication.png)
+
 
 
 ## Task 3: Manage Configuration with Parameter Store
