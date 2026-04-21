@@ -85,16 +85,29 @@ must normally be saved at the time of creation; however, for this lab, both the 
 4. I configure the AWS CLI to connect to my AWS Account:
 ```bash
 [ec2-user@ip-10-200-0-4 ~]$ aws configure
-AWS Access Key ID [None]: XXXXX
-AWS Secret Access Key [None]: XXXXX
+AWS Access Key ID [None]: <AWS Access Key ID>
+AWS Secret Access Key [None]: <AWS Secret Access Key>
 Default region name [None]: us-west-2
 Default output format [None]: json
 [ec2-user@ip-10-200-0-4 ~]$ 
 ```
 
-5. Observe IAM configuration details by using the AWS CLI
+5. I observe IAM configuration details by using the AWS CLI:
 ```bash
+[ec2-user@ip-10-200-0-4 ~]$ aws iam list-users
 
+{
+    "Users": [
+        {
+            "Path": "/",
+            "UserName": "awsstudent",
+            "UserId": "AIDAVD4OE6YMB7S5J65SZ",
+            "Arn": "arn:aws:iam::351948568088:user/awsstudent",
+            "CreateDate": "2026-04-21T08:44:07+00:00"
+        }
+    ]
+}
+[ec2-user@ip-10-200-0-4 ~]$ 
 ```
 
 ## Challenge
@@ -125,4 +138,10 @@ aws --version
 
 # Verify that the AWS CLI is now working - The help command displays the information for the AWS CLI - type q to exit
 aws help
+
+# Confugure AWS CLI
+aws configure
+
+# List IAM users in the account
+aws iam list-users
 ```
