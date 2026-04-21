@@ -82,9 +82,14 @@ must normally be saved at the time of creation; however, for this lab, both the 
 
 ![IAM User Security Credentials](./images/SO-01-security-credentials.png)
 
-4. Configure the AWS CLI to connect to your AWS Account
+4. I configure the AWS CLI to connect to my AWS Account:
 ```bash
-
+[ec2-user@ip-10-200-0-4 ~]$ aws configure
+AWS Access Key ID [None]: XXXXX
+AWS Secret Access Key [None]: XXXXX
+Default region name [None]: us-west-2
+Default output format [None]: json
+[ec2-user@ip-10-200-0-4 ~]$ 
 ```
 
 5. Observe IAM configuration details by using the AWS CLI
