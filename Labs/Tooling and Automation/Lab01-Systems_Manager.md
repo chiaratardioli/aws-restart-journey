@@ -14,7 +14,7 @@ The lab is conducted using the AWS Management Console. A pre-configured environm
 - AWS Systems Manager with required permissions
 
 
-## Task 1: Generate Inventory Lists
+## Task 1: Generate Inventory Lists with Fleet Manager
 
 **Fleet Manager**, a capability of Systems Manager, can be used to collect operating system information, application information, and metadata 
 from EC2 instances, on-premises servers, or virtual machines in a hybrid environment. Fleet Manager can also be used to query metadata to quickly 
@@ -35,6 +35,13 @@ The collected data is now accessible through the *Inventory tab*, allowing inspe
 
 
 ## Task 2: Install Application Using Run Command
+
+**Run Command**, a capability  of Systems Manager, enables secure, remote execution of commands on managed instances such as Amazon EC2 
+without requiring direct login access.
+
+![Run Command Architecture](./images/TA-01-InstallApplication.png)
+
+In the preceding diagram, Systems Manager installs an application on an EC2 instance within a virtual private cloud (VPC). It is installed by using Run Command. Run Command will run the "install script" and install the following: Apache web server, PHP, AWS SDK, and the web application. Once everything is installed, it also starts the web server.
 
 I use the *Run Command* to install a custom application (Widget Manufacturing Dashboard) on the EC2 instance.
 
