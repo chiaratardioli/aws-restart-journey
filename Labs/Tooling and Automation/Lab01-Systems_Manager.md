@@ -5,20 +5,11 @@ AWS Systems Manager is a collection of capabilities used to centralize operation
 
 This lab demonstrates how Systems Manager can be used to manage infrastructure efficiently without requiring direct access (e.g., SSH), improving automation, security, and scalability.
 
-## Objectives
-The objectives of this lab were to:
-- Verify configurations and permissions
-- Run tasks on managed instances
-- Update application settings
-- Access an instance command line securely
-
 ## Environment Setup
 The lab was conducted using the AWS Management Console. A pre-configured environment was provided, including:
 - A Virtual Private Cloud (VPC)
 - A managed EC2 instance
 - AWS Systems Manager with required permissions
-
----
 
 ## Task 1: Generate Inventory Lists
 
@@ -39,8 +30,6 @@ The collected data was accessible through the **Inventory tab**, allowing inspec
 
 **Outcome:**  
 Inventory collection was successfully configured, enabling centralized visibility of instance configurations.
-
----
 
 ## Task 2: Install Application Using Run Command
 
@@ -66,8 +55,6 @@ After execution, the application was accessed via the instance’s public IP add
 **Outcome:**  
 The application was successfully installed and deployed without direct instance access.
 
----
-
 ## Task 3: Manage Configuration with Parameter Store
 
 Parameter Store was used to manage application configuration.
@@ -92,8 +79,6 @@ The application dynamically read this parameter and enabled additional features 
 **Outcome:**  
 Application behavior was successfully modified without redeployment.
 
----
-
 ## Task 4: Access Instance Using Session Manager
 
 Session Manager was used to securely access the EC2 instance via a browser-based shell.
@@ -114,8 +99,6 @@ This method required no SSH keys or open ports.
 **Outcome:**  
 Secure, auditable access to the instance was achieved without traditional SSH.
 
----
-
 ## Results and Discussion
 
 This lab demonstrated the advantages of AWS Systems Manager:
@@ -124,8 +107,6 @@ This lab demonstrated the advantages of AWS Systems Manager:
 - Improved security and auditing  
 - Automation of operational tasks  
 - Dynamic configuration management  
-
----
 
 ## Conclusion
 
