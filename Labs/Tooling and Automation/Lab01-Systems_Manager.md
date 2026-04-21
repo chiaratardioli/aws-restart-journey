@@ -1,7 +1,6 @@
 # AWS Systems Manager Lab Report
 
-## Introduction
-AWS Systems Manager is a collection of capabilities used to centralize operational data and automate tasks across Amazon Web Services (AWS) resources. 
+**AWS Systems Manager** is a collection of capabilities used to centralize operational data and automate tasks across Amazon Web Services (AWS) resources. 
 It enables the configuration and management of Amazon EC2 instances, on-premises servers, virtual machines, and other resources at scale.  
 
 This lab demonstrates how Systems Manager is used to manage infrastructure efficiently without requiring direct access (e.g., SSH), improving automation, 
@@ -16,6 +15,10 @@ The lab is conducted using the AWS Management Console. A pre-configured environm
 
 
 ## Task 1: Generate Inventory Lists
+
+**Fleet Manager**, a capability of Systems Manager, can be used to collect operating system information, application information, and metadata 
+from EC2 instances, on-premises servers, or virtual machines in a hybrid environment. Fleet Manager can also be used to query metadata to quickly 
+understand which instances are running the software and configurations that the software policy requires and which instances need to be updated.
 
 I use *Fleet Manager* to collect inventory data from the managed EC2 instance.
 
@@ -69,27 +72,27 @@ I verify that the application is running using the instance’s public IP addres
 
 ## Task 3: Manage Configuration with Parameter Store
 
-Parameter Store is used to manage application configuration.
+**Parameter Store**, a capability of Systems Manager, provides secure, hierarchical storage for configuration data and secrets management. It allows 
+storage of data such as passwords, database connection strings, and license codes as parameter values, either in plain text or encrypted form.
+These values can then be referenced using the unique names defined at the time of parameter creation.
 
-A parameter is created:
-- **Name:** `/dashboard/show-beta-features`  
-- **Value:** `True`  
+I use *Parameter Store* to store a parameter that it is used to activate a feature in an application.
+
+I create a parameter:
+- Name: `/dashboard/show-beta-features`
+- Description: `Display beta features`
+- Tier: `Standard`
+- Type: `String`
+- Value: `True`
+
+![Parameter Store](./images/TA-01-parameter-store.png)
 
 The application dynamically reads this parameter and enables additional features (a third chart).
 
-📸 **Screenshot 6 – Parameter Creation**  
-![Parameter Store](images/parameter-store.png)
+![Beta Feature](./images/TA-01-beta-feature.png)
 
-📸 **Screenshot 7 – Application with Beta Feature Enabled**  
-![Beta Feature](images/beta-feature.png)
+After deleting the parameter, the feature disappears again.
 
-(Optional) After deleting the parameter, the feature disappears.
-
-📸 **Screenshot 8 – Application Without Beta Feature**  
-![No Beta](images/no-beta.png)
-
-**Outcome:**  
-Application behavior is successfully modified without redeployment.
 
 ## Task 4: Access Instance Using Session Manager
 
