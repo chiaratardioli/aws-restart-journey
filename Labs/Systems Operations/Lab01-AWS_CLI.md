@@ -111,11 +111,61 @@ Default output format [None]: json
 ```
 
 ## Challenge
+In this challenge I use the AWS CLI Command Reference documentation and AWS CLI to download the lab_policy document in a JSON-formatted IAM policy document. 
+
+1. I list all IAM customer managed policies by filtering the scope to local.
+```bash
+[ec2-user@ip-10-200-0-4 ~]$ aws iam list-policies --scope Local
+{
+    "Policies": [
+        {
+            "PolicyName": "lab_policy",
+            "PolicyId": "ANPAVD4OE6YMFF3KNO7DW",
+            "Arn": "arn:aws:iam::351948568088:policy/lab_policy",
+            "Path": "/",
+            "DefaultVersionId": "v1",
+            "AttachmentCount": 1,
+            "PermissionsBoundaryUsageCount": 0,
+            "IsAttachable": true,
+            "CreateDate": "2026-04-21T08:44:45+00:00",
+            "UpdateDate": "2026-04-21T08:44:45+00:00"
+        }
+    ]
+}
+```
+
+2. I use the version number *Arn* information and *DefaultVersionId* found inside the lab_policy document to retrieve the JSON IAM policy. 
+I use the > command to save the file.
+
+```bash
+[ec2-user@ip-10-200-0-4 ~]$ aws iam get-policy-version --policy-arn arn:aws:iam::351948568088:policy/lab_policy --version-id v1 > lab_policy.json
+[ec2-user@ip-10-200-0-4 ~]$ ls -ltr
+total 68236
+drwxr-xr-x 3 ec2-user ec2-user       78 Apr 20 18:21 aws
+-rw-rw-r-- 1 ec2-user ec2-user 69864275 Apr 21 09:11 awscliv2.zip
+-rw-rw-r-- 1 ec2-user ec2-user     5035 Apr 21 10:11 lab_policy.json
+[ec2-user@ip-10-200-0-4 ~]$ head -n 10 lab_policy.json 
+{
+    "PolicyVersion": {
+        "Document": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Action": [
+                        "cloudformation:List*",
+                        "cloudformation:Describe*",
+                        "cloudformation:Detect*",
+```
+
+I note that the file *lab_policy.json* is the same document that is in the AWS Management Console.
 
 ## Conclusion
 - I installed and configured the AWS CLI
 - I connected the AWS CLI to an AWS account
 - I accessed IAM by using the AWS CLI
+- I used the AWS CLI to retrieve policy information by referencing AWS documentation.
+- I can use the AWS CLI to manage and control multiple AWS services through the command line. I can also accomplish these tasks by using the AWS Management Console.
+- To connect to the same AWS account, the AWS CLI needed an access key ID and secret access key. To sign in to the AWS Management Console, I need a user name and password.
 
 ## Additional resources
 - [IAM AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/iam/index.html)
@@ -144,4 +194,12 @@ aws configure
 
 # List IAM users in the account
 aws iam list-users
+
+# Set the scope to local
+aws iam list-policies --scope Local
+
+# Returns the policy document for the v1 version of the policy whose ARN is arn:aws:iam::351948568088:policy/lab_policy
+aws iam get-policy-version \
+    --policy-arn arn:aws:iam::351948568088:policy/lab_policy \
+    --version-id v1
 ```
