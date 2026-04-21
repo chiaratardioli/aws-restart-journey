@@ -17,7 +17,7 @@ showing the relationship between the local environment, the EC2 instance, and AW
 
 ![AWS CLI Final Architecture](./images/SO-01-architecture.png)
 
-## Solution
+## Steps
 
 1. I connect to the Red Hat EC2 instance by using SSH.
 ```bash
