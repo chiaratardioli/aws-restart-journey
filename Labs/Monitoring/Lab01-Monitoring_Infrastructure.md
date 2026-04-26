@@ -18,6 +18,8 @@ After successful installation, I created a configuration file in Parameter Store
 * Collection of Apache access and error logs
 * Monitoring of CPU, memory, disk, and swap metrics
 
+![Task 1 - CloudWatch Agent Installation](./images/MN-01-parameter-store.png)
+
 I then executed another Run Command using the `AmazonCloudWatch-ManageAgent` document to start the agent with the stored configuration.
 
 This step ensured that both logs and system-level metrics were continuously sent to CloudWatch.
