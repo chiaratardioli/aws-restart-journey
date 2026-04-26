@@ -1,7 +1,5 @@
 # Monitoring Infrastructure Lab Report
 
-## Introduction
-
 Monitoring is a fundamental component of modern cloud infrastructure, enabling visibility into system performance, application behavior, 
 and compliance status. In this lab, I explored core AWS monitoring services including Amazon CloudWatch and AWS Config. The objective was 
 to understand how to collect system and application data, analyze logs and metrics, generate alerts, and enforce infrastructure compliance.
@@ -10,9 +8,7 @@ The lab focused on integrating multiple AWS tools such as AWS Systems Manager, C
 build a centralized monitoring solution. Through practical tasks, I gained insight into real-time monitoring, automation, and governance 
 within a cloud environment.
 
-## Solution
-
-### Task 1: Installing the CloudWatch Agent
+## Task 1: Installing the CloudWatch Agent
 
 In this task, I used AWS Systems Manager Run Command to install the CloudWatch agent on an EC2 instance. I selected the `AWS-ConfigureAWSPackage` 
 document and configured it to install the **AmazonCloudWatchAgent** package.
@@ -29,7 +25,7 @@ This step ensured that both logs and system-level metrics were continuously sent
 ![Task 1 - CloudWatch Agent Installation](./images/MN-01-cloudwatch-agent-status.png)
 
 
-### Task 2: Monitoring Application Logs using CloudWatch Logs
+## Task 2: Monitoring Application Logs using CloudWatch Logs
 
 I accessed the web server and intentionally generated errors by requesting non-existent pages. These actions created log entries that were 
 automatically forwarded to CloudWatch Logs.
@@ -51,7 +47,7 @@ This demonstrated how log-based monitoring can trigger real-time alerts.
 ![Task 2 - CloudWatch Logs and Alarm](./images/MN-01-cloudwatch-alarm.png)
 
 
-### Task 3: Monitoring Instance Metrics using CloudWatch
+## Task 3: Monitoring Instance Metrics using CloudWatch
 
 I explored system metrics available through both default CloudWatch monitoring and the CloudWatch agent.
 
@@ -76,7 +72,7 @@ This provided deeper visibility into the internal state of the instance, which i
 ![Task 3 - CloudWatch Metrics](./images/MN-01-CWAgent-metrics.png)
 
 
-### Task 4: Creating Real-Time Notifications
+## Task 4: Creating Real-Time Notifications
 
 I created a rule in CloudWatch Events to monitor EC2 instance state changes. The rule was configured to trigger when an instance entered 
 the **stopped** or **terminated** state.
@@ -96,7 +92,7 @@ This task showed how infrastructure events can be captured and acted upon instan
 ![Task 4 - CloudWatch Email Notification Received](./images/MN-01-cloudwatch-email.png)
 
 
-### Task 5: Monitoring Infrastructure Compliance using AWS Config
+## Task 5: Monitoring Infrastructure Compliance using AWS Config
 
 I enabled AWS Config Rules and added two managed rules:
 
