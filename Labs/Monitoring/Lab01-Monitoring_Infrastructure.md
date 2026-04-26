@@ -32,10 +32,13 @@ This step ensured that both logs and system-level metrics were continuously sent
 I accessed the web server and intentionally generated errors by requesting non-existent pages. These actions created log entries that were 
 automatically forwarded to CloudWatch Logs.
 
-Inside the **HttpAccessLog** log group, I verified that the logs contained HTTP requests, including 404 errors. I then created a metric filter 
-to detect entries with status code 404 using a defined filter pattern.
+Inside the **HttpAccessLog** log group, I verified that the logs contained HTTP requests, including 404 errors. 
 
-![Task 2 - CloudWatch Log Filter](./images/MN-01-cloudwatch-log-filter.png)
+![Task 2 - Http Access Logs](./images/MN-01-HttpAccessLog.png)
+
+I then created a metric filter to detect entries with status code 404 using a defined filter pattern.
+
+![Task 2 - CloudWatch Log Filter](./images/MN-01-cloudwatch-metric-filter.png)
 
 Next, I configured an alarm based on this metric:
 
