@@ -81,10 +81,10 @@ These metrics provide insights into resource utilization and service performance
 
 ## Task 4: Creating Real-Time Notifications
 
-I created a rule in CloudWatch Events to monitor EC2 instance state changes. The rule was configured to trigger when an instance entered 
-the **stopped** or **terminated** state.
+I created a rule in Amazon EventBridge (the old CloudWatch Events section is now part of Amazon EventBridge) to monitor EC2 instance state changes. 
+The rule was configured to trigger when an instance entered the **stopped** or **terminated** state.
 
-![Task 4 - CloudWatch Events rule configurationn](./images/MN-01-cloudwatch-event-rule.png)
+![Task 4 - EC2 Rule Monitoring](./images/MN-01-ec2-rule-monitoring.png)
 
 The rule used an SNS topic as a target to send email notifications.
 
@@ -92,11 +92,7 @@ To test the setup, I stopped the EC2 instance. Shortly after, I received a notif
 
 This task showed how infrastructure events can be captured and acted upon instantly.
 
-**Screenshot Placeholder:**
-`[Insert screenshot of CloudWatch Events rule configuration]`
-`[Insert screenshot of notification email received]`
-
-![Task 4 - CloudWatch Email Notification Received](./images/MN-01-cloudwatch-email.png)
+![Task 4 - Email Notification Instance Stopped](./images/MN-01-email-instance-stopped.png)
 
 
 ## Task 5: Monitoring Infrastructure Compliance using AWS Config
