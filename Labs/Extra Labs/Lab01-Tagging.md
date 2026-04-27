@@ -266,7 +266,7 @@ The script identified two instances and stopped them.
 
 I verified the status in the AWS EC2 console:
 
-[Verify Stopping Instances](./images/EX-01-instances-stopping.png)
+![Verify Stopping Instances](./images/EX-01-instances-stopping.png)
 
 Next, I restarted them using:
 ```bash
@@ -284,7 +284,7 @@ PHP Notice:  Array to string conversion in /home/ec2-user/aws-tools/stopinator.p
 
 I confirmed that both instances returned to running state.
 
-[Verify Running Instances](./images/EX-01-instances-restarting.png)
+![Verify Running Instances](./images/EX-01-instances-restarting.png)
 
 ## Task 3: Challenge – Terminate Non-Compliant Instances
 
@@ -322,7 +322,7 @@ Instances terminated.
 
 The script detected non-compliant instances and terminated them automatically.
 
-[Terminate Non-Compliant Instances](./images/EX-01-terminated-instances.png)
+![Terminate Non-Compliant Instances](./images/EX-01-terminated-instances.png)
 
 ## Conclusion
 
