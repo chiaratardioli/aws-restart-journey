@@ -5,6 +5,18 @@ Tagging enables automation of operational tasks such as filtering, updating, sto
 based on metadata rather than manual selection. The lab demonstrates practical use of AWS CLI commands and scripts to manage 
 instances in a structured environment using tags like Project, Environment, and Version.
 
+The environment for this lab (diagram below) consists of:
+- Amazon VPC named Lab VPC
+- Public subnet
+- Private subnet
+- Amazon EC2 Linux instance named CommandHost [AWS Command Line Interface (CLI) tools have been pre-installed and configured for you on this instance]
+- 8 Amazon EC2 Linux instances
+- Private instances have three custom tags applied to them:
+	- Project.	The project that the instance belongs to. The instances in this lab belong to one of two projects: ERPSystem and Experiment1.
+	- Version.	The version of the project that this instance belongs to. All Version tags are currently set to 1.0.
+	- Environment.	One of three values: development, staging, or production.
+
+![Resources with Tagging Architecture](./images/EX-01-architecture.png)
 
 ## Task 1: Inspecting and Updating Tags Using AWS CLI
 
