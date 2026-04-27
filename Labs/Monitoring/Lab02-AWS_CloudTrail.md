@@ -33,7 +33,7 @@ I created a new CloudTrail trail named **monitor**, configured to store logs in 
 
 Shortly after enabling logging, I noticed that the Café website had been modified unexpectedly.
 
-![Café Website Hacked](./images/MN-02-cafe-website-hacked.png)
+![Café Website Hacked](./images/MN-02-website-hacked.png)
 
 Upon reviewing the EC2 security group, I discovered an additional inbound rule allowing SSH access from anywhere (0.0.0.0/0), which indicated a 
 security breach.
