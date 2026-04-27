@@ -11,7 +11,7 @@ including Linux commands, AWS CLI, and Amazon Athena.
 
 The architectural diagram illustrates the setup that this activity uses.
 
-![AWS CloudTrail Architecture](./images/MN-01-architecture.png)
+![AWS CloudTrail Architecture](./images/MN-02-architecture.png)
 
 ## Task 1: Observing the System and Modifying Security Group
 In this task, I accessed the EC2 instance running the Café Web Server and reviewed its security group configuration. Initially, only HTTP (port 80) access was allowed. 
