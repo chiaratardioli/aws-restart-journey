@@ -14,7 +14,21 @@ I began by accessing the CommandHost instance where AWS CLI was preconfigured. M
 I ran the following command:
 
 ```bash
-aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem"
+[ec2-user@ip-10-5-0-10 ~]$ aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" "Name=tag:Environment,Values=development"
+{
+    "Reservations": [
+        {
+            "Instances": [
+                {
+                    "Monitoring": {
+                        "State": "disabled"
+                    }, 
+                    "PublicDnsName": "", 
+                    "State": {
+                        "Code": 16, 
+                        "Name": "running"
+                    }, 
+...
 ````
 
 This returned all instances linked to the ERPSystem project. However, the output was too detailed, so I refined it using JMESPath queries.
@@ -22,28 +36,76 @@ This returned all instances linked to the ERPSystem project. However, the output
 To extract only instance IDs, I used:
 
 ```bash
-aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].InstanceId'
+[ec2-user@ip-10-5-0-10 ~]$ aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].InstanceId'
+[
+    [
+        "i-09366303dec829e55"
+    ], 
+...
+]
 ```
 
 To improve readability, I included both Instance ID and Availability Zone:
 
 ```bash
-aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone}'
+[ec2-user@ip-10-5-0-10 ~]$ aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone}'
+
+[
+    [
+        {
+            "AZ": "us-west-2a", 
+            "ID": "i-09366303dec829e55"
+        }
+    ], 
+...
+]
 ```
 
 I then extended the query to include custom tags (Project, Environment, Version):
 
 ```bash
-aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
+[ec2-user@ip-10-5-0-10 ~]$ aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
+
+[
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "development", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-09366303dec829e55"
+        }
+    ], 
+...
+]
 ```
 
 To focus only on development instances, I applied an additional filter:
-
 ```bash
-aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" "Name=tag:Environment,Values=development"
+[ec2-user@ip-10-5-0-10 ~]$ aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" "Name=tag:Environment,Values=development" --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
+[
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "development", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-09366303dec829e55"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "development", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-0e32eaa4ef44f1d90"
+        }
+    ]
+]
 ```
 
-This confirmed only development instances were selected.
+Only two instances were returned by this command, both with a Project tag value of ERPSystem and an Environment tag value of development.
 
 ### Updating the Version Tag
 
