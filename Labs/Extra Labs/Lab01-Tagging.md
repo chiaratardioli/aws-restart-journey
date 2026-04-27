@@ -109,17 +109,20 @@ Only two instances were returned by this command, both with a Project tag value 
 
 ### Updating the Version Tag
 
-I edited the provided script:
-
+I used the bash script `change-resource-tags.sh` to automatically change all of the Version tags on the instances marked as development for the project ERPSystem.
 ```bash
-nano change-resource-tags.sh
-```
-
-The script identified development instances and updated their Version tag from `1.0` to `1.1` using:
-
-```bash
+GNU nano 2.9.8      change-resource-tags.sh                                                                                 
+#!/bin/bash
+ids=$(aws ec2 describe-instances \
+    --filter "Name=tag:Project,Values=ERPSystem" "Name=tag:Environment,Values=development" \
+    --query 'Reservations[*].Instances[*].InstanceId' \
+    --output text)
 aws ec2 create-tags --resources $ids --tags 'Key=Version,Value=1.1'
 ```
+The script identified development instances and updated their Version tag from `1.0` to `1.1` using:
+I also noticed how the first command uses the **--output text** option to manipulate the return results as text instead of as JSON, 
+making it easier to manipulate the return result and pass it to other commands.
+
 
 I executed the script:
 
@@ -128,8 +131,74 @@ I executed the script:
 ```
 
 Finally, I verified the update using the same describe-instances command and confirmed that only development instances had their version updated.
-
-[Text](./images/EX-01-version-update-verification.png)
+```bash
+[ec2-user@ip-10-5-0-10 ~]$ aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].{ID:InstanceId, AZ:Placement.AvailabilityZone, Project:Tags[?Key==`Project`] |[0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
+[
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "development", 
+            "AZ": "us-west-2a", 
+            "Version": "1.1", 
+            "ID": "i-09366303dec829e55"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "production", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-05d82f1c9c6feeb5a"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "staging", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-01448dbd69be4c345"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "staging", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-0f5e12ce8fcbd3f4e"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "development", 
+            "AZ": "us-west-2a", 
+            "Version": "1.1", 
+            "ID": "i-0e32eaa4ef44f1d90"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "production", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-002c913e4c71a615e"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "staging", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-0585b3c2b608568ca"
+        }
+    ]
+]
+```
 
 ## Task 2: Stopping and Starting Instances by Tag
 
