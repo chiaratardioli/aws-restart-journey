@@ -186,7 +186,7 @@ I used the AWS Pricing Calculator to estimate the monthly cost of the infrastruc
 
 [Calculator before optimization](./images/EX-02-calculator-before.png)
 
-**Estimated Monthly Cost (Before Optimization): $35.60**
+**Estimated Monthly Cost (Before Optimization): $74.04**
 
 2. Costs After Optimization
 
@@ -198,19 +198,31 @@ I updated the estimate to reflect the optimized setup:
 
 [Calculator after optimization](./images/EX-02-calculator-after.png)
 
-**Estimated Monthly Cost (After Optimization): $25.18**
+**Estimated Monthly Cost (After Optimization): $64.45**
 
 
 3. Cost Savings Calculation
 
 I compared the two estimates:
 
-- Before Optimization: $35.60  
-- After Optimization: $25.18  
+```
+Before optimization monthly costs:
+    - Amazon EC2 service         $19.18 
+    - Amazon RDS service         $54.86
+                                --------
+    Total                        $74.04
 
-**Projected Monthly Savings: $10.42**
+After optimization monthly costs:
+    - Amazon EC2 service          $9.59  
+    - Amazon RDS service         $54.86
+                                --------
+    Total                        $64.45
 
-[Cost comparison](./images/EX-02-cost-comparison.png)
+
+Overall monthly cost savings      $9.59
+```
+
+By removing the decommissioned local database and downsizing the Café instance type, the project will save about $10 per month in AWS service costs.
 
 
 ## Conclusion
