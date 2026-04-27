@@ -8,7 +8,7 @@ cost-effective type. Additionally, the AWS Pricing Calculator was used to estima
 
 This diagram illustrates the topology of the Café web application runtime environment before and after the optimization.
 
-[Café Web Application Architecture](./images/EX-02-architecture.png)
+![Café Web Application Architecture](./images/EX-02-architecture.png)
 
 
 ## Task 1: Optimize the Website to Reduce Costs
@@ -171,7 +171,7 @@ Since I restarted the instance, Amazon EC2 assigned a different Public DNS name 
 
 I accessed the Café website via the browser `http://ec2-34-218-51-103.us-west-2.compute.amazonaws.com/cafe` to confirm it was functioning correctly after the changes.
 
-[Downsized CafeInstance website](./images/EX-02-website-downsized.png)
+![Downsized CafeInstance website](./images/EX-02-website-downsized.png)
 
 
 ## Task 2: Estimate AWS Service Costs
@@ -184,7 +184,7 @@ I used the AWS Pricing Calculator to estimate the monthly cost of the infrastruc
 - EBS storage: 40 GB
 - RDS instance: db.t3.micro (20 GB storage)
 
-[Calculator before optimization](./images/EX-02-calculator-before.png)
+![Calculator before optimization](./images/EX-02-calculator-before.png)
 
 **Estimated Monthly Cost (Before Optimization): $74.04**
 
@@ -196,7 +196,7 @@ I updated the estimate to reflect the optimized setup:
 - EBS storage: 20 GB
 - RDS unchanged
 
-[Calculator after optimization](./images/EX-02-calculator-after.png)
+![Calculator after optimization](./images/EX-02-calculator-after.png)
 
 **Estimated Monthly Cost (After Optimization): $64.45**
 
