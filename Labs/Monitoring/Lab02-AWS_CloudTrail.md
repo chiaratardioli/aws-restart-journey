@@ -155,18 +155,12 @@ aws cloudtrail lookup-events \
 --region $region --output text | grep $sgId
 ```
 
-From the output, I identified a suspicious event:
-- Event Name: `AuthorizeSecurityGroupIngress`
-- User: `chaos`
-- Source IP: `34.216.153.22`
-- Action: Opened port 22 (SSH) to 0.0.0.0/0
-- Method: AWS CLI (based on user agent)
-
-This confirmed that the IAM user chaos was responsible for modifying the security group and introducing the security vulnerability.
-
-
 ## Task 4: Querying CloudTrail Logs Using Amazon Athena
 To simplify log analysis, I created an Athena table based on CloudTrail logs stored in S3. This allowed structured querying using SQL.
+
+![Athena Table Creation](./images/MN-02-athena-table-creation.png)
+
+The table is created with a default name that includes the name of the S3 bucket.
 
 I ran queries to extract key fields such as:
 - useridentity.userName  
@@ -175,20 +169,21 @@ I ran queries to extract key fields such as:
 - eventname  
 - requestparameters  
 
-Using Athena, I was able to filter security-related events and identify the user responsible for modifying the security group.
-
-![Athena Table Creation](./images/MN-02-athena-table-creation.png)  
 ![Athena Query Results](./images/MN-02-athena-query-results.png)
 
 
 ### Challenge: Identifying the Hacker
 By combining results from CloudTrail logs, AWS CLI, and Athena queries, I identified:
-- The IAM user responsible for the security group modification
-- The timestamp of the malicious activity
-- The source IP address used for access
-- The method of access (programmatic or console)
+- The Event Name: `AuthorizeSecurityGroupIngress`
+- The IAM user responsible for the security group modification: `chaos`
+- The timestamp of the malicious activity: `2026-04-27T08:05:00Z`
+- The source IP address used for access: `34.216.153.22`
+- Action: Opened port 22 (SSH) to 0.0.0.0/0
+- The method of access (programmatic or console): AWS CLI (based on user agent)
 
-This confirmed the root cause of the security breach.
+This confirmed that the IAM user chaos was responsible for modifying the security group and introducing the security vulnerability.
+
+![Challenge: Chaos is the Hacker](./images/MN-02-chaos-hacker.png)
 
 
 ## Task 5: Securing the Environment and Recovering the System
@@ -196,14 +191,56 @@ This confirmed the root cause of the security breach.
 1. Removing Unauthorized OS Access
 
 I detected an unauthorized OS user (`chaos-user`) on the EC2 instance. I terminated their session and removed the account from the system.
+```bash
+[ec2-user@web-server ~]$ sudo aureport --auth
 
-![Unauthorized User Detection](./images/MN-02-unauthorized-user.png)
-
+Authentication Report
+============================================
+# date time acct host term exe success event
+============================================
+1. 27/04/26 08:05:08 chaos-user ec2-16-148-102-148.us-west-2.compute.amazonaws.com ssh /usr/sbin/sshd yes 135
+2. 27/04/26 08:05:08 chaos-user 16.148.102.148 ssh /usr/sbin/sshd yes 138
+3. 27/04/26 08:12:27 ec2-user 193.5.232.113 ? /usr/sbin/sshd yes 161
+4. 27/04/26 08:12:27 ec2-user 193.5.232.113 ? /usr/sbin/sshd yes 162
+5. 27/04/26 08:12:27 ec2-user 193.5.232.113 ssh /usr/sbin/sshd yes 165
+6. 27/04/26 08:32:59 ec2-user 193.5.232.113 ? /usr/sbin/sshd yes 195
+7. 27/04/26 08:32:59 ec2-user 193.5.232.113 ? /usr/sbin/sshd yes 196
+8. 27/04/26 08:32:59 ec2-user 193.5.232.113 ssh /usr/sbin/sshd yes 199
+9. 27/04/26 09:18:57 ec2-user 193.5.232.113 ? /usr/sbin/sshd yes 250
+10. 27/04/26 09:18:57 ec2-user 193.5.232.113 ? /usr/sbin/sshd yes 251
+11. 27/04/26 09:18:57 ec2-user 193.5.232.113 ssh /usr/sbin/sshd yes 254
+[ec2-user@web-server ~]$ who
+chaos-user pts/0        2026-04-27 08:05 (ec2-16-148-102-148.us-west-2.compute.amazonaws.com)
+ec2-user pts/1        2026-04-27 08:12 (193.5.232.113)
+ec2-user pts/2        2026-04-27 08:33 (193.5.232.113)
+ec2-user pts/3        2026-04-27 09:18 (193.5.232.113)
+[ec2-user@web-server ~]$ sudo userdel -r chaos-user
+userdel: user chaos-user is currently used by process 3981
+[ec2-user@web-server ~]$ sudo kill -9 3981
+[ec2-user@web-server ~]$ who
+ec2-user pts/1        2026-04-27 08:12 (193.5.232.113)
+ec2-user pts/2        2026-04-27 08:33 (193.5.232.113)
+ec2-user pts/3        2026-04-27 09:18 (193.5.232.113)
+[ec2-user@web-server ~]$ sudo userdel -r chaos-user
+[ec2-user@web-server ~]$ sudo cat /etc/passwd | grep -v nologin
+root:x:0:0:root:/root:/bin/bash
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+ec2-user:x:1000:1000:EC2 Default User:/home/ec2-user:/bin/bash
+```
 
 2. Fixing SSH Security Configuration
 
-I reviewed the SSH configuration file and found that password authentication was enabled. I disabled password authentication and ensured only key-based 
-authentication was allowed. I then restarted the SSH service.
+I reviewed the SSH configuration file and found that password authentication was enabled. I disabled password authentication (line 61) and ensured only key-based 
+authentication was allowed. I then restarted the SSH service. I also delete the inbound rule that allows port 22 access from 0.0.0.0/0 (the one the hacker created).
+```bash
+[ec2-user@web-server ~]$ sudo ls -l /etc/ssh/sshd_config
+-rw------- 1 root root 3957 Apr 27 07:51 /etc/ssh/sshd_config
+[ec2-user@web-server ~]$ sudo vi /etc/ssh/sshd_config
+[ec2-user@web-server ~]$ sudo service sshd restart
+Redirecting to /bin/systemctl restart sshd.service
+```
 
 ![SSH Configuration Fix](./images/MN-02-ssh-security-fix.png)
 
