@@ -18,12 +18,41 @@ In this task, I connected to the Café EC2 instance and the CLI Host using SSH t
 1. Connect to the Café Instance
 
 I established an SSH connection to the Café EC2 instance using the provided key pair and public IP address.
+```bash
+chiara@macbook-air:~/labs$ chmod 700 labsuser.pem 
+chiara@macbook-air:~/labs$ ssh -i labsuser.pem ec2-user@54.187.214.67
+The authenticity of host '54.187.214.67 (54.187.214.67)' can't be established.
+ED25519 key fingerprint is SHA256:23V/ayGOAzx/J5xKE3OXTiBGotGFmNuQAopJaK7nqZE.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '54.187.214.67' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2026-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
 
-[SSH connection to CafeInstance](./images/MN-01-ssh-cafeinstance.png)
+[ec2-user@cli-host ~]$
+```
 
 I also configured the AWS CLI by setting the access key, secret key, region, and default output format.
-
-[AWS CLI configuration](./images/MN-01-aws-cli-config.png)
+```bash
+[ec2-user@cli-host ~]$ curl http://169.254.169.254/latest/dynamic/instance-identity/document | grep region
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   476  100   476    0     0   320k      0 --:--:-- --:--:-- --:--:--  464k
+  "region" : "us-west-2",
+[ec2-user@cli-host ~]$ aws configure
+AWS Access Key ID [None]: <Access Key>
+AWS Secret Access Key [None]: <Secret Access Key>
+Default region name [None]: us-west-2
+Default output format [None]: json
+```
 
 2. Connect to the CLI Host
 
