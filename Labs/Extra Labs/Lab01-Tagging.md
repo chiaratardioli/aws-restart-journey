@@ -202,41 +202,77 @@ Finally, I verified the update using the same describe-instances command and con
 
 ## Task 2: Stopping and Starting Instances by Tag
 
-I navigated to the tools directory:
-
+I navigated to the tools directory `aws-tools` and review the file `stopinator.php`:
 ```bash
-cd aws-tools
-```
+ GNU nano 2.9.8              stopinator.php                                                                                     
 
-I inspected the script:
+#!/usr/bin/php
+<?php
+# A simple PHP script to start all Amazon EC2 instances and Amazon RDS
+# databases within all regions.
+#
+# USAGE: stopinator.php [-t stop-tags] [-nt exclude-tags]
+#
+# If no arguments are supplied, stopinator stops every Amazon EC2 and 
+# Amazon RDS instance running in an account. 
+#
+# -t stop-tag: The tags to inspect to determine if a resource should be 
+# shut down. Format must follow the same format used by the AWS CLI.
+#
+# -e exclude-id: The instance ID of an Amazon EC2 instance NOT to terminate. Useful
+# when running the stopinator from an Amazon EC2 instance. 
+#
+# -p profile-name: The name of the AWS configuration section to use for 
+# credentials. Configuration sections are defines in your .aws/credentials file. 
+# If not supplied, will use the default profile. 
+#
+# -s start: If present, starts instead of stops instances.
+# PREREQUISITES
+# This app assumes that you have defined an .aws/credentials file. 
 
-```bash
-nano stopinator.php
+require 'vendor/autoload.php';
+use Aws\Ec2\Ec2Client;
+
+...
 ```
 
 The script uses AWS SDK for PHP to stop or start instances based on tag filters.
 
 To stop development instances:
-
 ```bash
-./stopinator.php -t"Project=ERPSystem;Environment=development"
+[ec2-user@ip-10-5-0-10 aws-tools]$ ./stopinator.php -t"Project=ERPSystem;Environment=development"
+...
+Region is us-west-1
+	No instances to stop in Array.
+Region is us-west-2
+	Identified instance i-09366303dec829e55
+	Identified instance i-0e32eaa4ef44f1d90
+	Stopping identified instances in Array...
 ```
 
 The script identified two instances and stopped them.
 
 I verified the status in the AWS EC2 console:
 
-[Text](./images/EX-01-instances-stopping.png)
+[Verify Stopping Instances](./images/EX-01-instances-stopping.png)
 
 Next, I restarted them using:
-
 ```bash
-./stopinator.php -t"Project=ERPSystem;Environment=development" -s
+[ec2-user@ip-10-5-0-10 aws-tools]$ ./stopinator.php -t"Project=ERPSystem;Environment=development" -s
+...
+Region is us-west-1
+	No instances to start in Array
+Region is us-west-2
+	Identified instance i-09366303dec829e55
+	Identified instance i-0e32eaa4ef44f1d90
+PHP Notice:  Array to string conversion in /home/ec2-user/aws-tools/stopinator.php on line 105
+
+	Starting identified instances in Array...
 ```
 
 I confirmed that both instances returned to running state.
 
-[Text](./images/EX-01-instances-restarting.png)
+[Verify Running Instances](./images/EX-01-instances-restarting.png)
 
 ## Task 3: Challenge – Terminate Non-Compliant Instances
 
