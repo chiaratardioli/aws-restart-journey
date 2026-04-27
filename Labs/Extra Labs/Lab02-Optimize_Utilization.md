@@ -88,61 +88,90 @@ Default output format [None]: json
 I stopped and removed the local MariaDB database from the Café instance using the following commands:
 
 ```bash
-sudo systemctl stop mariadb
-sudo yum -y remove mariadb-server
+[ec2-user@web-server ~]$ sudo systemctl stop mariadb
+[ec2-user@web-server ~]$ sudo yum -y remove mariadb-server
+...
+Complete!
 ```
-
-[MariaDB removal output](./images/MN-01-remove-mariadb.png)
 
 Then, from the CLI Host, I identified the instance ID of the Café instance:
-
 ```bash
-aws ec2 describe-instances 
---filters "Name=tag:Name,Values= CafeInstance" 
---query "Reservations[*].Instances[*].InstanceId"
+[ec2-user@cli-host ~]$ sudo systemctl stop mariadb
+Failed to stop mariadb.service: Unit mariadb.service not loaded.
+[ec2-user@cli-host ~]$ aws ec2 describe-instances \
+> --filters "Name=tag:Name,Values= CafeInstance" \
+> --query "Reservations[*].Instances[*].InstanceId"
+[
+    [
+        "i-0a9db3d4926777d74"
+    ]
+]
 ```
 
-[Describe instances output](./images/MN-01-describe-instance.png)
-
-After obtaining the instance ID, I stopped the instance:
-
+After obtaining the instance ID, I stopped the instance and modified the instance type to `t3.micro`:
 ```bash
-aws ec2 stop-instances --instance-ids <instance-id>
+[ec2-user@cli-host ~]$ aws ec2 stop-instances --instance-ids i-0a9db3d4926777d74
+{
+    "StoppingInstances": [
+        {
+            "InstanceId": "i-0a9db3d4926777d74", 
+            "CurrentState": {
+                "Code": 64, 
+                "Name": "stopping"
+            }, 
+            "PreviousState": {
+                "Code": 16, 
+                "Name": "running"
+            }
+        }
+    ]
+}
+[ec2-user@cli-host ~]$ aws ec2 modify-instance-attribute --instance-id i-0a9db3d4926777d74 --instance-type "{\"Value\": \"t3.micro\"}"
 ```
-
-[Stop instance](./images/MN-01-stop-instance.png)
-
-I modified the instance type to `t3.micro`:
-
-```bash
-aws ec2 modify-instance-attribute 
---instance-id <instance-id> 
---instance-type "{"Value": "t3.micro"}"
-```
-
-[Modify instance type](./images/MN-01-modify-instance.png)
 
 Then I restarted the instance:
-
 ```bash
-aws ec2 start-instances --instance-ids <instance-id>
+[ec2-user@cli-host ~]$ aws ec2 start-instances --instance-ids i-0a9db3d4926777d74
+{
+    "StartingInstances": [
+        {
+            "InstanceId": "i-0a9db3d4926777d74", 
+            "CurrentState": {
+                "Code": 0, 
+                "Name": "pending"
+            }, 
+            "PreviousState": {
+                "Code": 80, 
+                "Name": "stopped"
+            }
+        }
+    ]
+}
 ```
 
-[Start instance](./images/MN-01-start-instance.png)
-
-Finally, I verified that the instance was running and recorded its new public DNS and IP:
+Finally, I verified that the instance was running again and recorded its new public DNS and IP:
 
 ```bash
-aws ec2 describe-instances 
---instance-ids <instance-id> 
---query "Reservations[*].Instances[*].[InstanceType,PublicDnsName,PublicIpAddress,State.Name]"
+[ec2-user@cli-host ~]$ aws ec2 describe-instances \
+> --instance-ids i-0a9db3d4926777d74 \
+> --query "Reservations[*].Instances[*].[InstanceType,PublicDnsName,PublicIpAddress,State.Name]"
+[
+    [
+        [
+            "t3.micro", 
+            "ec2-34-218-51-103.us-west-2.compute.amazonaws.com", 
+            "34.218.51.103", 
+            "running"
+        ]
+    ]
+]
 ```
 
-[Instance status check](./images/MN-01-instance-status.png)
+Since I restarted the instance, Amazon EC2 assigned a different Public DNS name and Public IP address to the instance than what it had before.
 
-I accessed the Café website via the browser to confirm it was functioning correctly after the changes.
+I accessed the Café website via the browser `http://ec2-34-218-51-103.us-west-2.compute.amazonaws.com/cafe` to confirm it was functioning correctly after the changes.
 
-[Website test](./images/MN-01-website-test.png)
+[Downsized CafeInstance website](./images/EX-02-website-downsized.png)
 
 
 ## Task 2: Estimate AWS Service Costs
@@ -155,7 +184,7 @@ I used the AWS Pricing Calculator to estimate the monthly cost of the infrastruc
 - EBS storage: 40 GB
 - RDS instance: db.t3.micro (20 GB storage)
 
-[Calculator before optimization](./images/MN-01-calculator-before.png)
+[Calculator before optimization](./images/EX-02-calculator-before.png)
 
 **Estimated Monthly Cost (Before Optimization): $35.60**
 
@@ -167,7 +196,7 @@ I updated the estimate to reflect the optimized setup:
 - EBS storage: 20 GB
 - RDS unchanged
 
-[Calculator after optimization](./images/MN-01-calculator-after.png)
+[Calculator after optimization](./images/EX-02-calculator-after.png)
 
 **Estimated Monthly Cost (After Optimization): $25.18**
 
@@ -181,7 +210,7 @@ I compared the two estimates:
 
 **Projected Monthly Savings: $10.42**
 
-[Cost comparison](./images/MN-01-cost-comparison.png)
+[Cost comparison](./images/EX-02-cost-comparison.png)
 
 
 ## Conclusion
