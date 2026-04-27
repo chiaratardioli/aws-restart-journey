@@ -148,3 +148,55 @@ In summary:
 - I applied tags to existing AWS resources.
 - I find resources based on tags.
 - I used the AWS CLI or AWS SDK for PHP to stop and terminate Amazon EC2 instances based on certain attributes of the resource.
+
+## Bash Commands
+```bash
+# Describe all EC2 instances with the tag Project=ERPSystem
+aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem"
+
+# Retrieve only the Instance IDs of EC2 instances tagged with Project=ERPSystem
+aws ec2 describe-instances \
+  --filter "Name=tag:Project,Values=ERPSystem" \
+  --query 'Reservations[*].Instances[*].InstanceId'
+
+# Retrieve Instance IDs along with their Availability Zones
+aws ec2 describe-instances \
+  --filter "Name=tag:Project,Values=ERPSystem" \
+  --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone}'
+
+# Retrieve Instance details including custom tags: Project, Environment, and Version
+aws ec2 describe-instances \
+  --filter "Name=tag:Project,Values=ERPSystem" \
+  --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
+
+# Retrieve only development instances within the ERPSystem project
+aws ec2 describe-instances \
+  --filter "Name=tag:Project,Values=ERPSystem" "Name=tag:Environment,Values=development" \
+  --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
+
+# Store Instance IDs of development instances in a variable for reuse
+ids=$(aws ec2 describe-instances \
+  --filter "Name=tag:Project,Values=ERPSystem" "Name=tag:Environment,Values=development" \
+  --query 'Reservations[*].Instances[*].InstanceId' \
+  --output text)
+
+# Update (or create) the Version tag to 1.1 for selected instances
+aws ec2 create-tags --resources $ids --tags 'Key=Version,Value=1.1'
+
+# Verify that tags have been updated correctly
+aws ec2 describe-instances \
+  --filter "Name=tag:Project,Values=ERPSystem" \
+  --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
+
+# Stop all instances matching specific tags using the provided PHP script
+./stopinator.php -t"Project=ERPSystem;Environment=development"
+
+# Start previously stopped instances matching the same tags
+./stopinator.php -t"Project=ERPSystem;Environment=development" -s
+
+# Terminate non-compliant instances (missing required tags) in a given region and subnet
+./terminate-instances.php -region <region> -subnetid <subnet-id>
+
+# (Optional) Directly terminate instances by specifying their Instance IDs
+aws ec2 terminate-instances --instance-ids <instance-id-1> <instance-id-2>
+```
