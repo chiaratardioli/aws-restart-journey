@@ -248,9 +248,28 @@ Redirecting to /bin/systemctl restart sshd.service
 3. Restoring Website Integrity
 
 I restored the original Café website image by replacing the modified file with the backup version. After refreshing the website, the correct content was displayed again.
-
-![Website Restoration](./images/MN-02-website-restored.png)
-
+```bash
+[ec2-user@web-server ~]$ cd /var/www/html/cafe/images/
+[ec2-user@web-server images]$ ls -l
+total 5732
+-rwxrwxrwx 1 root root 647353 Apr  2  2019 Cake-Vitrine.jpg
+-rwxrwxrwx 1 root root 480820 Apr  2  2019 Chocolate-Chip-Cookies.jpg
+-rwxrwxrwx 1 1001 root 486325 Apr  2  2019 Coffee-and-Pastries.backup
+-rw-r--r-- 1 1001 root 260603 Apr 27 07:52 Coffee-and-Pastries.jpg
+-rwxrwxrwx 1 root root 631884 Apr  3  2019 Coffee.jpg
+-rwxrwxrwx 1 root root  17528 Apr  6  2021 Coffee-Shop.png
+-rwxrwxrwx 1 root root 429183 Apr  2  2019 Cookies.jpg
+-rwxrwxrwx 1 root root 351781 Apr  2  2019 Croissants.jpg
+-rwxrwxrwx 1 root root 316090 Apr  2  2019 Cup-of-Hot-Chocolate.jpg
+-rwxrwxrwx 1 root root  94341 Apr  2  2019 default-image.jpg
+-rwxrwxrwx 1 root root 380753 Apr  2  2019 Donuts.jpg
+-rwxrwxrwx 1 root root 411014 Apr  2  2019 Frank-Martha.jpg
+-rwxrwxrwx 1 root root 319081 Apr  2  2019 Latte.jpg
+-rwxrwxrwx 1 root root 243718 Apr  2  2019 Muffins.jpg
+-rwxrwxrwx 1 root root 290697 Apr  2  2019 Strawberry-Blueberry-Tarts.jpg
+-rwxrwxrwx 1 root root 479213 Apr  2  2019 Strawberry-Tarts.jpg
+[ec2-user@web-server images]$ sudo mv Coffee-and-Pastries.backup Coffee-and-Pastries.jpg
+```
 
 4. Removing Malicious IAM User
 
