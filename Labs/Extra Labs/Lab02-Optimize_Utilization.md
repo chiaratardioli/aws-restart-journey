@@ -17,7 +17,7 @@ In this task, I connected to the Café EC2 instance and the CLI Host using SSH t
 
 1. Connect to the Café Instance
 
-I established an SSH connection to the Café EC2 instance using the provided key pair and public IP address.
+I established an SSH connection to the CLI Host instance (public IP 54.187.214.67) using the provided key pair and public IP address.
 ```bash
 chiara@macbook-air:~/labs$ chmod 700 labsuser.pem 
 chiara@macbook-air:~/labs$ ssh -i labsuser.pem ec2-user@54.187.214.67
@@ -54,11 +54,34 @@ Default region name [None]: us-west-2
 Default output format [None]: json
 ```
 
-2. Connect to the CLI Host
+2. Connect to the Café EC2
 
-Next, I opened a second SSH session to the CLI Host instance and configured the AWS CLI there as well.
+Next, I opened a second SSH session to the Café EC2 instance (public IP 34.222.18.208) and configured the AWS CLI there as well.
+```bash
+chiara@macbook-air:~/labs$ ssh -i labsuser.pem ec2-user@34.222.18.208
+The authenticity of host '34.222.18.208 (34.222.18.208)' can't be established.
+ED25519 key fingerprint is SHA256:QaGoh9nGbWFy9HTBbhdbO1cKFdUa1xZnUWpS9Gu6zig.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '34.222.18.208' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2026-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
 
-[SSH connection to CLI Host](./images/MN-01-ssh-clihost.png)
+[ec2-user@web-server ~]$ aws configure
+AWS Access Key ID [None]: <Access Key>
+AWS Secret Access Key [None]: <Secret Access Key>
+Default region name [None]: us-west-2
+Default output format [None]: json
+[ec2-user@web-server ~]$ aws ls
+```
 
 3. Uninstall MariaDB and Resize the Instance
 
