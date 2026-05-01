@@ -64,12 +64,32 @@ The update completed successfully, and I confirmed that the new S3 bucket appear
 In this task, I extended the template further by adding an EC2 instance. First, I introduced a new parameter to dynamically retrieve the latest Amazon Linux 2 AMI 
 using AWS Systems Manager Parameter Store.
 
-![AMI parameter added](./images/EX-03-ami-parameter.png)
+```
+  AmazonLinuxAMIID:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2
+```
 
 Then, I defined the EC2 instance resource under the Resources section. This required specifying several properties, including the AMI reference, 
 instance type, security group, subnet, and tags. I used the `!Ref` function to reference existing resources such as the security group and subnet.
 
-![EC2 template configuration](./images/EX-03-ec2-template.png)
+```
+###########
+# EC2 Instance
+###########
+
+  EC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref AmazonLinuxAMIID
+      InstanceType: t3.micro
+      SecurityGroupIds: 
+        - !Ref AppSecurityGroup
+      SubnetId: !Ref PublicSubnet
+      Tags:
+        - Key: Name
+          Value: App Server
+```
 
 After updating the template, I performed another stack update. The preview confirmed that only the EC2 instance would be added.
 
@@ -105,5 +125,9 @@ In summary, I learnt how to:
 - Configure an AWS CloudFormation stack with resources, such as an Amazon Simple Storage Solution (S3) bucket and Amazon Elastic Compute Cloud (EC2).
 - Terminate an AWS CloudFormation and its respective resources.
 
+## Additional resources
+- [Amazon S3 Template Snippets](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-s3.html)
+- [AWS Compute Blog: Query for the latest Amazon Linux AMI IDs using AWS Systems Manager Parameter Store](https://aws.amazon.com/blogs/compute/query-for-the-latest-amazon-linux-ami-ids-using-aws-systems-manager-parameter-store/)
+- [AWS::EC2::Instance](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-ec2-instance.html)
 
 
