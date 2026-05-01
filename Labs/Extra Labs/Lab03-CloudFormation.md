@@ -37,10 +37,17 @@ Once the status reached `CREATE_COMPLETE`, I verified that the VPC and associate
 
 ## Task 2: Add an Amazon S3 Bucket to the Stack
 
-Next, I modified the existing template to include an Amazon S3 bucket. Based on the documentation, I added a minimal resource definition under 
-the Resources section using only the required type declaration.
+Next, I modified the existing template to include an Amazon S3 bucket. Based on the [documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-s3.html), 
+I added a minimal resource definition under the Resources section using only the required type declaration:
 
-![S3 bucket template edit](./images/EX-03-s3-template-edit.png)
+```
+###########
+# S3 Bucket
+###########
+
+  MyBucket:
+    Type: AWS::S3::Bucket
+```
 
 After saving the changes, I updated the existing CloudFormation stack by uploading the modified template. During the update process, I reviewed 
 the change set preview, which indicated that a new S3 bucket would be added without affecting existing resources.
