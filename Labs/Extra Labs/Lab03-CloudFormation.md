@@ -9,11 +9,16 @@ This approach reduces manual configuration errors and improves deployment effici
 
 ## Task 1: Deploy a CloudFormation Stack
 
-I started by downloading the provided `task1.yaml` template and examining its structure. The file contained three main sections: Parameters, Resources, and Outputs. 
+I started by downloading the provided [task1.yaml](./files/task1.yaml) template and examining its structure. The file contained three main sections: 
+- [Parameters](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html)
+- [Resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html)
+- [Outputs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/outputs-section-structure.html)
+
 The Parameters section defined CIDR blocks for networking, the Resources section described the VPC and Security Group, and the Outputs section exposed useful 
 information about the created resources.
 
-![CloudFormation template structure](./images/EX-03-template-structure.png)
+The template is written in a format called YAML, which is commonly used for configuration files. The format of the file is important, including the indents and hyphens. 
+CloudFormation templates can also be written in JSON.
 
 Using the AWS Management Console, I created a new CloudFormation stack named **Lab** by uploading the template file. I kept the default parameter values and 
 proceeded through the configuration steps.
