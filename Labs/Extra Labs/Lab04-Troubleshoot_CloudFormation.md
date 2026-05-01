@@ -13,7 +13,8 @@ The architectural diagram is illustrated below.
 
 ## Task 1: Querying JSON Data with JMESPath
 
-In this task, I explored how to use JMESPath expressions to extract specific data from JSON documents. I practiced selecting elements using array indices, retrieving attributes, and applying filters.
+In this task, I explored how to use [JMESPath](http://jmespath.org/) expressions to extract specific data from JSON documents. 
+I practiced selecting elements using array indices, retrieving attributes, and applying filters.
 
 I successfully:
 - Retrieved specific elements using index-based queries.
@@ -38,7 +39,29 @@ This exercise helped me understand how JMESPath is used within AWS CLI commands.
 
 I connected to the CLI Host EC2 instance using SSH and configured the AWS CLI with the provided credentials and region.
 
-![CLI Configuration](./images/EX-04-cli-config.png)
+```bash
+   ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2026-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
+
+[ec2-user@cli-host ~]$ curl http://169.254.169.254/latest/dynamic/instance-identity/document | grep region
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   476  100   476    0     0   343k      0 --:--:-- --:--:-- --:--:--  464k
+  "region" : "us-west-2",
+[ec2-user@cli-host ~]$ aws configure
+AWS Access Key ID [None]: <AWS Access Key>
+AWS Secret Access Key [None]:  <AWS Secret Access Key>  
+Default region name [None]: us-west-2
+Default output format [None]: json
+```
 
 #### Initial Stack Creation Attempt
 
@@ -49,9 +72,15 @@ Using CLI commands, I monitored:
 - Stack status
 - Stack events
 
-The error indicated that the `WaitCondition` resource timed out.
+![Stack events](./images/EX-04-describe-stack-resources.png)
+
+![Stack status](./images/EX-04-describe-stack-status.png)
 
 ![Stack Failure](./images/EX-04-stack-failure.png)
+
+The error indicated that the `WaitCondition` resource timed out.
+
+I delete the stack resource with the command `aws cloudformation delete-stack --stack-name myStack`.
 
 #### Investigating the Failure
 
@@ -159,4 +188,148 @@ In this lab, I learned how to troubleshoot CloudFormation deployments by analyzi
 I also understood the importance of disabling rollback during debugging and how small configuration errors can lead to stack failures. Additionally, I explored drift detection and observed how manual changes affect infrastructure managed by CloudFormation.
 
 Finally, I resolved a failed stack deletion scenario by retaining specific resources, demonstrating how to manage dependencies and prevent data loss. This lab provided practical insight into managing infrastructure as code and reinforced best practices for debugging and maintaining AWS environments.
+
+In summary:
+- I practiced using JMESPath to query JSON-formatted documents.
+- I troubleshot the deployment of an AWS CloudFormation stack by using the AWS CLI.
+- I analyzed log files on a Linux EC2 instance to determine the cause of a create-stack failure.
+- I troubleshot a failed delete-stack action.
+
+## AWS CLI Commands
+```bash
+## AWS CLI Commands
+
+```bash
+# Retrieve the AWS region of the EC2 instance
+curl http://169.254.169.254/latest/dynamic/instance-identity/document | grep region
+
+# Configure AWS CLI credentials and default settings
+aws configure
+
+# View the CloudFormation template
+less template1.yaml
+
+# Create CloudFormation stack (initial attempt)
+aws cloudformation create-stack \
+--stack-name myStack \
+--template-body file://template1.yaml \
+--capabilities CAPABILITY_NAMED_IAM \
+--parameters ParameterKey=KeyName,ParameterValue=vockey
+
+# Monitor stack resource creation
+watch -n 5 -d \
+aws cloudformation describe-stack-resources \
+--stack-name myStack \
+--query 'StackResources[*].[ResourceType,ResourceStatus]' \
+--output table
+
+# Monitor overall stack status
+watch -n 5 -d \
+aws cloudformation describe-stacks \
+--stack-name myStack \
+--output table
+
+# View stack events filtered for failures
+aws cloudformation describe-stack-events \
+--stack-name myStack \
+--query "StackEvents[?ResourceStatus == 'CREATE_FAILED']"
+
+# Describe stack details
+aws cloudformation describe-stacks \
+--stack-name myStack \
+--output table
+
+# Delete failed stack
+aws cloudformation delete-stack --stack-name myStack
+
+# Create stack without automatic rollback
+aws cloudformation create-stack \
+--stack-name myStack \
+--template-body file://template1.yaml \
+--capabilities CAPABILITY_NAMED_IAM \
+--on-failure DO_NOTHING \
+--parameters ParameterKey=KeyName,ParameterValue=vockey
+
+# Get EC2 instance public IP
+aws ec2 describe-instances \
+--filters "Name=tag:Name,Values='Web Server'" \
+--query 'Reservations[].Instances[].[State.Name,PublicIpAddress]'
+
+# View cloud-init logs for troubleshooting
+tail -50 /var/log/cloud-init-output.log
+
+# View user data script executed on instance
+sudo cat /var/lib/cloud/instance/scripts/part-001
+
+# Edit CloudFormation template
+vim template1.yaml
+
+# Verify template fix (httpd package)
+cat template1.yaml | grep httpd
+
+# Delete stack before recreating
+aws cloudformation delete-stack --stack-name myStack
+
+# Recreate stack after fixing template
+aws cloudformation create-stack \
+--stack-name myStack \
+--template-body file://template1.yaml \
+--capabilities CAPABILITY_NAMED_IAM \
+--on-failure DO_NOTHING \
+--parameters ParameterKey=KeyName,ParameterValue=vockey
+
+# Retrieve S3 bucket name from stack outputs
+bucketName=$(\
+aws cloudformation describe-stacks \
+--stack-name myStack \
+--query "Stacks[*].Outputs[?OutputKey == 'BucketName'].[OutputValue]" \
+--output text)
+
+# Display bucket name
+echo "bucketName = "$bucketName
+
+# Create a local file
+touch myfile
+
+# Upload file to S3 bucket
+aws s3 cp myfile s3://$bucketName/
+
+# List contents of S3 bucket
+aws s3 ls $bucketName/
+
+# Start drift detection
+aws cloudformation detect-stack-drift --stack-name myStack
+
+# Check drift detection status
+aws cloudformation describe-stack-drift-detection-status \
+--stack-drift-detection-id <driftId>
+
+# View full drift details
+aws cloudformation describe-stack-resource-drifts \
+--stack-name myStack
+
+# View simplified drift results using JMESPath
+aws cloudformation describe-stack-resources \
+--stack-name myStack \
+--query 'StackResources[*].[ResourceType,ResourceStatus,DriftInformation.StackResourceDriftStatus]' \
+--output table
+
+# Show only modified (drifted) resources
+aws cloudformation describe-stack-resource-drifts \
+--stack-name myStack \
+--stack-resource-drift-status-filters MODIFIED
+
+# Attempt to update stack (expected to fail due to drift)
+aws cloudformation update-stack \
+--stack-name myStack \
+--template-body file://template1.yaml \
+--parameters ParameterKey=KeyName,ParameterValue=vockey
+
+# Attempt to delete stack (fails due to non-empty S3 bucket)
+aws cloudformation delete-stack --stack-name myStack
+
+# Delete stack while retaining S3 bucket
+aws cloudformation delete-stack \
+--stack-name myStack \
+--retain-resources MyBucket
 ```
