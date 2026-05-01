@@ -127,7 +127,23 @@ I manually modified the security group by restricting SSH access to my IP addres
 
 I also uploaded a file to the S3 bucket created by the stack.
 
-![S3 Upload](./images/EX-04-s3-upload.png)
+```bash
+[ec2-user@cli-host ~]$ bucketName=$(\
+> aws cloudformation describe-stacks \
+> --stack-name myStack \
+> --query "Stacks[*].Outputs[?OutputKey \
+> == 'BucketName'].[OutputValue]" \
+> --output text)
+[ec2-user@cli-host ~]$ echo "bucketName = "$bucketName
+bucketName = mystack-mybucket-swvrguem5bfm
+[ec2-user@cli-host ~]$ echo $bucketName
+mystack-mybucket-swvrguem5bfm
+[ec2-user@cli-host ~]$ touch myfile
+[ec2-user@cli-host ~]$ aws s3 cp myfile s3://$bucketName/
+upload: ./myfile to s3://mystack-mybucket-swvrguem5bfm/myfile
+[ec2-user@cli-host ~]$ aws s3 ls s3://$bucketName/
+2026-05-01 14:55:49          0 myfile
+```
 
 #### Detecting Drift
 
