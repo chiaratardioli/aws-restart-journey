@@ -199,8 +199,13 @@ Mybucket = MyBucket
 
 This allowed the stack to be deleted successfully while preserving the bucket and its contents.
 
-![Successful Deletion](./images/EX-04-delete-success.png)
+```bash
+[ec2-user@cli-host ~]$ aws cloudformation describe-stacks \
+> --stack-name myStack \
+> --output table
 
+An error occurred (ValidationError) when calling the DescribeStacks operation: Stack with id myStack does not exist
+```
 
 ## Conclusion
 
