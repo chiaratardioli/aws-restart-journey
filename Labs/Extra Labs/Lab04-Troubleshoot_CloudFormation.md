@@ -63,7 +63,7 @@ Default region name [None]: us-west-2
 Default output format [None]: json
 ```
 
-#### Initial Stack Creation Attempt
+#### 2.1 Initial Stack Creation Attempt
 
 I attempted to create a CloudFormation stack using a provided template. The stack creation failed, and resources were rolled back automatically.
 
@@ -72,9 +72,9 @@ Using CLI commands, I monitored:
 - Stack status
 - Stack events
 
-![Stack events](./images/EX-04-describe-stack-resources.png)
+![Stack Events](./images/EX-04-stack-resources.png)
 
-![Stack status](./images/EX-04-describe-stack-status.png)
+![Stack Status Rollback](./images/EX-04-stack-status-rollback.png)
 
 ![Stack Failure](./images/EX-04-stack-failure.png)
 
@@ -82,9 +82,11 @@ The error indicated that the `WaitCondition` resource timed out.
 
 I delete the stack resource with the command `aws cloudformation delete-stack --stack-name myStack`.
 
-#### Investigating the Failure
+#### 2.2 Investigating the Failure
 
 To debug the issue, I recreated the stack with rollback disabled. This allowed me to access the EC2 instance logs.
+
+![Stack Status Failed](./images/EX-04-stack-status-failed.png)
 
 I connected to the web server instance and examined:
 
@@ -98,7 +100,7 @@ Because of the `-e` flag in the script, the failure caused the entire script to 
 
 ![Cloud-init Log Error](./images/EX-04-cloud-init-error.png)
 
-#### Fixing the Template
+#### 2.3 Fixing the Template
 
 I edited the CloudFormation template and replaced:
 
@@ -118,7 +120,7 @@ This time, the stack creation completed successfully.
 
 ![Successful Stack Creation](./images/EX-04-stack-success.png)
 
-#### Verifying the Web Server
+#### 2.4 Verifying the Web Server
 
 I accessed the web server using its public IP address and confirmed that it displayed the expected message.
 
