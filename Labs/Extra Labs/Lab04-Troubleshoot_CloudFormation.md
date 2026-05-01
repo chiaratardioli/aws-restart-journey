@@ -65,7 +65,7 @@ Default output format [None]: json
 
 #### 2.1 Initial Stack Creation Attempt
 
-I attempted to create a CloudFormation stack using a provided [template](./files/template1.yaml). 
+I attempted to create a CloudFormation stack using a provided template. 
 The stack creation failed, and resources were rolled back automatically.
 
 Using CLI commands, I monitored:
@@ -103,7 +103,8 @@ Because of the `-e` flag in the script, the failure caused the entire script to 
 
 #### 2.3 Fixing the Template
 
-I edited the CloudFormation template and replaced `yum install -y http` with `yum install -y httpd`
+I edited the CloudFormation template and replaced `yum install -y http` with `yum install -y httpd`.
+The updated template is [template1.yaml](./files/template1.yaml). 
 
 After saving the changes, I deleted the failed stack and created a new one.
 
