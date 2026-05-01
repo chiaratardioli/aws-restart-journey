@@ -119,7 +119,7 @@ I accessed the web server using its public IP address and confirmed that it disp
 
 ## Task 3: Drift Detection
 
-#### Manual Modification
+#### 3.1 Manual Modification
 
 I manually modified the security group by restricting SSH access to my IP address.
 
@@ -145,7 +145,7 @@ upload: ./myfile to s3://mystack-mybucket-swvrguem5bfm/myfile
 2026-05-01 14:55:49          0 myfile
 ```
 
-#### Detecting Drift
+#### 3.2 Detecting Drift
 
 I initiated drift detection using the AWS CLI and analyzed the results.
 
@@ -156,6 +156,8 @@ Findings:
 ![Drift Detection Results](./images/EX-04-drift-results.png)
 
 This demonstrated that CloudFormation detects configuration changes but not data changes within resources.
+
+Also, the update-stack command will not automatically resolve drift, though drift has occurred. One must manually resolve these issues to eliminate the drift.
 
 
 ### Task 4: Stack Deletion and Troubleshooting
