@@ -91,14 +91,13 @@ instance type, security group, subnet, and tags. I used the `!Ref` function to r
           Value: App Server
 ```
 
-After updating the template, I performed another stack update. The preview confirmed that only the EC2 instance would be added.
+After updating the template [final task1.yaml](./files/task1-final.yaml), I performed another stack update. The preview confirmed that only the EC2 instance would be added.
 
 ![EC2 preview changes](./images/EX-03-ec2-preview.png)
 
 Once the update completed, I verified that the EC2 instance was successfully created and listed among the stack resources.
 
 ![EC2 instance created](./images/EX-03-ec2-created.png)
-
 
 ## Task 4: Delete the Stack
 
@@ -108,6 +107,7 @@ Finally, I deleted the CloudFormation stack. This process automatically removed 
 
 I monitored the deletion process until the stack status changed to `DELETE_COMPLETE` and confirmed that all resources were removed.
 
+![Stack deletion complete](./images/EX-03-delete-in-progress.png)
 ![Stack deletion complete](./images/EX-03-delete-complete.png)
 
 
