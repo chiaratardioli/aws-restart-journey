@@ -82,3 +82,9 @@ validation errors, correcting configuration issues, and monitoring stack deploym
 
 I also learned how small syntax mistakes in a CloudFormation template can prevent deployment and how iterative debugging is essential for successful 
 infrastructure creation. By the end of the lab, I was able to successfully deploy a complete AWS environment using infrastructure as code.
+
+## Additional resources
+
+[Boto3 documentation](https://docs.aws.amazon.com/boto3/latest/)
+
+You use the AWS SDK for Python (Boto3) to create, configure, and manage AWS services, such as Amazon Elastic Compute Cloud (Amazon EC2) and Amazon Simple Storage Service (Amazon S3). The SDK provides an object-oriented API as well as low-level access to AWS services.
