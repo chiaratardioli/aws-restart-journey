@@ -102,17 +102,7 @@ Because of the `-e` flag in the script, the failure caused the entire script to 
 
 #### 2.3 Fixing the Template
 
-I edited the CloudFormation template and replaced:
-
-```
-yum install -y http
-```
-
-with:
-
-```
-yum install -y httpd
-```
+I edited the CloudFormation template and replaced `yum install -y http` with `yum install -y httpd`
 
 After saving the changes, I deleted the failed stack and created a new one.
 
