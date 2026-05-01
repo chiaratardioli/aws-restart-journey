@@ -159,6 +159,8 @@ This demonstrated that CloudFormation detects configuration changes but not data
 
 Also, the update-stack command will not automatically resolve drift, though drift has occurred. One must manually resolve these issues to eliminate the drift.
 
+![Failed Drift Update](./images/EX-04-drift-fix-failed.png)
+
 
 ### Task 4: Stack Deletion and Troubleshooting
 
