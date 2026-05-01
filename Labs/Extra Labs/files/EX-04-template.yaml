@@ -1,5 +1,5 @@
-AWSTemplateFormatVersion: 2010-09-09
-Description: Lab template
+AWSTemplateFormatVersion: 2026-05-01
+Description:  Template for the Challenge Lab
 
 # Lab VPC with public subnet and Internet Gateway
 
