@@ -33,7 +33,7 @@ To fix this, I updated the template to the correct format version:
 AWSTemplateFormatVersion: 2010-09-09
 ```
 
-Here is the final version of the (template.yaml)[./files/template.yaml].
+Here is the final version of the [template.yaml](./files/template.yaml).
 
 I then proceeded to create the CloudFormation stack using the AWS CLI:
 
