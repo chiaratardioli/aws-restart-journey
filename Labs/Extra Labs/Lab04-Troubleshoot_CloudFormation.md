@@ -106,7 +106,7 @@ I edited the CloudFormation template and replaced `yum install -y http` with `yu
 
 After saving the changes, I deleted the failed stack and created a new one.
 
-This time, the stack creation completed successfully.
+This time, the stack creation completed successfully. Also, the Outputs section includes the PublicIP address of the web server and the name of the S3 bucket that was created.
 
 ![Successful Stack Creation](./images/EX-04-stack-success.png)
 
