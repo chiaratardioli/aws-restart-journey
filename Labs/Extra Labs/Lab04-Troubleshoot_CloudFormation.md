@@ -178,14 +178,23 @@ To resolve this, I used the AWS CLI option to retain the S3 bucket during deleti
 
 Steps:
 1. Retrieved the logical resource ID of the bucket.
+```bash
+[ec2-user@cli-host ~]$ Mybucket=$(\
+> aws cloudformation describe-stack-resources \
+> --stack-name myStack \
+> --query "StackResources[?ResourceType == 'AWS::S3::Bucket'].LogicalResourceId" \
+> --output text)
+[ec2-user@cli-host ~]$ echo "Mybucket = "$Mybucket
+Mybucket = MyBucket
+```
+
 2. Executed the delete command with the `--retain-resources` parameter.
 
-Example:
-
-```
-aws cloudformation delete-stack 
---stack-name myStack 
---retain-resources MyBucket
+```bash
+[ec2-user@cli-host ~]$ aws cloudformation delete-stack \
+> --stack-name myStack \
+> --retain-resources MyBucket
+[ec2-user@cli-host ~]$
 ```
 
 This allowed the stack to be deleted successfully while preserving the bucket and its contents.
@@ -195,17 +204,24 @@ This allowed the stack to be deleted successfully while preserving the bucket an
 
 ## Conclusion
 
-In this lab, I learned how to troubleshoot CloudFormation deployments by analyzing stack events, inspecting EC2 logs, and identifying configuration issues in templates. I gained hands-on experience using JMESPath for querying CLI outputs, which improved my ability to extract relevant information efficiently.
+In this lab, I learned how to troubleshoot CloudFormation deployments by analyzing stack events, inspecting EC2 logs, and identifying configuration issues in templates. 
+I gained hands-on experience using JMESPath for querying CLI outputs, which improved my ability to extract relevant information efficiently.
 
-I also understood the importance of disabling rollback during debugging and how small configuration errors can lead to stack failures. Additionally, I explored drift detection and observed how manual changes affect infrastructure managed by CloudFormation.
+I also understood the importance of disabling rollback during debugging and how small configuration errors can lead to stack failures. Additionally, I explored drift 
+detection and observed how manual changes affect infrastructure managed by CloudFormation.
 
-Finally, I resolved a failed stack deletion scenario by retaining specific resources, demonstrating how to manage dependencies and prevent data loss. This lab provided practical insight into managing infrastructure as code and reinforced best practices for debugging and maintaining AWS environments.
+Finally, I resolved a failed stack deletion scenario by retaining specific resources, demonstrating how to manage dependencies and prevent data loss. 
+This lab provided practical insight into managing infrastructure as code and reinforced best practices for debugging and maintaining AWS environments.
 
 In summary:
 - I practiced using JMESPath to query JSON-formatted documents.
 - I troubleshot the deployment of an AWS CloudFormation stack by using the AWS CLI.
 - I analyzed log files on a Linux EC2 instance to determine the cause of a create-stack failure.
 - I troubleshot a failed delete-stack action.
+
+## Additional resources
+- [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/cloudformation/delete-stack.html)
+
 
 ## AWS CLI Commands
 ```bash
