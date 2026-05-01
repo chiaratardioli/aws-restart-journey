@@ -65,7 +65,8 @@ Default output format [None]: json
 
 #### 2.1 Initial Stack Creation Attempt
 
-I attempted to create a CloudFormation stack using a provided template. The stack creation failed, and resources were rolled back automatically.
+I attempted to create a CloudFormation stack using a provided [template](./files/EX-04-template.yaml). 
+The stack creation failed, and resources were rolled back automatically.
 
 Using CLI commands, I monitored:
 - Resource creation status
