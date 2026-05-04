@@ -123,14 +123,14 @@ The DNS name of the load balancer is `WebServerELB-1900878820.us-west-2.elb.amaz
 
 ### 2.2 Creating a Launch Template
 
-I created a launch template named *web-app-launch-template** using the custom AMI created earlier. I selected the instance type `t3.micro` and 
+I created a launch template named *web-app-launch-template* using the custom AMI created earlier. I selected the instance type `t3.micro` and 
 assigned the HTTPAccess security group. This template defines how new instances are launched within the Auto Scaling group.
 
 ![Launch Template](./images/EX-07-launch-template.png)
 
 ### 2.3 Creating an Auto Scaling Group
 
-Using the launch template, I created an Auto Scaling group named **Web App Auto Scaling Group**. I configured it to launch instances in private 
+Using the launch template, I created an Auto Scaling group named *Web App Auto Scaling Group*. I configured it to launch instances in private 
 subnets across two Availability Zones.
 
 I attached the group to the target group created earlier and enabled load balancer health checks. I set the desired capacity to 2, minimum to 2, 
@@ -149,7 +149,7 @@ was correctly routing traffic to the instances.
 
 ## Task 4: Testing Auto Scaling Configuration
 
-To test the scaling behavior, I accessed the web application using the load balancer DNS and initiated the **Start Stress** function. 
+To test the scaling behavior, I accessed the web application using the load balancer DNS and initiated the *Start Stress* function. 
 This caused CPU utilization to increase significantly.
 
 I monitored the Auto Scaling group activity and observed that a new EC2 instance was launched after CPU utilization exceeded the defined threshold. 
