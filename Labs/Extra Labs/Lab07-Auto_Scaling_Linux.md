@@ -14,27 +14,88 @@ group and balanced by an Application Load Balancer across multiple Availability 
 
 ## Task 1: Creating a New AMI for Amazon EC2 Auto Scaling
 
-### 1.1 Connecting to the Command Host Instance
+### 1.1 Connecting to the Command Host Instance and configuring the AWS CLI
 
 I began by accessing the EC2 Management Console and connecting to the **Command Host** instance using EC2 Instance Connect. This instance provided a preconfigured environment where I could execute AWS CLI commands required for the lab.
 
-![Connect Command Host](./images/EX-07-connect-command-host.png)
-
-### 1.2 Configuring the AWS CLI
-
 After connecting, I verified the AWS Region using a metadata query and configured the AWS CLI with the appropriate region and output format. This ensured that all subsequent commands were executed in the correct environment.
 
-![AWS CLI Configuration](./images/EX-07-aws-cli-config.png)
+```bash
+  ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2026-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
 
-### 1.3 Creating a New EC2 Instance
+[ec2-user@ip-10-0-1-213 ~]$ curl http://169.254.169.254/latest/dynamic/instance-identity/document | grep region
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   475  100   475    0     0    98k      0 --:--:-- --:--:-- --:--:--  115k
+  "region" : "us-west-2",
+[ec2-user@ip-10-0-1-213 ~]$ aws configure
+AWS Access Key ID [None]: 
+AWS Secret Access Key [None]: 
+Default region name [us-west-2]: us-west-2
+Default output format [None]: json
+[ec2-user@ip-10-0-1-213 ~]$
+```
 
-I inspected the provided `UserData.txt` script, which installs and configures a web server capable of generating CPU load. Then, I executed an AWS CLI command to launch a new EC2 instance using the specified parameters such as AMI ID, subnet, and security group.
+### 1.2 Creating a New EC2 Instance
 
-After launching the instance, I waited until it reached the running state and retrieved its public DNS name. I accessed the web application through the browser to confirm that the web server was functioning correctly.
+I inspected the provided `UserData.txt` script, which installs and configures a web server capable of generating CPU load. 
+
+```bash
+[ec2-user@ip-10-0-1-213 ~]$ cd /home/ec2-user/
+[ec2-user@ip-10-0-1-213 ~]$ more UserData.txt 
+#!/bin/bash
+yum update -y --security
+amazon-linux-extras install epel -y
+yum -y install httpd php stress
+systemctl enable httpd.service
+systemctl start httpd
+cd /var/www/html
+wget http://aws-tc-largeobjects.s3.amazonaws.com/CUR-TF-100-TULABS-1/10-lab-autoscaling-linux/s3/ec2-stress.zip
+unzip ec2-stress.zip
+
+echo 'UserData has been successfully executed. ' >> /home/ec2-user/result
+find -wholename /root/.*history -wholename /home/*/.*history -exec rm -f {} \;
+find / -name 'authorized_keys' -exec rm -f {} \;
+rm -rf /var/lib/cloud/data/scripts/*
+[ec2-user@ip-10-0-1-213 ~]$ 
+```
+
+The last lines of the script erase any history or security information that might have accidentally 
+been left on the instance when the image was taken.
+
+Then, I executed an AWS CLI command to launch a new EC2 instance using the specified parameters such as AMI ID, subnet, and security group.
+
+```bash
+[ec2-user@ip-10-0-1-213 ~]$ aws ec2 run-instances --key-name $KEYNAME --instance-type t3.micro --image-id $AMIID --user-data file:///home/ec2-user/UserData.txt --security-group-ids $HTTPACCESS --subnet-id $SUBNETID --associate-public-ip-address --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=WebServer}]' --output text --query 'Instances[*].InstanceId'
+
+i-03b19dee09cb55aa8
+```
+
+I save the new *InstanceId* in the variable called `NEW_INSTANCE_ID`.
+
+After launching the instance, I waited until it reached the running state and retrieved its public DNS name.
+
+```bash
+[ec2-user@ip-10-0-1-213 ~]$ aws ec2 wait instance-running --instance-ids $NEW_INSTANCE_ID
+[ec2-user@ip-10-0-1-213 ~]$ aws ec2 describe-instances --instance-id $NEW_INSTANCE_ID --query 'Reservations[0].Instances[0].NetworkInterfaces[0].Association.PublicDnsName'
+"ec2-35-93-28-75.us-west-2.compute.amazonaws.com"
+```
+
+I accessed the web application through the browser using the url `http://ec2-35-93-28-75.us-west-2.compute.amazonaws.com/index.php` 
+to confirm that the web server was functioning correctly.
 
 ![EC2 Instance Creation](./images/EX-07-ec2-instance.png)
 
-### 1.4 Creating a Custom AMI
+### 1.3 Creating a Custom AMI
 
 Next, I created a custom AMI from the running EC2 instance using the AWS CLI. This AMI captured the configured web server environment and would later be used to launch identical instances in the Auto Scaling group.
 
