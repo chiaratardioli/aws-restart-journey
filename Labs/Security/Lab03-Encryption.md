@@ -7,9 +7,10 @@ In this lab, I worked with AWS services to understand how encryption is implemen
 ## Task 1: Create an AWS KMS Key
 In this task, I created a symmetric encryption key using AWS KMS. I accessed the KMS service from the AWS Management Console and selected the option to create a new key.
 
-I configured the key with the alias **MyKMSKey** and added a description indicating its purpose for encrypting and decrypting data files. I assigned administrative and usage permissions to the provided IAM role (voclabs), ensuring proper access control.
+I configured the key with the alias *MyKMSKey* and added a description indicating its purpose for encrypting and decrypting data files. I assigned administrative and usage permissions to the provided IAM role (voclabs), ensuring proper access control.
 
-After reviewing the configuration, I completed the key creation process and copied the key’s ARN. This ARN was essential for later steps where the key was used in encryption and decryption commands.
+After reviewing the configuration, I completed the key creation process and saved the key’s ARN: `arn:aws:kms:us-west-2:450871918797:key/882db9db-9f7d-4a92-b676-10a13cb4f7ea`.
+The ARN was essential for later steps where the key was used in encryption and decryption commands.
 
 ![KMS Key Created](./images/SE-03-kms-key-created.png)
 
