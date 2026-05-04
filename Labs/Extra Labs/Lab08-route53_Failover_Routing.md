@@ -7,7 +7,7 @@ and distributed infrastructure across multiple Availability Zones, the system ac
 The architecture consists of two EC2 instances hosting identical web applications in different Availability Zones. Route 53 monitors the health of the 
 primary instance and redirects traffic to the secondary instance in case of failure.
 
-![Final Architecture](./images/EX-08-final-architecture.png)
+![Final Architecture](./images/EX-08-architecture.png)
 
 ## Task 1: Confirming the Café Websites
 
