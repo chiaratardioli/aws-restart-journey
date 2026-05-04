@@ -14,9 +14,11 @@ multiple EC2 instances distributed across private subnets in multiple Availabili
 
 ## Task 1: Creating an AMI for Auto Scaling
 
-In this task, I created an Amazon Machine Image (AMI) from the existing Web Server 1 instance. This allowed me to capture the configuration and state of the instance so that identical instances could be launched later.
+In this task, I created an Amazon Machine Image (AMI) from the existing Web Server 1 instance. This allowed me to capture the configuration 
+and state of the instance so that identical instances could be launched later.
 
-I navigated to the EC2 dashboard, selected the running instance, and created an image named *Web Server AMI*. This AMI serves as the base image for future instances in the Auto Scaling group.
+I navigated to the EC2 dashboard, selected the running instance, and created an image named *Web Server AMI*. This AMI serves as the base image 
+for future instances in the Auto Scaling group.
 
 ![AMI Creation](./images/EX-06-ami-creation.png)
 
@@ -25,18 +27,21 @@ I navigated to the EC2 dashboard, selected the running instance, and created an 
 
 I created an Application Load Balancer named *LabELB* to distribute incoming traffic across multiple EC2 instances.
 
-I configured it to span two Availability Zones using public subnets and associated it with the existing Web Security Group. I also created a target group named *lab-target-group* to route traffic to EC2 instances.
+I configured it to span two Availability Zones using public subnets and associated it with the existing Web Security Group. I also created a 
+target group named *lab-target-group* to route traffic to EC2 instances.
 
 After completing the setup, I retrieved the DNS name of the load balancer for later testing.
 
 ![Load Balancer Configuration](./images/EX-06-load-balancer.png)
 
+DNS name: `LabELB-833398434.us-west-2.elb.amazonaws.com`
 
 ## Task 3: Creating a Launch Template
 
 Next, I created a launch template named *lab-app-launch-template*. This template defines the configuration for instances launched by the Auto Scaling group.
 
-I selected the previously created AMI, chose the instance type *t3.micro*, and assigned the Web Security Group. No key pair was required since direct access to instances was not needed.
+I selected the previously created AMI, chose the instance type *t3.micro*, and assigned the Web Security Group. No key pair was required since direct 
+access to instances was not needed.
 
 ![Launch Template](./images/EX-06-launch-template.png)
 
@@ -45,27 +50,38 @@ I selected the previously created AMI, chose the instance type *t3.micro*, and a
 
 Using the launch template, I created an Auto Scaling group named *Lab Auto Scaling Group*.
 
-I configured the group to launch instances in private subnets across two Availability Zones. I attached the group to the previously created target group and enabled ELB health checks.
+I configured the group to launch instances in private subnets across two Availability Zones. I attached the group to the previously 
+created target group and enabled ELB health checks.
 
-I set the desired capacity to 2 instances, with a minimum of 2 and a maximum of 4. I also configured a target tracking scaling policy to maintain average CPU utilization at 50%.
+I set the desired capacity to 2 instances, with a minimum of 2 and a maximum of 4. I also configured a target tracking scaling policy to 
+maintain average CPU utilization at 50%.
 
 ![Auto Scaling Group](./images/EX-06-auto-scaling-group.png)
 
+![Target Tracking Scaling Policy](./images/EX-06-target-tracking-policy.png)
 
 ## Task 5: Verifying Load Balancing
 
-I verified that the Auto Scaling group successfully launched two EC2 instances. Then, I checked the target group to confirm that both instances passed the health checks and were marked as healthy.
+I verified that the Auto Scaling group successfully launched two EC2 instances. Then, I checked the target group to confirm that both instances 
+passed the health checks and were marked as healthy.
+
+![Healthy Targets](./images/EX-06-healthy-targets.png)
+
+A *healthy status* indicates that an instance has passed the load balancer's health check. This check means that the load balancer will send traffic to the instance.
 
 Using the load balancer’s DNS name, I accessed the application in a browser and confirmed that the load balancer was correctly routing traffic to the instances.
 
-![Healthy Targets](./images/EX-06-healthy-targets.png)
+[Load Test application](./images/EX-06-load-test.png)
 
 
 ## Task 6: Testing Auto Scaling
 
 To test scaling behavior, I generated load using the Load Test application. This increased CPU utilization across instances.
 
-I monitored the CloudWatch alarms and observed that the *AlarmHigh* state was triggered once CPU usage exceeded 50%. As a result, the Auto Scaling group launched additional instances.
+I monitored the CloudWatch alarms and observed that the *AlarmHigh* state was triggered once CPU usage exceeded 50%. 
+As a result, the Auto Scaling group launched additional instances.
+
+![CloudWatch AlarmHigh Status](./images/EX-06-alarmHigh-status.png)
 
 I confirmed that more than two instances were running, demonstrating successful automatic scaling.
 
