@@ -11,7 +11,7 @@ Additionally, I verified patch compliance across all instances.
 ## Task 1: Patch Linux Instances Using Default Baselines
 
 I began by accessing AWS Systems Manager through the AWS Management Console and navigating to Fleet Manager to inspect the available EC2 instances. 
-I confirmed that there were three Linux instances and verified their configuration and IAM roles.
+I confirmed that there were three Linux instances and three Windows instances, and verified their configuration and IAM roles.
 
 ![Fleet Manager Instances](./images/SE-02-fleet-manager-instances.png)
 
