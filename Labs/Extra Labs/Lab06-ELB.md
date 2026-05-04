@@ -71,7 +71,7 @@ A *healthy status* indicates that an instance has passed the load balancer's hea
 
 Using the load balancer’s DNS name, I accessed the application in a browser and confirmed that the load balancer was correctly routing traffic to the instances.
 
-[Load Test application](./images/EX-06-load-test.png)
+![Load Test application](./images/EX-06-load-test.png)
 
 
 ## Task 6: Testing Auto Scaling
