@@ -190,3 +190,34 @@ In summary:
 - I installed the AWS Encryption CLI
 _ I encrypted plaintext
 - I decrypted ciphertext
+
+
+## AWS CLI Commands
+
+```bash
+# Configures AWS CLI with credentials and default region
+aws configure
+
+# Encrypts the plaintext file using the specified AWS KMS key
+aws-encryption-cli --encrypt \
+  --input secret1.txt \
+  --wrapping-keys key=$keyArn \
+  --metadata-output ~/metadata \
+  --encryption-context purpose=test \
+  --commitment-policy require-encrypt-require-decrypt \
+  --output ~/output/.
+
+# Checks the exit status of the previous command (0 indicates success)
+echo $?
+
+# Decrypts the encrypted file back into plaintext using the same KMS key
+aws-encryption-cli --decrypt \
+  --input secret1.txt.encrypted \
+  --wrapping-keys key=$keyArn \
+  --commitment-policy require-encrypt-require-decrypt \
+  --encryption-context purpose=test \
+  --metadata-output ~/metadata \
+  --max-encrypted-data-keys 1 \
+  --buffer \
+  --output .
+```
