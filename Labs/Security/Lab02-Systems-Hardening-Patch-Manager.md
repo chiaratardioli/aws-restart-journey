@@ -39,8 +39,6 @@ Both rules were configured with an auto-approval delay of three days.
 
 After creating the baseline, I associated it with a patch group named `WindowsProd`.
 
-![Modify Patch Groups](./images/SE-02-modify-patch-groups.png)
-
 
 ## Task 3: Patch Windows Instances
 
