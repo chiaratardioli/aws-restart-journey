@@ -16,9 +16,11 @@ group and balanced by an Application Load Balancer across multiple Availability 
 
 ### 1.1 Connecting to the Command Host Instance and configuring the AWS CLI
 
-I began by accessing the EC2 Management Console and connecting to the **Command Host** instance using EC2 Instance Connect. This instance provided a preconfigured environment where I could execute AWS CLI commands required for the lab.
+I began by accessing the EC2 Management Console and connecting to the *Command Host* instance using EC2 Instance Connect. This instance provided a 
+preconfigured environment where I could execute AWS CLI commands required for the lab.
 
-After connecting, I verified the AWS Region using a metadata query and configured the AWS CLI with the appropriate region and output format. This ensured that all subsequent commands were executed in the correct environment.
+After connecting, I verified the AWS Region using a metadata query and configured the AWS CLI with the appropriate region and output format. 
+This ensured that all subsequent commands were executed in the correct environment.
 
 ```bash
   ,     #_
@@ -111,16 +113,17 @@ would later be used to launch identical instances in the Auto Scaling group.
 
 ### Task 2.1: Creating an Application Load Balancer
 
-I created an Application Load Balancer named **WebServerELB**. I configured it to operate across two Availability Zones and associated it with public subnets. 
-I also created a target group named **webserver-app** with a health check path of `/index.php`.
+I created an Application Load Balancer named *WebServerELB*. I configured it to operate across two Availability Zones and associated it with public subnets. 
+I also created a target group named *webserver-app* with a health check path of `/index.php`.
 
-After setup, I copied the DNS name of the load balancer for later testing.
+![Application Load Balancer](./images/EX-07-load-balancer.png)
 
-![Load Balancer Setup](./images/EX-07-load-balancer.png)
+The DNS name of the load balancer is `WebServerELB-1900878820.us-west-2.elb.amazonaws.com`.
+
 
 ### 2.2 Creating a Launch Template
 
-I created a launch template named **web-app-launch-template** using the custom AMI created earlier. I selected the instance type `t3.micro` and 
+I created a launch template named *web-app-launch-template** using the custom AMI created earlier. I selected the instance type `t3.micro` and 
 assigned the HTTPAccess security group. This template defines how new instances are launched within the Auto Scaling group.
 
 ![Launch Template](./images/EX-07-launch-template.png)
