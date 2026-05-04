@@ -47,15 +47,13 @@ After creating the baseline, I associated it with a patch group named `WindowsPr
 I navigated to the EC2 dashboard and added tags to each Windows instance. I assigned the tag `Patch Group: WindowsProd` to ensure they would be
 targeted by the custom patch baseline.
 
-![Tag Windows Instances](./images/SE-02-tag-windows-instances.png)
-
 
 ### Task 3.2: Patching Windows Instances
 
 Returning to Patch Manager, I initiated the patching process for Windows instances. I configured the operation similarly to the Linux patching 
 process, selecting scan and install with reboot if required, and targeting instances using the `WindowsProd` tag.
 
-![Patch Configuration Windows](./images/SE-02-patch-config-windows.png)
+![Patch Configuration Windows](./images/SE-02-windows-patch-progress.png)
 
 I accessed the execution details through the provided Execution ID and reviewed the Run Command output. This allowed me to confirm that the patch group 
 `WindowsProd` was correctly applied and that Patch Manager executed the required operations.
