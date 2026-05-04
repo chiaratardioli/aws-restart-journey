@@ -47,3 +47,9 @@ This process demonstrated how symmetric encryption uses the same key for both en
 In this lab, I successfully implemented data protection using encryption within AWS. I created a KMS key, configured an EC2 instance to use secure credentials, and installed the AWS Encryption CLI. I then encrypted plaintext data into ciphertext and decrypted it back into its original form.
 
 This lab demonstrated the practical use of encryption for securing sensitive data and highlighted the importance of key management in maintaining data security.
+
+In summary:
+- I created an AWS KMS encryption key
+- I installed the AWS Encryption CLI
+_ I encrypted plaintext
+- I decrypted ciphertext
