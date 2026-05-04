@@ -148,3 +148,46 @@ In this lab, I successfully created and configured a scalable web application in
 I used the AWS CLI to launch an EC2 instance and create a custom AMI. I then configured an Application Load Balancer to distribute incoming traffic and created a launch template to standardize instance configuration. Using this template, I deployed an Auto Scaling group that dynamically adjusted the number of instances based on CPU utilization.
 
 Finally, I validated the system by generating load and observing automatic scaling behavior. This lab demonstrated how to combine AWS services to build a resilient, efficient, and scalable cloud architecture.
+
+
+## AWS CLI Commands
+
+```bash
+# Verify the AWS region of the Command Host instance
+curl http://169.254.169.254/latest/dynamic/instance-identity/document | grep region
+
+# Configure AWS CLI credentials, region, and output format
+aws configure
+
+# Navigate to the working directory containing lab scripts
+cd /home/ec2-user/
+
+# View the user data script used to configure the web server
+more UserData.txt
+
+# Launch a new EC2 instance using AMI, subnet, security group, and user data
+aws ec2 run-instances \
+--key-name KEYNAME \
+--instance-type t3.micro \
+--image-id AMIID \
+--user-data file:///home/ec2-user/UserData.txt \
+--security-group-ids HTTPACCESS \
+--subnet-id SUBNETID \
+--associate-public-ip-address \
+--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=WebServer}]' \
+--output text \
+--query 'Instances[*].InstanceId'
+
+# Wait until the EC2 instance reaches the running state
+aws ec2 wait instance-running --instance-ids NEW-INSTANCE-ID
+
+# Retrieve the public DNS name of the EC2 instance
+aws ec2 describe-instances \
+--instance-id NEW-INSTANCE-ID \
+--query 'Reservations[0].Instances[0].NetworkInterfaces[0].Association.PublicDnsName'
+
+# Create an Amazon Machine Image (AMI) from the running instance
+aws ec2 create-image \
+--name WebServerAMI \
+--instance-id NEW-INSTANCE-ID
+```
