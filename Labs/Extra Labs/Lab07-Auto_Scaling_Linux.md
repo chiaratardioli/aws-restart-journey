@@ -97,15 +97,22 @@ to confirm that the web server was functioning correctly.
 
 ### 1.3 Creating a Custom AMI
 
-Next, I created a custom AMI from the running EC2 instance using the AWS CLI. This AMI captured the configured web server environment and would later be used to launch identical instances in the Auto Scaling group.
+Next, I created a custom AMI from the running EC2 instance using the AWS CLI. This AMI captured the configured web server environment and 
+would later be used to launch identical instances in the Auto Scaling group.
 
-![Create AMI CLI](./images/EX-07-create-ami.png)
+```bash
+[ec2-user@ip-10-0-1-213 ~]$ aws ec2 create-image --name WebServerAMI --instance-id $NEW_INSTANCE_ID
+{
+    "ImageId": "ami-0eb4ac437280c26ff"
+}
+```
 
 ## Task 2: Creating an Auto Scaling Environment
 
 ### Task 2.1: Creating an Application Load Balancer
 
-I created an Application Load Balancer named **WebServerELB**. I configured it to operate across two Availability Zones and associated it with public subnets. I also created a target group named **webserver-app** with a health check path of `/index.php`.
+I created an Application Load Balancer named **WebServerELB**. I configured it to operate across two Availability Zones and associated it with public subnets. 
+I also created a target group named **webserver-app** with a health check path of `/index.php`.
 
 After setup, I copied the DNS name of the load balancer for later testing.
 
@@ -113,15 +120,18 @@ After setup, I copied the DNS name of the load balancer for later testing.
 
 ### 2.2 Creating a Launch Template
 
-I created a launch template named **web-app-launch-template** using the custom AMI created earlier. I selected the instance type `t3.micro` and assigned the HTTPAccess security group. This template defines how new instances are launched within the Auto Scaling group.
+I created a launch template named **web-app-launch-template** using the custom AMI created earlier. I selected the instance type `t3.micro` and 
+assigned the HTTPAccess security group. This template defines how new instances are launched within the Auto Scaling group.
 
 ![Launch Template](./images/EX-07-launch-template.png)
 
 ### 2.3 Creating an Auto Scaling Group
 
-Using the launch template, I created an Auto Scaling group named **Web App Auto Scaling Group**. I configured it to launch instances in private subnets across two Availability Zones.
+Using the launch template, I created an Auto Scaling group named **Web App Auto Scaling Group**. I configured it to launch instances in private 
+subnets across two Availability Zones.
 
-I attached the group to the target group created earlier and enabled load balancer health checks. I set the desired capacity to 2, minimum to 2, and maximum to 4 instances. I also configured a target tracking scaling policy to maintain average CPU utilization at 50%.
+I attached the group to the target group created earlier and enabled load balancer health checks. I set the desired capacity to 2, minimum to 2, 
+and maximum to 4 instances. I also configured a target tracking scaling policy to maintain average CPU utilization at 50%.
 
 ![Auto Scaling Group](./images/EX-07-auto-scaling-group.png)
 
@@ -129,15 +139,18 @@ I attached the group to the target group created earlier and enabled load balanc
 
 I verified that two EC2 instances were automatically launched by the Auto Scaling group. I waited until both instances passed their status checks.
 
-Then, I checked the target group and confirmed that both instances were registered and marked as healthy. This indicated that the load balancer was correctly routing traffic to the instances.
+Then, I checked the target group and confirmed that both instances were registered and marked as healthy. This indicated that the load balancer 
+was correctly routing traffic to the instances.
 
 ![Healthy Instances](./images/EX-07-healthy-instances.png)
 
 ## Task 4: Testing Auto Scaling Configuration
 
-To test the scaling behavior, I accessed the web application using the load balancer DNS and initiated the **Start Stress** function. This caused CPU utilization to increase significantly.
+To test the scaling behavior, I accessed the web application using the load balancer DNS and initiated the **Start Stress** function. 
+This caused CPU utilization to increase significantly.
 
-I monitored the Auto Scaling group activity and observed that a new EC2 instance was launched after CPU utilization exceeded the defined threshold. This confirmed that the scaling policy was working correctly.
+I monitored the Auto Scaling group activity and observed that a new EC2 instance was launched after CPU utilization exceeded the defined threshold. 
+This confirmed that the scaling policy was working correctly.
 
 ![Scaling Activity](./images/EX-07-scaling-activity.png)
 
@@ -145,9 +158,19 @@ I monitored the Auto Scaling group activity and observed that a new EC2 instance
 
 In this lab, I successfully created and configured a scalable web application infrastructure using AWS services.
 
-I used the AWS CLI to launch an EC2 instance and create a custom AMI. I then configured an Application Load Balancer to distribute incoming traffic and created a launch template to standardize instance configuration. Using this template, I deployed an Auto Scaling group that dynamically adjusted the number of instances based on CPU utilization.
+I used the AWS CLI to launch an EC2 instance and create a custom AMI. I then configured an Application Load Balancer to distribute incoming traffic and 
+created a launch template to standardize instance configuration. Using this template, I deployed an Auto Scaling group that dynamically adjusted the 
+number of instances based on CPU utilization.
 
-Finally, I validated the system by generating load and observing automatic scaling behavior. This lab demonstrated how to combine AWS services to build a resilient, efficient, and scalable cloud architecture.
+Finally, I validated the system by generating load and observing automatic scaling behavior. This lab demonstrated how to combine AWS services to 
+build a resilient, efficient, and scalable cloud architecture.
+
+In summary:
+- I created an EC2 instance by using an AWS CLI command.
+- I created a new AMI by using the AWS CLI.
+- I created an Amazon EC2 launch template.
+- I created an Amazon EC2 Auto Scaling launch configuration.
+- I configured scaling policies and create an Auto Scaling group to scale in and scale out the number of servers based on a variable load.
 
 
 ## AWS CLI Commands
