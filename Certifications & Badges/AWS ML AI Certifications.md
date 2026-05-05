@@ -117,7 +117,7 @@ AWS supports responsible AI through services such as:
 Overall, responsible AI ensures that AI systems are developed and used ethically and effectively while delivering value to both organizations and society.
 
 
-## Developing Machine Learning Solutions — Summary
+## Developing Machine Learning Solutions
 
 Machine learning (ML) solutions follow an end-to-end lifecycle that includes defining business goals, framing the problem, preparing data, building and training models, deploying them, and continuously monitoring and retraining for improvement.
 
