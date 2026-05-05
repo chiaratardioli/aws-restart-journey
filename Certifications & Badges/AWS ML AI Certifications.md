@@ -78,7 +78,7 @@ Business success in generative AI is measured using metrics such as user satisfa
 Overall, AI and ML technologies enable scalable, data-driven solutions that transform industries and improve business outcomes when applied appropriately.
 
 
-## Responsible Artificial Intelligence Practices – Summary
+## Responsible Artificial Intelligence Practices
 
 <p align="center">
 <img src="./images/ML03-responsible-AI-core.png" 
@@ -86,7 +86,8 @@ Overall, AI and ML technologies enable scalable, data-driven solutions that tran
   width="50%">
 </p>
 
-Responsible AI refers to practices that ensure AI systems are **transparent, trustworthy, and safe** throughout their lifecycle, including design, development, deployment, and monitoring. It applies to both traditional AI and generative AI systems.
+Responsible AI refers to practices that ensure AI systems are **transparent, trustworthy, and safe** throughout their lifecycle, including design, 
+development, deployment, and monitoring. It applies to both traditional AI and generative AI systems.
 
 Key challenges include:
 - Bias and accuracy issues in models  
