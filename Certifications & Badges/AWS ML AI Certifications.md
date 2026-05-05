@@ -119,6 +119,11 @@ Overall, responsible AI ensures that AI systems are developed and used ethically
 
 ## Developing Machine Learning Solutions
 
+<p align="center">
+<img src="./images/ML04-ML-development-lifecycle.png" alt="Machine Learning Development Lifecycle" width="70%">
+</p>
+
+
 Machine learning (ML) solutions follow an end-to-end lifecycle that includes defining business goals, framing the problem, preparing data, building and training models, deploying them, and continuously monitoring and retraining for improvement.
 
 - **Lifecycle phases**:
@@ -156,9 +161,10 @@ Business metrics and KPIs are used to align model performance with real-world ob
 ## Certifications
 
 <p align="center">
-<img src="./images/cert-ML01-Fundamentals of Machine Learning and Artificial Intelligence.png" alt="Fundamentals of Machine Learning and Artificial Intelligence on AWS" width="30%">
-<img src="./images/cert-ML02-Exploring Artificial Intelligence Use Cases and Applications.png" alt="Exploring Artificial Intelligence Use Cases and Applications" width="30%">
-<img src="./images/cert-ML03-Responsible Artificial Intelligence Practices.png" alt="Responsible Artificial Intelligence Practices" width="30%">
+  <img src="./images/cert-ML01-Fundamentals of Machine Learning and Artificial Intelligence.png" alt="Fundamentals of Machine Learning and Artificial Intelligence on AWS" width="30%">
+  <img src="./images/cert-ML02-Exploring Artificial Intelligence Use Cases and Applications.png" alt="Exploring Artificial Intelligence Use Cases and Applications" width="30%">
+  <img src="./images/cert-ML03-Responsible Artificial Intelligence Practices.png" alt="Responsible Artificial Intelligence Practices" width="30%">
+  <img src="./images/cert-ML04-Developing Machine Learning Solutions.png" alt="Developing Machine Learning Solutions" width="30%">
 </p>
 
 
