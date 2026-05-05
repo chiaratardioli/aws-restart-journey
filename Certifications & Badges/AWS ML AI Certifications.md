@@ -2,8 +2,6 @@
 
 ## Fundamentals of Machine Learning and Artificial Intelligence on AWS
 
-![Machine Learning and Artificial Intelligence Asset](./images/ML01-diagram.png)
-
 Machine Learning (ML) and Artificial Intelligence (AI) are technologies that enable systems to learn from data, identify patterns, and make decisions 
 with minimal human intervention. Within AWS, these capabilities are delivered through a combination of managed services, scalable infrastructure, and 
 pre-built models that simplify development and deployment.
@@ -39,14 +37,13 @@ and efficient.
 Overall, AWS simplifies the adoption of machine learning and artificial intelligence by providing flexible tools and services that cater to both beginners 
 and experienced practitioners.
 
-
-<img src="./images/cert-ML01-Fundamentals of Machine Learning and Artificial Intelligence.png" alt="Fundamentals of Machine Learning and Artificial Intelligence on AWS" width="50%">
-
-
-
 ## Exploring Artificial Intelligence Use Cases and Applications
 
-![Machine Learning Techniques](./images/ML02-diagram.png)
+<p align="center">
+  <img src="./images/ML01-diagram.png" 
+       alt="Machine Learning and Artificial Intelligence Asset" 
+       width="30%">
+</p>
 
 Artificial Intelligence (AI) is a broad field that enables systems to perform human-like tasks such as reasoning, learning, and decision-making. Machine Learning (ML) is a subset of AI that learns patterns from data to improve performance over time without explicit programming. Deep Learning (DL) is a subset of ML that uses neural networks to model complex patterns. Generative AI is a subset of deep learning that creates new content such as text, images, audio, video, and code based on learned patterns.
 
@@ -66,6 +63,12 @@ Machine Learning is appropriate when rule-based systems are insufficient or when
 - Unsupervised learning (clustering and dimensionality reduction)
 - Reinforcement learning (learning through trial and error with rewards)
 
+<p align="center">
+<img src="./images/ML02-diagram.png" 
+  alt="Machine Learning Techniques" 
+  width="70%">
+</p>
+
 Generative AI provides additional capabilities such as adaptability, scalability, personalization, and real-time content generation. However, it also introduces challenges including bias, hallucinations, privacy risks, toxicity, and compliance issues, which require mitigation strategies such as guardrails, data minimization, and model evaluation.
 
 When selecting generative AI models, key factors include performance, capabilities, constraints, compliance, and cost. Popular foundation models include Amazon Titan, Claude, Llama, and Stable Diffusion, each designed for different tasks such as text generation, summarization, and image creation.
@@ -74,12 +77,14 @@ Business success in generative AI is measured using metrics such as user satisfa
 
 Overall, AI and ML technologies enable scalable, data-driven solutions that transform industries and improve business outcomes when applied appropriately.
 
-<img src="./images/cert-ML02-Exploring Artificial Intelligence Use Cases and Applications.png" alt="Exploring Artificial Intelligence Use Cases and Applications" width="50%">
-
 
 ## Responsible Artificial Intelligence Practices – Summary
 
-![Responsible AI Overview](./images/ML03-responsible-AI-core.png)
+<p align="center">
+<img src="./images/ML03-responsible-AI-core.png" 
+  alt="Responsible AI Overview" 
+  width="50%">
+</p>
 
 Responsible AI refers to practices that ensure AI systems are **transparent, trustworthy, and safe** throughout their lifecycle, including design, development, deployment, and monitoring. It applies to both traditional AI and generative AI systems.
 
@@ -110,5 +115,11 @@ AWS supports responsible AI through services such as:
 
 Overall, responsible AI ensures that AI systems are developed and used ethically and effectively while delivering value to both organizations and society.
 
-<img src="./images/cert-ML03-Responsible Artificial Intelligence Practices.png" alt="Responsible Artificial Intelligence Practices" width="50%">
 
+## Certifications
+
+<p align="center">
+<img src="./images/cert-ML01-Fundamentals of Machine Learning and Artificial Intelligence.png" alt="Fundamentals of Machine Learning and Artificial Intelligence on AWS" width="30%">
+<img src="./images/cert-ML02-Exploring Artificial Intelligence Use Cases and Applications.png" alt="Exploring Artificial Intelligence Use Cases and Applications" width="30%">
+<img src="./images/cert-ML03-Responsible Artificial Intelligence Practices.png" alt="Responsible Artificial Intelligence Practices" width="30%">
+</p>
