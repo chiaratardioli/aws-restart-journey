@@ -37,12 +37,12 @@ Next, I examined the existing user groups:
 - **S3-Support** – attached to the `AmazonS3ReadOnlyAccess` managed policy
 - **EC2-Admin** – assigned a custom inline policy
 
-![User Groups Overview](./images/SE-04-user-groups.png)
-
 I inspected the policies associated with each group. The managed policies provided read-only access to specific services, while the inline policy for EC2-Admin 
 allowed additional actions such as starting and stopping EC2 instances.
 
-![Policy Details](./images/SE-04-policy-details.png)
+![Managed Policy Details](./images/SE-04-managed-policy-details.png)
+
+![Inline Policy Details](./images/SE-04-inline-policy-details.png)
 
 This task helped me understand how permissions are structured and applied through IAM policies and groups.
 
@@ -61,14 +61,12 @@ I performed the following assignments:
 
 After completing the assignments, I verified that each group contained exactly one user.
 
-![Group Membership Confirmation](./images/SE-04-group-membership.png)
-
 By assigning users to groups, they automatically inherited the permissions defined by the group policies, demonstrating efficient permission management.
 
 
 ## Task 4: Sign In and Test User Permissions
 
-In this task, I tested the permissions by signing in as each user using the IAM sign-in URL.
+In this task, I tested the permissions by signing in as each user using the IAM sign-in URL `https://689779265591.signin.aws.amazon.com/console`.
 
 ![IAM Sign-in URL](./images/SE-04-signin-url.png)
 
@@ -104,6 +102,7 @@ Finally, I logged in as `user-3`. I was able to view EC2 instances and successfu
 ![EC2 Stop Success user-3](./images/SE-04-user3-ec2-stop.png)
 
 This task demonstrated how IAM policies directly affect user capabilities across AWS services.
+
 
 ## Conclusion
 
