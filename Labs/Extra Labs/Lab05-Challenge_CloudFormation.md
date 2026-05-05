@@ -1,7 +1,4 @@
-# AWS re/Start Challenge Lab Report  
-## Using AWS CloudFormation to Create an AWS VPC and Amazon EC2 Instance
-
-## Introduction
+# Using AWS CloudFormation to Create an AWS VPC and Amazon EC2 Instance
 
 This lab focused on using AWS CloudFormation to deploy infrastructure as code (IaC) in order to create a basic AWS environment. 
 The environment consisted of a Virtual Private Cloud (VPC), Internet Gateway, subnet configuration, security group rules, and an EC2 instance deployed inside the network.
