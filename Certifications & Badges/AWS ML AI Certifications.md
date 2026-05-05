@@ -168,3 +168,10 @@ Business metrics and KPIs are used to align model performance with real-world ob
 </p>
 
 
+## Reference
+- [Fundamentals of Machine Learning and Artificial Intelligence on AWS](https://skillbuilder.aws/learn/16ASDUHF86/fundamentals-of-machine-learning-and-artificial-intelligence/M7JZCTA94N)
+- [Exploring Artificial Intelligence Use Cases and Applications](https://skillbuilder.aws/learn/A3U2U9VGMX/exploring-artificial-intelligence-use-cases-and-applications/M12JQTFKB5)
+- [Responsible Artificial Intelligence Practices](https://skillbuilder.aws/learn/1H631ZWCTP/responsible-artificial-intelligence-practices/BN51NEFJNG)
+- [Developing Machine Learning Solutions on AWS Skill Builder](https://skillbuilder.aws/learn/VSS1JQ8QWW/developing-machine-learning-solutions/HR1KN4V89V)
+
+
