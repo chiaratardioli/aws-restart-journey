@@ -157,6 +157,59 @@ Business metrics and KPIs are used to align model performance with real-world ob
   - Focuses on continuous integration, deployment, monitoring, and governance
   - Improves collaboration, scalability, and reliability of ML systems
 
+## Developing Generative Artificial Intelligence Solutions
+
+<p align="center">
+<img src="./images/ML05-Diagram_GenAIApp.png" alt="Generative AI Application Lifecycle" width="70%">
+</p>
+
+The generative AI application lifecycle covers defining a use case, selecting a model, improving performance, evaluating results, and deploying the solution.
+The process is iterative and continuously improved using feedback and performance metrics.
+
+### Key Concepts
+- Generative AI has strong capabilities but also challenges (e.g., bias, cost, reliability).
+- Lifecycle stages are interconnected and may be revisited.
+
+### Defining a Use Case
+- Establish problem, requirements, and stakeholder alignment.
+- A business use case includes actors, flows, conditions, rules, and requirements.
+- Success metrics: cost savings, time savings, quality, customer satisfaction, productivity.
+- Common approaches: automation, decision support, personalization, content generation, innovation.
+
+### Selecting a Foundation Model (FM)
+- Choose between pre-trained models or building from scratch.
+- Key criteria: cost, modality, latency, multilingual support, size, complexity, customization, and deployment.
+- Must consider trade-offs, including performance vs. resources and responsible AI risks.
+
+### Improving Model Performance
+- Techniques:
+  - Prompt engineering: optimize inputs to guide outputs.
+  - Retrieval Augmented Generation (RAG): combines retrieval systems with generation for accurate, contextual responses.
+  - Fine-tuning: adapt models using domain-specific data (e.g., instruction tuning, RLHF).
+- Building from scratch offers full control but is costly and resource-intensive.
+- Trade-off: higher customization increases cost but can improve accuracy.
+
+### Agents
+- Automate and manage multi-step tasks.
+- Enable coordination, scalability, integration, and monitoring.
+- Improve efficiency and consistency in complex workflows.
+
+### Evaluation
+- Methods:
+  - Human evaluation (qualitative, accurate but costly)
+  - Benchmark datasets (standardized testing)
+  - Automated metrics (fast but limited)
+- Common metrics: ROUGE, BLEU, BERTScore, F1, perplexity.
+- Combine methods for better assessment.
+
+### Deployment
+- Integrate model into production with focus on scalability, cost, and security.
+- Consider infrastructure, regions, quotas, and shared security responsibilities.
+- Enables real-world impact and business value.
+
+### Summary
+Developing generative AI solutions requires managing the full lifecycle, balancing cost and performance, and continuously improving models through evaluation and feedback.
+
 
 ## Certifications
 
@@ -165,6 +218,7 @@ Business metrics and KPIs are used to align model performance with real-world ob
   <img src="./images/cert-ML02-Exploring Artificial Intelligence Use Cases and Applications.png" alt="Exploring Artificial Intelligence Use Cases and Applications" width="30%">
   <img src="./images/cert-ML03-Responsible Artificial Intelligence Practices.png" alt="Responsible Artificial Intelligence Practices" width="30%">
   <img src="./images/cert-ML04-Developing Machine Learning Solutions.png" alt="Developing Machine Learning Solutions" width="30%">
+  <img src="./images/cert-ML-05-Developing Generative Artificial Intelligence Solutions.png" alt="Developing Generative Artificial Intelligence Solutions" width="30%">
 </p>
 
 
