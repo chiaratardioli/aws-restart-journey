@@ -1,6 +1,4 @@
-# Troubleshoot CloudFormation – Lab Report
-
-## Introduction
+# Troubleshoot CloudFormation
 
 This lab focused on developing practical skills for troubleshooting AWS CloudFormation deployments. The activity covered querying JSON data using JMESPath, 
 identifying and resolving stack creation failures, analyzing EC2 instance logs, detecting configuration drift, and resolving issues encountered during stack deletion. 
