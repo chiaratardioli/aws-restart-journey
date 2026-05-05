@@ -1,4 +1,4 @@
-# Amazon Route 53 Failover Routing – Lab Report
+# Amazon Route 53 Failover Routing
 
 This lab focuses on configuring high availability for a web application using Amazon Route 53 failover routing. The objective is to ensure that user 
 traffic is automatically redirected to a secondary resource when the primary resource becomes unavailable. By combining health checks, DNS routing policies, 
