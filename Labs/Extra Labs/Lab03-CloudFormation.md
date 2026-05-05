@@ -1,7 +1,5 @@
 # Automation with CloudFormation
 
-## Introduction
-
 Amazon Web Services (AWS) provides infrastructure automation capabilities through services such as CloudFormation, enabling consistent and repeatable deployments. 
 In this lab, I explored how infrastructure can be defined as code using YAML templates and deployed automatically. The lab focused on creating, modifying, 
 and deleting a CloudFormation stack while integrating core AWS resources such as a Virtual Private Cloud (VPC), Security Groups, Amazon S3 buckets, and Amazon EC2 instances.
