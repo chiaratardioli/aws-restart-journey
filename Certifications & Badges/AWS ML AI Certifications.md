@@ -273,7 +273,7 @@ Optimizing foundation models involves combining RAG, fine-tuning, agents, and st
   <img src="./images/cert-ML02-Exploring Artificial Intelligence Use Cases and Applications.png" alt="Exploring Artificial Intelligence Use Cases and Applications" width="30%">
   <img src="./images/cert-ML03-Responsible Artificial Intelligence Practices.png" alt="Responsible Artificial Intelligence Practices" width="30%">
   <img src="./images/cert-ML04-Developing Machine Learning Solutions.png" alt="Developing Machine Learning Solutions" width="30%">
-  <img src="./images/cert-ML-05-Developing Generative Artificial Intelligence Solutions.png" alt="Developing Generative Artificial Intelligence Solutions" width="30%">
+  <img src="./images/cert-ML05-Developing Generative Artificial Intelligence Solutions.png" alt="Developing Generative Artificial Intelligence Solutions" width="30%">
   <img src="./images/cert-ML06-Optimizing Foundation Models.png" alt="Optimizing Foundation Models" width="30%">
 </p>
 
