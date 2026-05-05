@@ -116,6 +116,42 @@ AWS supports responsible AI through services such as:
 Overall, responsible AI ensures that AI systems are developed and used ethically and effectively while delivering value to both organizations and society.
 
 
+## Developing Machine Learning Solutions — Summary
+
+Machine learning (ML) solutions follow an end-to-end lifecycle that includes defining business goals, framing the problem, preparing data, building and training models, deploying them, and continuously monitoring and retraining for improvement.
+
+- **Lifecycle phases**:
+  - Business understanding and problem framing
+  - Data collection, preprocessing, and feature engineering
+  - Model training, evaluation, and tuning
+  - Deployment, monitoring, and retraining
+
+ML models are trained using labeled or unlabeled data and must generalize to new data. Data is typically split into training, validation, and test sets to ensure reliable evaluation.
+
+- **Model performance**:
+  - Models can be underfit, overfit, or balanced
+  - Balanced models achieve low bias and low variance
+  - Evaluation metrics depend on the task:
+    - Classification: accuracy, precision, recall, AUC-ROC
+    - Regression: mean squared error (MSE), R²
+
+Business metrics and KPIs are used to align model performance with real-world objectives, and techniques like A/B testing help optimize outcomes.
+
+- **Model deployment**:
+  - Integrates models into production for predictions
+  - Options include self-hosted or managed services
+  - Deployment types include real-time, batch, asynchronous, and serverless
+
+- **AWS support**:
+  - Amazon SageMaker AI enables data preparation, model building, training, deployment, and monitoring in a unified environment
+  - Supports pre-trained models, built-in algorithms, and custom implementations for tasks like classification, clustering, NLP, and computer vision
+
+- **MLOps**:
+  - Combines people, processes, and technology to automate and manage the ML lifecycle
+  - Focuses on continuous integration, deployment, monitoring, and governance
+  - Improves collaboration, scalability, and reliability of ML systems
+
+
 ## Certifications
 
 <p align="center">
@@ -123,3 +159,5 @@ Overall, responsible AI ensures that AI systems are developed and used ethically
 <img src="./images/cert-ML02-Exploring Artificial Intelligence Use Cases and Applications.png" alt="Exploring Artificial Intelligence Use Cases and Applications" width="30%">
 <img src="./images/cert-ML03-Responsible Artificial Intelligence Practices.png" alt="Responsible Artificial Intelligence Practices" width="30%">
 </p>
+
+
