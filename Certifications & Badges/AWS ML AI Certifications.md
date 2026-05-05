@@ -1,6 +1,6 @@
 # AWS Machine Learning And Generative AI
 
-## Fundamentals of Machine Learning and Artificial Intelligence on AWS
+## 1. Fundamentals of Machine Learning and Artificial Intelligence on AWS
 
 Machine Learning (ML) and Artificial Intelligence (AI) are technologies that enable systems to learn from data, identify patterns, and make decisions 
 with minimal human intervention. Within AWS, these capabilities are delivered through a combination of managed services, scalable infrastructure, and 
@@ -37,7 +37,7 @@ and efficient.
 Overall, AWS simplifies the adoption of machine learning and artificial intelligence by providing flexible tools and services that cater to both beginners 
 and experienced practitioners.
 
-## Exploring Artificial Intelligence Use Cases and Applications
+## 2. Exploring Artificial Intelligence Use Cases and Applications
 
 <p align="center">
   <img src="./images/ML01-diagram.png" 
@@ -78,7 +78,7 @@ Business success in generative AI is measured using metrics such as user satisfa
 Overall, AI and ML technologies enable scalable, data-driven solutions that transform industries and improve business outcomes when applied appropriately.
 
 
-## Responsible Artificial Intelligence Practices
+## 3. Responsible Artificial Intelligence Practices
 
 <p align="center">
 <img src="./images/ML03-responsible-AI-core.png" 
@@ -117,7 +117,7 @@ AWS supports responsible AI through services such as:
 Overall, responsible AI ensures that AI systems are developed and used ethically and effectively while delivering value to both organizations and society.
 
 
-## Developing Machine Learning Solutions
+## 4. Developing Machine Learning Solutions
 
 <p align="center">
 <img src="./images/ML04-ML-development-lifecycle.png" alt="Machine Learning Development Lifecycle" width="70%">
@@ -157,7 +157,7 @@ Business metrics and KPIs are used to align model performance with real-world ob
   - Focuses on continuous integration, deployment, monitoring, and governance
   - Improves collaboration, scalability, and reliability of ML systems
 
-## Developing Generative Artificial Intelligence Solutions
+## 5. Developing Generative Artificial Intelligence Solutions
 
 <p align="center">
 <img src="./images/ML05-Diagram_GenAIApp.png" alt="Generative AI Application Lifecycle" width="70%">
@@ -211,6 +211,61 @@ The process is iterative and continuously improved using feedback and performanc
 Developing generative AI solutions requires managing the full lifecycle, balancing cost and performance, and continuously improving models through evaluation and feedback.
 
 
+## 6. Optimizing Foundation Models
+
+Focuses on improving foundation model performance using Retrieval Augmented Generation (RAG), fine-tuning, vector databases, and agents. Also covers evaluation methods and preparing data for fine-tuning.
+
+### Retrieval Augmented Generation (RAG)
+- Improves model outputs by querying enterprise knowledge bases
+- Uses enterprise data (documents, reports, manuals, summaries) for context
+- Converts data into vector embeddings stored in vector databases
+- Enables faster and more relevant retrieval of information
+- Similarity search methods include k-NN and cosine similarity
+
+### Vector Embeddings and Databases
+- Embeddings represent text, images, and audio as numerical vectors
+- Similar concepts have closer vector representations
+- Stored in vector databases for fast retrieval at scale
+- AWS services include OpenSearch, RDS (pgvector), Aurora PostgreSQL (pgvector), and Amazon Kendra
+
+### Agents
+- Enable multi-step task execution in generative AI systems
+- Act as intermediaries between models and backend systems
+- Perform actions such as transactions, document retrieval, and system updates
+- Provide feedback to improve model performance over time
+
+### Evaluation of Models
+- Human evaluation: assesses user experience, context relevance, creativity, and flexibility
+- Benchmark datasets: measure accuracy, speed, efficiency, and scalability
+- Combined approach provides both technical and qualitative assessment
+- LLM-as-a-judge can automate evaluation using benchmark datasets
+
+### Fine-Tuning
+- Adapts foundation models to specific tasks or domains
+- Improves specificity, accuracy, efficiency, and reduces bias
+
+#### Approaches
+- Instruction tuning: trains model on prompt-response pairs
+- RLHF: aligns outputs with human feedback and preferences
+- Domain adaptation: uses industry-specific data (e.g., legal, healthcare)
+- Transfer learning: reuses pretrained models for new tasks
+- Continuous pretraining: updates model with new data over time
+
+### Data Preparation
+- Initial training uses large, diverse datasets for generalization
+- Fine-tuning uses smaller, high-quality, task-specific datasets
+- Key steps: data curation, labeling, governance, bias checking, feedback integration
+
+### Evaluation Metrics
+- ROUGE: overlap-based evaluation for summarization and generation
+- BLEU: precision-based metric for machine translation
+- BERTScore: semantic similarity using contextual embeddings
+
+### Summary
+Optimizing foundation models involves combining RAG, fine-tuning, agents, and structured evaluation methods to improve accuracy, relevance, and alignment with business objectives.
+
+
+
 ## Certifications
 
 <p align="center">
@@ -219,13 +274,15 @@ Developing generative AI solutions requires managing the full lifecycle, balanci
   <img src="./images/cert-ML03-Responsible Artificial Intelligence Practices.png" alt="Responsible Artificial Intelligence Practices" width="30%">
   <img src="./images/cert-ML04-Developing Machine Learning Solutions.png" alt="Developing Machine Learning Solutions" width="30%">
   <img src="./images/cert-ML-05-Developing Generative Artificial Intelligence Solutions.png" alt="Developing Generative Artificial Intelligence Solutions" width="30%">
+  <img src="./images/cert-ML06-Optimizing Foundation Models.png" alt="Optimizing Foundation Models" width="30%">
 </p>
 
 
 ## Reference
-- [Fundamentals of Machine Learning and Artificial Intelligence on AWS](https://skillbuilder.aws/learn/16ASDUHF86/fundamentals-of-machine-learning-and-artificial-intelligence/M7JZCTA94N)
-- [Exploring Artificial Intelligence Use Cases and Applications](https://skillbuilder.aws/learn/A3U2U9VGMX/exploring-artificial-intelligence-use-cases-and-applications/M12JQTFKB5)
-- [Responsible Artificial Intelligence Practices](https://skillbuilder.aws/learn/1H631ZWCTP/responsible-artificial-intelligence-practices/BN51NEFJNG)
-- [Developing Machine Learning Solutions on AWS Skill Builder](https://skillbuilder.aws/learn/VSS1JQ8QWW/developing-machine-learning-solutions/HR1KN4V89V)
-
+1. [Fundamentals of Machine Learning and Artificial Intelligence on AWS](https://skillbuilder.aws/learn/16ASDUHF86/fundamentals-of-machine-learning-and-artificial-intelligence/M7JZCTA94N)
+2. [Exploring Artificial Intelligence Use Cases and Applications](https://skillbuilder.aws/learn/A3U2U9VGMX/exploring-artificial-intelligence-use-cases-and-applications/M12JQTFKB5)
+3. [Responsible Artificial Intelligence Practices](https://skillbuilder.aws/learn/1H631ZWCTP/responsible-artificial-intelligence-practices/BN51NEFJNG)
+4. [Developing Machine Learning Solutions](https://skillbuilder.aws/learn/VSS1JQ8QWW/developing-machine-learning-solutions/HR1KN4V89V)
+5. [Developing Generative Artificial Intelligence Solutions](https://skillbuilder.aws/learn/PWJCMNXWHT/developing-generative-artificial-intelligence-solutions/JFB95SXNPF)
+6. [Optimizing Foundation Models](https://skillbuilder.aws/learn/CDYTAJCKGY/optimizing-foundation-models/PVR1FRGN1T)
 
