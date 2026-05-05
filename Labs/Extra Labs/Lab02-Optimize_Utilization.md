@@ -1,7 +1,5 @@
 # Optimize Utilization
 
-## Introduction
-
 This lab focused on optimizing AWS resources used by the Café web application to reduce operational costs and improve efficiency. 
 The primary objectives were to remove an unnecessary local database from an Amazon EC2 instance and resize the instance to a more 
 cost-effective type. Additionally, the AWS Pricing Calculator was used to estimate and compare costs before and after optimization.
