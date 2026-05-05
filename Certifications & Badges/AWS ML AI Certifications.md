@@ -2,6 +2,8 @@
 
 ## Fundamentals of Machine Learning and Artificial Intelligence on AWS
 
+![Machine Learning and Artificial Intelligence Asset](./images/ML01-diagram.png)
+
 Machine Learning (ML) and Artificial Intelligence (AI) are technologies that enable systems to learn from data, identify patterns, and make decisions 
 with minimal human intervention. Within AWS, these capabilities are delivered through a combination of managed services, scalable infrastructure, and 
 pre-built models that simplify development and deployment.
@@ -40,7 +42,11 @@ and experienced practitioners.
 
 <img src="./images/cert-ML01-Fundamentals of Machine Learning and Artificial Intelligence.png" alt="Fundamentals of Machine Learning and Artificial Intelligence on AWS" width="50%">
 
-## Exploring Artificial Intelligence Use Cases and Applications – Summary
+
+
+## Exploring Artificial Intelligence Use Cases and Applications
+
+![Machine Learning Techniques](./images/ML02-diagram.png)
 
 Artificial Intelligence (AI) is a broad field that enables systems to perform human-like tasks such as reasoning, learning, and decision-making. Machine Learning (ML) is a subset of AI that learns patterns from data to improve performance over time without explicit programming. Deep Learning (DL) is a subset of ML that uses neural networks to model complex patterns. Generative AI is a subset of deep learning that creates new content such as text, images, audio, video, and code based on learned patterns.
 
@@ -69,3 +75,40 @@ Business success in generative AI is measured using metrics such as user satisfa
 Overall, AI and ML technologies enable scalable, data-driven solutions that transform industries and improve business outcomes when applied appropriately.
 
 <img src="./images/cert-ML02-Exploring Artificial Intelligence Use Cases and Applications.png" alt="Exploring Artificial Intelligence Use Cases and Applications" width="50%">
+
+
+## Responsible Artificial Intelligence Practices – Summary
+
+![Responsible AI Overview](./images/ML03-responsible-AI-core.png)
+
+Responsible AI refers to practices that ensure AI systems are **transparent, trustworthy, and safe** throughout their lifecycle, including design, development, deployment, and monitoring. It applies to both traditional AI and generative AI systems.
+
+Key challenges include:
+- Bias and accuracy issues in models  
+- Bias-variance tradeoff affecting performance  
+- Generative AI risks such as toxicity, hallucinations, intellectual property concerns, and misuse  
+
+To address these challenges, responsible AI is built on several core dimensions:
+- Fairness and inclusion  
+- Explainability of model decisions  
+- Privacy and security of data  
+- Transparency of system capabilities and limitations  
+- Robustness and reliability  
+- Governance and compliance  
+- Safety and controllability  
+
+Responsible AI also provides important business benefits. These include:
+- Increased trust and reputation  
+- Regulatory compliance  
+- Reduced risks and costs  
+- Improved decision-making  
+- Competitive advantage  
+
+AWS supports responsible AI through services such as:
+- **Amazon SageMaker**, which provides tools for model building, bias detection, explainability, and monitoring  
+- **Amazon Bedrock**, which offers foundation models with built-in guardrails, content filtering, and privacy protection  
+
+Overall, responsible AI ensures that AI systems are developed and used ethically and effectively while delivering value to both organizations and society.
+
+<img src="./images/cert-ML03-Responsible Artificial Intelligence Practices.png" alt="Responsible Artificial Intelligence Practices" width="50%">
+
