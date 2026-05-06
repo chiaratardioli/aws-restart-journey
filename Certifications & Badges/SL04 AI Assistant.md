@@ -7,7 +7,7 @@ The HR department receives over 500 daily requests about policies, benefits, and
 
 ## AWS Services
 - **Amazon Bedrock**: to create the knowledge base and AI agent
--  **Amazon OpenSearch Service**: to store and retrieve vector embeddings for the knowledge base
+- **Amazon OpenSearch Service**: to store and retrieve vector embeddings for the knowledge base
 - **AWS Lambda**: to execute actions (e.g., submit vacation requests) through the agent’s action group
 
 [Link to course on Skillbuilder](https://skillbuilder.aws/learn/PT6HBMUFM8/aws-simulearn-create-an-ai-smart-assistant/9VN4PQCUR8)
@@ -15,15 +15,51 @@ The HR department receives over 500 daily requests about policies, benefits, and
 
 ## Solution
 
-1. I create an Amazon Bedrock knowledge base using HR documents
-2. I build an AI agent to answer employee questions
-3. I attached the knowledge base to the agent for accurate responses
-4. I added an action group to handle requests (e.g., vacation) using AWS Lambda
-5. I tested the agent for question answering and task execution  
+1. I review the HR documents and the prompt pre-loaded in the S3 bucket.
 
-![Architecture](./images/SL-04-architecture.png)
+2. I retrieve the ARN from the Amazon OpenSearch Service serveless collection `kb-collection`.
+
+[AWS OpenSearch Service Collection](SL-04-opensearch-collection.png)
+[AWS OpenSearch Service Knowledge Base Index](./images/SL-04-openseach-index.png)
+
+3. I create an Amazon Bedrock knowledge base with vector store and I called it `hr-knowledge-base`.
+
+[Amazon Bedrock knowledge Base]SL-04-knowledge-base.png)
+
+4. I build an AI agent to answer employee questions
+  - I used the pre-existing service role called `Bedrock Agent Role`
+  - I used the model `Nova Pro 1.0`
+  - I added the following instructions for the agent:
+  ```
+  You are a professional HR Assistant responsible for helping employees with HR-related policy questions. Follow these guidelines:
+
+1. Primary Responsibilities:
+- Answer questions about HR policies using all knowledge bases available
+- Maintain professional and friendly tone
+- Protect confidential information
+
+2. When handling HR policy questions:
+- Include relevant policy references only from available knowledge bases
+- If the information is not in the knowledge bases, recommend consulting HR department
+
+3. Limitations:
+- Defer sensitive matters to HR department
+
+4. Response Format:
+- Be concise and clear
+- Confirm understanding before proceeding
+- Provide next steps when applicable
+
+Always maintain professionalism and confidentiality in all interactions.
+  ```
+  - I attached the knowledge base to the agent for accurate responses
+  - I created an action group called `submit-benefits` to handle requests using AWS Lambda function `submitBenefits.py`
+  - I tested the agent for question answering and task execution  
+
 ![Agent Setup](./images/SL-04-agent-setup.png)
+
 
 ## Conclusion
 The AI smart assistant automates HR support by providing accurate answers and handling requests, improving efficiency and availability.
 
+![Create an AI Smart Assistant](./images/SL04-CreateanAISmartAssistant.png)
