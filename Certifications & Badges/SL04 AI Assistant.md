@@ -13,7 +13,7 @@ The HR department receives over 500 daily requests about policies, benefits, and
 
 ## Solution
 
-1. I review the HR documents and the prompt in the S3 bucket.
+1. I review the HR documents and the prompt stored in the S3 bucket.
 
 2. I retrieve the ARN from the Amazon OpenSearch Service serveless collection `kb-collection`.
 
