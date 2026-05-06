@@ -1,5 +1,7 @@
 # AWS SimuLearn: File Systems in the Cloud
 
+[Link to course on AWS Skill Builder](https://skillbuilder.aws/learn/A5M8X2CHM3/aws-simulearn-file-systems-in-the-cloud/RAJVAUNMHR)
+
 ## Simulated business scenario
 The pet modeling agency wants a way to share files across its branch offices without managing physical storage infrastructure.
 
@@ -15,7 +17,6 @@ The pet modeling agency wants a way to share files across its branch offices wit
 
 ![EFS-architecture](./images/lab-EFS-architecture.png)
 
-[Link to course on Skillbuilder](https://skillbuilder.aws/learn/A5M8X2CHM3/aws-simulearn-file-systems-in-the-cloud/RAJVAUNMHR)
 
 ## Solution
 
