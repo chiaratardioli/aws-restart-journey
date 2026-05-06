@@ -1,4 +1,4 @@
-# Portfolio Development – MathBridge AI (Optimization & Reflection)
+# MathBridge AI : Optimization & Reflection
 
 ## Optimization
 
