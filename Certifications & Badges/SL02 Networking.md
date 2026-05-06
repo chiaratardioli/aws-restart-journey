@@ -1,5 +1,7 @@
 # AWS SimuLearn: Networking Concepts
 
+[Link to course on AWS Skill Builder](https://skillbuilder.aws/learn/XCEMH2NXKJ/aws-simulearn-networking-concepts/QN5P4AJMUV)
+
 ## Simulated business scenario
 The bank wants to establish a network architecture that securely controls communication between its internal resources and the internet.
 
@@ -9,7 +11,6 @@ The bank wants to establish a network architecture that securely controls commun
 
 ![Network Architecture](./images/SL02-architecture.png)
 
-[Link to course on Skillbuilder](https://skillbuilder.aws/learn/XCEMH2NXKJ/aws-simulearn-networking-concepts/QN5P4AJMUV)
 
 ## Solution
 
