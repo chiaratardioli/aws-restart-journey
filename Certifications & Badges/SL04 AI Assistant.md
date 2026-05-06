@@ -14,14 +14,14 @@ The HR department receives over 500 daily requests about policies, benefits, and
 
 ## Solution
 
-1. I review the HR documents and the prompt stored in the S3 bucket.
+1. I reviewed the HR documents and the prompt stored in the S3 bucket.
 
-2. I retrieve the ARN from the Amazon OpenSearch Service serveless collection `kb-collection`.
+2. I retrieved the ARN from the Amazon OpenSearch Service serveless collection `kb-collection` and reviewed the base index.
 
 ![AWS OpenSearch Service Collection](./images/SL-04-opensearch-collection.png)
 ![AWS OpenSearch Service Knowledge Base Index](./images/SL-04-openseach-index.png)
 
-3. I create an Amazon Bedrock knowledge base with vector store and I called it `hr-knowledge-base`. As data source I used the HR documents stored in the S3 bucket.
+3. I created an Amazon Bedrock knowledge base with vector store and I called it `hr-knowledge-base`. As data source I used the HR documents stored in the S3 bucket.
 
 ![Amazon Bedrock knowledge Base](./images/SL-04-knowledge-base.png)
 
@@ -57,7 +57,7 @@ Always maintain professionalism and confidentiality in all interactions.
 
 ![Agent Setup](./images/SL-04-agent-setup.png)
 
-5. I verify that the dynamoDB `BenefitsTable` contains my test entry.
+5. I verified that the dynamoDB `BenefitsTable` contains my test entry.
 
 ![DynamoDB BenefitsTable](./images/SL-04-dynamoDB-benefits.png)
 
