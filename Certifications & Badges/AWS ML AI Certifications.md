@@ -265,6 +265,58 @@ Focuses on improving foundation model performance using Retrieval Augmented Gene
 Optimizing foundation models involves combining RAG, fine-tuning, agents, and structured evaluation methods to improve accuracy, relevance, and alignment with business objectives.
 
 
+## 7. Security, Compliance, and Governance for AI Solutions
+
+Focuses on securing AI systems, managing risk, and ensuring compliance using AWS tools and governance practices.
+
+### Key Concepts
+- Security: protects data, systems, and infrastructure  
+- Governance: manages risk and business value  
+- Compliance: ensures adherence to laws and standards  
+
+### Defense in Depth
+- Uses multiple layers of security to protect AI systems  
+- Helps prevent, detect, and respond to threats  
+
+### Governance and Compliance
+- Establish frameworks, policies, and oversight for responsible AI  
+- Mitigate risks such as bias, privacy issues, and misuse  
+- Follow standards like NIST, ISO, GDPR, HIPAA, PCI DSS  
+
+### AI-Specific Risks
+- Complex and evolving systems  
+- Bias, privacy violations, and unexpected behaviors  
+- Need for transparency and accountability  
+
+### AWS Governance and Compliance Services
+- AWS Config: track resource configurations  
+- Amazon Inspector: detect vulnerabilities  
+- AWS Audit Manager: automate audits  
+- AWS Artifact: access compliance documents  
+- AWS CloudTrail: log and monitor activity  
+- AWS Trusted Advisor: optimize security and performance  
+
+### Data Governance
+- Ensure data quality, integrity, and privacy  
+- Manage data lifecycle, access, and protection  
+- Apply responsible AI practices and governance roles  
+
+### Monitoring
+- Track performance, infrastructure, bias, and compliance  
+- Ensure reliability and alignment with objectives  
+
+### Security Practices
+- Threat detection and vulnerability management  
+- Infrastructure protection and access control  
+- Prevent prompt injection and secure data with encryption  
+
+### Shared Responsibility Model
+- AWS secures infrastructure  
+- Customers manage applications, data, and configurations  
+
+### Summary
+Effective AI solutions require strong security, governance, and compliance practices, supported by layered defenses, proper data management, continuous monitoring, and AWS services.
+
 
 ## Certifications
 
@@ -275,6 +327,7 @@ Optimizing foundation models involves combining RAG, fine-tuning, agents, and st
   <img src="./images/cert-ML04-Developing Machine Learning Solutions.png" alt="Developing Machine Learning Solutions" width="30%">
   <img src="./images/cert-ML05-Developing Generative Artificial Intelligence Solutions.png" alt="Developing Generative Artificial Intelligence Solutions" width="30%">
   <img src="./images/cert-ML06-Optimizing Foundation Models.png" alt="Optimizing Foundation Models" width="30%">
+  <img src="./images/cert-ML07-Security, Compliance, and Governance for AI Solutions.png" alt="Security, Compliance, and Governance for AI Solutions" width="30%">
 </p>
 
 
@@ -285,4 +338,4 @@ Optimizing foundation models involves combining RAG, fine-tuning, agents, and st
 4. [Developing Machine Learning Solutions](https://skillbuilder.aws/learn/VSS1JQ8QWW/developing-machine-learning-solutions/HR1KN4V89V)
 5. [Developing Generative Artificial Intelligence Solutions](https://skillbuilder.aws/learn/PWJCMNXWHT/developing-generative-artificial-intelligence-solutions/JFB95SXNPF)
 6. [Optimizing Foundation Models](https://skillbuilder.aws/learn/CDYTAJCKGY/optimizing-foundation-models/PVR1FRGN1T)
-
+7. [Security, Compliance, and Governance for AI Solutions](https://skillbuilder.aws/learn/YFACXFGBSJ/security-compliance-and-governance-for-ai-solutions/YZTVAG8P4Q)
