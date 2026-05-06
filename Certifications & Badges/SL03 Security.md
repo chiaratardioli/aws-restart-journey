@@ -1,5 +1,7 @@
 # AWS SimuLearn: Core Security Concepts
 
+[Link to course on AWS Skill Builder](https://skillbuilder.aws/learn/3KYWQBTSTV/aws-simulearn-core-security-concepts/Q29T2DWZPK)
+
 ## Simulated business scenario
 
 The stock exchange wants to restrict support engineers' system access to only those actions required for their specific roles, enhancing overall security controls.
@@ -16,8 +18,6 @@ I will gain hands-on experience working with AWS services, developing job-ready 
 - Amazon Elastic Compute Cloud
 - AWS Identity and Access Management
 - Amazon Relational Database Service
-
-[Link to course on Skillbuilder](https://skillbuilder.aws/learn/3KYWQBTSTV/aws-simulearn-core-security-concepts/Q29T2DWZPK)
 
 ## Solution
 
