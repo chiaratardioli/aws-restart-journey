@@ -1,4 +1,4 @@
-# MathBridge AI : Further Development
+# MathBridge AI: Further Development
 
 ## Optimization
 
