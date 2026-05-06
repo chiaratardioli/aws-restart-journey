@@ -1,4 +1,4 @@
-## MathBridge AI: Development
+## MathBridge AI: Solution Design
 
 ## App Name
 
