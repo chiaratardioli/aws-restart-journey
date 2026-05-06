@@ -56,12 +56,12 @@ Always ask yourself:
 
 ## Test 3
 
-![Test 3: Area of a circle](test03-area-circle.png)
+![Test 3: Area of a circle](./images/test03-area-circle.png)
 
 ## Test 4
 
-![Test 4: Prime Number](test04-prime-number.png)
+![Test 4: Prime Number](./images/test04-prime-number.png)
 
 ## Test 5
 
-![Test 5: What is x (unknow variable)?](test05-unknown-x.png)
+![Test 5: What is x (unknow variable)?](./images/test05-unknown-x.png)
