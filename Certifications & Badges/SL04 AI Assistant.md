@@ -19,12 +19,12 @@ The HR department receives over 500 daily requests about policies, benefits, and
 
 2. I retrieve the ARN from the Amazon OpenSearch Service serveless collection `kb-collection`.
 
-[AWS OpenSearch Service Collection](SL-04-opensearch-collection.png)
-[AWS OpenSearch Service Knowledge Base Index](./images/SL-04-openseach-index.png)
+![AWS OpenSearch Service Collection](SL-04-opensearch-collection.png)
+![AWS OpenSearch Service Knowledge Base Index](./images/SL-04-openseach-index.png)
 
 3. I create an Amazon Bedrock knowledge base with vector store and I called it `hr-knowledge-base`.
 
-[Amazon Bedrock knowledge Base]SL-04-knowledge-base.png)
+![Amazon Bedrock knowledge Base](SL-04-knowledge-base.png)
 
 4. I build an AI agent to answer employee questions
   - I used the pre-existing service role called `Bedrock Agent Role`
@@ -63,3 +63,6 @@ Always maintain professionalism and confidentiality in all interactions.
 The AI smart assistant automates HR support by providing accurate answers and handling requests, improving efficiency and availability.
 
 ![Create an AI Smart Assistant](./images/SL04-CreateanAISmartAssistant.png)
+
+## Completition Certificate
+
