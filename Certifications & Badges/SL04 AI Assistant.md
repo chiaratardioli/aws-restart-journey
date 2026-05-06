@@ -3,8 +3,6 @@
 ## Introduction
 The HR department receives over 500 daily requests about policies, benefits, and procedures, but responses are limited to business hours and capacity. An AI solution is needed to automate responses and improve availability.
 
-![HR Requests](./images/SL-04-hr-requests.png)
-
 ## AWS Services
 - **Amazon Bedrock**: to create the knowledge base and AI agent
 - **Amazon OpenSearch Service**: to store and retrieve vector embeddings for the knowledge base
@@ -19,12 +17,12 @@ The HR department receives over 500 daily requests about policies, benefits, and
 
 2. I retrieve the ARN from the Amazon OpenSearch Service serveless collection `kb-collection`.
 
-![AWS OpenSearch Service Collection](SL-04-opensearch-collection.png)
+![AWS OpenSearch Service Collection](./images/SL-04-opensearch-collection.png)
 ![AWS OpenSearch Service Knowledge Base Index](./images/SL-04-openseach-index.png)
 
 3. I create an Amazon Bedrock knowledge base with vector store and I called it `hr-knowledge-base`.
 
-![Amazon Bedrock knowledge Base](SL-04-knowledge-base.png)
+![Amazon Bedrock knowledge Base](./images/SL-04-knowledge-base.png)
 
 4. I build an AI agent to answer employee questions
   - I used the pre-existing service role called `Bedrock Agent Role`
@@ -57,6 +55,10 @@ Always maintain professionalism and confidentiality in all interactions.
   - I tested the agent for question answering and task execution  
 
 ![Agent Setup](./images/SL-04-agent-setup.png)
+
+5. I verify that the dynamoDB `BenefitsTable` contains my test entry.
+
+![DynamoDB BenefitsTable](./images/SL-04-dynamoDB-benefits.png)
 
 
 ## Conclusion
