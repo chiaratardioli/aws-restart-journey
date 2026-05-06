@@ -1,6 +1,6 @@
 ## AWS SimuLearn: Create an AI Smart Assistant
 
-## Introduction
+## Simulated business scenario
 The HR department receives over 500 daily requests about policies, benefits, and procedures, but responses are limited to business hours and capacity. An AI solution is needed to automate responses and improve availability.
 
 ## AWS Services
