@@ -77,5 +77,5 @@ The AI smart assistant automates HR support by providing accurate answers and ha
 
 ## Completion Certificate
 
-![AWS SimuLearn: Create an AI Smart Assistant](./images/cert-SL04-Create an AI Smart Assistant.png)
+![AWS SimuLearn: Create an AI Smart Assistant](./images/cert-SL04-AI-assistant.png)
 
