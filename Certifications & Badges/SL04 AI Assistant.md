@@ -25,7 +25,7 @@ The HR department receives over 500 daily requests about policies, benefits, and
 
 ![Amazon Bedrock knowledge Base](./images/SL-04-knowledge-base.png)
 
-4. I build an AI agent to answer employee questions
+4. I build an AI agent `hr-benefits-agent` to answer employee questions.
   - I used the pre-existing service role called `Bedrock Agent Role`
   - I used the model `Nova Pro 1.0`
   - I added the following instructions for the agent:
