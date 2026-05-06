@@ -1,4 +1,4 @@
-# PartyRock
+# MathBridge AI
 
 [MathBridge AI: Learn Math Today on PartyRock](https://partyrock.aws/u/chiarat/mUo2es1UX/MathBridge-AI%253A-Learn-Math-Today)
 
