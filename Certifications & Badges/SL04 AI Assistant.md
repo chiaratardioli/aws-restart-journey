@@ -5,12 +5,21 @@ The HR department receives over 500 daily requests about policies, benefits, and
 
 ![HR Requests](./images/SL-04-hr-requests.png)
 
+## AWS Services
+- **Amazon Bedrock**: to create the knowledge base and AI agent
+-  **Amazon OpenSearch Service**: to store and retrieve vector embeddings for the knowledge base
+- **AWS Lambda**: to execute actions (e.g., submit vacation requests) through the agent’s action group
+
+[Link to course on Skillbuilder](https://skillbuilder.aws/learn/PT6HBMUFM8/aws-simulearn-create-an-ai-smart-assistant/9VN4PQCUR8)
+
+
 ## Solution
-- Create an Amazon Bedrock knowledge base using HR documents  
-- Build an AI agent to answer employee questions  
-- Attach the knowledge base to the agent for accurate responses  
-- Add an action group to handle requests (e.g., vacation) using AWS Lambda  
-- Test the agent for question answering and task execution  
+
+1. I create an Amazon Bedrock knowledge base using HR documents
+2. I build an AI agent to answer employee questions
+3. I attached the knowledge base to the agent for accurate responses
+4. I added an action group to handle requests (e.g., vacation) using AWS Lambda
+5. I tested the agent for question answering and task execution  
 
 ![Architecture](./images/SL-04-architecture.png)
 ![Agent Setup](./images/SL-04-agent-setup.png)
