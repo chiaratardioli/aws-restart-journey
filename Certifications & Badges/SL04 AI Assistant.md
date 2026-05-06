@@ -62,10 +62,18 @@ Always maintain professionalism and confidentiality in all interactions.
 ![DynamoDB BenefitsTable](./images/SL-04-dynamoDB-benefits.png)
 
 
+## Final Architecture
+
+![Create an AI Smart Assistant](./images/SL04-CreateanAISmartAssistant.png)
+
+
 ## Conclusion
 The AI smart assistant automates HR support by providing accurate answers and handling requests, improving efficiency and availability.
 
-![Create an AI Smart Assistant](./images/SL04-CreateanAISmartAssistant.png)
+- I determined how to use Amazon Bedrock to create automated customer service solutions.
+- I determined how to setup an Amazon Bedrock agent with knowledge bases.
+- I demonstrated how to add action groups to an Amazon Bedrock agent.
+
 
 ## Completion Certificate
 
