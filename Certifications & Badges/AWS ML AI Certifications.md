@@ -318,7 +318,7 @@ Focuses on securing AI systems, managing risk, and ensuring compliance using AWS
 Effective AI solutions require strong security, governance, and compliance practices, supported by layered defenses, proper data management, continuous monitoring, and AWS services.
 
 
-## Certifications
+## AWS Completition Certificates
 
 <p align="center">
   <img src="./images/cert-ML01-Fundamentals of Machine Learning and Artificial Intelligence.png" alt="Fundamentals of Machine Learning and Artificial Intelligence on AWS" width="30%">
