@@ -6,10 +6,11 @@
 The HR department receives over 500 daily requests about policies, benefits, and procedures, but responses are limited to business hours and capacity. An AI solution is needed to automate responses and improve availability.
 
 ## AWS Services
-- **Amazon Bedrock**: to create the knowledge base and AI agent
-- **Amazon OpenSearch Service**: to store and retrieve vector embeddings for the knowledge base
-- **AWS Lambda**: to execute actions (e.g., submit vacation requests) through the agent’s action group
-
+* **Amazon Bedrock**: to create the knowledge base and AI agent
+* **Amazon OpenSearch Service**: to store and retrieve vector embeddings for the knowledge base
+* **AWS Lambda**: to execute actions (e.g., submit requests) through the agent’s action group
+* **Amazon DynamoDB**: to store and manage request data (e.g., vacation or benefits requests)
+* **Amazon Simple Storage Service (S3)**: to store HR documents used to build the knowledge base
 
 ## Solution
 
