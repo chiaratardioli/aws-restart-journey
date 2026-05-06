@@ -1,4 +1,4 @@
-## Create an AI Smart Assistant
+## AWS SimuLearn: Create an AI Smart Assistant
 
 ## Introduction
 The HR department receives over 500 daily requests about policies, benefits, and procedures, but responses are limited to business hours and capacity. An AI solution is needed to automate responses and improve availability.
@@ -64,5 +64,7 @@ The AI smart assistant automates HR support by providing accurate answers and ha
 
 ![Create an AI Smart Assistant](./images/SL04-CreateanAISmartAssistant.png)
 
-## Completition Certificate
+## Completion Certificate
+
+![AWS SimuLearn: Create an AI Smart Assistant](./images/cert-SL04-ai-agent.png)
 
