@@ -185,7 +185,34 @@ MathBridge AI is designed using AWS cloud services for scalability and reliabili
 
 ### Architecture flow
 
-Student → API Gateway → Lambda → Bedrock → Response
+```
+Student (Web / Mobile App)
+            │
+            ▼
+     Amazon API Gateway
+            │
+            ▼
+        AWS Lambda
+            │
+ ┌──────────┴──────────┐
+ ▼                     ▼
+Amazon Bedrock     Retrieval System (RAG)
+(Generative AI)    Amazon OpenSearch / Kendra
+                           │
+                           ▼
+                   Knowledge Base
+                  (Amazon S3 Storage)
+                           │
+                           ▼
+                 Vector Embeddings Database
+                  (OpenSearch / pgvector)
+
+            ▼
+      Generated Response
+            │
+            ▼
+ Student receives explanation
+```
 
 ### Key components
 
