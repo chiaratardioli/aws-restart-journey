@@ -31,8 +31,6 @@ Subnet A: 10.0.1.0/24
 Subnet B: 10.0.2.0/24
 ```
 
-
-
 ### CIDR block sizes and IP counts
 
 | CIDR Block | Total IPs | Usable IPs (AWS) |
@@ -41,9 +39,15 @@ Subnet B: 10.0.2.0/24
 | /24        | 256       | 251              |
 | /28        | 16        | 11               |
 
-> AWS reserves 5 IP addresses in every subnet
-
-
+> AWS reserves 5 IP addresses in every subnet and cannot be used.
+> 
+>For example, if the subnet is 10.0.0.0/24, AWS reserves:
+>
+>1. Network address → 10.0.0.0
+>2. VPC router → 10.0.0.1
+>3. DNS server → 10.0.0.2
+>4. Future use (reserved by AWS) → 10.0.0.3
+>5. Network broadcast address → 10.0.0.255
 
 ### Key AWS rules for CIDR
 - VPC CIDR range: **/16 to /28**
