@@ -1,6 +1,5 @@
 # Monitor an EC2 Instance with Amazon CloudWatch
 
-
 This lab focused on monitoring and logging AWS resources using Amazon CloudWatch and Amazon SNS. The objective was to configure a monitoring solution 
 capable of detecting high CPU utilization on an Amazon EC2 instance and automatically sending notifications through Amazon SNS.
 
@@ -19,14 +18,14 @@ The following AWS resources were available in the lab environment:
 - Amazon CloudWatch
 - Amazon SNS
 
-![Lab Environment](./images/SE-06-lab-environment.png)
+![Lab Architecture](./images/SE-06-architecture.png)
 
 
 ## Task 1: Configure Amazon SNS
 
 In this task, I created an Amazon SNS topic and subscribed an email endpoint to receive notifications from CloudWatch alarms.
 
-### 1. Create an SNS Topic
+#### 1. Create an SNS Topic
 
 I navigated to the AWS Management Console and opened the Amazon SNS service.
 
@@ -34,7 +33,7 @@ I created a new topic with the following configuration:
 - Type: `Standard`
 - Name: `MyCwAlarm`
 
-### 2. Create an Email Subscription
+#### 2. Create an Email Subscription
 
 After creating the topic, I added a subscription using my email address.
 - Protocol: `Email`
@@ -51,7 +50,7 @@ After confirming the subscription, the status changed to **Confirmed**.
 
 In this task, I configured a CloudWatch alarm to monitor CPU utilization for the Stress Test EC2 instance.
 
-### View EC2 Metrics
+#### 1. View EC2 Metrics
 
 I opened Amazon CloudWatch and navigated to:
 
@@ -65,37 +64,34 @@ Initially, the CPU utilization remained close to 0% because no workload was runn
 
 ![CloudWatch Metrics](./images/SE-06-cloudwatch-metrics.png)
 
-### Configure the Alarm
+#### 2. Configure the Alarm
 
 I created a new CloudWatch alarm using the following settings:
 
-| Setting        | Value           |
-| -------------- | --------------- |
-| Metric         | CPUUtilization  |
-| Statistic      | Average         |
-| Period         | 1 minute        |
-| Threshold Type | Static          |
-| Condition      | Greater than 60 |
-| SNS Topic      | MyCwAlarm       |
+- Metric: `CPUUtilization`
+- Statistic: `Average`
+- Period: `1 minute`
+- Threshold Type: `Static`
+- Condition: `Greater than 60`
+- SNS Topic: `MyCwAlarm`
 
 The alarm configuration triggered notifications whenever CPU utilization exceeded 60%.
 
-![CloudWatch Alarm Configuration](./images/SE-06-cloudwatch-alarm-configuration.png)
+![CloudWatch Alarm Configuration - part 1](./images/SE-06-cloudwatch-alarm-configuration-1.png)
 
-### Alarm Details
+![CloudWatch Alarm Configuration - part 2](./images/SE-06-cloudwatch-alarm-configuration-2.png)
+
+![CloudWatch Alarm Configuration - part 3](./images/SE-06-cloudwatch-alarm-configuration-3.png)
+
+
+#### 3. Alarm Details
 
 The alarm was created with the following configuration:
 
-| Setting     | Value                                                        |
-| ----------- | ------------------------------------------------------------ |
-| Alarm Name  | LabCPUUtilizationAlarm                                       |
-| Description | CloudWatch alarm for Stress Test EC2 instance CPUUtilization |
+- Alarm Name: `LabCPUUtilizationAlarm`
+- Description: `CloudWatch alarm for Stress Test EC2 instance CPUUtilization`
 
-### Result
-
-At the end of this task, CloudWatch was actively monitoring the EC2 instance and configured to notify me through Amazon SNS whenever 
-CPU usage exceeded the defined threshold.
-
+![CloudWatch Alarm](./images/SE-06-cloudwatch-alarm-created.png)
 
 
 ## Task 3: Test the CloudWatch Alarm
