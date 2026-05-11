@@ -16,7 +16,8 @@ Security and governance are critical in AI systems. AWS services such as **AWS C
 
 Overall, AWS simplifies the development of **secure, scalable, and production-ready AI solutions** by providing end-to-end support for both **traditional ML** and **modern Generative AI applications**.
 
-
+For more details, see [AWS Machine Learning and Generative AI](<../Core Concepts/ML_GenAI.md>) in the Core Concepts section.
+ 
 ## AWS Completition Certificates
 
 <p align="center">
