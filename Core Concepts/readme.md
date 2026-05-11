@@ -1,4 +1,4 @@
-# Random
+# AWS Core Concepts
 
 This section contains useful **cheat sheet**:
 
