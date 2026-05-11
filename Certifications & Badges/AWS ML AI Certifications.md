@@ -318,6 +318,67 @@ Focuses on securing AI systems, managing risk, and ensuring compliance using AWS
 Effective AI solutions require strong security, governance, and compliance practices, supported by layered defenses, proper data management, continuous monitoring, and AWS services.
 
 
+## 8. Essentials of Prompt Engineering
+
+### What Is Prompt Engineering?
+
+Prompt engineering is writing effective instructions for AI models to produce better outputs.
+
+Benefits:
+
+* Improves accuracy and quality
+* Adds context and structure
+* Guides safer responses
+
+### Main Parts of a Prompt
+
+* **Instructions** — task to perform
+* **Context** — background information
+* **Input Data** — information to process
+* **Output Format** — desired response style
+
+### Important Parameters
+
+* **Temperature** — controls creativity
+* **Top p / Top k** — control response diversity
+* **Maximum Length** — limits response size
+* **Stop Sequences** — stop generation at specific points
+
+### Best Practices
+
+* Be clear and specific
+* Include context
+* Define output format
+* Use examples
+* Break complex tasks into steps
+
+### Prompting Techniques
+
+#### Zero-Shot
+
+No examples provided.
+
+#### Few-Shot
+
+Uses examples to guide the model.
+
+#### Chain-of-Thought
+
+Encourages step-by-step reasoning.
+
+### Risks
+
+* **Poisoning** — harmful training data
+* **Prompt Injection** — manipulating prompts
+* **Exposure** — leaking sensitive data
+* **Prompt Leaking** — revealing hidden instructions
+* **Jailbreaking** — bypassing safety restrictions
+
+### Key Takeaway
+
+Clear, structured prompts improve the quality, safety, and relevance of AI-generated responses.
+
+
 ## AWS Completition Certificates
 
 <p align="center">
@@ -328,6 +389,9 @@ Effective AI solutions require strong security, governance, and compliance pract
   <img src="./images/cert-ML05-Developing Generative Artificial Intelligence Solutions.png" alt="Developing Generative Artificial Intelligence Solutions" width="30%">
   <img src="./images/cert-ML06-Optimizing Foundation Models.png" alt="Optimizing Foundation Models" width="30%">
   <img src="./images/cert-ML07-Security, Compliance, and Governance for AI Solutions.png" alt="Security, Compliance, and Governance for AI Solutions" width="30%">
+  <a href="https://skillbuilder.aws/learn/XBNAVKA88J/essentials-of-prompt-engineering/9T9Q45EDTV">
+    <img src="./images/cert-ML008-Essentials of Prompt Engineering.png" alt="Essentials of Prompt Engineering" width="30%">
+  </a>
 </p>
 
 
@@ -339,3 +403,4 @@ Effective AI solutions require strong security, governance, and compliance pract
 5. [Developing Generative Artificial Intelligence Solutions](https://skillbuilder.aws/learn/PWJCMNXWHT/developing-generative-artificial-intelligence-solutions/JFB95SXNPF)
 6. [Optimizing Foundation Models](https://skillbuilder.aws/learn/CDYTAJCKGY/optimizing-foundation-models/PVR1FRGN1T)
 7. [Security, Compliance, and Governance for AI Solutions](https://skillbuilder.aws/learn/YFACXFGBSJ/security-compliance-and-governance-for-ai-solutions/YZTVAG8P4Q)
+8. [Essentials of Prompt Engineering](https://skillbuilder.aws/learn/XBNAVKA88J/essentials-of-prompt-engineering/9T9Q45EDTV)
