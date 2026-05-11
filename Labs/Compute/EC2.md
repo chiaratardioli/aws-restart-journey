@@ -6,7 +6,7 @@ Amazon EC2 provides **resizable compute capacity**, allowing developers to quick
 
 ### Architecture Overview
 
-![Architecture Diagram Placeholder](./ec2-architecture.png)
+![Architecture Diagram Placeholder](./images/ec2-architecture.png)
 
 Source: AWS architecture icons [link here](https://aws.amazon.com/architecture/icons/)
 
