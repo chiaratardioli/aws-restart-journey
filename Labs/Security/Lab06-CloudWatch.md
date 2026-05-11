@@ -98,15 +98,9 @@ The alarm was created with the following configuration:
 
 In this task, I generated a CPU spike on the EC2 instance to validate that the CloudWatch alarm and SNS notifications were functioning correctly.
 
-### Connect to the EC2 Instance
+#### 1. Run the CPU Stress Test
 
-Using the provided Systems Manager connection link, I accessed the Stress Test instance terminal.
-
-![EC2 Terminal Access](./images/SE-06-ec2-terminal-access.png)
-
-### Run the CPU Stress Test
-
-I executed the following command to increase CPU utilization:
+Using the provided Systems Manager connection link, I accessed the Stress Test instance terminal and executed the following command to increase CPU utilization:
 
 ```bash
 sudo stress --cpu 10 -v --timeout 400s
@@ -116,39 +110,27 @@ This command generated CPU load for 400 seconds using 10 worker threads.
 
 ![Stress Command Execution](./images/SE-06-stress-command-execution.png)
 
-### Monitor CPU Usage
+#### 2. Monitor CPU Usage
 
-In a second terminal session, I monitored system resource usage using the following command:
-
-```bash
-top
-```
+In a second terminal session, I monitored system resource usage using the `top` command. 
 
 The output showed CPU utilization approaching 100%.
 
-```text
-top - 14:32:18 up 15 min,  2 users,  load average: 9.98, 9.75, 5.20
-Tasks: 145 total,  11 running, 134 sleeping
-%Cpu(s): 99.8 us,  0.2 sy,  0.0 ni,  0.0 id
-```
-
 ![Top Command Monitoring](./images/SE-06-top-command-monitoring.png)
 
-### Verify the CloudWatch Alarm
+
+#### 3. Verify the CloudWatch Alarm
 
 I returned to the CloudWatch console and monitored the alarm state.
 
-After several minutes, the alarm state changed from:
-
-```text
-OK → In alarm
-```
-
-The CloudWatch graph showed CPU utilization exceeding the 60% threshold.
+After several minutes, the alarm state changed from `OK` to `In Alarm`.
 
 ![CloudWatch Alarm Triggered](./images/SE-06-cloudwatch-alarm-triggered.png)
 
-### Verify Email Notification
+The CloudWatch graph showed CPU utilization exceeding the 60% threshold.
+
+
+#### 4. Verify Email Notification
 
 I checked my email inbox and confirmed that Amazon SNS successfully sent an alert notification.
 
