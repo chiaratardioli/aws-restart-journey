@@ -379,7 +379,7 @@ Encourages step-by-step reasoning.
 Clear, structured prompts improve the quality, safety, and relevance of AI-generated responses.
 
 
-## Reference
+## References
 1. [Fundamentals of Machine Learning and Artificial Intelligence on AWS](https://skillbuilder.aws/learn/16ASDUHF86/fundamentals-of-machine-learning-and-artificial-intelligence/M7JZCTA94N)
 2. [Exploring Artificial Intelligence Use Cases and Applications](https://skillbuilder.aws/learn/A3U2U9VGMX/exploring-artificial-intelligence-use-cases-and-applications/M12JQTFKB5)
 3. [Responsible Artificial Intelligence Practices](https://skillbuilder.aws/learn/1H631ZWCTP/responsible-artificial-intelligence-practices/BN51NEFJNG)
