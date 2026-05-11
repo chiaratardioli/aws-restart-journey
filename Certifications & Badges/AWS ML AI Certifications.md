@@ -390,7 +390,7 @@ Clear, structured prompts improve the quality, safety, and relevance of AI-gener
   <img src="./images/cert-ML06-Optimizing Foundation Models.png" alt="Optimizing Foundation Models" width="30%">
   <img src="./images/cert-ML07-Security, Compliance, and Governance for AI Solutions.png" alt="Security, Compliance, and Governance for AI Solutions" width="30%">
   <a href="https://skillbuilder.aws/learn/XBNAVKA88J/essentials-of-prompt-engineering/9T9Q45EDTV">
-    <img src="./images/cert-ML008-Essentials of Prompt Engineering.png" alt="Essentials of Prompt Engineering" width="30%">
+    <img src="./images/cert-ML08-Essentials of Prompt Engineering.png" alt="Essentials of Prompt Engineering" width="30%">
   </a>
 </p>
 
