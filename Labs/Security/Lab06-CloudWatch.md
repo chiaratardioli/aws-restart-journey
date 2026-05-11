@@ -144,8 +144,6 @@ The CloudWatch alarm successfully detected the CPU spike and triggered an SNS em
 
 In this task, I created a CloudWatch dashboard to visualize CPU utilization metrics.
 
-### Create Dashboard
-
 I navigated to:
 
 ```text
@@ -154,45 +152,16 @@ CloudWatch → Dashboards → Create dashboard
 
 I configured the dashboard with the following settings:
 
-| Setting        | Value           |
-| -------------- | --------------- |
-| Dashboard Name | LabEC2Dashboard |
-| Widget Type    | Line Graph      |
-
-![Dashboard Creation](./images/SE-06-dashboard-creation.png)
-
-### Add CPUUtilization Metric
-
-I added the EC2 metric:
-
-```text
-EC2 → Per-Instance Metrics → CPUUtilization
-```
-
-for the Stress Test instance.
-
-![Dashboard Metrics](./images/SE-06-dashboard-metrics.png)
-
-### Save Dashboard
+- Dashboard Name: `LabEC2Dashboard`
+- Widget Type: `Line Graph`
+- Metric: `CPUUtilization` for the Stress Test instance
 
 After adding the widget, I saved the dashboard.
 
 The dashboard provided a centralized view of CPU utilization metrics for the monitored EC2 instance.
 
-![Final Dashboard](./images/SE-06-final-dashboard.png)
+![CloudWatch Dashboard](./images/SE-06-cloudwatch-dashboard.png)
 
-## Results and Observations
-
-During the lab, the monitoring workflow operated successfully from end to end:
-
-* Amazon SNS delivered notification emails correctly
-* CloudWatch monitored EC2 CPU utilization in near real time
-* The CloudWatch alarm transitioned into the **In alarm** state when the threshold was exceeded
-* The EC2 stress test successfully simulated abnormal CPU usage
-* The CloudWatch dashboard displayed CPU metrics visually
-
-The lab demonstrated how AWS monitoring and notification services can be combined to improve operational visibility and 
-detect unusual system behavior.
 
 ## Conclusions
 
