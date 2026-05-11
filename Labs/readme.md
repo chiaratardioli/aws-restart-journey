@@ -1,6 +1,6 @@
 # Labs – Cloud Engineering Hands-on Portfolio
 
-This directory contains 67 hands-on labs completed during the AWS re/Start program using :contentReference[oaicite:0]{index=0}.
+This directory contains 67 hands-on labs completed during the AWS re/Start program using [Amazon Web Services (AWS)](https://aws.amazon.com/), covering cloud computing, networking, databases, security, Python scripting, Linux, monitoring, machine learning, and automation.
 
 These labs demonstrate practical cloud engineering skills across infrastructure, networking, security, automation, databases, and system operations.
 
