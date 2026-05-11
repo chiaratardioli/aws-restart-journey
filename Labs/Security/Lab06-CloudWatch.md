@@ -19,7 +19,7 @@ The following AWS resources were available in the lab environment:
 - Amazon CloudWatch
 - Amazon SNS
 
-![Lab Environment](./images/ML-01-lab-environment.png)
+![Lab Environment](./images/SE-06-lab-environment.png)
 
 
 ## Task 1: Configure Amazon SNS
@@ -37,7 +37,7 @@ I created a new topic with the following configuration:
 | Type | Standard |
 | Name | MyCwAlarm |
 
-![SNS Topic Creation](./images/ML-01-sns-topic-creation.png)
+![SNS Topic Creation](./images/SE-06-sns-topic-creation.png)
 
 ### Create an Email Subscription
 
@@ -50,7 +50,7 @@ After creating the topic, I added a subscription using my email address.
 
 Once the subscription was created, the status remained **Pending confirmation** until I confirmed the subscription through the email sent by AWS.
 
-![SNS Subscription Confirmation](./images/ML-01-sns-subscription-confirmation.png)
+![SNS Subscription Confirmation](./images/SE-06-sns-subscription-confirmation.png)
 
 After confirming the subscription, the status changed to **Confirmed**.
 
@@ -75,7 +75,7 @@ I selected the **CPUUtilization** metric for the Stress Test instance.
 
 Initially, the CPU utilization remained close to 0% because no workload was running on the instance.
 
-![CloudWatch Metrics](./images/ML-01-cloudwatch-metrics.png)
+![CloudWatch Metrics](./images/SE-06-cloudwatch-metrics.png)
 
 ### Configure the Alarm
 
@@ -92,7 +92,7 @@ I created a new CloudWatch alarm using the following settings:
 
 The alarm configuration triggered notifications whenever CPU utilization exceeded 60%.
 
-![CloudWatch Alarm Configuration](./images/ML-01-cloudwatch-alarm-configuration.png)
+![CloudWatch Alarm Configuration](./images/SE-06-cloudwatch-alarm-configuration.png)
 
 ### Alarm Details
 
@@ -118,7 +118,7 @@ In this task, I generated a CPU spike on the EC2 instance to validate that the C
 
 Using the provided Systems Manager connection link, I accessed the Stress Test instance terminal.
 
-![EC2 Terminal Access](./images/ML-01-ec2-terminal-access.png)
+![EC2 Terminal Access](./images/SE-06-ec2-terminal-access.png)
 
 ### Run the CPU Stress Test
 
@@ -130,7 +130,7 @@ sudo stress --cpu 10 -v --timeout 400s
 
 This command generated CPU load for 400 seconds using 10 worker threads.
 
-![Stress Command Execution](./images/ML-01-stress-command-execution.png)
+![Stress Command Execution](./images/SE-06-stress-command-execution.png)
 
 ### Monitor CPU Usage
 
@@ -148,7 +148,7 @@ Tasks: 145 total,  11 running, 134 sleeping
 %Cpu(s): 99.8 us,  0.2 sy,  0.0 ni,  0.0 id
 ```
 
-![Top Command Monitoring](./images/ML-01-top-command-monitoring.png)
+![Top Command Monitoring](./images/SE-06-top-command-monitoring.png)
 
 ### Verify the CloudWatch Alarm
 
@@ -162,13 +162,13 @@ OK → In alarm
 
 The CloudWatch graph showed CPU utilization exceeding the 60% threshold.
 
-![CloudWatch Alarm Triggered](./images/ML-01-cloudwatch-alarm-triggered.png)
+![CloudWatch Alarm Triggered](./images/SE-06-cloudwatch-alarm-triggered.png)
 
 ### Verify Email Notification
 
 I checked my email inbox and confirmed that Amazon SNS successfully sent an alert notification.
 
-![SNS Email Notification](./images/ML-01-sns-email-notification.png)
+![SNS Email Notification](./images/SE-06-sns-email-notification.png)
 
 ### Result
 
@@ -193,7 +193,7 @@ I configured the dashboard with the following settings:
 | Dashboard Name | LabEC2Dashboard |
 | Widget Type    | Line Graph      |
 
-![Dashboard Creation](./images/ML-01-dashboard-creation.png)
+![Dashboard Creation](./images/SE-06-dashboard-creation.png)
 
 ### Add CPUUtilization Metric
 
@@ -205,7 +205,7 @@ EC2 → Per-Instance Metrics → CPUUtilization
 
 for the Stress Test instance.
 
-![Dashboard Metrics](./images/ML-01-dashboard-metrics.png)
+![Dashboard Metrics](./images/SE-06-dashboard-metrics.png)
 
 ### Save Dashboard
 
@@ -213,7 +213,7 @@ After adding the widget, I saved the dashboard.
 
 The dashboard provided a centralized view of CPU utilization metrics for the monitored EC2 instance.
 
-![Final Dashboard](./images/ML-01-final-dashboard.png)
+![Final Dashboard](./images/SE-06-final-dashboard.png)
 
 ## Results and Observations
 
