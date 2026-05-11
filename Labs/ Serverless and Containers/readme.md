@@ -2,6 +2,7 @@
 
 This folder contains labs focused on serverless computing using AWS Lambda in :contentReference[oaicite:2]{index=2}.
 
+---
 
 ## What This Covers
 
@@ -9,6 +10,7 @@ This folder contains labs focused on serverless computing using AWS Lambda in :c
 - Event-driven architecture
 - Serverless computing concepts
 
+---
 
 ## Skills Developed
 
