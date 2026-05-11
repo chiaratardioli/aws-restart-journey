@@ -26,37 +26,25 @@ The following AWS resources were available in the lab environment:
 
 In this task, I created an Amazon SNS topic and subscribed an email endpoint to receive notifications from CloudWatch alarms.
 
-### Create an SNS Topic
+### 1. Create an SNS Topic
 
 I navigated to the AWS Management Console and opened the Amazon SNS service.
 
 I created a new topic with the following configuration:
+- Type: `Standard`
+- Name: `MyCwAlarm`
 
-| Setting | Value |
-|---|---|
-| Type | Standard |
-| Name | MyCwAlarm |
-
-![SNS Topic Creation](./images/SE-06-sns-topic-creation.png)
-
-### Create an Email Subscription
+### 2. Create an Email Subscription
 
 After creating the topic, I added a subscription using my email address.
-
-| Setting | Value |
-|---|---|
-| Protocol | Email |
-| Endpoint | My email address |
+- Protocol: `Email`
+- Endpoint: `<My email address>`
 
 Once the subscription was created, the status remained **Pending confirmation** until I confirmed the subscription through the email sent by AWS.
 
-![SNS Subscription Confirmation](./images/SE-06-sns-subscription-confirmation.png)
-
 After confirming the subscription, the status changed to **Confirmed**.
 
-### Result
-
-At the end of this task, Amazon SNS was configured to send notifications to my email address whenever a CloudWatch alarm was triggered.
+![SNS Topic with Subscription](./images/SE-06-sns-topic.png)
 
 
 ## Task 2: Create a CloudWatch Alarm
