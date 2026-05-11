@@ -1,95 +1,198 @@
-# AWS re/Start Program Portfolio
+# Welcome to my **AWS re/Start Program Portfolio**!
 
 [![AWS re/Start](https://img.shields.io/badge/AWS-re%2FStart-orange?style=for-the-badge)](https://aws.amazon.com/training/restart/)
 
-Welcome to my **AWS re/Start Program Portfolio**!  
 
 <!-- This repository documents my journey through the Restart program, where I gained hands-on experience in cloud computing, programming, networking, databases, and professional skills.  -->
 
-Hi, I'm Chiara
 
-I'm currently completing a full-time, 12-week AWS re/Start programme — an intensive, hands-on training designed to build real-world skills in Cloud Support, Cloud Operations, and DevOps fundamentals.
-This README highlights what I've learned and what I do every day to grow as a cloud professional.
+This repository documented my learning journey through the **AWS re/Start program**, a full-time, hands-on training initiative focused on cloud computing fundamentals, IT operations, networking, security, and automation using Amazon Web Services.
+
+Throughout the program, I built practical skills through labs, structured learning modules, and projects that simulated real-world cloud environments.
 
 ---
 
-## About the Restart Program
+## About This Journey
 
-During the program, I will learn:
+During the program, I:
 
-- **Cloud Computing:** Understanding AWS services, deploying applications, and managing infrastructure.  
-- **Programming & Scripting:** Building logic with Python, automating tasks, and working with data.  
-- **Databases & Storage:** Designing, creating, and querying relational and NoSQL databases.  
-- **Networking & Security:** Basics of networking, VPNs, subnets, and security best practices.  
-- **Professional Skills:** Git, GitHub, documentation, teamwork, and problem-solving.
+* Developed a strong foundation in cloud computing and AWS services
+* Practiced Linux system administration and automation
+* Built and troubleshot network architectures using VPC concepts
+* Worked with relational and NoSQL databases
+* Applied security best practices including IAM and encryption
+* Created Python scripts for automation and problem-solving
+* Deployed infrastructure using AWS tools and services
+* Documented all learning through structured Markdown files
 
-The program teaches not only **how to use tools**, but also **why they matter** in real-world IT environments. It emphasizes **hands-on practice, project building, and documentation**.
+This repository reflects both **technical growth and hands-on cloud experience**.
 
 ---
 
 ## Repository Structure
 
+The repository was organized into the following learning areas:
+
 ```
-aws-restart-portfolio/
+aws-restart-journey/
 │
-├── README.md                     # Main README (this file)
+├── Certifications & Badges/
+│   ├── AWS Badges.md
+│   ├── AWS ML GenAI Certifications.md
+│   ├── SL01 File Systems.md
+│   ├── SL02 Networking.md
+│   ├── SL03 Security.md
+│   ├── SL04 AI Assistant.md
+│   └── images/
+│
+├── Core Concepts/
+│   ├── EC2.md
+│   ├── Linux.md
+│   ├── ML_GenAI.md
+│   ├── Networking.md
+│   ├── WordPress.md
+│   └── images/
+│
 ├── Labs/
+│   ├── Serverless and Containers/
 │   ├── Compute/
-│   │   ├── Lab1_Creating_EC2_Instance/
-│   │   ├── Lab2_<Lab2_Name>/
-│   │   └── Lab3_<Lab3_Name>/
-│   └── Networking/
-│       ├── Lab1_<Lab1_Name>/
-│       ├── Lab2_<Lab2_Name>/
-│       └── Lab3_<Lab3_Name>/
+│   ├── Database Services/
+│   ├── Databases/
+│   ├── Extra Labs/
+│   ├── Linux/
+│   ├── Machine Learning and Generative AI/
+│   ├── Monitoring/
+│   ├── Networking Services/
+│   ├── Networking/
+│   ├── Python/
+│   ├── Security/
+│   ├── Servers/
+│   ├── Storage and Archiving/
+│   ├── Systems Operations/
+│   ├── Tooling and Automation/
+│   └── images/
+│
+├── Practice Questions/
+│   ├── Examforsure.md
+│   └── Introduction to AWS.md
+│
 ├── Projects/
-│   ├── Static_Website/
-│   ├── Project2_<Project_Name>/
-│   └── Project3_<Project_Name>/
-└── Certifications_and_Badges/
-    ├── Security_Simulearn/
-    └── Database_Simulearn/
+│   ├── 3D-ecommerce/
+│   └── S3-Website/
+│
+└── README.md
 ```
 
 ---
 
-## Folder Details
+## Certifications & Badges
 
-### Labs Folder
-Contains all **hands-on labs** completed during the Restart program.  
+This section captured completed certifications and learning milestones:
 
-- **Compute:** Labs focused on EC2, storage, and computing services.  
-- **Networking:** Labs focused on VPCs, subnets, routing, and network security.  
+* AWS foundational badges and learning achievements
+* Machine Learning and Generative AI certifications
+* Security, networking, and storage skill validations
+* AI assistant and system learning modules
 
-Each lab folder includes:
-
-- Instructions followed  
-- Screenshots (if needed)  
-- Outcomes and learnings  
+These artifacts demonstrated progression across cloud fundamentals and advanced concepts.
 
 ---
 
-### Projects Folder
-Contains all **portfolio projects** developed during the program.  
+## Core Concepts
 
-- **Static Website:** Deploy a fully functional static website on AWS.  
-- **Project2 & Project3:** Additional projects demonstrating cloud, scripting, and database skills.  
+This section covered essential AWS and IT foundations:
 
-Each project folder includes:
-
-- Project description  
-- Steps or code  
-- Screenshots or outputs  
+* **EC2 & Compute:** Virtual machines and compute workloads
+* **Linux:** Command line, file systems, and system operations
+* **Networking:** Subnets, routing, DNS, and VPC concepts
+* **Machine Learning & GenAI:** Introductory concepts and applications
+* **WordPress Deployment:** Web hosting fundamentals on AWS
 
 ---
 
-### Certifications and Badges Folder
-Contains **digital certifications and badges** earned.  
+## Labs
 
-- **Security Simulearn:** Basics of cybersecurity and best practices on AWS.  
-- **Database Simulearn:** Understanding and managing relational and NoSQL databases.  
+Hands-on labs formed the core of the learning experience.
 
-Each certification folder includes:
+### Serverless & Containers
 
-- Certificate or badge image  
-- Short explanation of what was learned  
+* AWS Lambda functions and event-driven architecture
+* Serverless challenge exercises
+
+### Compute
+
+* EC2 instance deployment and architecture analysis
+
+### Databases & Data Services
+
+* RDS migration
+* SQL operations, queries, and database management
+* DynamoDB fundamentals and advanced usage
+
+### Networking
+
+* VPC setup, subnet configuration, and troubleshooting
+* IP addressing and routing scenarios
+* Web server deployment and connectivity testing
+
+### Security
+
+* IAM policies and access control
+* Encryption practices and system hardening
+* Malware protection and CloudWatch monitoring
+
+### Linux & Systems
+
+* Bash scripting and automation
+* Cron jobs and log analysis
+* Package management and system debugging
+
+### Python & Automation
+
+* Script development for data processing and system tasks
+* Debugging exercises and automation workflows
+* DevOps-oriented scripting challenges
+
+### Monitoring & Operations
+
+* CloudWatch monitoring setup
+* AWS CLI usage and system operations
+
+### Storage & Archiving
+
+* S3 bucket management
+* EBS configuration and storage optimization
+
+---
+
+## Projects
+
+### 3D E-commerce Project
+
+A cloud-based project simulating a modern e-commerce deployment environment.
+
+### S3 Static Website
+
+A fully deployed static website hosted on AWS S3, demonstrating real-world cloud hosting practices.
+
+---
+
+## Key Skills Developed
+
+* Cloud infrastructure management
+* AWS service integration
+* Linux system administration
+* Networking design and troubleshooting
+* Database design and querying
+* Python scripting and automation
+* Security best practices
+* Technical documentation and GitHub workflows
+
+---
+
+## Summary
+
+This repository represented a complete learning journey through cloud computing fundamentals and practical AWS workloads. It documented consistent hands-on experience across infrastructure, security, automation, and application deployment.
+
+---
+
