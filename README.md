@@ -60,14 +60,17 @@ aws-restart-journey/
 |   |   ├── EC2
 |   |   └── Servers  
 │   ├── Databases & Data Services/
+│   ├── DevOps & Automation/
+|   |   ├── AWS CLI
+|   |   ├── AWS System Manager
+|   |   └── Python  
 │   ├── Linux & Systems/
 │   ├── Machine Learning and Generative AI/
-│   ├── Monitoring & Operations/
+│   ├── Monitoring/
 │   ├── Networking/
-│   ├── Python & Automation/
 │   ├── Security/
-│   ├── Storage and Archiving/
 │   ├── Serverless and Containers/
+│   ├── Storage and Archiving/
 │   └── readme.md
 │
 ├── Practice Questions/
@@ -131,6 +134,13 @@ Hands-on labs formed the core of the learning experience.
 * Amazon Aurora and DynamoDB
 * Advanced database manipulation
 
+### DevOps & Automation
+
+* Script development for data processing and system tasks
+* Debugging exercises and automation workflows
+* DevOps-oriented scripting challenges
+* AWS CLI usage and system manager
+
 ### Linux & Systems
 
 * Bash scripting and automation
@@ -143,16 +153,10 @@ Hands-on labs formed the core of the learning experience.
 * AI portfolio project
 * Intro to generative AI concepts
 
-### Monitoring & Operations
+### Monitoring
 
 * CloudWatch monitoring
 * CloudTrail logging
-* AWS CLI usage and system operations
-
-### Serverless & Containers
-
-* AWS Lambda functions and event-driven architecture
-* Serverless challenge exercises
 
 ### Networking
 
@@ -160,17 +164,16 @@ Hands-on labs formed the core of the learning experience.
 * IP addressing and routing scenarios
 * Web server deployment and connectivity testing
 
-### Python & Automation
-
-* Script development for data processing and system tasks
-* Debugging exercises and automation workflows
-* DevOps-oriented scripting challenges
-
 ### Security
 
 * IAM policies and access control
 * Encryption practices and system hardening
 * Malware protection and CloudWatch monitoring
+
+### Serverless & Containers
+
+* AWS Lambda functions and event-driven architecture
+* Serverless challenge exercises
 
 ### Storage & Archiving
 
