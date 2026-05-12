@@ -16,7 +16,7 @@ instance along with the application code. The instance has a T3 small instance t
 that internet clients can access the website. A CLI Host instance resides in the same subnet to facilitate the a
 dministration of the instance by using the AWS Command Line Interface (AWS CLI).
 
-![Starting architecture](./images/lab01-starting-architecture.png)
+![Starting architecture](./images/lab11-starting-architecture.png)
 
 ## Final architecture
 
@@ -24,7 +24,7 @@ The following diagram illustrates the topology of the café web application runt
 I will migrate the local café database to an Amazon RDS database that resides outside the instance. The Amazon RDS 
 database is deployed in the same virtual private cloud (VPC) as the instance.
 
-![Final architecture after migration](./images/lab01-final-architecture.png)
+![Final architecture after migration](./images/lab11-final-architecture.png)
 
 ## Task 1: Generating order data on the café website
 First I get the details for the lab:
@@ -43,7 +43,7 @@ First I get the details for the lab:
 Then, I browse the café website and place a few orders that are stored in the existing database. 
 Placing orders creates data for the application before the application is migrated to new Amazon RDS instance.
 
-![Café Order History](./images/lab01-cafe-order-history.png)
+![Café Order History](./images/lab11-cafe-order-history.png)
 
 ## Task 2: Creating an Amazon RDS instance by using the AWS CLI
 
@@ -227,7 +227,7 @@ with the **RDS Instance Database Endpoint Address value** `cafedbinstance.cuidhn
 
 I refresh to the website `http://44.251.174.187/cafe` and verify that the Order History has not been changed.
 
-![Café Order History DB](./images/lab01-cafe-order-hystory-new.png)
+![Café Order History DB](./images/lab11-cafe-order-hystory-new.png)
 
 I got the error: `Connection failed: Connections using insecure transport are prohibited while --require_secure_transport=ON.`
 This means that the café website is connecting to MySQL without SSL, but the RDS requires it.
@@ -242,12 +242,12 @@ learn how to monitor a metric in the Amazon RDS console.
 First, on the AWS Management Console I navigate to the RDS Management Console, then from the Databases list, I choose cafedbinstance.
 Detailed information about the database is displayed.
 
-![Café DB instance](./images/lab01-cafedbistance.png)
+![Café DB instance](./images/lab11-cafedbistance.png)
 
 The Monitoring tab displays a number of key database instance metrics that are available from CloudWatch. 
 Each metric includes a graph that shows the metric as it is monitored over a specific time span.
 
-![Café DB CloudWatch](./images/lab01-db-cloudwatch.png)
+![Café DB CloudWatch](./images/lab11-db-cloudwatch.png)
 
 The list of displayed metrics includes the following:
 - **CPUUtilization**: The percent of CPU utilization
@@ -260,13 +260,13 @@ The list of displayed metrics includes the following:
 This is how the DatabaseConnections looks like when I open it. The graph shows a line that indicates that 1 connection is in use. 
 This connection was established by the interactive SQL session from the CafeInstance.
 
-![DatabaseConnections before](./images/lab01-db-DatabaseConnections-1.png)
+![DatabaseConnections before](./images/lab11-db-DatabaseConnections-1.png)
 
 I type `exit` in the terminal window to close the connection from the interactive SQL session in the CafeInstance.
 After few minutes, I refresh the DatabaseConnections graph in Amazon RDS console. 
 The graph now shows that the number of connections in use is 0.
 
-![DatabaseConnections after](./images/lab01-db-DatabaseConnections-2.png)
+![DatabaseConnections after](./images/lab11-db-DatabaseConnections-2.png)
 
 
 ## Conclusion
