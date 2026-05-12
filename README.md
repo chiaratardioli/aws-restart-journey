@@ -1,6 +1,6 @@
 # Welcome to my **AWS re/Start Program Portfolio**!
 
-[![AWS re/Start](https://img.shields.io/badge/AWS-re%2FStart-orange?style=for-the-badge)](https://aws.amazon.com/training/restart/)
+![AWS](https://img.shields.io/badge/AWS-Cloud-orange?style=for-the-badge&logo=amazonaws&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-System%20Administration-black?style=for-the-badge&logo=linux)
 ![Python](https://img.shields.io/badge/Python-Automation-blue?style=for-the-badge&logo=python)
 
