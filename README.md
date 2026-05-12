@@ -124,16 +124,35 @@ Hands-on labs formed the core of the learning experience.
 * EC2 instance deployment and architecture analysis
 * Static website hosting (S3)
 
+### Databases & Data Services
+
+* Amazon RDS migration
+* SQL operations, queries, and database management
+* Amazon Aurora and DynamoDB
+* Advanced database manipulation
+
+### Linux & Systems
+
+* Bash scripting and automation
+* Cron jobs and log analysis
+* Package management and backup strategies
+
+### Machine Learning and Generative AI
+
+* Basic ML model training
+* AI portfolio project
+* Intro to generative AI concepts
+
+### Monitoring & Operations
+
+* CloudWatch monitoring
+* CloudTrail logging
+* AWS CLI usage and system operations
+
 ### Serverless & Containers
 
 * AWS Lambda functions and event-driven architecture
 * Serverless challenge exercises
-
-### Databases & Data Services
-
-* RDS migration
-* SQL operations, queries, and database management
-* DynamoDB fundamentals and advanced usage
 
 ### Networking
 
@@ -141,28 +160,17 @@ Hands-on labs formed the core of the learning experience.
 * IP addressing and routing scenarios
 * Web server deployment and connectivity testing
 
-### Security
-
-* IAM policies and access control
-* Encryption practices and system hardening
-* Malware protection and CloudWatch monitoring
-
-### Linux & Systems
-
-* Bash scripting and automation
-* Cron jobs and log analysis
-* Package management and system debugging
-
 ### Python & Automation
 
 * Script development for data processing and system tasks
 * Debugging exercises and automation workflows
 * DevOps-oriented scripting challenges
 
-### Monitoring & Operations
+### Security
 
-* CloudWatch monitoring setup
-* AWS CLI usage and system operations
+* IAM policies and access control
+* Encryption practices and system hardening
+* Malware protection and CloudWatch monitoring
 
 ### Storage & Archiving
 
