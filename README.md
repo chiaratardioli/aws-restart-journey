@@ -1,7 +1,8 @@
 # Welcome to my **AWS re/Start Program Portfolio**!
 
 [![AWS re/Start](https://img.shields.io/badge/AWS-re%2FStart-orange?style=for-the-badge)](https://aws.amazon.com/training/restart/)
-
+![Linux](https://img.shields.io/badge/Linux-System%20Administration-black?style=for-the-badge&logo=linux)
+![Python](https://img.shields.io/badge/Python-Automation-blue?style=for-the-badge&logo=python)
 
 <!-- This repository documents my journey through the Restart program, where I gained hands-on experience in cloud computing, programming, networking, databases, and professional skills.  -->
 
