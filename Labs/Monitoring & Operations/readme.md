@@ -1,17 +1,19 @@
-# Systems Operations – AWS CLI
+# Monitoring – Observability & Logging
 
-This folder focuses on command-line cloud operations.
+This folder contains system monitoring labs.
 
 ---
 
 ## What This Covers
 
-- AWS CLI usage
-- System-level operations
+- CloudWatch monitoring
+- CloudTrail logging
+- Infrastructure observability
 
 ---
 
 ## Skills Developed
 
-- Cloud administration via CLI
-- Operational control of AWS services
+- System monitoring setup
+- Log analysis
+- Cloud auditing and tracking
