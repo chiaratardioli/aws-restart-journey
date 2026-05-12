@@ -19,4 +19,4 @@ This folder contains extensive SQL and NoSQL database labs.
 - Relational database design
 - NoSQL data modeling
 - Query optimization and filtering
-- Advance migration strategies
+- Database migration strategies
