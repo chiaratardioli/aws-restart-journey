@@ -23,17 +23,17 @@ This section of the portfolio was designed to demonstrate:
 
 The labs are grouped into the following engineering domains:
 
-- Serverless Computing (Lambda, event-driven systems)
-- Compute Infrastructure (EC2, servers)
-- Networking & VPC Architecture
-- Databases (SQL and NoSQL systems)
-- Storage & Archiving (S3, EBS)
-- Security & Identity Management (IAM, encryption, hardening)
-- Automation & DevOps (Python, CLI, Systems Manager)
-- Monitoring & Observability (CloudTrail, CloudWatch)
-- Linux System Administration
 - Cloud Architecture & Scaling (CloudFormation, ELB, Auto Scaling)
-- Machine Learning & AI Foundations
+- Compute Infrastructure (EC2, servers)
+- Databases (SQL and NoSQL systems)
+- Linux & System Administration
+- Machine Learning & Generative AI Foundations
+- Monitoring & Operations (CloudTrail, CloudWatch, CLI)
+- Networking (VPC, Subnets, IPs)
+- Python & Automation (DevOps)
+- Security (IAM, encryption, hardening)
+- Serverless & Containers Computing (Lambda, event-driven systems)
+- Storage & Archiving (S3, EBS)
 
 ---
 
