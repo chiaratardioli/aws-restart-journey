@@ -37,13 +37,14 @@ The repository was organized into the following learning areas:
 aws-restart-journey/
 │
 ├── Certifications & Badges/
+│   ├── images/
 │   ├── AWS Badges.md
 │   ├── AWS ML GenAI Certifications.md
 │   ├── SL01 File Systems.md
 │   ├── SL02 Networking.md
 │   ├── SL03 Security.md
 │   ├── SL04 AI Assistant.md
-│   └── images/
+│   └── readme.md
 │
 ├── Core Concepts/
 │   ├── EC2.md
@@ -51,26 +52,23 @@ aws-restart-journey/
 │   ├── ML_GenAI.md
 │   ├── Networking.md
 │   ├── WordPress.md
-│   └── images/
+│   └── readme.md
 │
 ├── Labs/
-│   ├── Serverless and Containers/
-│   ├── Compute/
-│   ├── Database Services/
-│   ├── Databases/
-│   ├── Extra Labs/
-│   ├── Linux/
+│   ├── Cloud Architecture & Scaling/
+│   ├── Compute Infrastructure/
+|   |   ├── EC2
+|   |   └── Servers  
+│   ├── Databases & Data Services/
+│   ├── Linux & Systems/
 │   ├── Machine Learning and Generative AI/
-│   ├── Monitoring/
-│   ├── Networking Services/
+│   ├── Monitoring & Operations/
 │   ├── Networking/
-│   ├── Python/
+│   ├── Python & Automation/
 │   ├── Security/
-│   ├── Servers/
 │   ├── Storage and Archiving/
-│   ├── Systems Operations/
-│   ├── Tooling and Automation/
-│   └── images/
+│   ├── Serverless and Containers/
+│   └── readme.md
 │
 ├── Practice Questions/
 │   ├── Examforsure.md
@@ -114,14 +112,22 @@ This section covered essential AWS and IT foundations:
 
 Hands-on labs formed the core of the learning experience.
 
+### Cloud Architecture & Scaling
+
+* Auto Scaling and ELB
+* CloudFormation (Infrastructure as Code)
+* Route 53 failover routing
+* System optimization and tagging
+
+### Compute Infrastructure
+
+* EC2 instance deployment and architecture analysis
+* Static website hosting (S3)
+
 ### Serverless & Containers
 
 * AWS Lambda functions and event-driven architecture
 * Serverless challenge exercises
-
-### Compute
-
-* EC2 instance deployment and architecture analysis
 
 ### Databases & Data Services
 
