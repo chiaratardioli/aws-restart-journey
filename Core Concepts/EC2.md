@@ -1,4 +1,4 @@
-# AWS EC2 (Elastic Compute Cloud)
+# EC2 (Elastic Compute Cloud)
 
 Amazon Web Services **EC2 (Elastic Compute Cloud)** is a virtual server service from Amazon Web Services that lets you run applications in the cloud without managing physical hardware.
 
