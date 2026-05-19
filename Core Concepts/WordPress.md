@@ -1,4 +1,4 @@
-# WordPress on AWS
+# Case Study: WordPress on AWS
 
 This document briefly compares different ways to run WordPress on AWS.
 
