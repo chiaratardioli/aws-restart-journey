@@ -30,7 +30,7 @@ This repository reflects both **technical growth and hands-on cloud experience**
 
 ---
 
-## [Certifications & Badges](<./Certifications & Badges/readme.md)
+## [Certifications & Badges](<./Certifications & Badges/readme.md>)
 
 This section captured completed certifications and learning milestones:
 
