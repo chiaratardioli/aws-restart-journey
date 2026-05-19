@@ -151,6 +151,13 @@ A fully deployed static website hosted on AWS S3, demonstrating real-world cloud
 
 ---
 
+## Summary
+
+This repository represented a complete learning journey through cloud computing fundamentals and practical AWS workloads. It documented consistent hands-on experience across infrastructure, security, automation, and application deployment.
+
+<!--
+
+---
 ## Repository Structure
 
 The repository was organized into the following learning areas:
@@ -205,12 +212,5 @@ aws-restart-journey/
 │
 └── README.md
 ```
-
----
-
-## Summary
-
-This repository represented a complete learning journey through cloud computing fundamentals and practical AWS workloads. It documented consistent hands-on experience across infrastructure, security, automation, and application deployment.
-
----
+>
 
