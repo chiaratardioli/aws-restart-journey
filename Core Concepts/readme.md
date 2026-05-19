@@ -10,4 +10,4 @@ This section contains some of **AWS Core Concepts**:
 
 4. **[Networking in AWS](./Networking.md)**
 
-5. **[Case Study: WordPress on AWS](<./WordPress on AWS.md>)**
+5. **[Case Study: WordPress on AWS](<./WordPress.md>)**
