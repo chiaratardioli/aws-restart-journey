@@ -1,14 +1,13 @@
 # AWS Core Concepts
 
-This section contains useful **cheat sheet**:
+This section contains some of **AWS Core Concepts**:
 
-1.  **[Linux Command Lines](linux_command_lines.md)** A comprehensive, professional, and beginner-friendly Linux command reference. It includes:
+1. **[EC2 (Elastic Compute Cloud)](./EC2.md)**
 
-- Quick one-page command reference  
-- Categorized command sections (system info, file management, user/group management)  
-- Standard streams (`stdin`, `stdout`, `stderr`)  
-- Redirection and pipe tricks  
-- Bash productivity tips like tab completion  
-- Visual Linux directory map
+2. **[Linux Command Lines](./Linux.md)** 
 
-This file is perfect for beginners and intermediate users who want a **fast, practical Linux reference**.
+3. **[AWS Machine Learning And Generative AI](./ML_GenAI.md)**
+
+4. **[Networking in AWS](./Networking.md)**
+
+5. **[Case Study: WordPress on AWS](<./WordPress on AWS.md>)**
