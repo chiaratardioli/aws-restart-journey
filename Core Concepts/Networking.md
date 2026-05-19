@@ -1,4 +1,4 @@
-# Networkin in AWS
+# Networking in AWS
 
 ## CIDR (Classless Inter-Domain Routing)
 
