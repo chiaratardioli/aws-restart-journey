@@ -30,63 +30,6 @@ This repository reflects both **technical growth and hands-on cloud experience**
 
 ---
 
-## Repository Structure
-
-The repository was organized into the following learning areas:
-
-```
-aws-restart-journey/
-│
-├── Certifications & Badges/
-│   ├── images/
-│   ├── AWS Badges.md
-│   ├── AWS ML GenAI Certifications.md
-│   ├── SL01 File Systems.md
-│   ├── SL02 Networking.md
-│   ├── SL03 Security.md
-│   ├── SL04 AI Assistant.md
-│   └── readme.md
-│
-├── Core Concepts/
-│   ├── EC2.md
-│   ├── Linux.md
-│   ├── ML_GenAI.md
-│   ├── Networking.md
-│   ├── WordPress.md
-│   └── readme.md
-│
-├── Labs/
-│   ├── Cloud Architecture & Scaling/
-│   ├── Compute Infrastructure/
-|   |   ├── EC2
-|   |   └── Servers  
-│   ├── Databases & Data Services/
-│   ├── DevOps & Automation/
-|   |   ├── AWS CLI
-|   |   ├── AWS System Manager
-|   |   └── Python  
-│   ├── Linux & Systems/
-│   ├── Machine Learning and Generative AI/
-│   ├── Monitoring/
-│   ├── Networking/
-│   ├── Security/
-│   ├── Serverless and Containers/
-│   ├── Storage and Archiving/
-│   └── readme.md
-│
-├── Practice Questions/
-│   ├── Examforsure.md
-│   └── Introduction to AWS.md
-│
-├── Projects/
-│   ├── 3D-ecommerce/
-│   └── S3-Website/
-│
-└── README.md
-```
-
----
-
 ## Certifications & Badges
 
 This section captured completed certifications and learning milestones:
@@ -205,6 +148,63 @@ A fully deployed static website hosted on AWS S3, demonstrating real-world cloud
 * Python scripting and automation
 * Security best practices
 * Technical documentation and GitHub workflows
+
+---
+
+## Repository Structure
+
+The repository was organized into the following learning areas:
+
+```
+aws-restart-journey/
+│
+├── Certifications & Badges/
+│   ├── images/
+│   ├── AWS Badges.md
+│   ├── AWS ML GenAI Certifications.md
+│   ├── SL01 File Systems.md
+│   ├── SL02 Networking.md
+│   ├── SL03 Security.md
+│   ├── SL04 AI Assistant.md
+│   └── readme.md
+│
+├── Core Concepts/
+│   ├── EC2.md
+│   ├── Linux.md
+│   ├── ML_GenAI.md
+│   ├── Networking.md
+│   ├── WordPress.md
+│   └── readme.md
+│
+├── Labs/
+│   ├── Cloud Architecture & Scaling/
+│   ├── Compute Infrastructure/
+|   |   ├── EC2
+|   |   └── Servers  
+│   ├── Databases & Data Services/
+│   ├── DevOps & Automation/
+|   |   ├── AWS CLI
+|   |   ├── AWS System Manager
+|   |   └── Python  
+│   ├── Linux & Systems/
+│   ├── Machine Learning and Generative AI/
+│   ├── Monitoring/
+│   ├── Networking/
+│   ├── Security/
+│   ├── Serverless and Containers/
+│   ├── Storage and Archiving/
+│   └── readme.md
+│
+├── Practice Questions/
+│   ├── Examforsure.md
+│   └── Introduction to AWS.md
+│
+├── Projects/
+│   ├── 3D-ecommerce/
+│   └── S3-Website/
+│
+└── README.md
+```
 
 ---
 
