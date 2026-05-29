@@ -12,4 +12,4 @@ This section contains some of **AWS Core Concepts**:
 
 5. **[Case Study: WordPress on AWS](<./WordPress.md>)**
 
-6. **[Strong Consistency vs Eventual Consistency](<./Consistency<odels.md>)**
+6. **[Strong Consistency vs Eventual Consistency](<./ConsistencyModels.md>)**
