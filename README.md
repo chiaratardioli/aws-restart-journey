@@ -11,6 +11,12 @@ Hi, I'm Chiara and this repository documented my learning journey through the **
 
 Throughout the program, I built practical skills through labs, structured learning modules, and projects that simulated real-world cloud environments.
 
+## Badges
+
+This is my badge fom completing the AWS re/Start program from Amazon Web Services Training and Certification:
+
+[<img src="./Certifications & Badges/images/aws-re-start-graduate.png" alt="AWS re/Start Graduate Badge" width="150"/>](https://www.credly.com/badges/fee7e849-146d-41c3-8c61-e13a63e83073/public_url)
+
 ---
 
 ## About This Journey
