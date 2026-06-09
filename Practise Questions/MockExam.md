@@ -1,4 +1,4 @@
-## Mock Exam
+# Mock Exam
 
 ## Question #1
 
@@ -216,11 +216,11 @@ Agility refers to the ability to quickly develop, test, and deploy applications 
 
 Which of the following can resolve the connection between on-premises VPN and an Amazon VPC? (Select TWO)
 
-A. Virtual Private Gateway
-B. Amazon Route 53
-C. Egress-Only Internet Gateway
-D. NAT Gateway
-E. VPC Peering
+A. Virtual Private Gateway  
+B. Amazon Route 53  
+C. Egress-Only Internet Gateway  
+D. NAT Gateway  
+E. VPC Peering  
 
 ### Answer
 
@@ -248,10 +248,10 @@ A company is launching an online multiplayer gaming application for users around
 
 Which AWS service should the company use to improve global application availability and performance?
 
-A. Network Load Balancer
-B. Amazon SNS
-C. AWS Global Accelerator
-D. Amazon CloudFront
+A. Network Load Balancer  
+B. Amazon SNS  
+C. AWS Global Accelerator  
+D. Amazon CloudFront  
 
 ### Answer
 
@@ -273,10 +273,10 @@ AWS Global Accelerator improves global application availability and performance 
 
 A developer needs to collect and process large streams of data records in real-time. Which AWS service should be used for this task?
 
-A. AWS CloudTrail
-B. Amazon Kinesis Data Firehose
-C. AWS Glue
-D. Amazon Kinesis Data Streams
+A. AWS CloudTrail  
+B. Amazon Kinesis Data Firehose  
+C. AWS Glue  
+D. Amazon Kinesis Data Streams  
 
 ### Answer
 
