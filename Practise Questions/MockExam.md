@@ -560,6 +560,35 @@ An Elastic Load Balancer (ELB) automatically distributes incoming application tr
 
 </details>
 
+## Question #21
+
+Which of the following is an accurate statement regarding AWS resource tags?
+
+A. All AWS resource tags have a semantic interpretation  
+B. Within a resource tag, every defined key must have a value string  
+C. By default, resource tags are assigned as null, null  
+D. Resource tags can be edited or removed at any time  
+E. Placement group does not support tags  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct answer: D. Resource tags can be edited or removed at any time**
+
+**Explanation:**
+AWS resource tags are metadata in the form of key-value pairs that help organize, manage, automate, and track AWS resources. Tags can generally be added, modified, or removed after a resource is created.
+
+Why the others are incorrect:
+
+* **A.** AWS does not assign semantic meaning to most user-defined tags; they are interpreted according to how you choose to use them.
+* **B.** A tag key can exist without a value. Tag values are optional for many AWS resources.
+* **C.** Resources are not automatically assigned tags with `null, null` values.
+* **E.** Placement groups support tagging, so this statement is incorrect.
+
+</details>
+
 
 
 
