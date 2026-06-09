@@ -508,5 +508,58 @@ When an AWS Lambda function has not been invoked for a period of time, AWS may n
 
 ---
 
+## Question #19
+
+When designing a highly available architecture, what is the difference between vertical scaling (scaling up) and horizontal scaling (scaling out)?
+
+A. Scaling up provides for high availability whilst scaling out brings fault-tolerance  
+B. Scaling out is not cost-effective compared to scaling up  
+C. Scaling up adds more resources to an instance, scaling out adds more instances  
+D. Autoscaling groups require scaling up whilst launch configurations use scaling out  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct answer: C. Scaling up adds more resources to an instance, scaling out adds more instances**
+
+**Explanation:**
+Vertical scaling (**scaling up**) increases the resources of an existing instance, such as adding more CPU, memory, or storage. Horizontal scaling (**scaling out**) increases capacity by adding more instances and distributing the workload across them.
+
+For highly available architectures, horizontal scaling is often preferred because it can improve fault tolerance and reduce reliance on a single instance.
+
+* **A.** Incorrect. Scaling up does not inherently provide high availability, and scaling out is commonly used to improve both availability and fault tolerance.
+* **B.** Incorrect. Cost-effectiveness depends on the workload and architecture; scaling out is often very cost-effective.
+* **D.** Incorrect. Auto Scaling groups are designed for horizontal scaling, not vertical scaling. Launch configurations/templates define how instances are launched.
+
+</details>
+
+## Question #20
+
+Which of the following is the concept of the Elastic Load Balancer?
+
+A. To distribute traffic to multiple EC2 Instances  
+B. To scale up EC2 Instances  
+C. To distribute traffic to AWS resources across multiple regions  
+D. To increase the size of the EC2 Instance based on demand  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct answer: A. To distribute traffic to multiple EC2 Instances**
+
+**Explanation:**
+An Elastic Load Balancer (ELB) automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, helping improve application availability, fault tolerance, and scalability.
+
+* **B.** Incorrect. Scaling up EC2 instances is vertical scaling and is not performed by ELB.
+* **C.** Incorrect. ELB distributes traffic within a region. Global traffic routing is typically handled by services such as AWS Global Accelerator or Route 53.
+* **D.** Incorrect. Increasing the size of an EC2 instance is vertical scaling and is unrelated to ELB.
+
+</details>
+
+
 
 
