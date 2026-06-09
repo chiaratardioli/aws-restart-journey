@@ -294,5 +294,192 @@ Amazon Kinesis Data Streams is designed for real-time ingestion and processing o
 
 </details>
 
+---
+
+## Question #12
+
+A company wants objects older than 365 days moved to Glacier Deep Archive automatically. Which S3 feature should they configure?
+
+A. S3 Lifecycle rule to transition objects to Glacier Deep Archive  
+B. Cross-region replication only  
+C. Versioning with MFA delete only  
+D. Bucket policy with deny action  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct answer: A. S3 Lifecycle rule to transition objects to Glacier Deep Archive**
+
+**Explanation:**
+Amazon S3 Lifecycle rules allow you to automatically transition objects between storage classes based on their age. In this case, a lifecycle policy can be configured to move objects older than 365 days to **S3 Glacier Deep Archive**, which is designed for long-term, low-cost storage.
+
+* **Cross-region replication** is used to replicate objects across AWS regions, not to manage storage class transitions.
+* **Versioning with MFA delete** is used for protecting against accidental deletion, not lifecycle transitions.
+* **Bucket policy with deny action** is used for access control, not for storage automation.
+
+</details>
+
+## Question #13
+
+A team wants to run containerized microservices. They prefer AWS-managed orchestration and minimal operational overhead. Which TWO services are appropriate?
+
+A. AWS App Runner  
+B. Amazon RDS  
+C. Amazon ECS with Fargate  
+D. Amazon EMR  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct answers: A. AWS App Runner and C. Amazon ECS with Fargate**
+
+**Explanation:**
+Both AWS App Runner and Amazon ECS with AWS Fargate provide managed, serverless-style options for running containerized applications with minimal infrastructure management.
+
+* **AWS App Runner** is a fully managed service that automatically builds, deploys, and scales containerized web applications and APIs without requiring infrastructure management.
+* **Amazon ECS with AWS Fargate** allows you to run containers without managing servers, as Fargate handles the underlying compute infrastructure.
+
+Why the others are incorrect:
+
+* **Amazon RDS** is a managed relational database service, not for running containers.
+* **Amazon EMR** is used for big data processing (Hadoop/Spark workloads), not microservices hosting.
+
+</details>
+
+## Question #14
+
+A company needs to transfer terabytes of files from on-premises NAS into S3 on a recurring schedule with high performance. Which service is designed for this?
+
+A. Amazon S3 replication for first import  
+B. AWS Lambda for file transfer  
+C. AWS Transfer Family only  
+D. AWS DataSync  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct answer: D. AWS DataSync**
+
+**Explanation:**
+AWS DataSync is designed for high-speed, automated, and recurring data transfers between on-premises storage (such as NAS) and AWS services like Amazon S3. It efficiently transfers large datasets and can be scheduled for regular sync operations.
+
+* **Amazon S3 replication** is used to replicate objects between S3 buckets, not from on-premises NAS.
+* **AWS Lambda** is not suitable for large-scale or high-throughput file transfers.
+* **AWS Transfer Family** is used for file transfer protocols (SFTP, FTPS, FTP) into S3 or EFS, but it is not optimized for large-scale NAS migration or high-performance recurring sync workloads like DataSync.
+
+</details>
+
+## Question #15
+
+A read-heavy relational database needs better read scaling. Which approach is recommended?
+
+A. Add read replicas (RDS Read Replicas) or use read-replica features of Aurora  
+B. Store queries in S3 lifecycle  
+C. Switch to a single larger instance with no replication  
+D. Use CloudFront to cache RDS responses  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct answer: A. Add read replicas (RDS Read Replicas) or use read-replica features of Aurora**
+
+**Explanation:**
+For read-heavy workloads on a relational database, the standard AWS approach is to scale read traffic horizontally using read replicas. Amazon RDS supports read replicas, and Amazon Aurora provides built-in, highly efficient replication to multiple read replicas for improved read scalability and performance.
+
+* **B. Store queries in S3 lifecycle** – S3 is object storage and not used for database query handling.
+* **C. Switch to a single larger instance** – This is vertical scaling and does not solve read scaling limitations effectively.
+* **D. Use CloudFront to cache RDS responses** – CloudFront is for caching web content, not direct database query results.
+
+</details>
+
+## Question #16
+
+A web application needs to allow a user to upload file directly to S3 without exposing AWS credentials. Which mechanism is best?
+
+A. Use pre-signed S3 URLs or POST policies to allow direct uploads  
+B. Use EFS mount in the browser  
+C. Make the S3 bucket public and accept uploads  
+D. Embed root AWS credentials in the client  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct answer: A. Use pre-signed S3 URLs or POST policies to allow direct uploads**
+
+**Explanation:**
+Pre-signed URLs (or pre-signed POST policies) allow clients to upload files directly to Amazon S3 securely without exposing AWS credentials. The server generates a temporary, time-limited URL that grants permission for a specific upload operation.
+
+* **B. Use EFS mount in the browser** – Not applicable; Amazon EFS is for mounting file systems on compute instances, not web browsers.
+* **C. Make the S3 bucket public** – This is insecure and exposes the bucket to unauthorized access.
+* **D. Embed root AWS credentials in the client** – Extremely insecure and strongly discouraged.
+
+</details>
+
+## Question #17
+
+A global enterprise wants both encryption for traffic across the internet and a low-latency private connection for bulk transfer. Which TWO options describe a hybrid connectivity solution?
+
+A. Use AWS Direct Connect for dedicated private connectivity  
+B. Use Route 53 to encrypt traffic  
+C. Use a VPN connection (IPSec) over the internet for encrypted backup/failover  
+D. Use CloudFront to replace Direct Connect  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct answers: A. Use AWS Direct Connect for dedicated private connectivity and C. Use a VPN connection (IPSec) over the internet for encrypted backup/failover**
+
+**Explanation:**
+A hybrid connectivity solution commonly combines multiple AWS networking services:
+
+* **AWS Direct Connect** provides a dedicated private network connection between on-premises environments and AWS, ideal for high-throughput, low-latency bulk data transfer.
+* **AWS Site-to-Site VPN (IPSec over the internet)** provides encrypted connectivity over the public internet and is often used as a secure backup or failover option when Direct Connect is unavailable.
+
+Why the others are incorrect:
+
+* **Route 53** is a DNS service and does not provide encryption or network connectivity.
+* **CloudFront** is a content delivery network and does not replace Direct Connect for hybrid connectivity.
+
+</details>
+
+## Question #18
+
+A serverless API using Lambda occasionally experiences increased latency on first request after idle. What is the likely cause?
+
+A. S3 consistency issue  
+B. CloudFront misconfiguration  
+C. Lambda cold start (initialization overhead)  
+D. Route 53 propagation delay  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct answer: C. Lambda cold start (initialization overhead)**
+
+**Explanation:**
+When an AWS Lambda function has not been invoked for a period of time, AWS may need to initialize a new execution environment before handling a request. This is known as a **cold start**, and it can introduce additional latency on the first request after idle time.
+
+* **S3 consistency issue** – Not applicable; S3 provides strong read-after-write consistency for most operations.
+* **CloudFront misconfiguration** – Would affect caching and content delivery, not Lambda initialization latency.
+* **Route 53 propagation delay** – Relates to DNS changes, not per-request latency in Lambda execution.
+
+</details>
+
+---
+
 
 
