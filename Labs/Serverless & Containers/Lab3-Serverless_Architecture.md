@@ -8,6 +8,8 @@
 
 This lab implements a fully serverless, event-driven inventory tracking system on AWS, without provisioning or managing any servers. The architecture chains four managed services together: Amazon S3 receives inventory files, AWS Lambda processes them and writes to Amazon DynamoDB, a DynamoDB Stream triggers a second Lambda function that checks stock levels, and Amazon SNS delivers out-of-stock notifications by email. The solution demonstrates key serverless principles: automatic scaling, pay-per-use billing, and loose coupling between independent, single-purpose functions.
 
+![Serverless Architecture Architecture](./images/03-00-architecture.png)
+
 ## Task 1: Create the Lambda Function to Load Data
 
 I created a Lambda function named `Load-Inventory` (Python 3.9), using an existing execution role scoped with the permissions needed to read from S3 and write to DynamoDB. I deployed the provided handler code, which:
