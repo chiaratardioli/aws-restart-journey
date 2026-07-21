@@ -174,6 +174,30 @@ Berlin,Echo Look,10
 Berlin,Amazon Tap,15
 ```
 
+Extract from `inventory-calcutta.csv`:
+
+```text
+store,item,count
+Calcutta,Echo Dot,7
+Calcutta,Echo (2nd Gen),0
+Calcutta,Echo Show,14
+Calcutta,Echo Plus,16
+Calcutta,Echo Look,3
+Calcutta,Amazon Tap,15
+```
+
+Extract from `inventory-karachi.csv`:
+
+```text
+store,item,count
+Karachi,Echo Dot,19
+Karachi,Echo (2nd Gen),20
+Karachi,Echo Show,16
+Karachi,Echo Plus,0
+Karachi,Echo Look,25
+Karachi,Amazon Tap,6
+```
+
 Extract from `inventory-pusan.csv`:
 
 ```text
@@ -186,14 +210,26 @@ Pusan,Echo Look,15
 Pusan,Amazon Tap,3
 ```
 
-Extract from `inventory-calcutta.csv`:
+Extract from `inventory-shanghai.csv`:
 
 ```text
 store,item,count
-Calcutta,Echo Dot,7
-Calcutta,Echo (2nd Gen),0
-Calcutta,Echo Show,14
-Calcutta,Echo Plus,16
-Calcutta,Echo Look,3
-Calcutta,Amazon Tap,15
+Shanghai,Echo Dot,14
+Shanghai,Echo (2nd Gen),13
+Shanghai,Echo Show,24
+Shanghai,Echo Plus,19
+Shanghai,Echo Look,23
+Shanghai,Amazon Tap,0
+```
+
+Extract from `inventory-springfield.csv`:
+
+```text
+store,item,count
+Springfield,Echo Dot,12
+Springfield,Echo (2nd Gen),25
+Springfield,Echo Show,0
+Springfield,Echo Plus,8
+Springfield,Echo Look,5
+Springfield,Amazon Tap,1
 ```
