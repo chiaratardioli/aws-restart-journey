@@ -62,7 +62,8 @@ I then added a **DynamoDB trigger** to the function, pointing at the `Inventory`
 
 I uploaded another inventory file to the S3 bucket to exercise the full pipeline: S3 → `Load-Inventory` Lambda → DynamoDB → DynamoDB Stream → `Check-Stock` Lambda → SNS → email. I refreshed the dashboard and confirmed the new store's data appeared. Shortly after, I received an email notification for the item with zero stock, confirming that every stage of the event-driven chain worked correctly end to end.
 
-![Out-of-stock email notification received](./images/03-07-out-of-stock-email.png)
+![Out-of-stock email notification received](./images/03-07-out-of-stock-dashboard.png)
+![Out-of-stock email notification received](./images/03-08-out-of-stock-email.png)
 
 Uploading multiple inventory files at the same time would trigger multiple concurrent, independent invocations of `Load-Inventory`, since Lambda scales out automatically per event rather than queuing them behind a single instance. Each file would be processed in parallel and would independently trigger `Check-Stock` for any resulting DynamoDB writes.
 
