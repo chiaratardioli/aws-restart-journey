@@ -1,6 +1,7 @@
 # Lab Report: Implementing a Serverless Architecture on AWS
 
-**Lab:** Module 13 – Guided Lab 2: Implementing a Serverless Architecture on AWS
+**Lab:** [Module 13 – Guided Lab 2: Implementing a Serverless Architecture on AWS](https://labs.vocareum.com/main/main.php?m=editor&mode=s&asnid=1045963&stepid=1045964&hideNavBar=1)
+
 **Scenario:** Build an inventory tracking system for stores worldwide. Stores upload inventory files to Amazon S3, which triggers an AWS Lambda function that loads the data into an Amazon DynamoDB table. A serverless dashboard displays inventory levels, and a second Lambda function monitors stock and sends a notification through Amazon SNS when an item is out of stock.
 
 ## Introduction
@@ -17,13 +18,13 @@ I created a Lambda function named `Load-Inventory` (Python 3.9), using an existi
 
 This function is not invoked directly; it is designed to run only in response to an S3 event, which I configured in the next task.
 
-![Load-Inventory Lambda function configuration](./images/01-01-load-inventory-lambda.png)
+![Load-Inventory Lambda function configuration](./images/03-01-load-inventory-lambda.png)
 
 ## Task 2: Configure the Amazon S3 Event Trigger
 
 I created an S3 bucket (`inventory-<random-number>`) to serve as the upload endpoint for stores. In the bucket's **Properties**, I added an event notification (`Load-Inventory`) for **All object create events**, with the destination set to the `Load-Inventory` Lambda function. This wires the two services together: any object uploaded to the bucket now automatically invokes the Lambda function, with no polling or scheduling required.
 
-![S3 event notification configuration](./images/02-01-s3-event-trigger.png)
+![S3 event notification configuration](./images/03-02-s3-event-trigger.png)
 
 ## Task 3: Test the Loading Process
 
@@ -31,15 +32,15 @@ I uploaded a sample inventory CSV file (store, item, count columns) to the S3 bu
 
 I verified the result in two ways: through the serverless dashboard application (a static site on S3 that authenticates anonymously via Amazon Cognito and reads directly from DynamoDB), and by inspecting the `Inventory` table's Items tab in the DynamoDB console.
 
-![Inventory dashboard displaying uploaded data](./images/03-01-inventory-dashboard.png)
+![Inventory dashboard displaying uploaded data](./images/03-03-inventory-dashboard.png)
 
-![DynamoDB Inventory table items](./images/03-02-dynamodb-items.png)
+![DynamoDB Inventory table items](./images/03-04-dynamodb-items.png)
 
 ## Task 4: Configure Notifications with Amazon SNS
 
 I created an SNS topic named `NoStock` (Standard type) to handle out-of-stock alerts. I then created an email subscription to the topic using my own address and confirmed it via the confirmation link sent by Amazon SNS. Any message published to this topic from this point on is delivered directly to my inbox.
 
-![SNS topic and email subscription](./images/04-01-sns-topic-subscription.png)
+![SNS topic and email subscription](./images/03-05-sns-topic-subscription.png)
 
 ## Task 5: Create the Lambda Function to Send Notifications
 
@@ -53,13 +54,13 @@ I deployed the provided handler code, which:
 
 I then added a **DynamoDB trigger** to the function, pointing at the `Inventory` table, so it fires automatically whenever the table is updated by the loading process.
 
-![Check-Stock Lambda function and DynamoDB trigger](./images/05-01-check-stock-lambda-trigger.png)
+![Check-Stock Lambda function and DynamoDB trigger](./images/03-06-check-stock-lambda-trigger.png)
 
 ## Task 6: Test the End-to-End System
 
 I uploaded another inventory file to the S3 bucket to exercise the full pipeline: S3 → `Load-Inventory` Lambda → DynamoDB → DynamoDB Stream → `Check-Stock` Lambda → SNS → email. I refreshed the dashboard and confirmed the new store's data appeared. Shortly after, I received an email notification for the item with zero stock, confirming that every stage of the event-driven chain worked correctly end to end.
 
-![Out-of-stock email notification received](./images/06-01-out-of-stock-email.png)
+![Out-of-stock email notification received](./images/03-07-out-of-stock-email.png)
 
 Uploading multiple inventory files at the same time would trigger multiple concurrent, independent invocations of `Load-Inventory`, since Lambda scales out automatically per event rather than queuing them behind a single instance. Each file would be processed in parallel and would independently trigger `Check-Stock` for any resulting DynamoDB writes.
 
