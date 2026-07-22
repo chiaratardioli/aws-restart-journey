@@ -1,4 +1,8 @@
-# AWS Well-Architected Framework
+# AWS Cloud Architecture
+
+*Cloud Architecture is a journey, not a destination.*
+
+## AWS Well-Architected Framework
 
 The **AWS Well-Architected Framework** is a collection of AWS best practices and design principles used to build secure, reliable, 
 efficient, cost-effective, and sustainable cloud architectures. It provides a consistent method for evaluating AWS workloads, 
