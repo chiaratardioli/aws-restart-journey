@@ -26,15 +26,143 @@ Then AWS launches a virtual machine called an **instance**.
 * **Auto Scaling** → automatically add/remove instances based on demand
 * **Load Balancer** → distributes traffic across multiple instances
 
-### Main Instance Families
+### EC2 Instance Types
 
-| Family                | Description                              |
-| --------------------- | ---------------------------------------- |
-| General Purpose       | Balanced compute, memory, and networking |
-| Compute Optimized     | High-performance processors              |
-| Memory Optimized      | Large memory workloads                   |
-| Storage Optimized     | High disk throughput                     |
-| Accelerated Computing | GPU-based workloads                      |
+AWS provides hundreds of **EC2 instance types**, grouped into **instance families**. Each family is designed and optimized for a specific workload pattern.
+
+#### Main EC2 Instance Families
+
+| Instance Family | Description | Common Use Cases |
+|---|---|---|
+| **General Purpose (M, T)** | Balanced combination of compute, memory, and networking | Web servers, application servers, development/test environments |
+| **Compute Optimized (C)** | High CPU performance with a higher compute-to-memory ratio | Batch processing, scientific computing, gaming servers, media processing |
+| **Memory Optimized (R, X, z)** | Large amounts of RAM for memory-intensive applications | In-memory databases, caching, real-time analytics |
+| **Storage Optimized (I, D, H)** | High-performance local storage with high IOPS and low latency | Databases, data warehouses, distributed file systems |
+| **Accelerated Computing (P, G, Inf, Trn)** | GPU or specialized hardware acceleration | Machine learning, AI inference, video rendering, HPC |
+
+---
+
+#### General Purpose Instances (M and T families)
+
+General Purpose instances provide a balance between **CPU, memory, and networking resources**.
+
+**T-Series (Burstable Performance)**
+- Uses a **CPU credit system** to handle occasional bursts of high CPU usage.
+- Best for workloads with variable or unpredictable CPU demand.
+- Cost-effective for applications that do not require constant maximum performance.
+
+**Use cases:**
+- Development and testing environments
+- Small websites
+- Low-traffic applications
+- Applications with occasional CPU spikes
+
+**M-Series (Balanced Workloads)**
+- Provides a balanced ratio of CPU, memory, and networking.
+- Considered the standard "workhorse" EC2 family.
+
+**Use cases:**
+- Web servers
+- Application servers
+- Enterprise applications
+- Small to medium-sized databases
+
+### Compute Optimized Instances (C Family)
+
+Compute Optimized instances provide a **high CPU-to-memory ratio**.
+
+They are designed for applications where processing power is more important than memory capacity.
+
+**Use cases:**
+- Batch processing
+- Media transcoding
+- High-performance web servers
+- Scientific simulations
+- Gaming servers
+- Machine learning inference
+
+**Keyword:**  
+➡️ **CPU-intensive workload = C family**
+
+
+#### Memory Optimized Instances (R, X, z Families)
+
+Memory Optimized instances provide a **large amount of RAM** compared to CPU resources.
+
+They are ideal when applications need to store large datasets in memory for fast access.
+
+**Use cases:**
+- SAP HANA
+- Redis
+- Memcached
+- In-memory databases
+- Real-time big data analytics
+- Large-scale caching
+
+**Keyword:**  
+➡️ **In-memory database or large dataset = R/X family**
+
+
+#### Storage Optimized Instances (I, D, H Families)
+
+Storage Optimized instances are designed for workloads requiring:
+
+- Very high disk throughput
+- High IOPS
+- Low-latency local storage
+- NVMe SSD performance
+
+**Use cases:**
+- OLTP databases
+- NoSQL databases using local storage
+- Data warehouses
+- Distributed file systems
+- Log processing systems
+
+**Keyword:**  
+➡️ **High IOPS or local disk performance = I family**
+
+### Accelerated Computing Instances (P, G, Inf, Trn Families)
+
+Accelerated Computing instances use GPUs or specialized AWS hardware to speed up specific workloads.
+
+**Use cases:**
+- Machine learning model training
+- AI inference
+- Video rendering
+- Graphics processing
+- High-performance computing (HPC)
+
+Examples:
+- **P family** → GPU-based machine learning training
+- **G family** → Graphics and inference workloads
+- **Inf family** → Machine learning inference using AWS Inferentia
+- **Trn family** → Machine learning training using AWS Trainium
+
+**Keyword:**  
+➡️ **GPU or ML workload = Accelerated Computing**
+
+
+#### 📝 Exam Tips — EC2 Instance Family Keywords
+
+| Requirement in Question | Choose |
+|---|---|
+| High CPU workload, batch processing, scientific computing | **C family (Compute Optimized)** |
+| In-memory database, SAP HANA, Redis, Memcached | **R/X family (Memory Optimized)** |
+| Machine learning training, GPU workloads, video rendering | **P/G/Inf/Trn family (Accelerated Computing)** |
+| High random IOPS, local NVMe storage, NoSQL databases | **I family (Storage Optimized)** |
+| Development/testing, variable CPU usage, cost-sensitive workloads | **T family (Burstable General Purpose)** |
+| Balanced web/app workloads | **M family (General Purpose)** |
+
+#### Quick Memory Trick
+
+- **T = Tiny bursts** → Burstable workloads  
+- **M = Medium balance** → General purpose  
+- **C = Compute** → CPU-heavy workloads  
+- **R = RAM** → Memory-heavy workloads  
+- **I = IOPS** → Storage performance  
+- **P/G = Processing Graphics** → GPU acceleration  
+
 
 ### vCPU
 
