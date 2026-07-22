@@ -1204,7 +1204,6 @@ Useful for:
 | **Control Tower** | Automated multi-account setup |
 | **Guardrails** | Prevent and detect non-compliance |
 | **Account Factory** | Create governed AWS accounts quickly |
-```
 
 ---
 
