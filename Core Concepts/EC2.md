@@ -26,6 +26,8 @@ Then AWS launches a virtual machine called an **instance**.
 * **Auto Scaling** → automatically add/remove instances based on demand
 * **Load Balancer** → distributes traffic across multiple instances
 
+---
+
 ### EC2 Instance Types
 
 AWS provides hundreds of **EC2 instance types**, grouped into **instance families**. Each family is designed and optimized for a specific workload pattern.
@@ -39,8 +41,6 @@ AWS provides hundreds of **EC2 instance types**, grouped into **instance familie
 | **Memory Optimized (R, X, z)** | Large amounts of RAM for memory-intensive applications | In-memory databases, caching, real-time analytics |
 | **Storage Optimized (I, D, H)** | High-performance local storage with high IOPS and low latency | Databases, data warehouses, distributed file systems |
 | **Accelerated Computing (P, G, Inf, Trn)** | GPU or specialized hardware acceleration | Machine learning, AI inference, video rendering, HPC |
-
----
 
 #### General Purpose Instances (M and T families)
 
@@ -163,11 +163,13 @@ Examples:
 - **I = IOPS** → Storage performance  
 - **P/G = Processing Graphics** → GPU acceleration  
 
+---
 
 ### vCPU
 
 A **vCPU (virtual CPU)** represents a thread of a physical CPU core and measures processing power.
-### Common use cases
+
+#### Common use cases
 
 * Web hosting
 * APIs and backend services
@@ -176,6 +178,8 @@ A **vCPU (virtual CPU)** represents a thread of a physical CPU core and measures
 * Machine learning workloads
 * Big data processing
 * Gaming servers
+
+---
 
 ### Pricing model
 
@@ -186,7 +190,7 @@ EC2 uses pay-as-you-go pricing:
 * **Spot Instances** → discounted unused capacity
 * **Dedicated Hosts** → isolated physical servers
 
-### Advantages
+#### Advantages
 
 * Highly scalable
 * Fast provisioning
@@ -194,13 +198,13 @@ EC2 uses pay-as-you-go pricing:
 * Flexible configurations
 * Integrates with other AWS services
 
-### Drawbacks
+#### Drawbacks
 
 * Can become expensive if unmanaged
 * Requires system administration knowledge
 * Misconfiguration can create security risks
 
-### Example workflow
+#### Example workflow
 
 1. Choose an AMI (e.g., Ubuntu Linux)
 2. Select instance type (e.g., t3.micro)
@@ -209,7 +213,7 @@ EC2 uses pay-as-you-go pricing:
 5. Connect via SSH or RDP
 6. Deploy your application
 
-### Analogy
+#### Analogy
 
 Think of EC2 as:
 
