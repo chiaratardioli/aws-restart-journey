@@ -37,3 +37,21 @@ optimize their systems as business requirements evolve.
 - **Performance Efficiency** – Use computing resources efficiently and scale to meet workload requirements.
 - **Cost Optimization** – Minimize unnecessary costs while maximizing business value.
 - **Sustainability** – Reduce the environmental impact of cloud workloads by optimizing resource usage.
+
+## AWS Well-Architected Tool (AWS WA Tool)
+
+The **AWS Well-Architected Framework** defines the best practices and principles for designing cloud architectures. The **AWS Well-Architected Tool (AWS WA Tool)** is the AWS service that helps apply those principles by reviewing workloads against the framework. It provides a structured way to assess architectures, identify risks, and create improvement plans based on AWS recommendations.
+
+The AWS WA Tool guides architects through a **Well-Architected Review**, where a workload is evaluated by answering a series of questions for each of the six pillars. The tool identifies **High-Risk Issues (HRIs)** and **Medium-Risk Issues (MRIs)**, tracks improvements over time using **milestones**, and supports **lenses** for specialized workloads such as Serverless, Machine Learning, IoT, and Financial Services.
+
+### Key Features
+
+- **Workload Reviews** – Evaluate AWS workloads against the Well-Architected Framework.
+- **Question-Based Assessment** – Answer pillar-specific questions to identify architectural risks.
+- **Risk Identification** – Highlights High-Risk Issues (HRIs) and Medium-Risk Issues (MRIs).
+- **Milestones** – Capture snapshots of a workload to monitor improvements over time.
+- **Lenses** – Apply additional best practices for specific technologies and industries.
+- **Improvement Plans** – Receive AWS recommendations to remediate identified risks.
+- **Pillar Prioritization** – Customize the priority of the six pillars according to business requirements.
+
+> **Exam Tip:** The **Well-Architected Framework** defines the best practices, while the **AWS Well-Architected Tool** helps assess workloads against those practices and track continuous improvements.
