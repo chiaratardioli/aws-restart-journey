@@ -55,3 +55,31 @@ The AWS WA Tool guides architects through a **Well-Architected Review**, where a
 - **Pillar Prioritization** – Customize the priority of the six pillars according to business requirements.
 
 > **Exam Tip:** The **Well-Architected Framework** defines the best practices, while the **AWS Well-Architected Tool** helps assess workloads against those practices and track continuous improvements.
+
+## AWS Architectural Best Practices
+
+The **AWS Architectural Best Practices** are a set of recommendations based on the **AWS Well-Architected Framework**. They help architects design workloads that are secure, reliable, scalable, cost-effective, and operationally efficient throughout their entire lifecycle. Rather than being a one-time checklist, these practices should be applied continuously as applications evolve and business requirements change.
+
+Successful architectures begin with careful planning. Before selecting AWS services, architects should gather both **functional requirements** (what the system must do) and **non-functional requirements** (how well the system should perform, such as security, availability, scalability, and performance). These requirements guide architectural decisions and ensure the final solution meets both business and technical objectives.
+
+### AWS Best Practices
+
+- **Start with business requirements** – Understand the customer's goals before designing the architecture.
+- **Design for failure** – Assume components will fail and build systems that can recover automatically.
+- **Implement security at every layer** – Apply the principle of least privilege, encrypt data, and protect workloads throughout the stack.
+- **Automate wherever possible** – Use Infrastructure as Code (IaC), automation, and managed deployments to reduce manual work.
+- **Use managed services** – Prefer AWS managed services to reduce operational overhead and improve reliability.
+- **Monitor and measure** – Collect metrics, logs, and alarms to continuously improve workloads.
+- **Stay current** – Regularly adopt new AWS features, services, and best practices.
+
+### Functional vs Non-Functional Requirements
+
+| Functional Requirements | Non-Functional Requirements |
+|--------------------------|-----------------------------|
+| Describe **what** the system does | Describe **how well** the system performs |
+| Define business features | Define quality attributes |
+| Specified by the customer | Often defined by architects or technical teams |
+| Mandatory for the application | Usually desirable but may affect cost |
+| Examples: user login, order processing, file upload | Examples: security, availability, scalability, performance, latency |
+
+> **Exam Tip:** AWS exam questions often describe **non-functional requirements** (high availability, low latency, security, scalability, disaster recovery, or cost optimization). The correct answer is usually the AWS architecture that best satisfies these quality attributes rather than simply providing the requested functionality.
