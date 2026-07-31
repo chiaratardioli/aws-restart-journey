@@ -1,3 +1,47 @@
+# AWS Compute Services
+
+AWS compute services provide a versatile range of solutions from virtual servers and automated scaling to serverless container orchestration. Below is a summary of the core concepts and services based on the sources:
+
+### **1. EC2 Advanced: AMIs, Instance Types, and Placement Groups**
+*   **Amazon Machine Images (AMIs):** These are blueprints for EC2 instances containing the OS, software, and configuration. They are **Region-specific**; to use one in a different Region, it must be copied, which generates a new AMI ID. **Custom AMIs** are preferred for Auto Scaling as they provide faster boot times than using user-data scripts.
+*   **Instance Families:** Workloads should be matched to specific families: **T** (burstable/low-cost), **M** (balanced), **C** (compute-optimized for batch/HPC), **R/X** (memory-optimized for in-memory DBs like Redis), and **P/G** (accelerated compute for ML/GPU).
+*   **Placement Groups:** These influence physical placement for performance or fault tolerance. **Cluster** (lowest latency, single AZ), **Spread** (maximum hardware isolation, max 7 instances per AZ), and **Partition** (scale-out isolation for big data like Hadoop/Kafka).
+*   **Pricing Models:** Options include **On-Demand** (flexible/expensive), **Reserved Instances** (1-3 year commitment), **Spot Instances** (up to 90% discount for fault-tolerant batch work), **Savings Plans** (flexible $/hour commitment), and **Dedicated Hosts** (required for BYOL and physical server control).
+
+### **2. Auto Scaling and Load Balancing**
+*   **Auto Scaling Groups (ASGs):** These maintain application availability by automatically launching or terminating instances based on demand. They require a **Launch Template** and three capacity values: Minimum, Desired, and Maximum.
+*   **Scaling Policies:** Common triggers include **Target Tracking** (maintains a metric, e.g., 50% CPU), **Step Scaling** (responds to alarm size), **Scheduled Scaling** (pre-scales for known events), and **Predictive Scaling** (uses ML to forecast demand).
+*   **Elastic Load Balancing (ELB):**
+    *   **ALB (Layer 7):** Best for HTTP/HTTPS, microservices, and path-based routing.
+    *   **NLB (Layer 4):** Designed for ultra-low latency, millions of requests per second, and static IP requirements.
+    *   **GWLB (Layer 3):** Used to insert third-party security appliances (firewalls/IDS) inline into the traffic path.
+
+### **3. Loosely Coupled Architectures**
+*   **Microservices:** This architecture decomposes applications into small, independently deployable services.
+*   **Decoupling Patterns:**
+    *   **Amazon SQS:** A message queue for asynchronous processing; it buffers work and prevents loss if the backend is overwhelmed.
+    *   **Amazon SNS:** A pub/sub service for broadcasting one message to multiple subscribers (Fan-out pattern).
+    *   **Amazon EventBridge:** An event bus that routes events from AWS services or SaaS apps using complex rules and filtering.
+
+### **4. Disaster Recovery (DR) Strategies**
+DR is measured by **RPO** (data loss tolerance) and **RTO** (downtime tolerance).
+*   **Backup & Restore:** Cheapest; involves restoring data after a disaster (Hours RTO/RPO).
+*   **Pilot Light:** Core services like databases are kept live; other resources scale up during recovery (Minutes RTO/RPO).
+*   **Warm Standby:** A scaled-down but functional version runs continuously in another Region.
+*   **Multi-Site Active-Active:** Most expensive; full capacity in multiple locations for near-zero downtime/data loss.
+
+### **5. Multi-Account Strategy**
+*   **AWS Organizations:** Centralises account management and provides **Consolidated Billing**.
+*   **Service Control Policies (SCPs):** These define maximum permissions for accounts in an Organizational Unit (OU). Key rule: **SCPs only restrict, they never grant**, and an **Explicit Deny always wins**.
+*   **AWS Control Tower:** An automated "Landing Zone" that deploys best-practice environments with pre-configured guardrails and an **Account Factory** for new accounts.
+
+### **6. Container and Managed Compute**
+*   **ECS vs. EKS:** **ECS** is AWS-native and simpler for those new to containers; **EKS** is managed Kubernetes, ideal for migrating existing K8s workloads.
+*   **AWS Fargate:** A serverless engine for ECS and EKS that removes the need to manage underlying EC2 instances.
+*   **AWS Elastic Beanstalk:** A PaaS for deploying applications where AWS manages the infrastructure, but the customer **retains full access** to underlying resources (unlike Lambda).
+*   **AWS Batch:** Manages large-scale, compute-intensive batch jobs (e.g., genomics, rendering), dynamically scaling EC2 or Spot instances to zero when finished.
+
+
 # EC2, Auto Scaling & Container Services
 
 This section covers:
