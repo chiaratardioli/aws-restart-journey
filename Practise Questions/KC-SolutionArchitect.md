@@ -348,3 +348,234 @@ Remember AWS service categories:
 If a question says **"developers deploy an application without managing servers, load balancers, or scaling"**, the answer is usually **AWS Elastic Beanstalk**.
 
 </details>
+
+## Question #9
+
+Praesignis creates an S3 Access Point with a policy granting full read and write access to a specific application team. The underlying bucket policy, however, only grants that same team read-only access.
+
+What level of access does the application team actually have through this access point?
+
+A. Read-only access, since an access point policy cannot grant more access than the underlying bucket policy already allows.  
+B. Full read and write access, since the access point's policy takes precedence over the bucket policy.  
+C. No access at all, since access points and bucket policies must be identical to function.  
+D. It depends entirely on which VPC the request originates from.  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct Answer: A. Read-only access, since an access point policy cannot grant more access than the underlying bucket policy already allows.**
+
+**Explanation:**
+An **Amazon S3 Access Point** provides a dedicated access path to an S3 bucket with its own resource policy. However, an access point **cannot grant permissions beyond what the underlying bucket policy allows**.
+
+When a request is made through an access point, AWS evaluates **both**:
+
+* The **Access Point policy**
+* The **Underlying S3 bucket policy**
+
+The effective permissions are the **intersection** of the permissions granted by both policies. Since the bucket policy only allows **read** access, write operations are denied even though the access point policy allows them.
+
+**Why not the others:**
+
+* **B. Full read and write access** – Incorrect. An access point policy does **not** override or take precedence over the bucket policy. Both policies must allow the requested action.
+* **C. No access at all** – Incorrect. The policies do not need to be identical. The team still receives the permissions that are allowed by both policies—in this case, read-only access.
+* **D. It depends entirely on which VPC the request originates from** – Incorrect. While an access point can be restricted to a VPC, VPC origin does not allow it to bypass the permissions defined by the bucket policy.
+
+**Exam Tip:**
+
+Remember how Amazon S3 authorization works:
+
+* **Access Point Policy** → Provides an additional access control layer for a bucket.
+* **Bucket Policy** → Defines the maximum permissions available through the bucket.
+* **Effective Permissions** → Only the permissions that are allowed by **both** the Access Point policy and the bucket policy.
+
+**Keyword to remember:**
+If a question says an **S3 Access Point grants more permissions than the bucket policy**, the answer is that the user **only receives the permissions allowed by the bucket policy**. Access point policies **cannot expand** access beyond the underlying bucket.
+
+</details>
+
+
+## Question #10
+
+A Praesignis partner integration for supply-chain document exchange specifically requires **EDI (Electronic Data Interchange)** support.
+
+Which AWS Transfer Family protocol should be configured?
+
+A. SFTP  
+B. FTPS  
+C. AS2  
+D. FTP  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct Answer: C. AS2**
+
+**Explanation:**
+**AS2 (Applicability Statement 2)** is the AWS Transfer Family protocol specifically designed for **Electronic Data Interchange (EDI)** over the internet. It enables organizations to securely exchange business documents, such as purchase orders, invoices, and shipping notices, using encryption, digital signatures, and message acknowledgments (MDNs).
+
+AWS Transfer Family supports AS2 to help organizations modernize B2B integrations while meeting common EDI requirements.
+
+**Why not the others:**
+
+* **A. SFTP** – Securely transfers files over SSH, but it does not provide the EDI-specific messaging, encryption, signing, and acknowledgment capabilities of AS2.
+* **B. FTPS** – Uses SSL/TLS to secure file transfers but is a general-purpose file transfer protocol, not an EDI protocol.
+* **D. FTP** – Provides basic file transfer without encryption and is not suitable for secure EDI communications.
+
+**Exam Tip:**
+
+Remember the AWS Transfer Family protocols:
+
+* **AS2** → Secure **EDI/B2B** document exchange.
+* **SFTP** → Secure file transfer over SSH.
+* **FTPS** → Secure file transfer over SSL/TLS.
+* **FTP** → Unencrypted legacy file transfer.
+
+**Keyword to remember:**
+If a question mentions **"EDI," "B2B integration," "purchase orders," "invoices,"** or **"supply-chain document exchange,"** the answer is usually **AS2**.
+
+</details>
+
+
+## Question #11
+
+A Praesignis bucket policy explicitly grants public read access to all objects, and **Block Public Access** is fully disabled at both the account and bucket level. An external, anonymous user still cannot read a specific object.
+
+Which layer of the access control model is the **MOST LIKELY** cause, given the other layers appear correctly configured for public access?
+
+A. Block Public Access, since it always overrides bucket policies regardless of its configured state.  
+B. The IAM policy of the anonymous user, since anonymous users always have an implicit IAM policy blocking access.  
+C. An S3 Access Point policy that does not grant this specific access, since an access point policy can only narrow, never expand, what the underlying bucket policy allows.  
+D. The object's storage class, since Glacier-class objects can never be made public.  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct Answer: C. An S3 Access Point policy that does not grant this specific access, since an access point policy can only narrow, never expand, what the underlying bucket policy allows.**
+
+**Explanation:**
+When accessing an object through an **Amazon S3 Access Point**, AWS evaluates both the **Access Point policy** and the **underlying bucket policy**. Even if the bucket policy allows public read access and **Block Public Access** is disabled, the request must also be permitted by the Access Point policy.
+
+An Access Point policy can **further restrict** access but **cannot grant permissions beyond what the bucket policy allows**. Therefore, if the Access Point policy does not allow anonymous read access, the request is denied.
+
+**Why not the others:**
+
+* **A. Block Public Access** – Incorrect. The question explicitly states that Block Public Access is fully disabled at both the account and bucket level, so it is not preventing access.
+* **B. The IAM policy of the anonymous user** – Incorrect. Anonymous users do not authenticate with IAM identities, so there is no IAM policy attached to them.
+* **D. The object's storage class** – Incorrect. Storage classes such as S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive do not determine whether an object can be public. Public access is controlled by S3 authorization policies, although archived objects must first be restored before they can be retrieved.
+
+**Exam Tip:**
+
+Remember the S3 authorization layers:
+
+* **Block Public Access** → Can block public access regardless of policies (when enabled).
+* **Bucket Policy** → Defines permissions for the bucket and its objects.
+* **Access Point Policy** → Applies additional restrictions for requests through an access point.
+* **Effective permissions** → A request must be allowed by **all applicable authorization layers**.
+
+**Keyword to remember:**
+If a question states that **Block Public Access is disabled** and the **bucket policy already allows public access**, but access through an **S3 Access Point** still fails, the cause is usually the **Access Point policy**, which can **restrict** but never **expand** permissions.
+
+</details>
+
+
+## Question #12
+
+Which **TWO** of the following statements about AWS hybrid storage services are correct?
+
+A. Tape Gateway requires backup software to be reconfigured to use a new, AWS-specific API instead of standard tape commands.  
+B. DataSync can perform AWS-to-AWS transfers, such as syncing data from Amazon S3 to Amazon EFS or replicating between AWS Regions, not just on-premises-to-AWS transfers.  
+C. Volume Gateway Cached Mode keeps the entire dataset locally with only an asynchronous backup to Amazon S3.  
+D. S3 File Gateway translates NFS/SMB writes into native Amazon S3 API calls, and the resulting data is stored as genuine S3 objects, not a proprietary format.  
+E. FSx File Gateway presents an NFS interface backed by Amazon FSx for Lustre.  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct Answers: B and D**
+
+**Explanation:**
+
+**B. DataSync can perform AWS-to-AWS transfers** – **Correct.**
+AWS DataSync is not limited to migrating data from on-premises environments to AWS. It can also transfer data **between AWS storage services**, such as Amazon S3, Amazon EFS, Amazon FSx, and even across AWS Regions or AWS accounts.
+
+**D. S3 File Gateway stores data as native S3 objects** – **Correct.**
+Amazon S3 File Gateway presents standard **NFS or SMB file shares** to clients. Files written to the gateway are translated into **native Amazon S3 objects**, allowing direct access using S3 APIs and integration with other AWS services.
+
+**Why not the others:**
+
+* **A. Tape Gateway** – Incorrect. Tape Gateway exposes a **Virtual Tape Library (VTL)** using standard iSCSI interfaces, allowing existing backup software to continue using standard tape operations without modification.
+* **C. Volume Gateway Cached Mode** – Incorrect. Cached Mode stores the **primary copy of data in Amazon S3**, while only **frequently accessed data is cached locally**. Keeping the entire dataset locally describes **Stored Mode**, not Cached Mode.
+* **E. FSx File Gateway** – Incorrect. Amazon FSx File Gateway provides access to **Amazon FSx for Windows File Server** using the **SMB protocol**. It does **not** present an NFS interface and is not backed by Amazon FSx for Lustre.
+
+**Exam Tip:**
+
+Remember the AWS hybrid storage services:
+
+* **AWS DataSync** → High-speed data transfers between on-premises storage and AWS, **and between AWS storage services**.
+* **S3 File Gateway** → NFS/SMB access to **native Amazon S3 objects**.
+* **Volume Gateway Cached Mode** → Primary data in S3, frequently accessed data cached locally.
+* **Volume Gateway Stored Mode** → Primary data stored locally with asynchronous backups to S3.
+* **Tape Gateway** → Virtual Tape Library (VTL) compatible with existing backup software.
+
+**Keyword to remember:**
+If a question mentions **AWS-to-AWS data transfers**, think **AWS DataSync**. If it mentions **NFS/SMB access to Amazon S3**, think **S3 File Gateway** storing **native S3 objects**.
+
+</details>
+
+
+## Question #13
+
+A Praesignis mission-critical financial database requires **up to 200,000 IOPS** and **consistent, provisioned performance**, with the ability to attach the **same Amazon EBS volume to multiple EC2 instances** in an **active-active cluster configuration** within a single Availability Zone.
+
+Which Amazon EBS volume type satisfies **BOTH** requirements?
+
+A. io2 Block Express  
+B. io1  
+C. gp3  
+D. st1  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct Answer: A. io2 Block Express**
+
+**Explanation:**
+**Amazon EBS io2 Block Express** is the highest-performance EBS volume type, designed for mission-critical applications such as large relational databases. It supports:
+
+* Up to **256,000 IOPS** (depending on instance type)
+* Consistent, low-latency performance
+* High durability (99.999%)
+* **Multi-Attach**, allowing the same volume to be attached to multiple EC2 instances simultaneously within the same Availability Zone
+
+These capabilities make **io2 Block Express** the ideal choice for clustered applications requiring shared block storage and extremely high I/O performance.
+
+**Why not the others:**
+
+* **B. io1** – Provides provisioned IOPS and supports Multi-Attach, but it does **not** support the performance levels of **io2 Block Express**, making it unsuitable for workloads requiring up to 200,000 IOPS.
+* **C. gp3** – A general-purpose SSD volume that offers up to **80,000 IOPS**, but it does **not** support Multi-Attach.
+* **D. st1** – A throughput-optimized HDD volume intended for large, sequential workloads. It is not designed for high IOPS, low latency, or Multi-Attach.
+
+**Exam Tip:**
+
+Remember the key Amazon EBS volume types:
+
+* **io2 Block Express** → Highest performance, lowest latency, **Multi-Attach**, mission-critical databases.
+* **io1** → Provisioned IOPS SSD with lower maximum performance than io2 Block Express.
+* **gp3** → General-purpose SSD with independent IOPS and throughput provisioning.
+* **st1** → Throughput-optimized HDD for large sequential workloads.
+
+**Keyword to remember:**
+If a question mentions **200,000+ IOPS**, **consistent provisioned performance**, or **Multi-Attach for clustered applications**, the answer is almost always **io2 Block Express**.
+
+</details>
