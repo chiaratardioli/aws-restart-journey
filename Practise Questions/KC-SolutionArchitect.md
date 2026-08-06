@@ -579,3 +579,304 @@ Remember the key Amazon EBS volume types:
 If a question mentions **200,000+ IOPS**, **consistent provisioned performance**, or **Multi-Attach for clustered applications**, the answer is almost always **io2 Block Express**.
 
 </details>
+
+## Question #14
+
+A Lambda-based application opens a new database connection on every invocation, causing the Amazon RDS instance to hit its maximum connection limit under high load.
+
+Which AWS service resolves this **without changing the application's database driver**?
+
+A. Amazon RDS Proxy, which pools and shares database connections between Lambda functions, reducing the number of connections to RDS.  
+B. Amazon ElastiCache for Redis, which caches frequently read query results and reduces the number of direct database connections.  
+C. Upgrading the RDS instance to a larger instance type to increase the maximum allowed connections limit.  
+D. Enabling RDS Multi-AZ so connection requests can be distributed between the primary and standby instances.  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct Answer: A. Amazon RDS Proxy, which pools and shares database connections between Lambda functions, reducing the number of connections to RDS.**
+
+**Explanation:**
+**Amazon RDS Proxy** is a fully managed database proxy that sits between applications and Amazon RDS or Amazon Aurora databases. It **pools and reuses database connections**, allowing thousands of AWS Lambda invocations to share a much smaller number of database connections.
+
+This reduces connection overhead, improves application scalability, and prevents the database from reaching its maximum connection limit. Because the proxy uses the same database protocols, applications can continue using their existing database drivers with minimal or no code changes.
+
+**Why not the others:**
+
+* **B. Amazon ElastiCache for Redis** – Incorrect. Caching can reduce the number of database queries, but it does not solve the underlying problem of Lambda functions creating excessive database connections.
+* **C. Upgrading the RDS instance** – Incorrect. A larger instance increases the maximum number of connections, but it does not eliminate inefficient connection management. The problem is likely to reoccur as traffic grows.
+* **D. Enabling RDS Multi-AZ** – Incorrect. Multi-AZ provides high availability and automatic failover. The standby instance does not accept application connections, so it does not distribute or reduce connection load.
+
+**Exam Tip:**
+
+Remember the purpose of Amazon RDS Proxy:
+
+* **Connection pooling** for Amazon RDS and Amazon Aurora.
+* Designed for **AWS Lambda**, serverless, and highly concurrent applications.
+* Reduces database connection overhead.
+* Improves scalability and resiliency during traffic spikes.
+
+**Keyword to remember:**
+If a question mentions **AWS Lambda**, **too many database connections**, **connection pooling**, or **maximum connection limits**, the answer is usually **Amazon RDS Proxy**.
+
+</details>
+
+
+## Question #15
+
+A DynamoDB table serving an e-commerce application has unpredictable traffic spikes during flash sales. The team wants to avoid throttling without over-provisioning.
+
+Which **TWO** DynamoDB features address this?
+
+A. DynamoDB On-Demand capacity mode, which automatically accommodates any level of traffic and charges per request, eliminating the need to provision capacity.  
+B. DynamoDB Auto Scaling with provisioned capacity mode, which automatically adjusts read and write capacity units based on actual traffic patterns within defined limits.  
+C. DynamoDB Accelerator (DAX), which caches read results in memory and reduces read capacity consumption, but does not help with write throttling during flash sales.  
+D. DynamoDB Streams, which captures item-level changes and can trigger Lambda functions to redistribute write load across multiple tables.  
+E. DynamoDB Global Tables, which replicate data across regions and distribute write traffic internationally to prevent regional throttling.  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct Answers: A and B**
+
+**Explanation:**
+The two DynamoDB features that help handle unpredictable traffic spikes while avoiding manual over-provisioning are:
+
+**A. DynamoDB On-Demand capacity mode** – **Correct.**
+DynamoDB On-Demand automatically scales capacity based on incoming requests and charges only for the read and write requests consumed. It is ideal for workloads with unpredictable traffic patterns, such as flash sales, because the team does not need to estimate or provision capacity in advance.
+
+**B. DynamoDB Auto Scaling with provisioned capacity mode** – **Correct.**
+DynamoDB Auto Scaling automatically adjusts provisioned read and write capacity based on application traffic. It uses target utilization settings and scaling limits to increase capacity during spikes and reduce capacity when demand decreases.
+
+**Why not the others:**
+
+* **C. DynamoDB Accelerator (DAX)** – Incorrect. DAX improves read performance by caching frequently accessed items in memory, but it does not increase write capacity or prevent write throttling during flash sales.
+* **D. DynamoDB Streams** – Incorrect. Streams capture item-level changes for event processing and triggers, but they do not automatically distribute traffic or increase table capacity.
+* **E. DynamoDB Global Tables** – Incorrect. Global Tables provide multi-Region replication and low-latency access worldwide, but they are not primarily used to prevent throttling from traffic spikes in a single workload.
+
+**Exam Tip:**
+
+Remember DynamoDB scaling options:
+
+* **On-Demand Capacity Mode** → Best for unpredictable workloads; no capacity planning required.
+* **Auto Scaling** → Best for predictable workloads with changing traffic patterns using provisioned capacity.
+* **DAX** → Improves read latency and reduces read load.
+* **Global Tables** → Multi-Region replication and disaster recovery.
+
+**Keyword to remember:**
+If a question mentions **unpredictable traffic**, **flash sales**, or **avoiding over-provisioning**, think **DynamoDB On-Demand**. If it mentions **automatically adjusting provisioned capacity**, think **DynamoDB Auto Scaling**.
+
+</details>
+
+
+
+## Question #17
+
+A company's Aurora Serverless v2 database experiences a brief but sharp traffic spike every morning when batch jobs run. The DBA notices that capacity scaling takes a few seconds, causing initial query latency spikes.
+
+Which **Aurora Serverless v2** feature can minimize this warm-up delay?
+
+A. Set a higher minimum ACU (Aurora Capacity Unit) value so the cluster maintains pre-warmed capacity at all times, reducing the time needed to scale up during the morning spike.  
+B. Enable Aurora Auto Scaling on a provisioned cluster and configure scheduled scaling actions to add replicas before the batch window begins.  
+C. Switch to Aurora provisioned mode with the largest available instance type to eliminate any scaling delays entirely.  
+D. Use Aurora Serverless v1 instead of v2, which has a faster cold-start response time due to its simpler scaling architecture.  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct Answer: A. Set a higher minimum ACU (Aurora Capacity Unit) value so the cluster maintains pre-warmed capacity at all times, reducing the time needed to scale up during the morning spike.**
+
+**Explanation:**
+**Aurora Serverless v2** allows administrators to configure a **minimum and maximum Aurora Capacity Unit (ACU)** range. Setting a higher **minimum ACU** keeps more compute capacity available even during periods of low activity.
+
+This helps reduce latency during sudden traffic increases because Aurora Serverless v2 does not need to scale from a very low capacity level before handling the workload. The database can immediately use the already allocated capacity and then scale further if required.
+
+**Why not the others:**
+
+* **B. Enable Aurora Auto Scaling on a provisioned cluster** – Incorrect. Aurora Auto Scaling applies to provisioned Aurora clusters, mainly for adding or removing read replicas. It does not address Aurora Serverless v2 capacity warm-up.
+* **C. Switch to Aurora provisioned mode with the largest available instance type** – Incorrect. A larger provisioned instance may provide consistent performance, but it removes the serverless scaling benefits and does not represent the Aurora Serverless v2 solution for minimizing scaling delays.
+* **D. Use Aurora Serverless v1 instead of v2** – Incorrect. Aurora Serverless v1 has slower scaling characteristics and can experience more noticeable scaling delays compared to Aurora Serverless v2.
+
+**Exam Tip:**
+
+Remember Aurora Serverless v2 scaling controls:
+
+* **Minimum ACU** → Keeps baseline capacity available and reduces scaling latency.
+* **Maximum ACU** → Defines the upper scaling limit.
+* **Aurora Serverless v2** → Provides near-instantaneous scaling compared to v1 and supports features such as Multi-AZ deployments and read replicas.
+
+**Keyword to remember:**
+If a question mentions **Aurora Serverless v2 scaling delays**, **warm-up time**, or **traffic spikes**, think **increase the minimum ACU value** to keep capacity pre-warmed.
+
+</details>
+
+
+
+## Question #18
+
+A company uses an **Aurora PostgreSQL** cluster. Their **RTO is 15 minutes** and **RPO is 1 minute**.
+
+Which **TWO** Aurora features help achieve these recovery objectives?
+
+A. Aurora automated backups and point-in-time recovery, which continuously backs up data to Amazon S3 and allows restoration to any second within the retention window, supporting a near-1-minute RPO.  
+B. Aurora Replicas with automatic failover, which can promote a healthy replica to primary in under 30 seconds, well within the 15-minute RTO requirement.  
+C. Aurora Multi-Master, which allows all instances to accept writes simultaneously, eliminating any RPO but is only available for Aurora MySQL 5.6.  
+D. Aurora manual snapshots taken every minute, which achieve a 1-minute RPO but require 20–30 minutes to restore, exceeding the RTO.  
+E. Aurora Global Database, which replicates across Regions with sub-second lag, providing a cross-Region RPO of under 1 second for global DR scenarios.  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct Answers: A and B**
+
+**Explanation:**
+To meet a **15-minute Recovery Time Objective (RTO)** and a **1-minute Recovery Point Objective (RPO)**, the solution needs both:
+
+* A way to restore data with minimal data loss (**RPO**)
+* A way to quickly recover database availability (**RTO**)
+
+**A. Aurora automated backups and point-in-time recovery** – **Correct.**
+Amazon Aurora continuously backs up cluster data to Amazon S3 and supports **point-in-time recovery (PITR)** within the configured backup retention period. This allows restoration to a specific point in time, minimizing potential data loss and supporting a low RPO requirement.
+
+**B. Aurora Replicas with automatic failover** – **Correct.**
+Aurora Replicas provide high availability within an AWS Region. If the primary instance fails, Aurora can automatically promote a replica to become the new primary, typically completing failover within seconds, which easily satisfies a 15-minute RTO.
+
+**Why not the others:**
+
+* **C. Aurora Multi-Master** – Incorrect. Aurora Multi-Master is not a general Aurora PostgreSQL recovery solution and does not eliminate RPO. It was a limited feature primarily associated with Aurora MySQL-compatible editions and is not the recommended approach for meeting these recovery objectives.
+* **D. Aurora manual snapshots taken every minute** – Incorrect. Manual snapshots are not designed for continuous backup and cannot realistically be created every minute. Restoring from snapshots may also take longer than the required RTO.
+* **E. Aurora Global Database** – Incorrect for this requirement. Aurora Global Database is designed for cross-Region disaster recovery and can provide very low replication lag, but the question only requires a 1-minute RPO and 15-minute RTO within an Aurora PostgreSQL cluster. It is not necessary for meeting these objectives.
+
+**Exam Tip:**
+
+Remember Aurora recovery features:
+
+* **Automated Backups + PITR** → Recover data to a specific moment in time (RPO).
+* **Aurora Replicas + Automatic Failover** → Quickly restore database availability (RTO).
+* **Aurora Global Database** → Cross-Region disaster recovery and global read scaling.
+* **Snapshots** → Manual backups, but slower recovery compared with automated recovery options.
+
+**Keyword to remember:**
+If a question mentions **RPO (data loss)**, think **automated backups and point-in-time recovery**. If it mentions **RTO (downtime)**, think **Aurora Replicas with automatic failover**.
+
+</details>
+
+
+
+## Question #19
+
+A company is planning for disaster recovery of their production **Amazon RDS MySQL** database. Their **RPO is 5 minutes** and their **RTO is 1 hour**.
+
+They are in **us-east-1** and need recovery capability in **us-west-2**.
+
+Which **TWO** approaches together meet **BOTH** the RPO and RTO requirements?
+
+A. Enable automated backups with a retention period of at least 1 day and configure cross-Region backup replication to us-west-2, enabling point-in-time recovery with an RPO close to 5 minutes.  
+B. Create a cross-Region Read Replica in us-west-2, which uses near-real-time asynchronous replication and can be promoted to a standalone instance within the 1-hour RTO if the primary Region fails.  
+C. Enable RDS Multi-AZ in us-east-1, which provides automatic failover within the same Region but does not provide cross-Region DR capability.  
+D. Take hourly manual snapshots and copy them to us-west-2, which provides a maximum RPO of 60 minutes — exceeding the required 5-minute RPO.  
+E. Use AWS Database Migration Service (DMS) with full-load mode to copy the database to us-west-2 nightly, which exceeds both the RPO and RTO requirements.  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct Answers: A and B**
+
+**Explanation:**
+The company requires:
+
+* **RPO of 5 minutes** → Data loss must be limited to approximately 5 minutes.
+* **RTO of 1 hour** → The database must be recoverable within one hour.
+* **Cross-Region recovery** → The recovery environment must exist in us-west-2.
+
+The two approaches that satisfy these requirements are:
+
+**A. Cross-Region automated backups with point-in-time recovery** – **Correct.**
+Amazon RDS automated backups continuously capture database changes and support **point-in-time recovery (PITR)**. By copying backups to another Region, the company can restore the database in us-west-2 after a regional failure while minimizing data loss.
+
+**B. Cross-Region Read Replica** – **Correct.**
+An RDS Read Replica in another Region continuously replicates data asynchronously from the primary database. During a disaster, the replica can be promoted to a standalone database, providing a recovery option that can meet the 1-hour RTO requirement.
+
+**Why not the others:**
+
+* **C. RDS Multi-AZ** – Incorrect. Multi-AZ provides high availability and automatic failover **within the same Region**. It does not protect against a complete Regional outage.
+* **D. Hourly manual snapshots** – Incorrect. Hourly snapshots result in a potential data loss window of up to 60 minutes, which does not meet the required 5-minute RPO.
+* **E. AWS DMS full-load mode** – Incorrect. Nightly full-load replication is too slow and does not provide the continuous replication required for a 5-minute RPO or 1-hour RTO.
+
+**Exam Tip:**
+
+Remember RDS disaster recovery options:
+
+* **Multi-AZ** → High availability within one Region; automatic failover.
+* **Read Replica (cross-Region)** → Disaster recovery with asynchronous replication and fast promotion.
+* **Automated Backups + PITR** → Restore to a specific point in time.
+* **Manual Snapshots** → Backup copies, but not suitable for low RPO requirements.
+
+**Keyword to remember:**
+If a question mentions **cross-Region DR**, **low RPO**, and **fast recovery**, think **cross-Region Read Replica + automated backups with point-in-time recovery**.
+
+</details>
+
+
+
+## Question #20
+
+An **Aurora MySQL** cluster has one primary instance and three Aurora Replicas.
+
+Which **TWO** statements correctly describe how Aurora handles reads and writes in this configuration?
+
+A. All write operations must go to the primary instance via the cluster writer endpoint; the three replicas handle read traffic via the reader endpoint.  
+B. Aurora Replicas share the same underlying cluster storage volume as the primary, so replicas do not need to copy data — they access the same data pages.  
+C. Each Aurora Replica maintains its own independent copy of the data, similar to RDS Read Replicas using binary log replication.  
+D. Write operations can be sent to any of the four instances (primary + replicas) using the reader endpoint for load distribution.  
+E. Aurora Replicas are only used for failover and cannot serve read traffic until the primary instance fails.  
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct Answers: A and B**
+
+**Explanation:**
+Amazon Aurora uses a distributed storage architecture where database instances share a common, highly durable cluster storage volume.
+
+In this configuration:
+
+**A. Writes go to the primary instance and replicas serve reads** – **Correct.**
+The Aurora cluster has a single **writer instance** that handles all write operations. Applications send write traffic through the **cluster endpoint** (writer endpoint). The Aurora Replicas handle read traffic through the **reader endpoint**, which distributes read requests across available replicas.
+
+**B. Aurora Replicas share the same underlying storage volume** – **Correct.**
+Unlike traditional database read replicas that maintain separate copies of data through replication, Aurora instances use a shared distributed storage layer. Aurora Replicas do not need to copy data pages because all instances access the same underlying cluster storage.
+
+**Why not the others:**
+
+* **C. Each Aurora Replica maintains its own independent copy of data** – Incorrect. This describes traditional database replication models, such as standard RDS Read Replicas. Aurora Replicas use shared cluster storage instead.
+* **D. Write operations can be sent to any instance using the reader endpoint** – Incorrect. Aurora Replicas are read-only and cannot process writes. Writes must go to the primary instance through the writer endpoint.
+* **E. Aurora Replicas are only for failover** – Incorrect. Aurora Replicas can serve read traffic immediately and also provide failover targets if the primary instance fails.
+
+**Exam Tip:**
+
+Remember Aurora architecture:
+
+* **Writer endpoint** → Sends requests to the primary instance for writes.
+* **Reader endpoint** → Distributes read requests across Aurora Replicas.
+* **Aurora Replicas** → Share the same storage layer and can serve reads.
+* **Failover** → A replica can be promoted to become the new writer if the primary fails.
+
+**Keyword to remember:**
+If a question mentions **Aurora Replicas sharing storage**, remember: **Aurora replicas do not copy data; they access the same distributed cluster volume.**
+
+</details>
+
+
