@@ -1,4 +1,4 @@
-# Mock Exam
+# Mock Exam: Amazon Cloud Partictioner
 
 ## Question #0
 
