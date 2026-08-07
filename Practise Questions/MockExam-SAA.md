@@ -1,4 +1,4 @@
-# Amazon Solution Architect Associate
+# Mock Exam: Amazon Solution Architect Associate
 
 ## Question #1
 
@@ -6,10 +6,10 @@ Praesignis must comply with a regulatory requirement that all data stored in Ama
 
 Which S3 encryption option satisfies these requirements?
 
-A. SSE-C (Server-Side Encryption with Customer-Provided Keys)
-B. Client-Side Encryption using a self-managed library before uploading to S3
-C. SSE-S3 (Server-Side Encryption with Amazon S3 Managed Keys)
-D. SSE-KMS using Customer Managed Keys (CMKs) in AWS KMS
+A. SSE-C (Server-Side Encryption with Customer-Provided Keys)  
+B. Client-Side Encryption using a self-managed library before uploading to S3  
+C. SSE-S3 (Server-Side Encryption with Amazon S3 Managed Keys)  
+D. SSE-KMS using Customer Managed Keys (CMKs) in AWS KMS  
 
 ### Answer
 
@@ -21,3 +21,4 @@ D. SSE-KMS using Customer Managed Keys (CMKs) in AWS KMS
 * **A. SSE-C** requires customers to provide the encryption key with every request. AWS does not store or manage the keys, making it difficult to integrate with AWS services and limiting centralized auditing and key management.
 * **B. Client-Side Encryption** gives full control over encryption but requires the application to manage encryption, decryption, and key lifecycle. It does not provide the seamless AWS service integration or centralized KMS audit capabilities required.
 * **C. SSE-S3** uses AWS-managed keys, so the customer has no control over key management or rotation, making it unsuitable for the stated regulatory requirements.
+
