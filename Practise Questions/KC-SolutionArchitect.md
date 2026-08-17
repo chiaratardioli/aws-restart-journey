@@ -880,3 +880,125 @@ If a question mentions **Aurora Replicas sharing storage**, remember: **Aurora r
 </details>
 
 
+## Question #21
+
+A multi-tier application has web servers in public subnets and database servers in private subnets. The security team wants to ensure database servers can ONLY receive traffic from the web tier. What is the BEST approach?
+
+**A.** Configure the database Security Group's inbound rules to allow only the web server Security Group ID as the source, on the database port.
+**B.** Configure a NACL on the database subnet to allow traffic only from the web server IP addresses.
+**C.** Use a NAT Gateway in the private subnet to filter traffic destined for the database servers.
+**D.** Place the web and database servers in the same subnet and use host-based firewalls on database servers.
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct Answer: A**
+
+**Explanation:**
+Use a **Security Group reference** to allow database traffic only from the web-tier Security Group.
+
+* **B:** NACLs use IP addresses and are subnet-level controls.
+* **C:** NAT Gateways are for outbound internet access.
+* **D:** Same subnet reduces network isolation.
+
+**Exam Tip:**
+**Tier-to-tier access → Security Group → Security Group reference.**
+
+</details>
+
+
+## Question #22
+
+A company uses CloudFront to serve a dynamic web application. Users are reporting that they see stale content even after the origin has been updated. Which TWO approaches can resolve this issue?
+
+**A.** Create a CloudFront Invalidation for the affected files or paths, which forces edge locations to fetch the latest version from the origin on the next request.
+**B.** Use versioned file names or cache-busting query strings in the application so CloudFront treats updated files as new objects with no cached version.
+**C.** Disable CloudFront caching entirely by setting the Maximum TTL to 0 for all behaviors, eliminating the performance benefits of the CDN.
+**D.** Enable CloudFront Origin Shield to add a regional caching layer that automatically detects and refreshes stale content.
+**E.** Switch to AWS Global Accelerator, which does not cache content and always forwards requests to the origin server.
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct Answers: A and B**
+
+**Explanation:**
+
+* **A:** Invalidation removes cached objects so the latest content is fetched.
+* **B:** Versioned URLs make updated files appear as new objects to CloudFront.
+* **C:** Unnecessarily disables caching benefits.
+* **D:** Origin Shield does not automatically refresh stale content.
+* **E:** Global Accelerator does not replace CloudFront caching.
+
+**Exam Tip:**
+**Stale CloudFront content → Invalidation or cache busting.**
+
+</details>
+
+
+## Question #23
+
+A company wants to use Route 53 to resolve DNS names for resources within their private VPC without exposing those names publicly. Which **TWO** statements about Route 53 Private Hosted Zones are correct?
+
+**A.** A Private Hosted Zone must be associated with one or more VPCs; DNS queries from those VPCs will resolve to the private records.
+
+**B.** The same domain name can exist in both a Public Hosted Zone and a Private Hosted Zone, with VPC resources resolving to the private records.
+
+**C.** Private Hosted Zones are automatically replicated across all AWS Regions without any additional configuration.
+
+**D.** Private Hosted Zones can be queried from the public internet using a Route 53 Resolver outbound endpoint.
+
+**E.** Resources outside the associated VPC can query a Private Hosted Zone using the Route 53 DNSSEC feature.
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct Answers: A and B**
+
+**Explanation:**
+
+* **A — Correct:** Private Hosted Zones must be associated with VPCs.
+* **B — Correct:** The same domain can exist in both public and private hosted zones.
+* **C — Incorrect:** VPC association is required in each Region.
+* **D — Incorrect:** Private Hosted Zones are not publicly accessible.
+* **E — Incorrect:** DNSSEC does not provide external access to private zones.
+
+**Exam Tip:**
+**Private Hosted Zone → VPC-associated + private DNS resolution.**
+
+</details>
+
+
+## Question #24
+
+An EC2 instance in a public subnet cannot reach the internet despite having a public IP address. The route table has a route for `0.0.0.0/0` targeting an Internet Gateway. What is the **MOST likely cause**?
+
+**A.** The Security Group attached to the instance does not have an outbound rule allowing the relevant traffic.
+**B.** The Internet Gateway has not been attached to the VPC.
+**C.** The instance's subnet does not have the auto-assign public IP setting enabled.
+**D.** The NAT Gateway in the public subnet is blocking outbound traffic from EC2 instances.
+
+### Answer
+
+<details>
+<summary><strong>Click to reveal answer</strong></summary>
+
+**Correct Answer: A**
+
+**Explanation:**
+
+* **A — Correct:** A restrictive Security Group outbound rule can block internet access.
+* **B — Incorrect:** The route to an Internet Gateway would not work if it weren't attached, but this is less likely given the scenario.
+* **C — Incorrect:** The instance already has a public IP.
+* **D — Incorrect:** NAT Gateways are not required for instances with public IPs using an Internet Gateway.
+
+**Exam Tip:**
+**Public IP + IGW route + no internet → Check Security Group outbound rules.**
+
+</details>
