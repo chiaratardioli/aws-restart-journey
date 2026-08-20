@@ -62,8 +62,6 @@ This section covered essential AWS and IT foundations:
 
 ## [Labs](./Labs/readme.md)
 
-Hands-on labs formed the core of the learning experience.
-
 ### [Cloud Architecture & Scaling](<./Labs/Cloud Architecture & Scaling/readme.md>)
 
 * Auto Scaling and ELB
