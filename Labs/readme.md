@@ -33,7 +33,7 @@ The labs are grouped into the following engineering domains:
 - [Networking (VPC, Subnets, IPs)](<./Networking/readme.md>)
 - [Security (IAM, encryption, hardening)](<./Security/readme.md>)
 - [Serverless & Containers Computing (Lambda, event-driven systems)](<./Serverless & Containers/readme.md>)
-- [Storage & Archiving (S3, EBS)](<./Storage & Archiving/readme.md>)
+- [Storage & Archiving (S3, EBS)](<./Storage and Archiving/readme.md>)
 
 ---
 
