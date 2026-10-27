@@ -1,5 +1,11 @@
 # AWS SNS vs SQS — Birthday Invitation Example
 
+<p align="center">
+  <img src="./images/SNS-SQS-01-Messaging-Example.png" 
+       alt="SNS and SQS Messaging Example" 
+       width="30%">
+</p>
+
 ## 1\. Amazon SNS (Simple Notification Service)
 
 **My example:**
