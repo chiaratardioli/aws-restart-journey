@@ -25,13 +25,17 @@ I give the invitations to my teacher to distribute.
 
 **My example:**
 
-My teacher puts the birthday invitations in a tray. Some classmates collect their invitations later.
+My teacher puts birthday invitations in a tray. Several student helpers collect invitations from the tray and deliver them to classmates.
+
+Each helper takes an invitation, delivers it, and removes the completed task from the tray. Invitations that haven't been collected remain in the tray until a helper is available.
 
 **AWS equivalent:**
 
 - Invitation tray = SQS Queue
 - Invitations = Messages
-- Collecting invitations = Processing messages
+- Student helpers = Consumers
+- Delivering invitations = Processing messages
+- Removing completed invitations = Deleting processed messages
 
 **Key idea:** SQS stores messages until consumers retrieve and process them.
 
