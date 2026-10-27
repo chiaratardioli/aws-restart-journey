@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <img src="./images/SNS-SQS-03-Messaging-Example.jpeg" 
+  <img src="./images/SNS-SQS-03-Messaging-Example.png" 
        alt="Pokémon GO AWS Raid Messaging Explained" 
        width="80%">
 </p>
