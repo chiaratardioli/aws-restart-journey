@@ -1,6 +1,12 @@
 # AWS SNS vs SQS — Pokémon GO Example
 
-## 1\. Amazon SNS (Simple Notification Service) 📢
+<p align="center">
+  <img src="./images/SNS-SQS-02-Messaging-Example.png" 
+       alt="SNS and SQS Pokémon GO Messaging Example" 
+       width="80%">
+</p>
+
+## 1\. Amazon SNS (Simple Notification Service)
 
 **Example: Notifying friends about a Pokémon raid**
 
