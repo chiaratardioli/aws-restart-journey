@@ -6,6 +6,12 @@
        width="80%">
 </p>
 
+<p align="center">
+  <img src="./images/SNS-SQS-03-Messaging-Example.jpeg" 
+       alt="Pokémon GO AWS Raid Messaging Explained" 
+       width="80%">
+</p>
+
 ## 1\. Amazon SNS (Simple Notification Service)
 
 **Example: Notifying friends about a Pokémon raid**
