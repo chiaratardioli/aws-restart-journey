@@ -1,12 +1,6 @@
 # AWS SNS vs SQS — Pokémon GO Example
 
 <p align="center">
-  <img src="./images/SNS-SQS-02-Messaging-Example.jpeg" 
-       alt="SNS and SQS Pokémon GO Messaging Example" 
-       width="80%">
-</p>
-
-<p align="center">
   <img src="./images/SNS-SQS-03-Messaging-Example.png" 
        alt="Pokémon GO AWS Raid Messaging Explained" 
        width="80%">
@@ -78,3 +72,9 @@ Each service processes its messages at its own pace.
 - **SNS + SQS = Distributes events and enables independent processing.**
 
 > Note: This is an illustrative AWS architecture inspired by Pokémon GO, not a description of its actual internal infrastructure.
+
+<p align="center">
+  <img src="./images/SNS-SQS-02-Messaging-Example.jpeg" 
+       alt="SNS and SQS Pokémon GO Messaging Example" 
+       width="80%">
+</p>
