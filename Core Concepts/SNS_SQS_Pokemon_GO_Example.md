@@ -1,7 +1,7 @@
 # AWS SNS vs SQS — Pokémon GO Example
 
 <p align="center">
-  <img src="./images/SNS-SQS-02-Messaging-Example.png" 
+  <img src="./images/SNS-SQS-02-Messaging-Example.jpeg" 
        alt="SNS and SQS Pokémon GO Messaging Example" 
        width="80%">
 </p>
