@@ -13,3 +13,5 @@ This section contains some of **AWS Core Concepts**:
 5. **[Case Study: WordPress on AWS](<./WordPress.md>)**
 
 6. **[Strong Consistency vs Eventual Consistency](<./ConsistencyModels.md>)**
+
+7. **[AWS SNS vs SQS — Birthday Invitation Example](<./SNS_SQS_example.md>)**
