@@ -14,6 +14,9 @@ This resource introduces three AWS messaging and communication services:
 
 The presentation covers the core concepts and use cases of SQS, SNS, and SES to help you understand their differences and prepare for AWS Cloud certification.
 
+[Link to the presentation](Teaching/Topic/SQS_SNS_SES/AWS%20Cloud%20Concepts-SQS-SNS-SES.pdf)
+
+
 ## Learning Objectives
 
 By the end of this presentation, you should be able to:
@@ -33,6 +36,3 @@ By the end of this presentation, you should be able to:
 
 Happy learning\! 
 
-```
-[View the presentation](Teaching/Topic/SQS_SNS_SES/AWS%20Cloud%20Concepts-SQS-SNS-SES.pdf)
-```
